@@ -36,3 +36,6 @@ C:\Users\vidam\Documents\GitHub\Anything-wpf_main-\Anything[wpf_main]\Anything[w
 C:\Users\vidam\Desktop\Anything[wpf_main]\Anything[wpf_main]\bin\Debug\Anything[wpf_main].exe.config
 C:\Users\vidam\Desktop\Anything[wpf_main]\Anything[wpf_main]\obj\Debug\Anything[wpf_main].exe
 C:\Users\vidam\Desktop\Anything[wpf_main]\Anything[wpf_main]\obj\Debug\Anything[wpf_main].pdb
+C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\bin\Debug\Anything[wpf_main].exe.config
+C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\obj\Debug\Anything[wpf_main].exe
+C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\obj\Debug\Anything[wpf_main].pdb

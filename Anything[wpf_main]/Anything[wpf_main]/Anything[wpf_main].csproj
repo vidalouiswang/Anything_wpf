@@ -59,7 +59,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="cls\InitStyles.cs" />
-    <Compile Include="DrawingCanvas.cs" />
     <Compile Include="vButton.xaml.cs">
       <DependentUpon>vButton.xaml</DependentUpon>
     </Compile>
@@ -113,7 +112,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <SplashScreen Include="1.jpg" />
+    <SplashScreen Include="wallhaven-10108.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
