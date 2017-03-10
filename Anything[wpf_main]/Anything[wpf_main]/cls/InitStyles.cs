@@ -46,6 +46,7 @@ namespace Anything
             daShow.Duration = TimeSpan.FromSeconds(showTimeSpan);
             Storyboard.SetTargetProperty(daShow, new PropertyPath(UIElement.OpacityProperty));
 
+            Storyboard.SetDesiredFrameRate(sbShow, 90);
             sbShow.Children.Add(daShow);
             bsShow.Storyboard = sbShow;
 
@@ -60,6 +61,7 @@ namespace Anything
             Storyboard.SetTargetProperty(daHide, new PropertyPath(UIElement.OpacityProperty));
 
             sbHide.BeginTime = TimeSpan.FromSeconds(TimeoutSpan);
+            Storyboard.SetDesiredFrameRate(sbHide, 90);
             sbHide.Children.Add(daHide);
             bsHide.Storyboard = sbHide;
 

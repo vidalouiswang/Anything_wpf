@@ -13,15 +13,27 @@
             <Setter Property="FontSize" Value="15"></Setter>
             <Setter Property="Margin" Value="0,5,5,5"></Setter>
             <Setter Property="Opacity" Value="0.3"></Setter>
+            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"></Setter>
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <RotateTransform></RotateTransform>
+                </Setter.Value>
+            </Setter>
             
             <Style.Triggers>
                 <EventTrigger RoutedEvent="Mouse.MouseEnter">
                     <EventTrigger.Actions>
                         <BeginStoryboard>
                             <Storyboard>
-                                <DoubleAnimation Duration="0:0:0.3" Storyboard.TargetProperty="Opacity"
-                                                 To="0.9">
-                                     
+                                <DoubleAnimation Duration="0:0:0.5" Storyboard.TargetProperty="Opacity"
+                                                 To="1">
+                                    
+                                </DoubleAnimation>
+                                <DoubleAnimation Duration="0:0:0.5" Storyboard.TargetProperty="RenderTransform.Angle"
+                                                 To="360" >
+                                    <!--<DoubleAnimation.EasingFunction>
+                                        <ElasticEase Oscillations="2" EasingMode="EaseOut" Springiness="0.1"></ElasticEase>
+                                    </DoubleAnimation.EasingFunction>-->
                                 </DoubleAnimation>
                             </Storyboard>
                         </BeginStoryboard>
@@ -33,29 +45,20 @@
                     <EventTrigger.Actions>
                         <BeginStoryboard>
                             <Storyboard>
-                                <DoubleAnimation Duration="0:0:0.3" Storyboard.TargetProperty="Opacity"
+                                <DoubleAnimation Duration="0:0:0.7" Storyboard.TargetProperty="Opacity"
                                                  To="0.3">
 
                                 </DoubleAnimation>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger.Actions>
-                </EventTrigger>
-
-                <EventTrigger RoutedEvent="Mouse.MouseDown">
-                    <EventTrigger.Actions>
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation Duration="0:0:0.3" Storyboard.TargetProperty="Width"
-                                                 To="50">
-
+                                <DoubleAnimation Duration="0:0:0.7" Storyboard.TargetProperty="RenderTransform.Angle"
+                                                  >
+                                    <!--<DoubleAnimation.EasingFunction>
+                                        <ElasticEase EasingMode="EaseOut" Oscillations="2" Springiness="0.1"></ElasticEase>
+                                    </DoubleAnimation.EasingFunction>-->
                                 </DoubleAnimation>
                             </Storyboard>
                         </BeginStoryboard>
                     </EventTrigger.Actions>
                 </EventTrigger>
-
-                
 
             </Style.Triggers>
             
@@ -70,8 +73,13 @@
                     <EventTrigger.Actions>
                         <BeginStoryboard>
                             <Storyboard BeginTime="0:0:3" >
-                                <DoubleAnimation Duration="0:0:0.3" Storyboard.TargetProperty="Opacity"
-                                                 To="0.03"></DoubleAnimation>
+                                <DoubleAnimation Duration="0:0:1" Storyboard.TargetProperty="Opacity"
+                                                 To="0.03">
+                                    <DoubleAnimation.EasingFunction>
+                                        <ElasticEase EasingMode="EaseOut" Oscillations="5" Springiness="0.1"></ElasticEase>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                                
                             </Storyboard>
                         </BeginStoryboard>
                     </EventTrigger.Actions>
@@ -82,8 +90,12 @@
                     <EventTrigger.Actions>
                         <BeginStoryboard>
                             <Storyboard >
-                                <DoubleAnimation Duration="0:0:0.3" Storyboard.TargetProperty="Opacity"
-                                                 To="0.9"></DoubleAnimation>
+                                <DoubleAnimation Duration="0:0:1" Storyboard.TargetProperty="Opacity"
+                                                 To="0.9">
+                                    <DoubleAnimation.EasingFunction>
+                                        <ElasticEase EasingMode="EaseOut" Oscillations="5" Springiness="0.1" ></ElasticEase>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
                             </Storyboard>
                         </BeginStoryboard>
                     </EventTrigger.Actions>

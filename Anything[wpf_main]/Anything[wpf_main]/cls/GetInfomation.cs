@@ -42,7 +42,7 @@ namespace Anything
         /// <returns></returns>
         public static double GetMaxOpacity()
         {
-            double rtnValue = 0.95;
+            double rtnValue = 0.98;
 
             return rtnValue;
         }
