@@ -1,0 +1,38 @@
+c:\users\vidam\documents\visual studio 2015\Projects\Anything[wpf_main]\Anything[wpf_main]\bin\Debug\Anything[wpf_main].exe.config
+c:\users\vidam\documents\visual studio 2015\Projects\Anything[wpf_main]\Anything[wpf_main]\bin\Debug\Anything[wpf_main].exe
+c:\users\vidam\documents\visual studio 2015\Projects\Anything[wpf_main]\Anything[wpf_main]\bin\Debug\Anything[wpf_main].pdb
+c:\users\vidam\documents\visual studio 2015\Projects\Anything[wpf_main]\Anything[wpf_main]\obj\Debug\frmMain.g.cs
+c:\users\vidam\documents\visual studio 2015\Projects\Anything[wpf_main]\Anything[wpf_main]\obj\Debug\App.g.cs
+c:\users\vidam\documents\visual studio 2015\Projects\Anything[wpf_main]\Anything[wpf_main]\obj\Debug\Anything[wpf_main]_MarkupCompile.cache
+c:\users\vidam\documents\visual studio 2015\Projects\Anything[wpf_main]\Anything[wpf_main]\obj\Debug\Anything[wpf_main]_MarkupCompile.lref
+c:\users\vidam\documents\visual studio 2015\Projects\Anything[wpf_main]\Anything[wpf_main]\obj\Debug\frmMain.baml
+c:\users\vidam\documents\visual studio 2015\Projects\Anything[wpf_main]\Anything[wpf_main]\obj\Debug\Anything[wpf_main].g.resources
+c:\users\vidam\documents\visual studio 2015\Projects\Anything[wpf_main]\Anything[wpf_main]\obj\Debug\Anything_wpf_main_.Properties.Resources.resources
+c:\users\vidam\documents\visual studio 2015\Projects\Anything[wpf_main]\Anything[wpf_main]\obj\Debug\Anything[wpf_main].csproj.GenerateResource.Cache
+c:\users\vidam\documents\visual studio 2015\Projects\Anything[wpf_main]\Anything[wpf_main]\obj\Debug\Anything[wpf_main].exe
+c:\users\vidam\documents\visual studio 2015\Projects\Anything[wpf_main]\Anything[wpf_main]\obj\Debug\Anything[wpf_main].pdb
+C:\Users\vidam\documents\visual studio 2015\Projects\Anything[wpf_main]\Anything[wpf_main]\obj\Debug\App.baml
+C:\Users\vidam\documents\visual studio 2015\Projects\Anything[wpf_main]\Anything[wpf_main]\obj\Debug\vButton.g.cs
+C:\Users\vidam\documents\visual studio 2015\Projects\Anything[wpf_main]\Anything[wpf_main]\obj\Debug\vButton.baml
+C:\Users\vidam\documents\visual studio 2015\Projects\Anything[wpf_main]\Anything[wpf_main]\obj\Debug\Anything[wpf_main].csprojResolveAssemblyReference.cache
+C:\Users\vidam\Documents\GitHub\Anything-wpf_main-\Anything[wpf_main]\Anything[wpf_main]\bin\Debug\Anything[wpf_main].exe.config
+C:\Users\vidam\Documents\GitHub\Anything-wpf_main-\Anything[wpf_main]\Anything[wpf_main]\obj\Debug\Anything[wpf_main].exe
+C:\Users\vidam\Documents\GitHub\Anything-wpf_main-\Anything[wpf_main]\Anything[wpf_main]\obj\Debug\Anything[wpf_main].pdb
+C:\Users\vidam\Documents\GitHub\Anything-wpf_main-\Anything[wpf_main]\Anything[wpf_main]\obj\Debug\Anything[wpf_main].csprojResolveAssemblyReference.cache
+C:\Users\vidam\Documents\GitHub\Anything-wpf_main-\Anything[wpf_main]\Anything[wpf_main]\obj\Debug\frmMain.g.cs
+C:\Users\vidam\Documents\GitHub\Anything-wpf_main-\Anything[wpf_main]\Anything[wpf_main]\obj\Debug\vButton.g.cs
+C:\Users\vidam\Documents\GitHub\Anything-wpf_main-\Anything[wpf_main]\Anything[wpf_main]\obj\Debug\App.g.cs
+C:\Users\vidam\Documents\GitHub\Anything-wpf_main-\Anything[wpf_main]\Anything[wpf_main]\obj\Debug\Anything[wpf_main]_MarkupCompile.cache
+C:\Users\vidam\Documents\GitHub\Anything-wpf_main-\Anything[wpf_main]\Anything[wpf_main]\obj\Debug\Anything[wpf_main]_MarkupCompile.lref
+C:\Users\vidam\Documents\GitHub\Anything-wpf_main-\Anything[wpf_main]\Anything[wpf_main]\bin\Debug\Anything[wpf_main].exe
+C:\Users\vidam\Documents\GitHub\Anything-wpf_main-\Anything[wpf_main]\Anything[wpf_main]\bin\Debug\Anything[wpf_main].pdb
+C:\Users\vidam\Documents\GitHub\Anything-wpf_main-\Anything[wpf_main]\Anything[wpf_main]\obj\Debug\App.baml
+C:\Users\vidam\Documents\GitHub\Anything-wpf_main-\Anything[wpf_main]\Anything[wpf_main]\obj\Debug\frmMain.baml
+C:\Users\vidam\Documents\GitHub\Anything-wpf_main-\Anything[wpf_main]\Anything[wpf_main]\obj\Debug\vButton.baml
+C:\Users\vidam\Documents\GitHub\Anything-wpf_main-\Anything[wpf_main]\Anything[wpf_main]\obj\Debug\Anything[wpf_main].g.resources
+C:\Users\vidam\Documents\GitHub\Anything-wpf_main-\Anything[wpf_main]\Anything[wpf_main]\obj\Debug\Anything_wpf_main_.Properties.Resources.resources
+C:\Users\vidam\Documents\GitHub\Anything-wpf_main-\Anything[wpf_main]\Anything[wpf_main]\obj\Debug\Anything[wpf_main].csproj.GenerateResource.Cache
+C:\Users\vidam\Documents\GitHub\Anything-wpf_main-\Anything[wpf_main]\Anything[wpf_main]\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\vidam\Desktop\Anything[wpf_main]\Anything[wpf_main]\bin\Debug\Anything[wpf_main].exe.config
+C:\Users\vidam\Desktop\Anything[wpf_main]\Anything[wpf_main]\obj\Debug\Anything[wpf_main].exe
+C:\Users\vidam\Desktop\Anything[wpf_main]\Anything[wpf_main]\obj\Debug\Anything[wpf_main].pdb

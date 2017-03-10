@@ -1,0 +1,90 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Anything_wpf_main_"
+        xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="Anything_wpf_main_.MainWindow"
+        mc:Ignorable="d"
+        xmlns:anything="clr-namespace:Anything"
+        Title="Anything" Height="650" Width="350" AllowsTransparency="True" Opacity="0.9"  WindowStyle="None" Background="#00fefefe" 
+        Loaded="Window_Loaded"   >
+
+    <Border x:Name="bdrmain">
+            
+            <Border Background="#ffFEFEFE" BorderThickness="2" CornerRadius="10">
+                <Border x:Name="bdrMainForm" Background="#ff282828" BorderThickness="2" CornerRadius="9">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <!--第一层功能区-->
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0">
+                            <Button x:Name="btnMin" HorizontalAlignment="Right" Click="btnMin_Click">
+                                <Line X1="1" Y1="17" X2="12" Y2="17" Stroke="#FFAAAAAA" StrokeThickness="2"/>
+                            </Button>
+                            <Button x:Name="btnMax" HorizontalAlignment="Right" Click="btnMax_Click">
+                                <Border BorderThickness="2" Width="15" Height="15" Background="#ffAAAAAA">
+                                    <Border BorderThickness="1" Width="10" Height="10" Background="#aa282828"/>
+                                </Border>
+                            </Button>
+                            <Button x:Name="btnClose"  HorizontalAlignment="Right" Click="btnClose_Click" MouseLeave="btnClose_MouseLeave">
+                                <Grid>
+                                    <Line X1="1" X2="10" Y1="1" Y2="10" Stroke="#FFAAAAAA"  StrokeThickness="2"/>
+                                    <Line X1="1" X2="10" Y1="1" Y2="10" Stroke="#FFAAAAAA"  StrokeThickness="2" RenderTransformOrigin="0.5,0.5">
+                                        <Line.RenderTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform/>
+                                                <SkewTransform/>
+                                                <RotateTransform Angle="90"/>
+                                                <TranslateTransform/>
+                                            </TransformGroup>
+                                        </Line.RenderTransform>
+                                    </Line>
+
+                                </Grid>
+
+                            </Button>
+                        </StackPanel>
+                        <!--第一层功能区完-->
+
+                        <!--第二层关键字检索区-->
+                        <StackPanel Grid.Row="1">
+                            <!--Background="#FF505050"-->
+                            <TextBox x:Name="txtMain" Background="#FF505050" Margin="10,0,10,0" MinHeight="25" TextAlignment="Center" FontSize="17" Foreground="#FFEEEEEE" Text="cdscs" >
+
+
+
+                            </TextBox>
+                        </StackPanel>
+                        <!--第二层关键字检索区完-->
+
+                        <!--第三层常用项目区-->
+                        <StackPanel Grid.Row="2" Margin="5" >
+
+
+                        </StackPanel>
+                        <!--第三层常用项目区完-->
+
+                        <!--第四层常规项目区-->
+                        <StackPanel Grid.Row="3">
+
+                            <anything:DrawingCanvas x:Name="drawingsurface" Background="White" ClipToBounds="True" 
+                                                MouseLeftButtonDown="drawingsurface_MouseLeftButtonDown"
+                                                MouseLeftButtonUp="drawingsurface_MouseLeftButtonUp"
+                                                MouseMove="drawingsurface_MouseMove"></anything:DrawingCanvas>
+                        </StackPanel>
+                        <!--第四层常规项目区完-->
+                    </Grid>
+
+                </Border>
+            </Border>
+
+        </Border>
+
+
+    
+</Window>
