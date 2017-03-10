@@ -10,7 +10,7 @@
         Title="Anything" Height="650" Width="350" AllowsTransparency="True" Opacity="0.9"  WindowStyle="None" Background="#00fefefe" 
         Loaded="Window_Loaded"   >
 
-    <Border x:Name="bdrmain">
+    <Border x:Name="bdrMain">
             
             <Border Background="#ffFEFEFE" BorderThickness="2" CornerRadius="10">
                 <Border x:Name="bdrMainForm" Background="#ff282828" BorderThickness="2" CornerRadius="9">
@@ -72,10 +72,7 @@
                         <!--第四层常规项目区-->
                         <StackPanel Grid.Row="3">
 
-                            <anything:DrawingCanvas x:Name="drawingsurface" Background="White" ClipToBounds="True" 
-                                                MouseLeftButtonDown="drawingsurface_MouseLeftButtonDown"
-                                                MouseLeftButtonUp="drawingsurface_MouseLeftButtonUp"
-                                                MouseMove="drawingsurface_MouseMove"></anything:DrawingCanvas>
+                            
                         </StackPanel>
                         <!--第四层常规项目区完-->
                     </Grid>

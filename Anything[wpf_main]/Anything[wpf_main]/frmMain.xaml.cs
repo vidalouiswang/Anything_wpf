@@ -75,7 +75,9 @@ namespace Anything_wpf_main_
         /// <param name="e"></param>
         private  void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            InitStyles.InitBdrStyle(ref this.bdrmain);
+            this.effect = new FormEffects(this, 1, 1);
+            this.StateChanged += new EventHandler(this.effect.Window_StateChanged);
+            InitStyles.InitBdrStyle(ref this.bdrMain);
 
         }
 
@@ -122,11 +124,8 @@ namespace Anything_wpf_main_
         /// <param name="e"></param>
         private void btnMin_Click(object sender, RoutedEventArgs e)
         {
-            //effect.Hide(true);
-            MouseEventArgs args = new MouseEventArgs(Mouse.PrimaryDevice, 0);
-            args.RoutedEvent = Border.PreviewMouseWheelEvent;
-
-            this.bdrmain.RaiseEvent(args);
+            effect.Hide(true);
+            
         }
 
         /// <summary>
@@ -141,21 +140,6 @@ namespace Anything_wpf_main_
 
         #endregion
 
-        private void drawingsurface_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            Point pointClicked = e.GetPosition(drawingsurface);
-            DrawingVisual vis = new DrawingVisual();
-            
-        }
-
-        private void drawingsurface_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-
-        }
-
-        private void drawingsurface_MouseMove(object sender, MouseEventArgs e)
-        {
-
-        }
+       
     }
 }

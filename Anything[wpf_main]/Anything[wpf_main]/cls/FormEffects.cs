@@ -249,36 +249,36 @@ namespace Anything
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public void WindowMouse_Enter(object sender, MouseEventArgs e)
-        {
-            //准备显示工作
-            this.current_operation = Operation.showing;
-            this.tm_sh.Interval = this.show_speed;
+        //public void WindowMouse_Enter(object sender, MouseEventArgs e)
+        //{
+        //    //准备显示工作
+        //    this.current_operation = Operation.showing;
+        //    this.tm_sh.Interval = this.show_speed;
 
-            //重置超时时间
-            this.time_out = 3;
+        //    //重置超时时间
+        //    this.time_out = 3;
 
-            //开始显示
-            tm_sh.Start();
+        //    //开始显示
+        //    tm_sh.Start();
 
-            //关闭超时定时器
-            this.tm_timeout.Stop();
-        }
+        //    //关闭超时定时器
+        //    this.tm_timeout.Stop();
+        //}
 
         /// <summary>
         /// 鼠标移出窗体时
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public void WindowMouse_Leave(object sender , MouseEventArgs e)
-        {
-            //准备隐藏工作
-            this.tm_sh.Interval = this.hide_speed;
-            this.current_operation = Operation.hiding;
+        //public void WindowMouse_Leave(object sender , MouseEventArgs e)
+        //{
+        //    //准备隐藏工作
+        //    this.tm_sh.Interval = this.hide_speed;
+        //    this.current_operation = Operation.hiding;
 
-            //隐藏
-            this.tm_timeout.Start();
-        }
+        //    //隐藏
+        //    this.tm_timeout.Start();
+        //}
 
         /// <summary>
         /// 鼠标移动
@@ -288,7 +288,7 @@ namespace Anything
         public void WindowMouse_MouseMove(object sender, MouseEventArgs e)
         {
             //重置超时时间
-            this.time_out = 3;
+            //this.time_out = 3;
             Point pt= e.GetPosition((IInputElement)sender);
             Point FormSize = new Point(this.wnd.ActualWidth, this.wnd.ActualHeight);
             if (Math.Abs(pt.X-FormSize.X)<10)
