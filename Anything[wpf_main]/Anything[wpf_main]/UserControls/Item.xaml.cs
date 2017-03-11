@@ -12,17 +12,38 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Drawing;
 
 namespace Anything_wpf_main_
 {
     /// <summary>
-    /// vButton.xaml 的交互逻辑
+    /// Item.xaml 的交互逻辑
     /// </summary>
-    public partial class vButton : UserControl
+    public partial class Item : UserControl
     {
-        public vButton()
+        public Item()
         {
             InitializeComponent();
+
+            
+        }
+        private BitmapImage vImage = null;
+        public Bitmap bitmap=null;
+
+
+
+        public BitmapImage VImage
+        {
+            get
+            {
+                return vImage;
+            }
+
+            set
+            {
+                vImage = value;
+                this.btnMain.Content = vImage;
+            }
         }
     }
 }

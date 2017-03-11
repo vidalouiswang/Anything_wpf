@@ -4,8 +4,8 @@
              xmlns:local="clr-namespace:Anything_wpf_main_"
              StartupUri="frmMain.xaml">
     <Application.Resources>
-
-        <Style TargetType="Button">
+        <ResourceDictionary>
+            <Style x:Key="ButtonStyle" TargetType="Button">
             <Setter Property="Width" Value="30"></Setter>
             <Setter Property="Height" Value="30"></Setter>
             <Setter Property="Background" Value="#AA282828"></Setter>
@@ -65,44 +65,23 @@
             
         </Style>
 
-
-
-        <Style x:Key="borderstyle">
-            <Style.Triggers>
-                <EventTrigger RoutedEvent="Mouse.MouseLeave">
-                    <EventTrigger.Actions>
-                        <BeginStoryboard>
-                            <Storyboard BeginTime="0:0:3" >
-                                <DoubleAnimation Duration="0:0:1" Storyboard.TargetProperty="Opacity"
-                                                 To="0.03">
-                                    <DoubleAnimation.EasingFunction>
-                                        <ElasticEase EasingMode="EaseOut" Oscillations="5" Springiness="0.1"></ElasticEase>
-                                    </DoubleAnimation.EasingFunction>
-                                </DoubleAnimation>
-                                
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger.Actions>
-                </EventTrigger>
-                
-                
-                <EventTrigger RoutedEvent="Mouse.MouseEnter">
-                    <EventTrigger.Actions>
-                        <BeginStoryboard>
-                            <Storyboard >
-                                <DoubleAnimation Duration="0:0:1" Storyboard.TargetProperty="Opacity"
-                                                 To="0.9">
-                                    <DoubleAnimation.EasingFunction>
-                                        <ElasticEase EasingMode="EaseOut" Oscillations="5" Springiness="0.1" ></ElasticEase>
-                                    </DoubleAnimation.EasingFunction>
-                                </DoubleAnimation>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger.Actions>
-                </EventTrigger>
-            </Style.Triggers>
-        </Style>
-
+            <Style x:Key="CloseButton" TargetType="{x:Type Button}">
+                <Setter Property="OverridesDefaultStyle" Value="True"/>
+                <Setter Property="IsTabStop" Value="False"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border Background="Transparent">
+                                <Canvas>
+                                    <Line X1="4" Y1="4" X2="11" Y2="11" Stroke="#9FA1A0" StrokeThickness="2"></Line>
+                                    <Line X1="11" Y1="4" X2="4" Y2="11" Stroke="#9FA1A0" StrokeThickness="2"></Line>
+                                </Canvas>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
 
 
     </Application.Resources>

@@ -23,15 +23,15 @@
                         </Grid.RowDefinitions>
                         <!--第一层功能区-->
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0">
-                            <Button x:Name="btnMin" HorizontalAlignment="Right" Click="btnMin_Click">
+                            <Button x:Name="btnMin" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Right" Click="btnMin_Click">
                             <Line X1="1" Y1="17" X2="12" Y2="17" Stroke="#FFAAAAAA" StrokeThickness="2"/>
                         </Button>
-                        <Button x:Name="btnMax" HorizontalAlignment="Right" Click="btnMax_Click">
+                        <Button x:Name="btnMax" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Right" Click="btnMax_Click">
                             <Border BorderThickness="2" Width="15" Height="15" Background="#ffAAAAAA">
                                     <Border BorderThickness="1" Width="10" Height="10" Background="#aa282828"/>
                                 </Border>
                             </Button>
-                        <Button x:Name="btnClose"  HorizontalAlignment="Right" Click="btnClose_Click" MouseLeave="btnClose_MouseLeave">
+                        <Button x:Name="btnClose" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Right" Click="btnClose_Click" MouseLeave="btnClose_MouseLeave">
                             <Grid>
                                     <Line X1="1" X2="10" Y1="1" Y2="10" Stroke="#FFAAAAAA"  StrokeThickness="2"/>
                                     <Line X1="1" X2="10" Y1="1" Y2="10" Stroke="#FFAAAAAA"  StrokeThickness="2" RenderTransformOrigin="0.5,0.5">
@@ -56,17 +56,23 @@
                             <!--Background="#FF505050"-->
                             <TextBox x:Name="txtMain" Background="#FF505050" Margin="10,0,10,0" MinHeight="25" TextAlignment="Center" FontSize="17" Foreground="#FFEEEEEE" Text="cdscs" >
 
-
-
                             </TextBox>
                         </StackPanel>
                         <!--第二层关键字检索区完-->
 
                         <!--第三层常用项目区-->
                         <StackPanel Grid.Row="2" Margin="5" >
+                        <ListBox x:Name="lstImgs">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Image Width="100" Height="30" Source="{Binding Path=FullPath}">
 
+                                    </Image>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
 
-                        </StackPanel>
+                    </StackPanel>
                         <!--第三层常用项目区完-->
 
                         <!--第四层常规项目区-->
@@ -82,6 +88,13 @@
 
         </Border>
 
-
+    <Window.Resources>
+        <DataTemplate x:Key="dt">
+            <StackPanel>
+                <Image x:Name="img"></Image>
+                <TextBlock x:Name="txt"></TextBlock>
+            </StackPanel>
+        </DataTemplate>
+    </Window.Resources>
     
 </Window>

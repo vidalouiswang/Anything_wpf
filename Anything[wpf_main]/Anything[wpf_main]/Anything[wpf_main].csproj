@@ -39,6 +39,7 @@
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -59,9 +60,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="cls\InitStyles.cs" />
-    <Compile Include="vButton.xaml.cs">
-      <DependentUpon>vButton.xaml</DependentUpon>
-    </Compile>
     <Page Include="frmMain.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -73,16 +71,20 @@
     <Compile Include="cls\FileOperation.cs" />
     <Compile Include="cls\FormEffects.cs" />
     <Compile Include="cls\GetInfomation.cs" />
+    <Compile Include="ConvertToRecipesImageInfo.cs" />
     <Compile Include="frmMain.xaml.cs">
       <DependentUpon>frmMain.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="vButton.xaml">
+    <Page Include="UserControls\Item.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UserControls\Item.xaml.cs">
+      <DependentUpon>Item.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -112,7 +114,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <SplashScreen Include="wallhaven-10108.jpg" />
+    <SplashScreen Include="Images\wallhaven-10108.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

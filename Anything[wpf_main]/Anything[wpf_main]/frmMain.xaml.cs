@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using Anything;
 using System.Windows.Interop;
 using System.Windows.Media.Animation;
+using System.IO;
 
 namespace Anything_wpf_main_
 {
@@ -43,7 +44,7 @@ namespace Anything_wpf_main_
         //指示窗体是否最大化
         private bool IsMaximized = false;
 
-
+        public List<Photo> photos = new List<Photo>();
 
         #endregion
 
@@ -61,7 +62,10 @@ namespace Anything_wpf_main_
             bdrColor = Color.FromArgb(0xff, 0x28, 0x28, 0x28);
             this.bdrMainForm.Background = new SolidColorBrush(bdrColor);
 
-            
+
+            //this.btnTest.VImage = BitmapFrame.Create(st, BitmapCreateOptions.None, BitmapCacheOption.Default);
+
+
         }
 
         #endregion
@@ -73,11 +77,14 @@ namespace Anything_wpf_main_
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private  void Window_Loaded(object sender, RoutedEventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             this.effect = new FormEffects(this, 1, 1);
             this.StateChanged += new EventHandler(this.effect.Window_StateChanged);
             InitStyles.InitBdrStyle(ref this.bdrMain);
+
+
+            this.InitPhoto();
 
         }
 
@@ -93,7 +100,7 @@ namespace Anything_wpf_main_
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             this.btnCloseOnceClick++;
-            if (this.btnCloseOnceClick >= 2) 
+            if (this.btnCloseOnceClick >= 2)
                 effect.Hide(true, WindowState.Normal, true);
             else
                 this.btnClose.ToolTip = "Click Once";
@@ -125,7 +132,7 @@ namespace Anything_wpf_main_
         private void btnMin_Click(object sender, RoutedEventArgs e)
         {
             effect.Hide(true);
-            
+
         }
 
         /// <summary>
@@ -140,6 +147,46 @@ namespace Anything_wpf_main_
 
         #endregion
 
-       
+        private void InitPhoto()
+        {
+
+
+            System.Windows.Forms.FolderBrowserDialog fbd = new System.Windows.Forms.FolderBrowserDialog();
+            fbd.ShowDialog();
+            string rootPath = fbd.SelectedPath;
+            //MessageBox.Show(rootPath);  
+            GetAllImagePath(rootPath);
+            lstImgs.ItemsSource = photos;
+
+
+        }
+
+        public void GetAllImagePath(string path)
+        {
+            DirectoryInfo di = new DirectoryInfo(path);
+            FileInfo[] files = di.GetFiles("*.*", SearchOption.AllDirectories);
+
+
+            if (files != null && files.Length > 0)
+            {
+                foreach (var file in files)
+                {
+                    if (file.Extension == (".jpg") ||
+                        file.Extension == (".png") ||
+                        file.Extension == (".bmp") ||
+                        file.Extension == (".gif"))
+                    {
+                        photos.Add(new Photo()
+                        {
+                            FullPath = file.FullName
+                        });
+                    }
+                }
+            }
+        }
+        public class Photo
+        {
+            public string FullPath { get; set; }
+        }
     }
 }
