@@ -84,7 +84,7 @@ namespace Anything_wpf_main_
             InitStyles.InitBdrStyle(ref this.bdrMain);
 
 
-            this.InitPhoto();
+            //this.InitPhoto();
 
         }
 

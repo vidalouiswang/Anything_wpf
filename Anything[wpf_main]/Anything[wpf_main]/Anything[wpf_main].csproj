@@ -71,6 +71,8 @@
     <Compile Include="cls\FileOperation.cs" />
     <Compile Include="cls\FormEffects.cs" />
     <Compile Include="cls\GetInfomation.cs" />
+    <Compile Include="cls\ItemData.cs" />
+    <Compile Include="cls\Manage.cs" />
     <Compile Include="ConvertToRecipesImageInfo.cs" />
     <Compile Include="frmMain.xaml.cs">
       <DependentUpon>frmMain.xaml</DependentUpon>

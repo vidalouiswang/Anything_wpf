@@ -9,6 +9,19 @@ namespace Anything
 {
     class GetInfomation
     {
+
+        public struct INFO
+        {
+            int Left;
+            int Top;
+            double MinOpa;
+            double MaxOpa;
+            double ShowTimeSpan;
+            double HideTimeSpan;
+            int TimeOut;
+        }
+
+        public static INFO info;
         public static string ExePath = System.Windows.Forms.Application.StartupPath + "/";
         public static string SettingsFileName = ExePath + "Settings.vid";
 
