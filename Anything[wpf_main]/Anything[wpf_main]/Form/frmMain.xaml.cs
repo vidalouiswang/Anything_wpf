@@ -18,6 +18,8 @@ using System.Windows.Interop;
 using System.Windows.Media.Animation;
 using System.IO;
 
+using System.Drawing.Imaging;
+
 namespace Anything_wpf_main_
 {
     /// <summary>
@@ -43,8 +45,6 @@ namespace Anything_wpf_main_
 
         //指示窗体是否最大化
         private bool IsMaximized = false;
-
-        public List<Photo> photos = new List<Photo>();
 
         #endregion
 
@@ -81,6 +81,7 @@ namespace Anything_wpf_main_
         {
             this.effect = new FormEffects(this, 1, 1);
             this.StateChanged += new EventHandler(this.effect.Window_StateChanged);
+            this.MouseDown += new MouseButtonEventHandler(this.effect.WindowMouse_Down);
             InitStyles.InitBdrStyle(ref this.bdrMain);
 
 
@@ -147,46 +148,35 @@ namespace Anything_wpf_main_
 
         #endregion
 
-        private void InitPhoto()
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-
-
-            System.Windows.Forms.FolderBrowserDialog fbd = new System.Windows.Forms.FolderBrowserDialog();
-            fbd.ShowDialog();
-            string rootPath = fbd.SelectedPath;
-            //MessageBox.Show(rootPath);  
-            GetAllImagePath(rootPath);
-            lstImgs.ItemsSource = photos;
-
-
+            
         }
 
-        public void GetAllImagePath(string path)
+        private void Button_DragEnter(object sender, DragEventArgs e)
         {
-            DirectoryInfo di = new DirectoryInfo(path);
-            FileInfo[] files = di.GetFiles("*.*", SearchOption.AllDirectories);
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+                e.Effects = DragDropEffects.Link;
+            else e.Effects = DragDropEffects.None;
+        }
 
+        private void Button_Drop(object sender, DragEventArgs e)
+        {
+            string fileName = ((System.Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString();
+            byte[] b = GetIcon.GetIconByteArray(fileName);
 
-            if (files != null && files.Length > 0)
+            
+        }
+        public static byte[] Bitmap2Byte(System.Drawing.Bitmap bitmap)
+        {
+            using (MemoryStream stream = new MemoryStream())
             {
-                foreach (var file in files)
-                {
-                    if (file.Extension == (".jpg") ||
-                        file.Extension == (".png") ||
-                        file.Extension == (".bmp") ||
-                        file.Extension == (".gif"))
-                    {
-                        photos.Add(new Photo()
-                        {
-                            FullPath = file.FullName
-                        });
-                    }
-                }
+                bitmap.Save(stream , ImageFormat.Jpeg);
+                byte[] data = new byte[stream.Length];
+                stream.Seek(0 , SeekOrigin.Begin);
+                stream.Read(data ,0  , Convert.ToInt32(stream.Length));
+                return data;
             }
-        }
-        public class Photo
-        {
-            public string FullPath { get; set; }
         }
     }
 }

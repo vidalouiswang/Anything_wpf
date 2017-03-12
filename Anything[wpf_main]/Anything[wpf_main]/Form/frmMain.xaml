@@ -77,8 +77,8 @@
 
                         <!--第四层常规项目区-->
                         <StackPanel Grid.Row="3">
-
-                            
+                        <Button Height="300" Click="Button_Click" AllowDrop="True" DragEnter="Button_DragEnter" Drop="Button_Drop" >geticon</Button>
+                        <Image x:Name="imgtest" Width="128" Height="128"></Image>
                         </StackPanel>
                         <!--第四层常规项目区完-->
                     </Grid>
