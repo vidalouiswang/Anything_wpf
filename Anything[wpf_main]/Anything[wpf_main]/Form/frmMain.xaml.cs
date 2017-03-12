@@ -146,37 +146,52 @@ namespace Anything_wpf_main_
             this.btnCloseOnceClick = 0;
         }
 
-        #endregion
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
-        private void Button_DragEnter(object sender, DragEventArgs e)
+        private void bdrMainForm_DragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
                 e.Effects = DragDropEffects.Link;
             else e.Effects = DragDropEffects.None;
         }
 
-        private void Button_Drop(object sender, DragEventArgs e)
+        private void bdrMainForm_Drop(object sender, DragEventArgs e)
         {
             string fileName = ((System.Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString();
             byte[] b = GetIcon.GetIconByteArray(fileName);
+            this.imgs.Img_Property = GetIcon.ByteArrayToIS(b);
+            this.imgs.Name_Property = "this is a test";
+        }
 
-            
-        }
-        public static byte[] Bitmap2Byte(System.Drawing.Bitmap bitmap)
-        {
-            using (MemoryStream stream = new MemoryStream())
-            {
-                bitmap.Save(stream , ImageFormat.Jpeg);
-                byte[] data = new byte[stream.Length];
-                stream.Seek(0 , SeekOrigin.Begin);
-                stream.Read(data ,0  , Convert.ToInt32(stream.Length));
-                return data;
-            }
-        }
+        #endregion
+
+        //private void Button_Click(object sender, RoutedEventArgs e)
+        //{
+
+        //}
+
+        //private void Button_DragEnter(object sender, DragEventArgs e)
+        //{
+        //    if (e.Data.GetDataPresent(DataFormats.FileDrop))
+        //        e.Effects = DragDropEffects.Link;
+        //    else e.Effects = DragDropEffects.None;
+        //}
+
+        //private void Button_Drop(object sender, DragEventArgs e)
+        //{
+        //    string fileName = ((System.Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString();
+        //    byte[] b = GetIcon.GetIconByteArray(fileName);
+
+
+        //}
+        //public static byte[] Bitmap2Byte(System.Drawing.Bitmap bitmap)
+        //{
+        //    using (MemoryStream stream = new MemoryStream())
+        //    {
+        //        bitmap.Save(stream , ImageFormat.Jpeg);
+        //        byte[] data = new byte[stream.Length];
+        //        stream.Seek(0 , SeekOrigin.Begin);
+        //        stream.Read(data ,0  , Convert.ToInt32(stream.Length));
+        //        return data;
+        //    }
+        //}
     }
 }

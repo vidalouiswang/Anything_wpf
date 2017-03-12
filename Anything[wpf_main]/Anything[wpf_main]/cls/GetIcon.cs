@@ -8,6 +8,8 @@ using System.Windows.Interop;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using System.IO;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 
 namespace Anything
 {
@@ -25,6 +27,100 @@ namespace Anything
         const string IID_IImageList = "46EB5926-582E-4017-9FDF-E8998DAA0950";
         const string IID_IImageList2 = "192B9D83-50FC-457B-90A0-2B82A8B5DAE1";
         #endregion
+
+        /// <summary>
+        /// 根据图片得到一个图片非透明部分的区域
+        /// </summary>
+        /// <param name="bckImage"></param>
+        /// <returns></returns>
+        public static unsafe Region GetRegion(Bitmap bckImage)
+        {
+            GraphicsPath path = new GraphicsPath();
+            int w = bckImage.Width;
+            int h = bckImage.Height;
+            BitmapData bckdata = null;
+            try
+            {
+                bckdata = bckImage.LockBits(new Rectangle(0, 0, w, h), ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+                uint* bckInt = (uint*)bckdata.Scan0;
+                for (int j = 0; j < h; j++)
+                {
+                    for (int i = 0; i < w; i++)
+                    {
+                        if ((*bckInt & 0xff000000) != 0)
+                        {
+                            path.AddRectangle(new Rectangle(i, j, 1, 1));
+                        }
+                        bckInt++;
+                    }
+                }
+                bckImage.UnlockBits(bckdata); bckdata = null;
+            }
+            catch
+            {
+                if (bckdata != null)
+                {
+                    bckImage.UnlockBits(bckdata);
+                    bckdata = null;
+                }
+            }
+            Region region = new System.Drawing.Region(path);
+            path.Dispose(); path = null;
+            return region;
+        }
+
+        public static Bitmap GetPart(Bitmap bit)
+        {
+            System.Drawing.Color c = new System.Drawing.Color();
+            int count = 0;
+            for (int i=0;i<bit.Width;i++)
+            {
+                for (int j=0;j<bit.Height;j++)
+                {
+                
+                    c = bit.GetPixel(i, j);
+                    if (c.R>0 && c.G>0 && c.B>0)
+                    {
+                        count++;
+                        break;
+                    }
+                    
+                }
+            }
+
+            if (count > 0 && count <= 16)
+                count = 16;
+            else if (count > 16 && count <= 24)
+                count = 24;
+            else if (count > 24 && count <= 32)
+                count = 32;
+            else if (count > 32 && count <= 36)
+                count = 36;
+            else if (count > 36 && count <= 48)
+                count = 48;
+            else if (count > 48 && count <= 64)
+                count = 64;
+            else if (count > 64 && count <= 72)
+                count = 72;
+            else if (count > 72 && count <= 96)
+                count = 96;
+            else if (count > 96 && count <= 128)
+                count = 128;
+            else if (count > 128 && count <= 256)
+                count = 256;
+
+            Rectangle rect = new Rectangle(0, 0, count, count);
+            Bitmap bmSmall = new Bitmap(rect.Width, rect.Height, bit.PixelFormat);
+            using (Graphics grSmall = Graphics.FromImage(bmSmall))
+            {
+                grSmall.DrawImage(bit,
+                                  new System.Drawing.Rectangle(0, 0, bmSmall.Width, bmSmall.Height),
+                                  rect,
+                                  GraphicsUnit.Pixel);
+                grSmall.Dispose();
+            }
+            return bmSmall;
+        }
 
         #region 外部函数
 
@@ -58,7 +154,9 @@ namespace Anything
             //获取Icon数据
             Icon icon = (Icon)Icon.FromHandle(hIcon).Clone();
 
-            return BitmapToByte(icon.ToBitmap());
+            Bitmap bit = GetPart(icon.ToBitmap());
+            
+            return BitmapToByte(bit);
         }
         #endregion
 
@@ -135,6 +233,7 @@ namespace Anything
             //填充流
             bmp.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
 
+            bmp.Save("123.png");
             return ms.ToArray();
         }
 
@@ -196,7 +295,7 @@ namespace Anything
             Shell32.SHGetImageList(Shell32.SHIL_JUMBO, ref guil, ref spiml);
             //填充句柄
             IntPtr hIcon = IntPtr.Zero;
-            spiml.GetIcon(img, Shell32.ILD_TRANSPARENT | Shell32.ILD_IMAGE, ref hIcon); //
+            spiml.GetIcon(img, Shell32.ILD_TRANSPARENT | Shell32.ILD_IMAGE, ref hIcon);
 
             return hIcon;
         }

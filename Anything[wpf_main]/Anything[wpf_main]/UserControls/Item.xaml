@@ -5,36 +5,81 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Anything_wpf_main_"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300" MaxHeight="128" MaxWidth="128">
+             d:DesignHeight="128" d:DesignWidth="128" MaxHeight="128" MaxWidth="128" MinHeight="32" MinWidth="32">
 
-        <Border x:Name="bdrMain" BorderThickness="2" BorderBrush="Gray"
-                CornerRadius="20">
-
-            <Button x:Name="btnMain" Background="Transparent">
-
-            </Button>
-    </Border>
-        
-
-    
+<Border  x:Name="Bdr"  BorderThickness="2" 
+                 CornerRadius="10" Background="#00FFFFFF">
+        <Border.BorderBrush>
+            <SolidColorBrush x:Name="scb" Color="#00FFFFFF">
+                
+            </SolidColorBrush>
             
-    <UserControl.Resources>
-        <Style TargetType="Border">
-            <Style.Triggers>
-                <EventTrigger RoutedEvent="Mouse.MouseEnter">
-                    <EventTrigger.Actions>
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation Storyboard.TargetProperty="Opacity"
-                                                 To="1"
-                                                 Duration="0:0:0.3"></DoubleAnimation>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger.Actions>
-                </EventTrigger>
-            </Style.Triggers>
-        </Style>
+        </Border.BorderBrush>
+        <Border.Triggers>
+            
+            <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetProperty="Color"
+                                            Storyboard.TargetName="scb"
+                                                To="#FFFFFFFF"
+                                                Duration="0:0:0.5"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
 
+            <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetProperty="Color"
+                                            Storyboard.TargetName="scb"
+                                                To="#00FFFFFF"
+                                                Duration="0:0:0.5"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+            
+            
+        </Border.Triggers>
+        <Border.Effect>
+                <DropShadowEffect BlurRadius="15" Direction="-90" RenderingBias="Quality" ShadowDepth="2"/>
+            </Border.Effect>
+    
+    
+    <!--thisis s s fds fsd fds gdfsgfdgfdgdfgfdgfdgfdgdfgdfgdfgdfgdfgd-->
 
-    </UserControl.Resources>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <DockPanel x:Name="dock"  LastChildFill="True"
+                         HorizontalAlignment="Center" 
+                         Grid.Row="0">
+
+                <Image x:Name="Img" 
+                       IsHitTestVisible="False"
+                       HorizontalAlignment="Stretch"
+                       VerticalAlignment="Stretch"
+                       Stretch="Uniform"
+                       Source="{Binding Path=img_Property, Mode=TwoWay}" 
+                       Height="auto" 
+                       Width="126"
+                       ></Image>
+                
+            </DockPanel>
+            <TextBlock  x:Name="Txt" Foreground="White" 
+                            Background="Transparent" 
+                            Height="Auto"
+                            HorizontalAlignment="Center"
+                            Text="{Binding Path=name_Property,Mode=TwoWay}"
+                            Grid.Row="1"></TextBlock>
+        </Grid>
+            
+</Border>
+
 </UserControl>

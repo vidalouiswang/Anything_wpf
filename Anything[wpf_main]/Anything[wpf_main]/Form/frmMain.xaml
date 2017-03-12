@@ -8,12 +8,16 @@
         mc:Ignorable="d"
         xmlns:anything="clr-namespace:Anything"
         Title="Anything" Height="650" Width="350" AllowsTransparency="True" Opacity="0.97"  WindowStyle="None" Background="#00fefefe" 
-        Loaded="Window_Loaded"   >
+        Loaded="Window_Loaded"   WindowStartupLocation="Manual" Left="700" Top="200">
 
     <Border x:Name="bdrMain">
             
             <Border Background="#ffFEFEFE" BorderThickness="2" CornerRadius="10">
-                <Border x:Name="bdrMainForm" Background="#ff282828" BorderThickness="2" CornerRadius="9">
+                <Border x:Name="bdrMainForm" Background="#ff282828"
+                        BorderThickness="2" CornerRadius="9" 
+                        AllowDrop="True"
+                        DragEnter="bdrMainForm_DragEnter"
+                        Drop="bdrMainForm_Drop">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -77,8 +81,9 @@
 
                         <!--第四层常规项目区-->
                         <StackPanel Grid.Row="3">
-                        <Button Height="300" Click="Button_Click" AllowDrop="True" DragEnter="Button_DragEnter" Drop="Button_Drop" >geticon</Button>
-                        <Image x:Name="imgtest" Width="128" Height="128"></Image>
+                        <local:Item x:Name="imgs">
+                            
+                        </local:Item>
                         </StackPanel>
                         <!--第四层常规项目区完-->
                     </Grid>

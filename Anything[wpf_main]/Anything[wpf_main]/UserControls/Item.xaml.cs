@@ -21,28 +21,60 @@ namespace Anything_wpf_main_
     /// </summary>
     public partial class Item : UserControl
     {
-        public Item()
+        public Item(){InitializeComponent();}
+
+        public Item(String ID,String Name,ImageSource IS)
         {
             InitializeComponent();
-
-            
+            this.ID = ID;
+            this.name_Property = Name;
+            this.img_Property = IS;
+            this.Img.Source = IS;
         }
-        private BitmapImage vImage = null;
-        public Bitmap bitmap=null;
+        private ImageSource img_Property = null;
+        private String name_Property = "";
+        private String iD = "";
 
 
-
-        public BitmapImage VImage
+        public string Name_Property
         {
             get
             {
-                return vImage;
+                return name_Property;
             }
 
             set
             {
-                vImage = value;
-                this.btnMain.Content = vImage;
+                name_Property = value;
+                this.Txt.Text = this.name_Property;
+            }
+        }
+
+        public ImageSource Img_Property
+        {
+            get
+            {
+                return img_Property;
+            }
+
+            set
+            {
+                img_Property = value;
+                this.Img.Source = this.img_Property;
+                
+            }
+        }
+
+        public string ID
+        {
+            get
+            {
+                return iD;
+            }
+
+            set
+            {
+                iD = value;
             }
         }
     }
