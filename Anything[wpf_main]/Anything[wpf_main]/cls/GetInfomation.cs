@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Anything;
-using Microsoft.VisualBasic;
+
 namespace Anything
 {
-    class GetInfomation
+ static class GetInfomation
     {
 
         public struct INFO
@@ -77,7 +73,7 @@ namespace Anything
         /// <returns></returns>
         public static double GetHideTimeSpan()
         {
-            double rtnValue = 0.6;
+            double rtnValue = 0.3;
 
             return rtnValue;
         }
@@ -91,6 +87,22 @@ namespace Anything
             double rtnValue = 3;
 
             return rtnValue;
+        }
+
+
+        public static List<string> Split(this string input, string sign)
+        {
+            List<string> strs = new List<string>();
+            int index = input.IndexOf(sign);
+            while (index != -1)
+            {
+                strs.Add(input.Substring(0, index));
+                input = input.Substring(index + sign.Length);
+                index = input.IndexOf(sign);
+            }
+            if (!string.IsNullOrEmpty(input))
+                strs.Add(input);
+            return strs;
         }
         #endregion
 

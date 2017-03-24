@@ -7,17 +7,20 @@
         xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="Anything_wpf_main_.MainWindow"
         mc:Ignorable="d"
         xmlns:anything="clr-namespace:Anything"
-        Title="Anything" Height="650" Width="350" AllowsTransparency="True" Opacity="0.97"  WindowStyle="None" Background="#00fefefe" 
-        Loaded="Window_Loaded"   WindowStartupLocation="Manual" Left="700" Top="200">
-
+        Title="Anything" x:Name="Me" Height="700" Width="350" AllowsTransparency="True" Opacity="0.97" 
+    WindowStyle="None" Background="#00fefefe" 
+        Loaded="Window_Loaded"   WindowStartupLocation="Manual" Left="10" Top="10"
+    VerticalAlignment="Top" HorizontalAlignment="Left" LocationChanged="Window_LocationChanged" MouseDown="Me_MouseDown"
+     >
     <Border x:Name="bdrMain">
-            
+
             <Border Background="#ffFEFEFE" BorderThickness="2" CornerRadius="10">
                 <Border x:Name="bdrMainForm" Background="#ff282828"
                         BorderThickness="2" CornerRadius="9" 
                         AllowDrop="True"
                         DragEnter="bdrMainForm_DragEnter"
                         Drop="bdrMainForm_Drop">
+                <Grid>
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -28,17 +31,18 @@
                         <!--第一层功能区-->
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0">
                             <Button x:Name="btnMin" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Right" Click="btnMin_Click">
-                            <Line X1="1" Y1="17" X2="12" Y2="17" Stroke="#FFAAAAAA" StrokeThickness="2"/>
-                        </Button>
-                        <Button x:Name="btnMax" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Right" Click="btnMax_Click">
-                            <Border BorderThickness="2" Width="15" Height="15" Background="#ffAAAAAA">
+                                <Line X1="5" Y1="20" X2="20" Y2="20" Stroke="#FFAAAAAA" StrokeThickness="2"/>
+                            </Button>
+                            <Button x:Name="btnMax" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Right" Click="btnMax_Click">
+                                <Border BorderThickness="2" Width="15" Height="15" Background="#ffAAAAAA">
                                     <Border BorderThickness="1" Width="10" Height="10" Background="#aa282828"/>
                                 </Border>
                             </Button>
-                        <Button x:Name="btnClose" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Right" Click="btnClose_Click" MouseLeave="btnClose_MouseLeave">
-                            <Grid>
-                                    <Line X1="1" X2="10" Y1="1" Y2="10" Stroke="#FFAAAAAA"  StrokeThickness="2"/>
-                                    <Line X1="1" X2="10" Y1="1" Y2="10" Stroke="#FFAAAAAA"  StrokeThickness="2" RenderTransformOrigin="0.5,0.5">
+                            <Button x:Name="btnClose" Style="{StaticResource  ButtonStyle_Close}" HorizontalAlignment="Right" MouseLeave="btnClose_MouseLeave"
+                                    Click="btnClose_Click">
+                                <Grid>
+                                    <Line X1="6" Y1="6" X2="20"  Y2="20" Stroke="#FFAAAAAA"  StrokeThickness="2"/>
+                                    <Line X1="6" Y1="6" X2="20"  Y2="20" Stroke="#FFAAAAAA"  StrokeThickness="2" RenderTransformOrigin="0.5,0.5">
                                         <Line.RenderTransform>
                                             <TransformGroup>
                                                 <ScaleTransform/>
@@ -66,40 +70,73 @@
 
                         <!--第三层常用项目区-->
                         <StackPanel Grid.Row="2" Margin="5" >
-                        <ListBox x:Name="lstImgs">
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <Image Width="100" Height="30" Source="{Binding Path=FullPath}">
-
-                                    </Image>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>
-
-                    </StackPanel>
+                            
+                        </StackPanel>
                         <!--第三层常用项目区完-->
 
                         <!--第四层常规项目区-->
-                        <StackPanel Grid.Row="3">
-                        <local:Item x:Name="imgs">
-                            
-                        </local:Item>
-                        </StackPanel>
+
+                        <WrapPanel x:Name="Recent" Grid.Row="3" />
+
                         <!--第四层常规项目区完-->
                     </Grid>
-
-                </Border>
+                   
+                </Grid>
+            </Border>
             </Border>
 
         </Border>
 
     <Window.Resources>
-        <DataTemplate x:Key="dt">
-            <StackPanel>
-                <Image x:Name="img"></Image>
-                <TextBlock x:Name="txt"></TextBlock>
-            </StackPanel>
-        </DataTemplate>
+        <!--<Style TargetType="{x:Type local:ImgEx}">
+
+            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"></Setter>
+            <Setter Property="Margin" Value="5"></Setter>
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                --><!--<ColorAnimation Storyboard.TargetProperty="Color"
+                                            Storyboard.TargetName="scb"
+                                                To="#FFFFFFFF"
+                                                Duration="0:0:0.5"/>--><!--
+                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX"
+                                             Duration="0:0:0.3"
+                                             To="1.1"
+                                             ></DoubleAnimation>
+                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY"
+                                             Duration="0:0:0.3"
+                                             To="1.1"
+                                             ></DoubleAnimation>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+
+                <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                --><!--<ColorAnimation Storyboard.TargetProperty="Color"
+                                            Storyboard.TargetName="scb"
+                                                To="#00FFFFFF"
+                                                Duration="0:0:0.5"/>--><!--
+                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX"
+                                             Duration="0:0:0.3"
+                                             
+                                             ></DoubleAnimation>
+                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY"
+                                             Duration="0:0:0.3"
+                                             
+                                             ></DoubleAnimation>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+
+            </Style.Triggers>
+        </Style>-->
     </Window.Resources>
     
 </Window>

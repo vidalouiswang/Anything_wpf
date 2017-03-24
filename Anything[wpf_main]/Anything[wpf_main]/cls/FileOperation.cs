@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.VisualBasic.Devices;
 using System.IO;
 
@@ -63,6 +59,11 @@ namespace Anything
                 }
             }
             return 0;
+        }
+
+        public static String GetName(String Path)
+        {
+            return objComputer.FileSystem.GetName(Path);
         }
     }
 }

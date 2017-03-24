@@ -1,55 +1,64 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Drawing;
 
 namespace Anything_wpf_main_
 {
+
     /// <summary>
     /// Item.xaml 的交互逻辑
     /// </summary>
     public partial class Item : UserControl
     {
-        public Item(){InitializeComponent();}
+        /// <summary>
+        /// 无参构造
+        /// </summary>
+        public Item()
+        {
+            InitializeComponent();   
+        }
 
+        /// <summary>
+        /// 带参构造
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <param name="Name"></param>
+        /// <param name="IS"></param>
         public Item(String ID,String Name,ImageSource IS)
         {
             InitializeComponent();
-            this.ID = ID;
-            this.name_Property = Name;
-            this.img_Property = IS;
-            this.Img.Source = IS;
+            Init(ID,Name,IS);
         }
+
+        /// <summary>
+        /// 初始化过程
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <param name="Name"></param>
+        /// <param name="IS"></param>
+        private void Init(String ID, String Name = "Default Name", ImageSource IS = null)
+        {
+            this.Name_Property = Name;
+            this.ID = ID;
+            this.Img_Property = IS;
+        }
+
+        //项目的可视化资源
         private ImageSource img_Property = null;
+
+        //项目名称属性
         private String name_Property = "";
+
+        //项目的唯一标识符
         private String iD = "";
 
+        //边长
+        private double length = 0;
 
-        public string Name_Property
-        {
-            get
-            {
-                return name_Property;
-            }
-
-            set
-            {
-                name_Property = value;
-                this.Txt.Text = this.name_Property;
-            }
-        }
-
+        /// <summary>
+        /// Img_Property属性的包装器
+        /// </summary>
         public ImageSource Img_Property
         {
             get
@@ -65,6 +74,9 @@ namespace Anything_wpf_main_
             }
         }
 
+        /// <summary>
+        /// ID属性的包装器
+        /// </summary>
         public string ID
         {
             get
@@ -76,6 +88,76 @@ namespace Anything_wpf_main_
             {
                 iD = value;
             }
+        }
+
+        /// <summary>
+        /// Name属性的包装器
+        /// </summary>
+        public string Name_Property
+        {
+            get
+            {
+                return name_Property;
+            }
+
+            set
+            {
+                name_Property = value;
+                this.Txt.Text = value;
+                this.TxtWrite.Text = value;
+            }
+        }
+
+        /// <summary>
+        /// 边长属性的包装器
+        /// </summary>
+        public double Length
+        {
+            get
+            {
+                return length;
+            }
+
+            set
+            {
+                length = value;
+                this.Width = value;
+                this.Height = value;
+            }
+        }
+
+        /// <summary>
+        /// 尺寸改变时调整字体大小
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void UserControl_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            this.Txt.FontSize = this.ActualWidth / 8;
+            this.TxtWrite.FontSize = this.ActualWidth / 8;
+            this.Length = this.ActualWidth;
+        }
+
+        /// <summary>
+        /// 命名项目
+        /// </summary>
+        private void SetName()
+        {
+            this.Txt.Visibility = Visibility.Hidden;
+            this.TxtWrite.Visibility = Visibility.Visible;
+            this.TxtWrite.Focus();
+        }
+
+        /// <summary>
+        /// 丢失焦点时保存数据
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TxtWrite_LostFocus(object sender, RoutedEventArgs e)
+        {
+            this.Name_Property = this.TxtWrite.Text;
+            this.TxtWrite.Visibility = Visibility.Hidden;
+            this.Txt.Visibility = Visibility.Visible;
         }
     }
 }

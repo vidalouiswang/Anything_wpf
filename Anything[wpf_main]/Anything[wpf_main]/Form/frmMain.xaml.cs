@@ -1,32 +1,92 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+using System.ComponentModel;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Anything;
 using System.Windows.Interop;
-using System.Windows.Media.Animation;
-using System.IO;
-
-using System.Drawing.Imaging;
+using System.Windows.Media;
+using Anything;
+using Anything_wpf_main_.cls;
 
 namespace Anything_wpf_main_
 {
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
+
+
+
     public partial class MainWindow : Window
     {
+        #region 额外
+
+        /// <summary>
+        /// 改变窗体大小
+        /// </summary>
+        /// <param name="hwnd"></param>
+        /// <param name="msg"></param>
+        /// <param name="wParam"></param>
+        /// <param name="lParam"></param>
+        /// <param name="handled"></param>
+        /// <returns></returns>
+        protected IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
+        {
+            //定义距离
+            int GripSize = 8;
+            int BorderSize = 5;
+
+            //定义Window
+            Window wnd = (Window)HwndSource.FromHwnd(hwnd).RootVisual;
+
+            //判断消息
+            if (msg == NativeMethods.WM_NCHITTEST)
+            {
+                int x = lParam.ToInt32() << 16 >> 16, y = lParam.ToInt32() >> 16;
+                Point pt = wnd.PointFromScreen(new Point(x, y));
+
+                //底部
+                if (pt.X > GripSize && pt.X < wnd.ActualWidth - GripSize && pt.Y >= wnd.ActualHeight - BorderSize)
+                {
+                    handled = true;
+                    return (IntPtr)NativeMethods.HTBOTTOM;
+                }
+
+                //右侧
+                if (pt.Y > GripSize && pt.X > wnd.ActualWidth - BorderSize && pt.Y < wnd.ActualHeight - GripSize)
+                {
+                    handled = true;
+                    return (IntPtr)NativeMethods.HTRIGHT;
+                }
+
+                //右下角
+                if (pt.X > wnd.ActualWidth - GripSize && pt.Y >= wnd.ActualHeight - GripSize)
+                {
+                    handled = true;
+                    return (IntPtr)NativeMethods.HTBOTTOMRIGHT;
+                }
+            }
+
+            return IntPtr.Zero;
+        }
+
+        /// <summary>
+        /// 注册钩子
+        /// </summary>
+        /// <param name="e"></param>
+        protected override void OnSourceInitialized(EventArgs e)
+        {
+            base.OnSourceInitialized(e);
+            HwndSource hwndSource = PresentationSource.FromVisual(this) as HwndSource;
+            if (hwndSource != null)
+            {
+                hwndSource.AddHook(new HwndSourceHook(this.WndProc));
+            }
+        }
+
+        #endregion
 
         #region 成员变量
 
@@ -34,7 +94,9 @@ namespace Anything_wpf_main_
         private Color bdrColor = new Color();
 
         //窗体效果对象
-        private FormEffects effect = null;
+        //private FormResize effect = null;
+
+        private Animation animation = new Animation();
 
         //关闭按钮的计数
         private byte btnCloseOnceClick = 0;
@@ -45,6 +107,10 @@ namespace Anything_wpf_main_
 
         //指示窗体是否最大化
         private bool IsMaximized = false;
+
+        //系统缩放
+        public double ScaleX;
+        public double ScaleY;
 
         #endregion
 
@@ -63,8 +129,6 @@ namespace Anything_wpf_main_
             this.bdrMainForm.Background = new SolidColorBrush(bdrColor);
 
 
-            //this.btnTest.VImage = BitmapFrame.Create(st, BitmapCreateOptions.None, BitmapCacheOption.Default);
-
 
         }
 
@@ -79,13 +143,34 @@ namespace Anything_wpf_main_
         /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            this.effect = new FormEffects(this, 1, 1);
-            this.StateChanged += new EventHandler(this.effect.Window_StateChanged);
-            this.MouseDown += new MouseButtonEventHandler(this.effect.WindowMouse_Down);
-            InitStyles.InitBdrStyle(ref this.bdrMain);
+            //窗体事件处理
+            this.StateChanged += new EventHandler(this.animation.Window_StateChanged);
+            
+
+            //设置窗体渐隐与显示
+            animation.InitBdrStyle(ref this.bdrMain);
 
 
-            //this.InitPhoto();
+        }
+
+        /// <summary>
+        /// 移动窗体
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Me_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+                this.DragMove();
+        }
+
+        /// <summary>
+        /// 位置改变时响应函数
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Window_LocationChanged(object sender, EventArgs e)
+        {
 
         }
 
@@ -101,8 +186,8 @@ namespace Anything_wpf_main_
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             this.btnCloseOnceClick++;
-            if (this.btnCloseOnceClick >= 2)
-                effect.Hide(true, WindowState.Normal, true);
+            if (this.btnCloseOnceClick >= 2) 
+                this.animation.Close(this);
             else
                 this.btnClose.ToolTip = "Click Once";
         }
@@ -116,11 +201,11 @@ namespace Anything_wpf_main_
         {
             if (this.WindowState == WindowState.Normal)
             {
-                effect.Hide(true, WindowState.Maximized);
+                this.animation.SetMax(this);
             }
             else
             {
-                effect.Hide(true, WindowState.Normal);
+                this.animation.SetMax(this, 1);
             }
 
         }
@@ -132,8 +217,9 @@ namespace Anything_wpf_main_
         /// <param name="e"></param>
         private void btnMin_Click(object sender, RoutedEventArgs e)
         {
-            effect.Hide(true);
-
+            //effect.Hide(true);
+            this.animation.SetMin(this);
+            
         }
 
         /// <summary>
@@ -155,43 +241,21 @@ namespace Anything_wpf_main_
 
         private void bdrMainForm_Drop(object sender, DragEventArgs e)
         {
-            string fileName = ((System.Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString();
-            byte[] b = GetIcon.GetIconByteArray(fileName);
-            this.imgs.Img_Property = GetIcon.ByteArrayToIS(b);
-            this.imgs.Name_Property = "this is a test";
+            String[] arr = (String[])e.Data.GetData(DataFormats.FileDrop);
+            int i = 0;
+            String str = "";
+            while (i < arr.Length)
+            {
+                str = arr[i].ToString();
+                this.Recent.Children.Add(Manage.AddItem(str));
+                byte[] b = GetIcon.GetIconByteArray(str);
+                i++;
+            }
+
         }
 
         #endregion
 
-        //private void Button_Click(object sender, RoutedEventArgs e)
-        //{
 
-        //}
-
-        //private void Button_DragEnter(object sender, DragEventArgs e)
-        //{
-        //    if (e.Data.GetDataPresent(DataFormats.FileDrop))
-        //        e.Effects = DragDropEffects.Link;
-        //    else e.Effects = DragDropEffects.None;
-        //}
-
-        //private void Button_Drop(object sender, DragEventArgs e)
-        //{
-        //    string fileName = ((System.Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString();
-        //    byte[] b = GetIcon.GetIconByteArray(fileName);
-
-
-        //}
-        //public static byte[] Bitmap2Byte(System.Drawing.Bitmap bitmap)
-        //{
-        //    using (MemoryStream stream = new MemoryStream())
-        //    {
-        //        bitmap.Save(stream , ImageFormat.Jpeg);
-        //        byte[] data = new byte[stream.Length];
-        //        stream.Seek(0 , SeekOrigin.Begin);
-        //        stream.Read(data ,0  , Convert.ToInt32(stream.Length));
-        //        return data;
-        //    }
-        //}
     }
 }

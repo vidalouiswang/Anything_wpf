@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Drawing;
 using Anything;
 using System.Windows.Media;
@@ -14,26 +10,51 @@ namespace Anything_wpf_main_.cls
         #region 结构
 
         /// <summary>
-        /// Item的数据结构
+        /// Item的组成
         /// </summary>
-        public struct Data
+        public struct DataST
         {
             //名称
-            private String Name;
-            //图标
-            private byte[] Icon;
+            public String Name;
+            //图标byte array
+            public byte[] Icon;
+            //图标image source
+            public ImageSource IS;
             //路径
-            private String Path;
+            public String Path;
             //ID
-            private String ID;
+            public String ID;
             //参数
-            private String Arguments;
+            public String Arguments;
             //是否使用
-            private int IsUesd;
+            public int IsUesd;
             //执行权限
-            private int RunAs;
+            public int RunAs;
             //自动运行
-            private int AutoRun;
+            public int AutoRun;
+
+            public DataST(string name,
+                string path,
+                string id,
+                ImageSource _is=null,
+                byte[] icon=null,
+                string arguments="",
+                int isuesd=0,
+                int runas=0,
+                int autorun=0)
+
+            {
+                Name = name;
+                Path = path;
+                ID = id;
+                IS = _is;
+                Icon = icon;
+                Arguments = arguments;
+                IsUesd = isuesd;
+                RunAs = runas;
+                AutoRun = autorun;
+            }
+
         }
 
         /// <summary>
@@ -64,20 +85,21 @@ namespace Anything_wpf_main_.cls
 
         public bool IsInit;
         public String DataStr;
-        private Data objData;
+        private DataST data;
 
-        internal Data ObjData
+        internal DataST Data
         {
             get
             {
-                return objData;
+                return data;
             }
 
             set
             {
-                objData = value;
+                data = value;
             }
         }
+
 
         #endregion
 
@@ -87,9 +109,13 @@ namespace Anything_wpf_main_.cls
         /// 从指定的Data构造对象
         /// </summary>
         /// <param name="data"></param>
-        public ItemData(Data data)
+        public ItemData(DataST data)
         {
-            this.objData = data;
+            //填充数据
+            this.data = data;
+
+            //初始化成功
+            this.IsInit = true;
         }
 
         /// <summary>
@@ -109,7 +135,7 @@ namespace Anything_wpf_main_.cls
                 }
                 else
                     //初始化失败
-                    throw new Exception("Can not init");
+                    throw new Exception("load error");
             }
         }
 
@@ -346,7 +372,7 @@ namespace Anything_wpf_main_.cls
 
         #endregion
 
-        #region 中性
+        #region 其他
 
         /// <summary>
         /// 执行

@@ -1,8 +1,6 @@
-﻿using System;
+﻿using Anything;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Anything_wpf_main_.cls
 {
@@ -13,13 +11,13 @@ namespace Anything_wpf_main_.cls
 
         #region 成员变量
         //数据集合
-        List<ItemData> listData = new List<ItemData>();
+        public static List<ItemData> listData = new List<ItemData>();
 
         #endregion
 
         #region 外部函数
 
-        public int GetIndexByName(String Name)
+        public static int GetIndexByName(String Name)
         {
             try
             {
@@ -32,7 +30,7 @@ namespace Anything_wpf_main_.cls
             return -1;
         }
 
-        public int GetIndexByID(String ID)
+        public static int GetIndexByID(String ID)
         {
             try
             {
@@ -45,7 +43,7 @@ namespace Anything_wpf_main_.cls
             return -1;
         }
 
-        public int GetIndexByPath(String Path)
+        public static int GetIndexByPath(String Path)
         {
             try
             {
@@ -56,6 +54,34 @@ namespace Anything_wpf_main_.cls
 
             }
             return -1;
+        }
+
+        public static Item AddItem(String Path )
+        {
+            try
+            {
+                //获取图标
+                byte[] b = GetIcon.GetIconByteArray(Path);
+
+                string Name = FileOperation.GetName(Path);
+                //构造UI对象
+                Item item = new Item("ID",
+                    Name, 
+                    GetIcon.ByteArrayToIS(b));
+
+                //构造ID类对象
+                ItemData itemdata = new ItemData(new ItemData.DataST(Name, Path, "auto"));
+
+                Manage.listData.Add(itemdata);
+
+                item.Margin = new System.Windows.Thickness(5);
+
+                return item;
+            }
+            catch
+            {
+                throw new Exception("Add Error");
+            }
         }
         #endregion
 

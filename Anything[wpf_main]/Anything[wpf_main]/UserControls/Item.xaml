@@ -5,52 +5,24 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Anything_wpf_main_"
              mc:Ignorable="d" 
-             d:DesignHeight="128" d:DesignWidth="128" MaxHeight="128" MaxWidth="128" MinHeight="32" MinWidth="32">
+             d:DesignHeight="128" d:DesignWidth="128" MaxHeight="128" MaxWidth="128" MinHeight="32" MinWidth="32" SizeChanged="UserControl_SizeChanged">
 
-<Border  x:Name="Bdr"  BorderThickness="2" 
+<Border  x:Name="Bdr" Style="{DynamicResource BdrStyle}" BorderThickness="2" RenderTransformOrigin="0.5,0.5"
                  CornerRadius="10" Background="#00FFFFFF">
+        <Border.RenderTransform>
+            <TransformGroup x:Name="tg">
+                <ScaleTransform></ScaleTransform>
+                <SkewTransform></SkewTransform>
+            </TransformGroup>
+            
+        </Border.RenderTransform>
         <Border.BorderBrush>
             <SolidColorBrush x:Name="scb" Color="#00FFFFFF">
-                
-            </SolidColorBrush>
-            
-        </Border.BorderBrush>
-        <Border.Triggers>
-            
-            <EventTrigger RoutedEvent="Mouse.MouseEnter">
-                <EventTrigger.Actions>
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <ColorAnimation Storyboard.TargetProperty="Color"
-                                            Storyboard.TargetName="scb"
-                                                To="#FFFFFFFF"
-                                                Duration="0:0:0.5"/>
-                        </Storyboard>
-                    </BeginStoryboard>
-                </EventTrigger.Actions>
-            </EventTrigger>
 
-            <EventTrigger RoutedEvent="Mouse.MouseLeave">
-                <EventTrigger.Actions>
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <ColorAnimation Storyboard.TargetProperty="Color"
-                                            Storyboard.TargetName="scb"
-                                                To="#00FFFFFF"
-                                                Duration="0:0:0.5"/>
-                        </Storyboard>
-                    </BeginStoryboard>
-                </EventTrigger.Actions>
-            </EventTrigger>
-            
-            
-        </Border.Triggers>
-        <Border.Effect>
-                <DropShadowEffect BlurRadius="15" Direction="-90" RenderingBias="Quality" ShadowDepth="2"/>
-            </Border.Effect>
-    
-    
-    <!--thisis s s fds fsd fds gdfsgfdgfdgdfgfdgfdgfdgdfgdfgdfgdfgdfgd-->
+            </SolidColorBrush>
+
+        </Border.BorderBrush>
+        <!--thisis s s fds fsd fds gdfsgfdgfdgdfgfdgfdgfdgdfgdfgdfgdfgdfgd-->
 
         <Grid>
             <Grid.RowDefinitions>
@@ -62,22 +34,53 @@
                          Grid.Row="0">
 
                 <Image x:Name="Img" 
-                       IsHitTestVisible="False"
-                       HorizontalAlignment="Stretch"
+                       
                        VerticalAlignment="Stretch"
                        Stretch="Uniform"
-                       Source="{Binding Path=img_Property, Mode=TwoWay}" 
+                       
                        Height="auto" 
                        Width="126"
-                       ></Image>
+                       >
+                    
+                </Image>
                 
+
             </DockPanel>
-            <TextBlock  x:Name="Txt" Foreground="White" 
+            <Canvas x:Name="CanvasX" Grid.Row="1" Height="auto" 
+                    MinHeight="{Binding ElementName=Txt, Path=ActualHeight}">
+                
+                <TextBlock Panel.ZIndex="0"  x:Name="Txt" Foreground="White" 
                             Background="Transparent" 
                             Height="Auto"
-                            HorizontalAlignment="Center"
-                            Text="{Binding Path=name_Property,Mode=TwoWay}"
-                            Grid.Row="1"></TextBlock>
+                            Visibility="Visible"
+                            TextAlignment="Center"
+                            
+                            TextWrapping="Wrap"
+                            Canvas.Left="0"
+                            Canvas.Top="0"
+                           Width="{Binding ElementName=CanvasX, Path=ActualWidth}"
+                            >
+                    <TextBlock.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem>ReName</MenuItem>
+                        </ContextMenu>
+                    </TextBlock.ContextMenu>
+                </TextBlock>
+                <TextBox x:Name="TxtWrite"
+                         Background="Transparent"
+                         Foreground="White"
+                         TextWrapping="Wrap"
+                         Visibility="Hidden"
+                         
+                         TextAlignment="Center"
+                         Height="Auto"
+                         Canvas.Left="0"
+                         Canvas.Top="0"
+                         Width="{Binding ElementName=CanvasX, Path=ActualWidth}" LostFocus="TxtWrite_LostFocus"
+                         >
+                        
+                </TextBox>
+            </Canvas>
         </Grid>
             
 </Border>

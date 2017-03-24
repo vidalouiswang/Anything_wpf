@@ -1,0 +1,54 @@
+﻿
+    <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Anything_wpf_main_.Resources">
+    <Style x:Key="BdrStyle" TargetType="{x:Type Border}">
+        <Style.Triggers>
+
+            <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetProperty="(Border.BorderBrush).Color"
+                                           
+                                                To="#FFFFFFFF"
+                                                Duration="0:0:0.5"/>
+                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.Children[0].ScaleX"
+                                             Duration="0:0:0.5"
+                                             To="1.2"
+                                             ></DoubleAnimation>
+                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.Children[0].ScaleY"
+                                             Duration="0:0:0.5"
+                                             To="1.2"
+                                             ></DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+
+            <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetProperty="(Border.BorderBrush).Color"
+                                            
+                                                To="#00FFFFFF"
+                                                Duration="0:0:0.5"/>
+                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.Children[0].ScaleX"
+                                             Duration="0:0:0.5"
+                                             
+                                             ></DoubleAnimation>
+                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.Children[0].ScaleY"
+                                             Duration="0:0:0.5"
+                                             
+                                             ></DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+
+
+
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>
