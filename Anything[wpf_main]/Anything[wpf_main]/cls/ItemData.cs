@@ -5,7 +5,7 @@ using System.Windows.Media;
 
 namespace Anything_wpf_main_.cls
 {
-    class ItemData
+    class ItemData : IDisposable
     {
         #region 结构
 
@@ -390,6 +390,14 @@ namespace Anything_wpf_main_.cls
                 throw new Exception("Error");
             }
             return 0;
+        }
+
+        /// <summary>
+        /// 销毁数据
+        /// </summary>
+        public void Dispose()
+        {
+            
         }
         #endregion
 

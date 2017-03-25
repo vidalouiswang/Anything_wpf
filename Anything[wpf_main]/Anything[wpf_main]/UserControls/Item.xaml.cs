@@ -9,7 +9,7 @@ namespace Anything_wpf_main_
     /// <summary>
     /// Item.xaml 的交互逻辑
     /// </summary>
-    public partial class Item : UserControl
+    public partial class Item : UserControl,IDisposable
     {
         /// <summary>
         /// 无参构造
@@ -158,6 +158,15 @@ namespace Anything_wpf_main_
             this.Name_Property = this.TxtWrite.Text;
             this.TxtWrite.Visibility = Visibility.Hidden;
             this.Txt.Visibility = Visibility.Visible;
+        }
+
+        public void Dispose()
+        {
+            this.iD = null;
+            this.img_Property = null;
+            this.name_Property = null;
+            this.length = 0;
+            GC.Collect();
         }
     }
 }

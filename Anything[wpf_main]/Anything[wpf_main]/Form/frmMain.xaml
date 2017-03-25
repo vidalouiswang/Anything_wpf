@@ -9,7 +9,7 @@
         xmlns:anything="clr-namespace:Anything"
         Title="Anything" x:Name="Me" Height="700" Width="350" AllowsTransparency="True" Opacity="0.97" 
     WindowStyle="None" Background="#00fefefe" 
-        Loaded="Window_Loaded"   WindowStartupLocation="Manual" Left="10" Top="10"
+        Loaded="Window_Loaded"   WindowStartupLocation="Manual" 
     VerticalAlignment="Top" HorizontalAlignment="Left" LocationChanged="Window_LocationChanged" MouseDown="Me_MouseDown"
      >
     <Border x:Name="bdrMain">

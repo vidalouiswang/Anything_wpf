@@ -10,6 +10,7 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using Anything;
 using Anything_wpf_main_.cls;
+using ApplicationInformations.Anything;
 
 namespace Anything_wpf_main_
 {
@@ -101,16 +102,7 @@ namespace Anything_wpf_main_
         //关闭按钮的计数
         private byte btnCloseOnceClick = 0;
 
-        //最大最小透明度
-        private double MinOpacity = 0.03;
-        private double MaxOpacity = 0.95;
-
-        //指示窗体是否最大化
-        private bool IsMaximized = false;
-
-        //系统缩放
-        public double ScaleX;
-        public double ScaleY;
+        private bool IsInformationsInitialized = false;
 
         #endregion
 
@@ -145,12 +137,14 @@ namespace Anything_wpf_main_
         {
             //窗体事件处理
             this.StateChanged += new EventHandler(this.animation.Window_StateChanged);
-            
+
+            this.Left = AppInfoOperations.GetLeft();
+            this.Top = AppInfoOperations.GetTop();
 
             //设置窗体渐隐与显示
             animation.InitBdrStyle(ref this.bdrMain);
 
-
+            IsInformationsInitialized = true;
         }
 
         /// <summary>
@@ -171,7 +165,12 @@ namespace Anything_wpf_main_
         /// <param name="e"></param>
         private void Window_LocationChanged(object sender, EventArgs e)
         {
-
+            if (IsInformationsInitialized)
+            {
+                AppInfoOperations.SetLeft(this.Left);
+                AppInfoOperations.SetTop(this.Top);
+            }
+            
         }
 
         #endregion

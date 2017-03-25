@@ -4,6 +4,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Anything_wpf_main_;
+using ApplicationInformations.Anything;
 
 namespace Anything
 {
@@ -20,19 +21,19 @@ namespace Anything
         public void InitBdrStyle(ref Border bdr)
         {
             //获取最小透明度
-            double minOpa = GetInfomation.GetMinOpacity();
+            double minOpa = AppInfoOperations.GetMinOpacity();
 
             //获取最大透明度
-            double maxOpa = GetInfomation.GetMaxOpacity();
+            double maxOpa = AppInfoOperations.GetMaxOpacity();
 
             //获取显示时长
-            double showTimeSpan = GetInfomation.GetShowTimeSpan();
+            double showTimeSpan = AppInfoOperations.GetShowTimeSpan();
 
             //获取隐藏时长
-            double hideTimeSpan = GetInfomation.GetHideTimeSpan();
+            double hideTimeSpan = AppInfoOperations.GetHideTimeSpan();
 
             //获取超时时长
-            double TimeoutSpan = GetInfomation.GetTimeoutTimeSpan();
+            double TimeoutSpan = AppInfoOperations.GetTimeoutTimeSpan();
 
 
             DoubleAnimation daShow = new DoubleAnimation();
@@ -106,12 +107,12 @@ namespace Anything
             if (Way==0)
             {
                 wnd.WindowState = WindowState.Maximized;
-                OpacityChange(wnd, 0, GetInfomation.GetMaxOpacity(), TimeSpan.FromSeconds(0.3));
+                OpacityChange(wnd, 0, AppInfoOperations.GetMaxOpacity(), TimeSpan.FromSeconds(0.3));
             }
             else
             {
                 wnd.WindowState = WindowState.Normal;
-                OpacityChange(wnd, 0, GetInfomation.GetMaxOpacity(), TimeSpan.FromSeconds(0.3));
+                OpacityChange(wnd, 0, AppInfoOperations.GetMaxOpacity(), TimeSpan.FromSeconds(0.3));
                 Way = 0;
             }
         }
@@ -144,7 +145,7 @@ namespace Anything
             da1.Duration = TimeSpan.FromSeconds(0.5);
 
             wnd.BeginAnimation(Window.TopProperty, da1);
-            OpacityChange(wnd, 0, GetInfomation.GetMaxOpacity(), TimeSpan.FromSeconds(0.5));
+            OpacityChange(wnd, 0, AppInfoOperations.GetMaxOpacity(), TimeSpan.FromSeconds(0.5));
 
         }
         /// <summary>

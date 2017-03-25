@@ -83,10 +83,15 @@ namespace Anything_wpf_main_.cls
                 throw new Exception("Add Error");
             }
         }
+
+        public void RemoveItem(String ID)
+        {
+
+        }
         #endregion
 
         #region 内部函数
-        private void InitList()
+        private void InitializeList()
         {
 
         }

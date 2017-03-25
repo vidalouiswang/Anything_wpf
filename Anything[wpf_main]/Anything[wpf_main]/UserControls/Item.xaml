@@ -41,7 +41,13 @@
                        Height="auto" 
                        Width="126"
                        >
-                    
+                    <Image.ContextMenu>
+                        <ContextMenu >
+                            <MenuItem Header="Open"></MenuItem>
+                            <MenuItem Header="Send shortcut to desktop"></MenuItem>
+                            <MenuItem Header="Delete"></MenuItem>
+                        </ContextMenu>
+                    </Image.ContextMenu>
                 </Image>
                 
 

@@ -111,6 +111,13 @@
     <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Anoicess, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Anoicess\Anoicess\Anoicess\bin\Debug\Anoicess.dll</HintPath>
+    </Reference>
+    <Reference Include="ApplicationInformations">
+      <HintPath>..\..\..\ClassLibrary\ApplicationInformations\ApplicationInformations\bin\Debug\ApplicationInformations.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -147,7 +154,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="cls\FileOperation.cs" />
-    <Compile Include="cls\GetInfomation.cs" />
     <Compile Include="cls\ItemData.cs" />
     <Compile Include="cls\Manage.cs" />
     <Compile Include="Form\frmMain.xaml.cs">
