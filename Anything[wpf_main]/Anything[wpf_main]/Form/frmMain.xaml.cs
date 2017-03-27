@@ -8,6 +8,7 @@ using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using Anything;
 using Anything_wpf_main_.cls;
 using ApplicationInformations.Anything;
@@ -22,7 +23,7 @@ namespace Anything_wpf_main_
 
     public partial class MainWindow : Window
     {
-        #region 额外
+        #region 改变大小
 
         /// <summary>
         /// 改变窗体大小
@@ -94,15 +95,13 @@ namespace Anything_wpf_main_
         //边界颜色
         private Color bdrColor = new Color();
 
-        //窗体效果对象
-        //private FormResize effect = null;
-
         private Animation animation = new Animation();
 
         //关闭按钮的计数
         private byte btnCloseOnceClick = 0;
 
-        private bool IsInformationsInitialized = false;
+        //用于自动存储位置大小的开关指示
+        public bool IsInformationsInitialized = false;
 
         #endregion
 
@@ -119,9 +118,6 @@ namespace Anything_wpf_main_
             //边界颜色定义
             bdrColor = Color.FromArgb(0xff, 0x28, 0x28, 0x28);
             this.bdrMainForm.Background = new SolidColorBrush(bdrColor);
-
-
-
         }
 
         #endregion
@@ -135,16 +131,23 @@ namespace Anything_wpf_main_
         /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            //窗体事件处理
+            //关联事件处理
             this.StateChanged += new EventHandler(this.animation.Window_StateChanged);
+            this.SizeChanged += new SizeChangedEventHandler(this.animation.Window_SizeChanged);
 
-            this.Left = AppInfoOperations.GetLeft();
-            this.Top = AppInfoOperations.GetTop();
+            //设置窗体位置、大小
+            this.Left = AppInfoOperations.GetLeft()-2;
+            this.Top = AppInfoOperations.GetTop()-1;
+            this.Width = AppInfoOperations.GetWidth();
+            this.Height = AppInfoOperations.GetHeight();
 
             //设置窗体渐隐与显示
             animation.InitBdrStyle(ref this.bdrMain);
 
+            //用于自动存储位置大小的开关指示
             IsInformationsInitialized = true;
+
+            //this.animation.SetStackPanelStyle( ref this.BdrFunction,(this.btnClose.ActualHeight+(this.btnClose.Margin.Top *2)+this.txtMain.ActualHeight));
         }
 
         /// <summary>
@@ -188,7 +191,7 @@ namespace Anything_wpf_main_
             if (this.btnCloseOnceClick >= 2) 
                 this.animation.Close(this);
             else
-                this.btnClose.ToolTip = "Click Once";
+                this.btnClose.ToolTip = "Click Again";
         }
 
         /// <summary>
@@ -231,6 +234,11 @@ namespace Anything_wpf_main_
             this.btnCloseOnceClick = 0;
         }
 
+        /// <summary>
+        /// 当拖放文件进入区域时的事件处理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void bdrMainForm_DragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
@@ -238,6 +246,11 @@ namespace Anything_wpf_main_
             else e.Effects = DragDropEffects.None;
         }
 
+        /// <summary>
+        /// 当拖放文件拖放时的事件处理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void bdrMainForm_Drop(object sender, DragEventArgs e)
         {
             String[] arr = (String[])e.Data.GetData(DataFormats.FileDrop);
@@ -253,8 +266,10 @@ namespace Anything_wpf_main_
 
         }
 
+
+
         #endregion
 
-
+       
     }
 }

@@ -18,10 +18,31 @@ ApplicationInformations
  </summary>
  <returns></returns>
 </member>
+<member name="M:ApplicationInformations.Anything.AppInfoOperations.SetTop(System.Double)">
+ <summary>
+ 设置top
+ </summary>
+ <param name="Top"></param>
+ <returns></returns>
+</member>
+<member name="M:ApplicationInformations.Anything.AppInfoOperations.SetLeft(System.Double)">
+ <summary>
+ 设置left
+ </summary>
+ <param name="Left"></param>
+ <returns></returns>
+</member>
 <member name="M:ApplicationInformations.Anything.AppInfoOperations.GetMinOpacity">
  <summary>
  获取配置信息中的最小透明度参数
  </summary>
+ <returns></returns>
+</member>
+<member name="M:ApplicationInformations.Anything.AppInfoOperations.SetMinOpacity(System.Double)">
+ <summary>
+ 设置最小透明度
+ </summary>
+ <param name="Opacity"></param>
  <returns></returns>
 </member>
 <member name="M:ApplicationInformations.Anything.AppInfoOperations.GetMaxOpacity">
@@ -30,10 +51,24 @@ ApplicationInformations
  </summary>
  <returns></returns>
 </member>
+<member name="M:ApplicationInformations.Anything.AppInfoOperations.SetMaxOpacity(System.Double)">
+ <summary>
+ 设置最大透明度
+ </summary>
+ <param name="Opacity"></param>
+ <returns></returns>
+</member>
 <member name="M:ApplicationInformations.Anything.AppInfoOperations.GetShowTimeSpan">
  <summary>
  获取显示时长
  </summary>
+ <returns></returns>
+</member>
+<member name="M:ApplicationInformations.Anything.AppInfoOperations.SetShowTimeSpan(System.Double)">
+ <summary>
+ 设置显示时长
+ </summary>
+ <param name="TimeSpan"></param>
  <returns></returns>
 </member>
 <member name="M:ApplicationInformations.Anything.AppInfoOperations.GetHideTimeSpan">
@@ -42,9 +77,49 @@ ApplicationInformations
  </summary>
  <returns></returns>
 </member>
+<member name="M:ApplicationInformations.Anything.AppInfoOperations.SetHideTimeSpan(System.Double)">
+ <summary>
+ 设置隐藏时长
+ </summary>
+ <param name="TimeSpan"></param>
+ <returns></returns>
+</member>
 <member name="M:ApplicationInformations.Anything.AppInfoOperations.GetTimeoutTimeSpan">
  <summary>
  获取超时时间
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:ApplicationInformations.Anything.AppInfoOperations.SetTimeoutTimeSpan(System.Double)">
+ <summary>
+ 设置超时时间
+ </summary>
+ <param name="Timeout"></param>
+ <returns></returns>
+</member>
+<member name="M:ApplicationInformations.Anything.AppInfoOperations.GetWidth">
+ <summary>
+ 获取宽度
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:ApplicationInformations.Anything.AppInfoOperations.SetWidth(System.Double)">
+ <summary>
+ 设置宽度
+ </summary>
+ <param name="Width"></param>
+ <returns></returns>
+</member>
+<member name="M:ApplicationInformations.Anything.AppInfoOperations.SetHeight(System.Double)">
+ <summary>
+ 设置高度
+ </summary>
+ <param name="Height"></param>
+ <returns></returns>
+</member>
+<member name="M:ApplicationInformations.Anything.AppInfoOperations.GetHeight">
+ <summary>
+ 获取高度
  </summary>
  <returns></returns>
 </member>

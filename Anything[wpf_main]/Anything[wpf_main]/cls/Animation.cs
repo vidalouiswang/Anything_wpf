@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using Anything_wpf_main_;
 using ApplicationInformations.Anything;
+using System.Windows.Media;
 
 namespace Anything
 {
@@ -13,11 +14,20 @@ namespace Anything
         private Window wnd = null;
         private int Way = 0;
         private bool Closing = false;
+
         
+        /// <summary>
+        /// 无参构造
+        /// </summary>
         public Animation()
         {
-
         }
+
+        
+        /// <summary>
+        /// 初始化窗体border的样式
+        /// </summary>
+        /// <param name="bdr"></param>
         public void InitBdrStyle(ref Border bdr)
         {
             //获取最小透明度
@@ -83,6 +93,14 @@ namespace Anything
             bdr.Style = style;
         }
 
+        /// <summary>
+        /// 内部函数
+        /// </summary>
+        /// <param name="wnd"></param>
+        /// <param name="From"></param>
+        /// <param name="To"></param>
+        /// <param name="ts"></param>
+        /// <param name="Max"></param>
         private void OpacityChange(Window wnd,double From, double To,TimeSpan ts,bool Max=false)
         {
 
@@ -134,6 +152,7 @@ namespace Anything
             wnd.BeginAnimation(Window.TopProperty, da1);
             OpacityChange(wnd, wnd.Opacity, 0, TimeSpan.FromSeconds(0.5));
         }
+
         /// <summary>
         /// 还原
         /// </summary>
@@ -148,6 +167,7 @@ namespace Anything
             OpacityChange(wnd, 0, AppInfoOperations.GetMaxOpacity(), TimeSpan.FromSeconds(0.5));
 
         }
+
         /// <summary>
         /// 最大化
         /// </summary>
@@ -168,6 +188,7 @@ namespace Anything
             }
             
         }
+
         /// <summary>
         /// 关闭
         /// </summary>
@@ -181,30 +202,98 @@ namespace Anything
 
         #endregion
 
+        public void SetStackPanelStyle(ref Border bdr   ,double InneraActualHeight)
+        {
+
+            DoubleAnimation daShowHeight = new DoubleAnimation(5, InneraActualHeight, TimeSpan.FromSeconds(0.5), FillBehavior.HoldEnd);
+            DoubleAnimation daHideHeight = new DoubleAnimation(bdr.ActualHeight, 5, TimeSpan.FromSeconds(0.5), FillBehavior.HoldEnd);
+
+
+            Storyboard sbHide = new Storyboard();
+            Storyboard sbShow = new Storyboard();
+
+            sbHide.BeginTime = TimeSpan.FromSeconds(1);
+            sbShow.BeginTime = TimeSpan.FromSeconds(0.5);
+
+
+            BeginStoryboard bsdShow = new BeginStoryboard();
+            BeginStoryboard bsdHide = new BeginStoryboard();
+
+            bsdHide.HandoffBehavior = HandoffBehavior.Compose;
+            bsdShow.HandoffBehavior = HandoffBehavior.Compose;
+
+
+
+            EventTrigger etShow = new EventTrigger();
+            EventTrigger etHide = new EventTrigger();
+
+            Storyboard.SetTargetProperty(daShowHeight,new PropertyPath(StackPanel.HeightProperty));
+            Storyboard.SetTargetProperty(daHideHeight, new PropertyPath(StackPanel.HeightProperty));
+
+            sbHide.Children.Add(daHideHeight);
+            sbShow.Children.Add(daShowHeight);
+
+            bsdHide.Storyboard = sbHide;
+            bsdShow.Storyboard = sbShow;
+
+            etShow.RoutedEvent = Mouse.MouseUpEvent;
+            etHide.RoutedEvent = Mouse.MouseLeaveEvent;
+
+            etShow.Actions.Add(bsdShow);
+            etHide.Actions.Add(bsdHide);
+
+
+            Style style = new Style();
+
+            style.Triggers.Add(etShow);
+            style.Triggers.Add(etHide);
+
+
+            bdr.Style = style;
+            
+        }
+
         #region 事件响应
+
+        /// <summary>
+        /// 窗体状态发生改变时的时间处理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void Window_StateChanged(object sender, EventArgs e)
         {
-            MainWindow wnd = (MainWindow)sender;
+            Window wnd = (Window)sender;
             if (wnd.Opacity == 0 && wnd.WindowState == WindowState.Minimized)
             {
                 wnd.WindowState = WindowState.Normal;
                 wnd.Opacity = 0.01;
                 SetNormal(wnd);
             }
+            
 
         }
 
+        /// <summary>
+        /// 窗体大小发生改变时的事件处理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
 
-            Window wnd = (Window)sender;
+            MainWindow wnd = (MainWindow)sender;
             wnd.UpdateLayout();
             if (wnd.Opacity == 0 && wnd.WindowState == WindowState.Normal)
             {
                 wnd.WindowState = WindowState.Minimized;
 
             }
+            if (wnd.IsInformationsInitialized)
+            {
+                AppInfoOperations.SetWidth(wnd.ActualWidth);
+                AppInfoOperations.SetHeight(wnd.ActualHeight);
 
+            }
         }
         #endregion
     }

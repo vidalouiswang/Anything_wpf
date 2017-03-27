@@ -3,6 +3,7 @@
                     xmlns:local="clr-namespace:Anything_wpf_main_.Resources"
                     xmlns:anything="Anything_wpf_main_" >
     
+    <!--按钮-->
     <Style x:Key="ButtonStyle" TargetType="Button">
         <Setter Property="Width" Value="30"></Setter>
         <Setter Property="Height" Value="30"></Setter>
@@ -132,6 +133,7 @@
         </Border>
 
     </ControlTemplate>
+    <!--按钮-->
 
 
 </ResourceDictionary>

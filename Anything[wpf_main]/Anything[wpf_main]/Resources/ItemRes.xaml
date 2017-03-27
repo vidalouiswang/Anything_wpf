@@ -16,12 +16,12 @@
                                                 To="#FFFFFFFF"
                                                 Duration="0:0:0.5"/>
                             <DoubleAnimation Storyboard.TargetProperty="RenderTransform.Children[0].ScaleX"
-                                             Duration="0:0:0.5"
-                                             To="1.2"
+                                             Duration="0:0:0.3"
+                                             To="1.1"
                                              ></DoubleAnimation>
                             <DoubleAnimation Storyboard.TargetProperty="RenderTransform.Children[0].ScaleY"
-                                             Duration="0:0:0.5"
-                                             To="1.2"
+                                             Duration="0:0:0.3"
+                                             To="1.1"
                                              ></DoubleAnimation>
                         </Storyboard>
                     </BeginStoryboard>
@@ -71,8 +71,9 @@
         <Setter Property="Template" Value="{DynamicResource MenuItemTemplate}"></Setter>
         <Setter Property="MinHeight" Value="25"></Setter>
         <Setter Property="MinWidth" Value="100"></Setter>
-        <Setter Property="Background" Value="#aa303030"></Setter>
-        <Setter Property="BorderBrush" Value="#aa909090"></Setter>
+        <Setter Property="Background" Value="#cc303030"></Setter>
+        <Setter Property="BorderBrush" Value="#cc909090"></Setter>
+        <Setter Property="Margin" Value="0.5"></Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="true">
                 <Setter Property="Background" Value="#ee606060"></Setter>
@@ -80,13 +81,17 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+        
+        
+        
     <ControlTemplate x:Key="MenuItemTemplate" TargetType="{x:Type MenuItem}">
         <Border Background="{TemplateBinding Background}" BorderThickness="2" BorderBrush="{TemplateBinding BorderBrush}"
                 CornerRadius="5"
                 TextBlock.FontSize="16"
                 TextBlock.TextAlignment="Center"
                 TextBlock.Foreground="White"
-                Padding="6,2,6,2">
+                Padding="6,3,6,3"
+                >
             
             
             <ContentPresenter ContentSource="Header"></ContentPresenter>

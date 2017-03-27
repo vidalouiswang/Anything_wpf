@@ -10,34 +10,41 @@
         Title="Anything" x:Name="Me" Height="700" Width="350" AllowsTransparency="True" Opacity="0.97" 
     WindowStyle="None" Background="#00fefefe" 
         Loaded="Window_Loaded"   WindowStartupLocation="Manual" 
-    VerticalAlignment="Top" HorizontalAlignment="Left" LocationChanged="Window_LocationChanged" MouseDown="Me_MouseDown"
+    VerticalAlignment="Top" HorizontalAlignment="Left" LocationChanged="Window_LocationChanged" MouseDown="Me_MouseDown" 
      >
     <Border x:Name="bdrMain">
-
-            <Border Background="#ffFEFEFE" BorderThickness="2" CornerRadius="10">
-                <Border x:Name="bdrMainForm" Background="#ff282828"
+        <Border Background="#ffFEFEFE" BorderThickness="2" CornerRadius="10">
+            <Border x:Name="bdrMainForm" Background="#ff282828"
                         BorderThickness="2" CornerRadius="9" 
                         AllowDrop="True"
                         DragEnter="bdrMainForm_DragEnter"
                         Drop="bdrMainForm_Drop">
                 <Grid>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition x:Name="FunctionRD" Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!--一二层-->
+                    <StackPanel x:Name="stTop">
+
                         <!--第一层功能区-->
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0"
+                                        Height="auto">
+
+                            <!--Min-->
                             <Button x:Name="btnMin" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Right" Click="btnMin_Click">
                                 <Line X1="5" Y1="20" X2="20" Y2="20" Stroke="#FFAAAAAA" StrokeThickness="2"/>
                             </Button>
+                            <!--Max-->
                             <Button x:Name="btnMax" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Right" Click="btnMax_Click">
                                 <Border BorderThickness="2" Width="15" Height="15" Background="#ffAAAAAA">
                                     <Border BorderThickness="1" Width="10" Height="10" Background="#aa282828"/>
                                 </Border>
                             </Button>
+                            <!--close-->
                             <Button x:Name="btnClose" Style="{StaticResource  ButtonStyle_Close}" HorizontalAlignment="Right" MouseLeave="btnClose_MouseLeave"
                                     Click="btnClose_Click">
                                 <Grid>
@@ -60,83 +67,35 @@
                         <!--第一层功能区完-->
 
                         <!--第二层关键字检索区-->
-                        <StackPanel Grid.Row="1">
+                        <StackPanel Grid.Row="1" Height="auto">
                             <!--Background="#FF505050"-->
-                            <TextBox x:Name="txtMain" Background="#FF505050" Margin="10,0,10,0" MinHeight="25" TextAlignment="Center" FontSize="17" Foreground="#FFEEEEEE" Text="cdscs" >
-
-                            </TextBox>
+                            <TextBox x:Name="txtMain" 
+                                     Background="#FF505050" 
+                                     Margin="10,0,10,0" 
+                                     MinHeight="25" 
+                                     TextAlignment="Center" 
+                                     FontSize="17" 
+                                     Foreground="#FFEEEEEE" 
+                                     Text=""
+                                     ></TextBox>
+                            <!--<Button HorizontalAlignment="Right" 
+                                    VerticalAlignment="Top"
+                                    BorderBrush="#00ffffff"
+                                    Background="#00"
+                                     >Search</Button>-->
                         </StackPanel>
                         <!--第二层关键字检索区完-->
 
-                        <!--第三层常用项目区-->
-                        <StackPanel Grid.Row="2" Margin="5" >
-                            
-                        </StackPanel>
-                        <!--第三层常用项目区完-->
+                    </StackPanel>
 
-                        <!--第四层常规项目区-->
+                    <!--第三层常用项目区-->
+                    <StackPanel Grid.Row="2" Margin="5" ></StackPanel>
 
-                        <WrapPanel x:Name="Recent" Grid.Row="3" />
+                    <!--第四层常规项目区-->
+                    <WrapPanel x:Name="Recent" Grid.Row="3" />
 
-                        <!--第四层常规项目区完-->
-                    </Grid>
-                   
                 </Grid>
             </Border>
-            </Border>
-
         </Border>
-
-    <Window.Resources>
-        <!--<Style TargetType="{x:Type local:ImgEx}">
-
-            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"></Setter>
-            <Setter Property="Margin" Value="5"></Setter>
-            <Style.Triggers>
-                <EventTrigger RoutedEvent="Mouse.MouseEnter">
-                    <EventTrigger.Actions>
-                        <BeginStoryboard>
-                            <Storyboard>
-                                --><!--<ColorAnimation Storyboard.TargetProperty="Color"
-                                            Storyboard.TargetName="scb"
-                                                To="#FFFFFFFF"
-                                                Duration="0:0:0.5"/>--><!--
-                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX"
-                                             Duration="0:0:0.3"
-                                             To="1.1"
-                                             ></DoubleAnimation>
-                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY"
-                                             Duration="0:0:0.3"
-                                             To="1.1"
-                                             ></DoubleAnimation>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger.Actions>
-                </EventTrigger>
-
-                <EventTrigger RoutedEvent="Mouse.MouseLeave">
-                    <EventTrigger.Actions>
-                        <BeginStoryboard>
-                            <Storyboard>
-                                --><!--<ColorAnimation Storyboard.TargetProperty="Color"
-                                            Storyboard.TargetName="scb"
-                                                To="#00FFFFFF"
-                                                Duration="0:0:0.5"/>--><!--
-                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX"
-                                             Duration="0:0:0.3"
-                                             
-                                             ></DoubleAnimation>
-                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY"
-                                             Duration="0:0:0.3"
-                                             
-                                             ></DoubleAnimation>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger.Actions>
-                </EventTrigger>
-
-            </Style.Triggers>
-        </Style>-->
-    </Window.Resources>
-    
+    </Border>
 </Window>
