@@ -56,6 +56,11 @@ namespace Anything_wpf_main_
         //边长
         private double length = 0;
 
+        public delegate EventHandler Click(String ID);
+
+
+
+
         /// <summary>
         /// Img_Property属性的包装器
         /// </summary>
@@ -167,6 +172,16 @@ namespace Anything_wpf_main_
             this.name_Property = null;
             this.length = 0;
             GC.Collect();
+        }
+
+        private void dock_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void dock_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+
         }
     }
 }

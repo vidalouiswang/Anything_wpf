@@ -111,12 +111,17 @@
     <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Anoicess, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Anoicess, Version=1.0.1.8, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Anoicess\Anoicess\Anoicess\bin\Debug\Anoicess.dll</HintPath>
     </Reference>
-    <Reference Include="ApplicationInformations">
+    <Reference Include="ApplicationInformations, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\ClassLibrary\ApplicationInformations\ApplicationInformations\bin\Debug\ApplicationInformations.dll</HintPath>
+    </Reference>
+    <Reference Include="ClsMD5, Version=1.0.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\ClsMD5.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />

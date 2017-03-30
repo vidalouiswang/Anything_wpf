@@ -2,6 +2,7 @@
 using System.Drawing;
 using Anything;
 using System.Windows.Media;
+using System.IO;
 
 namespace Anything_wpf_main_.cls
 {
@@ -87,6 +88,10 @@ namespace Anything_wpf_main_.cls
         public String DataStr;
         private DataST data;
 
+        private Anoicess.Anoicess.Anoicess objDB = null;
+
+        
+
         internal DataST Data
         {
             get
@@ -114,6 +119,7 @@ namespace Anything_wpf_main_.cls
             //填充数据
             this.data = data;
 
+            CreateDB();
             //初始化成功
             this.IsInit = true;
         }
@@ -122,20 +128,16 @@ namespace Anything_wpf_main_.cls
         /// 从给定的数据文件路径构造对象
         /// </summary>
         /// <param name="path"></param>
-        public ItemData(String path)
+        public  ItemData(Anoicess.Anoicess.Anoicess objDB)
         {
-            //判断给定路径的合法性
-            if (!String.IsNullOrEmpty(path))
+            if (objDB!=null)
             {
-                //调用内部函数初始化数据
-                if (this.InitFromStrPath(path) == 0)
-                {
-                    //初始化成功
-                    this.IsInit = true;
-                }
-                else
-                    //初始化失败
-                    throw new Exception("load error");
+                this.objDB = objDB;
+                ConnectDB();
+            }
+            else
+            {
+                Dispose();
             }
         }
 
@@ -143,231 +145,165 @@ namespace Anything_wpf_main_.cls
 
         #region 内部函数
 
+        private void CreateDB()
+        {
+            objDB = Manage.MAIN.CreateChildDB(data.Name, true);
+            objDB.Insert("ID", data.ID);
+            objDB.Insert("Name", data.Name);
+            objDB.Insert("Icon", data.Icon.Length.ToString());
+            objDB.Insert("Path", data.Path);
+            objDB.Insert("Arguments", data.Arguments);
+            objDB.Insert("Runas", data.RunAs.ToString());
+            objDB.Insert("Autorun", data.AutoRun.ToString());
+
+            if (!Directory.Exists(Manage.IconPath))
+            {
+                Directory.CreateDirectory(Manage.IconPath);
+            }
+
+            try
+            {
+                using (BinaryWriter bw = new BinaryWriter(new FileStream(Manage.IconPath + data.ID + ".ib", FileMode.Create)))
+                {
+                    bw.Write(data.Icon);
+                    bw.Flush();
+                    bw.Close();
+                }
+            }
+            catch
+            {
+
+            }
+
+            
+            
+
+        }
+
+
         /// <summary>
         /// 从数据文件路径初始化内部数据
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        private int InitFromStrPath(String path)
+        private int ConnectDB()
         {
-            this.DataStr = FileOperation.ReadTextFile(path);
-            String[] strSplit = DataStr.Split(new char[6] { 'A', '0', 'C', '0', 'F', '0' });
-            if (strSplit.Length > 0)
+            if (objDB != null)
             {
-                //todo
+                this.data.Name = objDB.Read("Name") as string;
+                this.data.ID = objDB.Read("ID") as string;
+                int Count = Convert.ToInt32( objDB.Read("Icon"));
+
+                try
+                {
+                    using (BinaryReader br = new BinaryReader(new FileStream(Manage.IconPath + data.ID + ".ib", FileMode.Open)))
+                    {
+                        data.Icon = br.ReadBytes(Count);
+                    }
+
+                    data.IS = GetIcon.ByteArrayToIS(data.Icon);
+                }
+                catch
+                {
+
+                }
+
+                this.data.Path = objDB.Read("Path") as string;
+                this.data.Arguments = objDB.Read("Arguments") as string;
+                this.data.RunAs = Convert.ToInt32( objDB.Read("Runas"));
+                this.data.AutoRun = Convert.ToInt32(objDB.Read("Autorun"));
+
+                return 0;
             }
-            return 0;
+            return -1;
         }
 
         #endregion
 
         #region 外部函数
 
-        #region 读
-        /// <summary>
-        /// 获取图标数据
-        /// </summary>
-        /// <returns></returns>
+        #region 属性
         
-        public ImageSource GetIcon()
+        public ImageSource Icon_imagesource
         {
-            ImageSource imgsrc = null;
-            
-            try
+            get
             {
-                //todo
+                return this.data.IS;
             }
-            catch
+            set
             {
-
+                this.data.IS = value;
             }
-
-            return imgsrc;
         }
 
-        /// <summary>
-        /// 获取参数
-        /// </summary>
-        /// <returns></returns>
-        public String GetArguments()
+        public byte[] Icon_byte
         {
-
-            String rtnStr = null;
-            try
+            get
             {
-                //todo
+                return this.data.Icon;
             }
-            catch
+            set
             {
-
+                this.data.Icon = value;
             }
-
-            return rtnStr;
         }
 
-        /// <summary>
-        /// 获取名称
-        /// </summary>
-        /// <returns></returns>
-        public String GetName()
+        public String Arguments
         {
-            String rtnName = null;
-            try
+            get
             {
-
+                return this.data.Arguments;
             }
-            catch
+            set
             {
-
+                this.data.Arguments = value;
             }
-            return rtnName;
-        }
-        #endregion
 
-        #region 写
-
-        /// <summary>
-        /// 更改图标从字节数组
-        /// </summary>
-        /// <param name="Icon"></param>
-        /// <returns></returns>
-        public int ChangeIcon(byte[] Icon)
-        {
-            try
-            {
-                //todo
-            }
-            catch
-            {
-                throw new Exception("Error");
-            }
-            return 0;
         }
 
-        /// <summary>
-        /// 更改图标从Image对象
-        /// </summary>
-        /// <param name="Icon"></param>
-        /// <returns></returns>
-        public int ChangeIcon(Image Icon)
+        public String Name
         {
-            try
+            get
             {
-                //todo
+                return this.data.Name;
             }
-            catch
+            set
             {
-                throw new Exception("Error");
+                this.data.Name = value;
             }
-            return 0;
         }
 
-        /// <summary>
-        /// 更改图标从Bitmap对象
-        /// </summary>
-        /// <param name="Icon"></param>
-        /// <returns></returns>
-        public int ChangeIcon(Bitmap Icon)
+        public String ID
         {
-            try
+            get
             {
-                //todo
+                return this.data.ID;
             }
-            catch
-            {
-                throw new Exception("Error");
-            }
-            return 0;
+
         }
 
-        /// <summary>
-        /// 更改名称
-        /// </summary>
-        /// <param name="Name"></param>
-        /// <returns></returns>
-        public int ChangeName(String Name)
+        public int RunAs
         {
-            try
+            get
             {
-                //todo
+                return this.data.RunAs; 
             }
-            catch
+            set
             {
-                throw new Exception("Error");
+                this.data.RunAs = value;
             }
-            return 0;
         }
 
-        /// <summary>
-        /// 更改路径
-        /// </summary>
-        /// <param name="Path"></param>
-        /// <returns></returns>
-        public int ChangePath(String Path)
+        public int AutoRun
         {
-            try
+            get
             {
-                //todo
+                return this.data.AutoRun;
             }
-            catch
+            set
             {
-                throw new Exception("Error");
+                this.data.AutoRun = value;
             }
-            return 0;
-        }
-
-        /// <summary>
-        /// 更改参数
-        /// </summary>
-        /// <param name="Arguments"></param>
-        /// <returns></returns>
-        public int ChangeArguments(String Arguments)
-        {
-            try
-            {
-                //todo
-            }
-            catch
-            {
-                throw new Exception("Error");
-            }
-            return 0;
-        }
-
-        /// <summary>
-        /// 设置自动启动
-        /// </summary>
-        /// <param name="run"></param>
-        /// <returns></returns>
-        public int SetAutoRun(Run run)
-        {
-            try
-            {
-                //todo
-            }
-            catch
-            {
-                throw new Exception("Error");
-            }
-            return 0;
-        }
-
-        /// <summary>
-        /// 设置运行权限
-        /// </summary>
-        /// <param name="runway"></param>
-        /// <returns></returns>
-        public int SetRunAs(RunWay runway)
-        {
-            try
-            {
-                //todo
-            }
-            catch
-            {
-                throw new Exception("Error");
-            }
-            return 0;
         }
 
         #endregion

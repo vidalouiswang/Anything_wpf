@@ -31,7 +31,7 @@
             </Grid.RowDefinitions>
             <DockPanel x:Name="dock"  LastChildFill="True"
                          HorizontalAlignment="Center" 
-                         Grid.Row="0">
+                         Grid.Row="0" MouseLeftButtonDown="dock_MouseLeftButtonDown" MouseLeftButtonUp="dock_MouseLeftButtonUp" >
 
                 <Image x:Name="Img" 
                        

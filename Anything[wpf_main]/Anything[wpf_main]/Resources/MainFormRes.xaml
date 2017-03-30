@@ -135,5 +135,74 @@
     </ControlTemplate>
     <!--按钮-->
 
+    <Style x:Key="BdrFunctionStyle" TargetType="Border">
+        <Style.Triggers>
+            <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                <BeginStoryboard HandoffBehavior="Compose">
+                    <Storyboard  BeginTime="0:0:1">
+                        <DoubleAnimation Storyboard.TargetProperty="Height" To="70" Duration="0:0:0.2"></DoubleAnimation>
+                        <DoubleAnimation Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.2"></DoubleAnimation>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
 
+            <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                <BeginStoryboard HandoffBehavior="Compose">
+                    <Storyboard BeginTime="0:0:3" >
+                        <DoubleAnimation Storyboard.TargetProperty="Height" To="3" Duration="0:0:0.5"></DoubleAnimation>
+                        <DoubleAnimation Storyboard.TargetProperty="Opacity" To="0.1" Duration="0:0:0.5"></DoubleAnimation>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Style.Triggers>
+        
+    </Style>
+
+    <!--<ControlTemplate x:Key="ScrollViewerTemplate" TargetType="{x:Type ScrollViewer}">
+        <Grid x:Name="Grid" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <ScrollContentPresenter x:Name="PART_ScrollContentPresenter" 
+                                    CanContentScroll="{TemplateBinding CanContentScroll}" 
+                                    CanHorizontallyScroll="False" 
+                                    CanVerticallyScroll="False" 
+                                    ContentTemplate="{TemplateBinding ContentTemplate}"
+                                    Content="{TemplateBinding Content}" 
+                                    Grid.Column="0" 
+                                    Margin="{TemplateBinding Padding}"
+                                    Grid.Row="0"/>
+            
+            <ScrollBar x:Name="PART_VerticalScrollBar" 
+                       AutomationProperties.AutomationId="VerticalScrollBar" 
+                       Cursor="Arrow" Grid.Column="1"
+                       Maximum="{TemplateBinding ScrollableHeight}" 
+                       Minimum="0" 
+                       Grid.Row="0" 
+                       Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
+                       Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
+                       ViewportSize="{TemplateBinding ViewportHeight}" 
+                       Background="{TemplateBinding Background}"
+                       Style="{DynamicResource ScrollBarStyle2}"/>
+            
+            <ScrollBar x:Name="PART_HorizontalScrollBar" 
+                       AutomationProperties.AutomationId="HorizontalScrollBar"
+                       Cursor="Arrow" Grid.Column="0" Maximum="{TemplateBinding ScrollableWidth}" 
+                       Minimum="0" Orientation="Horizontal" Grid.Row="1" 
+                       Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" 
+                       Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" 
+                       ViewportSize="{TemplateBinding ViewportWidth}"/>
+        </Grid>
+    </ControlTemplate>
+
+    <Style x:Key="ScrollBarStyle2" TargetType="ScrollBar">
+        <Setter Property="Background" Value="#66FFFFFF"></Setter>
+        <Setter Property="BorderBrush" Value="Blue"></Setter>
+        <Setter Property="BorderThickness" Value="5"></Setter>
+    </Style>-->
 </ResourceDictionary>

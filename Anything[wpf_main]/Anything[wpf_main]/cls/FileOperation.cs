@@ -65,5 +65,20 @@ namespace Anything
         {
             return objComputer.FileSystem.GetName(Path);
         }
+
+        public static String GetNameWithoutExtension(String Name)
+        {
+            int i = Name.Length-1;
+
+            while (i>0)
+            {
+                if (Name.Substring(i,1)==".")
+                {
+                    return Name.Substring(0, i);
+                }
+                i--;
+            }
+            return "";
+        }
     }
 }

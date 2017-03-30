@@ -13,9 +13,9 @@
     VerticalAlignment="Top" HorizontalAlignment="Left" LocationChanged="Window_LocationChanged" MouseDown="Me_MouseDown" 
      >
     <Border x:Name="bdrMain">
-        <Border Background="#ffFEFEFE" BorderThickness="2" CornerRadius="10">
+        <Border Background="#ffFEFEFE" BorderThickness="2" CornerRadius="10" >
             <Border x:Name="bdrMainForm" Background="#ff282828"
-                        BorderThickness="2" CornerRadius="9" 
+                        BorderThickness="2" CornerRadius="9"
                         AllowDrop="True"
                         DragEnter="bdrMainForm_DragEnter"
                         Drop="bdrMainForm_Drop">
@@ -28,72 +28,83 @@
                     </Grid.RowDefinitions>
 
                     <!--一二层-->
-                    <StackPanel x:Name="stTop">
+                    <Border x:Name="BdrFunction" Style="{DynamicResource BdrFunctionStyle}" Background="#00000000" Height="70" BorderThickness="1" BorderBrush="#01FFFFFF"
+                            CornerRadius="5">
+                        <StackPanel >
 
-                        <!--第一层功能区-->
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0"
+                            <!--第一层功能区-->
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0"
                                         Height="auto">
 
-                            <!--Min-->
-                            <Button x:Name="btnMin" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Right" Click="btnMin_Click">
-                                <Line X1="5" Y1="20" X2="20" Y2="20" Stroke="#FFAAAAAA" StrokeThickness="2"/>
-                            </Button>
-                            <!--Max-->
-                            <Button x:Name="btnMax" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Right" Click="btnMax_Click">
-                                <Border BorderThickness="2" Width="15" Height="15" Background="#ffAAAAAA">
-                                    <Border BorderThickness="1" Width="10" Height="10" Background="#aa282828"/>
-                                </Border>
-                            </Button>
-                            <!--close-->
-                            <Button x:Name="btnClose" Style="{StaticResource  ButtonStyle_Close}" HorizontalAlignment="Right" MouseLeave="btnClose_MouseLeave"
+                                <!--Min-->
+                                <Button x:Name="btnMin" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Right" Click="btnMin_Click">
+                                    <Line X1="5" Y1="20" X2="20" Y2="20" Stroke="#FFAAAAAA" StrokeThickness="2"/>
+                                </Button>
+                                <!--Max-->
+                                <Button x:Name="btnMax" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Right" Click="btnMax_Click">
+                                    <Border BorderThickness="2" Width="15" Height="15" Background="#ffAAAAAA">
+                                        <Border BorderThickness="1" Width="10" Height="10" Background="#aa282828"/>
+                                    </Border>
+                                </Button>
+                                <!--close-->
+                                <Button x:Name="btnClose" Style="{StaticResource  ButtonStyle_Close}" HorizontalAlignment="Right" MouseLeave="btnClose_MouseLeave"
                                     Click="btnClose_Click">
-                                <Grid>
-                                    <Line X1="6" Y1="6" X2="20"  Y2="20" Stroke="#FFAAAAAA"  StrokeThickness="2"/>
-                                    <Line X1="6" Y1="6" X2="20"  Y2="20" Stroke="#FFAAAAAA"  StrokeThickness="2" RenderTransformOrigin="0.5,0.5">
-                                        <Line.RenderTransform>
-                                            <TransformGroup>
-                                                <ScaleTransform/>
-                                                <SkewTransform/>
-                                                <RotateTransform Angle="90"/>
-                                                <TranslateTransform/>
-                                            </TransformGroup>
-                                        </Line.RenderTransform>
-                                    </Line>
+                                    <Grid>
+                                        <Line X1="6" Y1="6" X2="20"  Y2="20" Stroke="#FFAAAAAA"  StrokeThickness="2"/>
+                                        <Line X1="6" Y1="6" X2="20"  Y2="20" Stroke="#FFAAAAAA"  StrokeThickness="2" RenderTransformOrigin="0.5,0.5">
+                                            <Line.RenderTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform/>
+                                                    <SkewTransform/>
+                                                    <RotateTransform Angle="90"/>
+                                                    <TranslateTransform/>
+                                                </TransformGroup>
+                                            </Line.RenderTransform>
+                                        </Line>
 
-                                </Grid>
+                                    </Grid>
 
-                            </Button>
-                        </StackPanel>
-                        <!--第一层功能区完-->
+                                </Button>
+                            </StackPanel>
+                            <!--第一层功能区完-->
 
-                        <!--第二层关键字检索区-->
-                        <StackPanel Grid.Row="1" Height="auto">
-                            <!--Background="#FF505050"-->
-                            <TextBox x:Name="txtMain" 
+                            <!--第二层关键字检索区-->
+                            <StackPanel Grid.Row="1" Height="auto">
+
+                                <TextBox x:Name="txtMain" 
                                      Background="#FF505050" 
-                                     Margin="10,0,10,0" 
-                                     MinHeight="25" 
+                                     Margin="10,0,10,5" 
+                                     MinHeight="25"
+                                     MaxHeight="25"
+                                     Height="25"
                                      TextAlignment="Center" 
                                      FontSize="17" 
                                      Foreground="#FFEEEEEE" 
-                                     Text=""
-                                     ></TextBox>
-                            <!--<Button HorizontalAlignment="Right" 
-                                    VerticalAlignment="Top"
-                                    BorderBrush="#00ffffff"
-                                    Background="#00"
-                                     >Search</Button>-->
+                                     Text="" GotFocus="txtMain_GotFocus" LostFocus="txtMain_LostFocus"
+                                     >
+                                    <TextBox.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Search on the Web"></MenuItem>
+                                        </ContextMenu>
+                                    </TextBox.ContextMenu>
+                                </TextBox>
+                            </StackPanel>
+                            <!--第二层关键字检索区完-->
+
                         </StackPanel>
-                        <!--第二层关键字检索区完-->
-
-                    </StackPanel>
-
-                    <!--第三层常用项目区-->
-                    <StackPanel Grid.Row="2" Margin="5" ></StackPanel>
+                    </Border>
 
                     <!--第四层常规项目区-->
-                    <WrapPanel x:Name="Recent" Grid.Row="3" />
 
+                   
+
+                    <ScrollViewer x:Name="scrlist" Margin="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden"
+                                  Grid.Row="3">
+                        <WrapPanel x:Name="Recent" Width="{Binding ElementName=scrlist, Path=Width,Mode=TwoWay}"
+                               
+                               ></WrapPanel>
+                    </ScrollViewer>
+                    
                 </Grid>
             </Border>
         </Border>

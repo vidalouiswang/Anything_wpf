@@ -6,12 +6,25 @@ Anoicess
 </name>
 </assembly>
 <members>
-<member name="M:Anoicess.Anoicess.Anoicess.#ctor(System.String)">
+<member name="M:Anoicess.Anoicess.Anoicess.#ctor(System.String,System.Boolean,Anoicess.Anoicess.Anoicess)">
  <summary>
  带参构造函数
  </summary>
  <param name="FileName">数据库的路径，包含文件名</param>
  <remarks></remarks>
+</member>
+<member name="M:Anoicess.Anoicess.Anoicess.Dispose">
+ <summary>
+ 软析构
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:Anoicess.Anoicess.Anoicess.CreateChildDB(System.String,System.Boolean)">
+ <summary>
+ 创建子库
+ </summary>
+ <param name="Name"></param>
+ <returns></returns>
 </member>
 <member name="M:Anoicess.Anoicess.Anoicess.Insert(System.String,System.String,Anoicess.Anoicess.Anoicess._Append)">
  <summary>
@@ -23,6 +36,16 @@ Anoicess
  <returns></returns>
  <remarks></remarks>
 </member>
+<member name="M:Anoicess.Anoicess.Anoicess.InsertToChildDB(System.String,System.String,System.String,Anoicess.Anoicess.Anoicess._Append)">
+ <summary>
+ 子库内添加
+ </summary>
+ <param name="ChildName"></param>
+ <param name="Name"></param>
+ <param name="Data"></param>
+ <param name="Append"></param>
+ <returns></returns>
+</member>
 <member name="M:Anoicess.Anoicess.Anoicess.Delete(System.String,System.Boolean)">
  <summary>
  删除数据
@@ -31,7 +54,16 @@ Anoicess
  <returns></returns>
  <remarks></remarks>
 </member>
-<member name="M:Anoicess.Anoicess.Anoicess.Modify(System.String,System.String,System.String,System.Boolean)">
+<member name="M:Anoicess.Anoicess.Anoicess.DeleteFromChildDB(System.String,System.String,System.Boolean)">
+ <summary>
+ 子库内删除
+ </summary>
+ <param name="ChildName"></param>
+ <param name="Name"></param>
+ <param name="ForAll"></param>
+ <returns></returns>
+</member>
+<member name="M:Anoicess.Anoicess.Anoicess.Update(System.String,System.String,System.String,System.Boolean)">
  <summary>
  更新数据
  </summary>

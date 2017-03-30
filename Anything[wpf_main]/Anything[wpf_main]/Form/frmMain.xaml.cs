@@ -135,17 +135,44 @@ namespace Anything_wpf_main_
             this.StateChanged += new EventHandler(this.animation.Window_StateChanged);
             this.SizeChanged += new SizeChangedEventHandler(this.animation.Window_SizeChanged);
 
-            //设置窗体位置、大小
-            this.Left = AppInfoOperations.GetLeft()-2;
-            this.Top = AppInfoOperations.GetTop()-1;
-            this.Width = AppInfoOperations.GetWidth();
-            this.Height = AppInfoOperations.GetHeight();
+            double ScreenWidth = SystemParameters.PrimaryScreenWidth;
+            double ScreenHeight = SystemParameters.PrimaryScreenHeight;
+
+
+            //获取位置
+            //并检查合法性
+            double readLeft = AppInfoOperations.GetLeft();
+            double readTop = AppInfoOperations.GetTop();
+
+            if (readLeft <= 2)
+                this.Left = readLeft - 2;
+            else
+                this.Left = 0;
+
+            if (readTop <= 1)
+                this.Top = readTop - 1;
+            else
+                this.Top = 0;
+
+            //获取宽高
+            double readWidth= AppInfoOperations.GetWidth();
+            double readHeight = AppInfoOperations.GetHeight();
+            
+            //检查数值合法性
+            if (readWidth > ScreenWidth) readWidth = ScreenWidth;
+            if (readHeight > ScreenHeight) readHeight = ScreenHeight;
+
+            //应用宽高
+            this.Width = readWidth;
+            this.Height = readHeight;
 
             //设置窗体渐隐与显示
             animation.InitBdrStyle(ref this.bdrMain);
 
             //用于自动存储位置大小的开关指示
             IsInformationsInitialized = true;
+
+            Manage.InitializeData(ref this.Recent);
 
             //this.animation.SetStackPanelStyle( ref this.BdrFunction,(this.btnClose.ActualHeight+(this.btnClose.Margin.Top *2)+this.txtMain.ActualHeight));
         }
@@ -253,23 +280,34 @@ namespace Anything_wpf_main_
         /// <param name="e"></param>
         private void bdrMainForm_Drop(object sender, DragEventArgs e)
         {
+            //获取拖放的文件
             String[] arr = (String[])e.Data.GetData(DataFormats.FileDrop);
-            int i = 0;
-            String str = "";
-            while (i < arr.Length)
+
+            //添加项目
+            foreach (string s in arr)
             {
-                str = arr[i].ToString();
-                this.Recent.Children.Add(Manage.AddItem(str));
-                byte[] b = GetIcon.GetIconByteArray(str);
-                i++;
+                //
+                this.Recent.Children.Add(Manage.AddItem(s));
+                byte[] b = GetIcon.GetIconByteArray(s);
             }
 
         }
 
 
 
+
         #endregion
 
-       
+        private void txtMain_GotFocus(object sender, RoutedEventArgs e)
+        {
+            this.BdrFunction.Style = null;
+
+        }
+
+        private void txtMain_LostFocus(object sender, RoutedEventArgs e)
+        {
+            this.BdrFunction.Style = this.FindResource("BdrFunctionStyle") as Style;
+        }
+        
     }
 }
