@@ -78,7 +78,69 @@ namespace Anything
                 }
                 i--;
             }
-            return "";
+            return Name;
+        }
+
+        public static void RenameFile(string FileName,string NewName)
+        {
+            if (objComputer.FileSystem.FileExists(FileName))
+            {
+                try
+                {
+                    objComputer.FileSystem.RenameFile(FileName, NewName);
+
+                }
+                catch
+                {
+
+                }
+            }
+        }
+
+        public static void RenameDirectory(string DirectoryName, string NewName)
+        {
+            if (objComputer.FileSystem.DirectoryExists(DirectoryName))
+            {
+                objComputer.FileSystem.RenameFile(DirectoryName, NewName);
+            }
+        }
+
+        public static void DeleteFile(string FileName )
+        {
+            if (objComputer.FileSystem.FileExists(FileName))
+            {
+                try
+                {
+                objComputer.FileSystem.DeleteFile(FileName);
+                }
+                catch
+                {
+
+                }
+            }
+        }
+
+        public static int IsFile(string FileName)
+        {
+            bool folder = false;
+            bool file = false;
+            if (objComputer.FileSystem.DirectoryExists(FileName))
+            {
+                folder = true;
+            }
+            if (objComputer.FileSystem.FileExists(FileName))
+            {
+                file = true;
+            }
+
+            if (folder==true && file ==false)
+            {
+                return -1;
+            }
+            else
+            {
+                return 1;
+            }
         }
     }
 }

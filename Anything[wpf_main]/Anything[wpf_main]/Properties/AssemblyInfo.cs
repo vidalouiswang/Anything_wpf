@@ -7,11 +7,11 @@ using System.Windows;
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("Anything[wpf_main]")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Anything")]
+[assembly: AssemblyDescription("桌面资源整合")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Anything[wpf_main]")]
+[assembly: AssemblyCompany("Vida")]
+[assembly: AssemblyProduct("Anything")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

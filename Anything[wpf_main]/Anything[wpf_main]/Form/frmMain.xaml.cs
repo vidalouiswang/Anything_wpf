@@ -103,6 +103,8 @@ namespace Anything_wpf_main_
         //用于自动存储位置大小的开关指示
         public bool IsInformationsInitialized = false;
 
+        
+
         #endregion
 
         #region 构造函数
@@ -174,19 +176,13 @@ namespace Anything_wpf_main_
 
             Manage.InitializeData(ref this.Recent);
 
-            //this.animation.SetStackPanelStyle( ref this.BdrFunction,(this.btnClose.ActualHeight+(this.btnClose.Margin.Top *2)+this.txtMain.ActualHeight));
+            Manage.timer.Interval = TimeSpan.FromSeconds(3);
+            Manage.timer.Stop();
+            Manage.timer.Tick += Timer_Tick;
         }
 
-        /// <summary>
-        /// 移动窗体
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Me_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.LeftButton == MouseButtonState.Pressed)
-                this.DragMove();
-        }
+        
+
 
         /// <summary>
         /// 位置改变时响应函数
@@ -206,6 +202,24 @@ namespace Anything_wpf_main_
         #endregion
 
         #region 按钮事件响应
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            if (Manage.RemoveList.Count>0)
+            {
+                foreach(Item i in Manage.RemoveList)
+                {
+                    Manage.MAIN.RemoveChild(i.ID);
+
+                    FileOperation.DeleteFile(Manage.IconPath + i.ID + ".ib");
+
+                    this.Recent.Children.Remove(i);
+                }
+            }
+
+            
+            Manage.timer.Stop();
+        }
 
         /// <summary>
         /// 关闭按钮
@@ -308,6 +322,45 @@ namespace Anything_wpf_main_
         {
             this.BdrFunction.Style = this.FindResource("BdrFunctionStyle") as Style;
         }
+
+        private void Me_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+                this.DragMove();
+        }
+
+        private void txtMain_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string str = this.txtMain.Text;
+            if (!string.IsNullOrEmpty(str))
+            {
+                foreach (Item item in this.Recent.Children)
+                {
+                    item.Hide();
+                }
+                List<string> value = Manage.GetObjsByNameAndPath(str,str ,ref this.Recent);
+
+                if (value != null)
+                {
+                    foreach (string s in value)
+                    {
+                        foreach (Item i in this.Recent.Children)
+                        {
+                            if (i.Name_Property == s)
+                                i.Show();
+                        }
+                    }
+                }
+            }
+            else
+            {
+                foreach (Item item in this.Recent.Children)
+                {
+                    item.Show();
+                }
+            }
+        }
         
+
     }
 }

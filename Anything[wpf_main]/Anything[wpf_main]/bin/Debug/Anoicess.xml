@@ -6,18 +6,108 @@ Anoicess
 </name>
 </assembly>
 <members>
+<member name="P:Anoicess.Anoicess.Anoicess.DBName">
+ <summary>
+ 库名称
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:Anoicess.Anoicess.Anoicess.ChildrenPath_">
+ <summary>
+ 子库路径
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:Anoicess.Anoicess.Anoicess.CurrentPath_">
+ <summary>
+ 当前路径
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:Anoicess.Anoicess.Anoicess.DbFileName_">
+ <summary>
+ 库的路径包含文件名
+ </summary>
+ <returns></returns>
+</member>
+<member name="T:Anoicess.Anoicess.Anoicess._Content">
+ <summary>
+ 数据结构
+ </summary>
+</member>
+<member name="P:Anoicess.Anoicess.Anoicess._Content.Key">
+ <summary>
+ 标识符
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:Anoicess.Anoicess.Anoicess._Content.IsUsed">
+ <summary>
+ 指示是否已使用
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:Anoicess.Anoicess.Anoicess._Content.Content">
+ <summary>
+ 内容
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:Anoicess.Anoicess.Anoicess._Content.Name">
+ <summary>
+ 名称
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:Anoicess.Anoicess.Anoicess._Content.#ctor(System.String,System.String)">
+ <summary>
+ New
+ </summary>
+ <param name="Name"></param>
+ <param name="Content"></param>
+</member>
+<member name="M:Anoicess.Anoicess.Anoicess._Content.op_Equality(Anoicess.Anoicess.Anoicess._Content,Anoicess.Anoicess.Anoicess._Content)">
+ <summary>
+ 重载等于操作符
+ </summary>
+ <param name="obj1"></param>
+ <param name="obj2"></param>
+ <returns></returns>
+</member>
+<member name="M:Anoicess.Anoicess.Anoicess._Content.op_Inequality(Anoicess.Anoicess.Anoicess._Content,Anoicess.Anoicess.Anoicess._Content)">
+ <summary>
+ 重载不等于操作符
+ </summary>
+ <param name="obj1"></param>
+ <param name="obj2"></param>
+ <returns></returns>
+</member>
+<member name="M:Anoicess.Anoicess.Anoicess._Content.Fill(System.String,System.String)">
+ <summary>
+ 一次填充所有内容
+ </summary>
+ <param name="Name"></param>
+ <param name="Content"></param>
+</member>
+<member name="M:Anoicess.Anoicess.Anoicess._Content.Encrypt(System.String,System.Int32,System.Boolean)">
+ <summary>
+ 计算MD5值
+ </summary>
+ <param name="strSource"></param>
+ <param name="CodeBit"></param>
+ <param name="Upper"></param>
+ <returns></returns>
+</member>
 <member name="M:Anoicess.Anoicess.Anoicess.#ctor(System.String,System.Boolean,Anoicess.Anoicess.Anoicess)">
  <summary>
  带参构造函数
  </summary>
- <param name="FileName">数据库的路径，包含文件名</param>
  <remarks></remarks>
 </member>
 <member name="M:Anoicess.Anoicess.Anoicess.Dispose">
  <summary>
  软析构
  </summary>
- <returns></returns>
 </member>
 <member name="M:Anoicess.Anoicess.Anoicess.CreateChildDB(System.String,System.Boolean)">
  <summary>
@@ -26,7 +116,21 @@ Anoicess
  <param name="Name"></param>
  <returns></returns>
 </member>
-<member name="M:Anoicess.Anoicess.Anoicess.Insert(System.String,System.String,Anoicess.Anoicess.Anoicess._Append)">
+<member name="M:Anoicess.Anoicess.Anoicess.GetAllChild">
+ <summary>
+ 获取子节点集合
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:Anoicess.Anoicess.Anoicess.RemoveChild(System.String,System.Boolean)">
+ <summary>
+ 移除某一子库
+ </summary>
+ <param name="ChildName"></param>
+ <param name="DeleteFile"></param>
+ <returns></returns>
+</member>
+<member name="M:Anoicess.Anoicess.Anoicess.Insert(System.String,System.String,System.String)">
  <summary>
  添加数据
  </summary>
@@ -36,7 +140,7 @@ Anoicess
  <returns></returns>
  <remarks></remarks>
 </member>
-<member name="M:Anoicess.Anoicess.Anoicess.InsertToChildDB(System.String,System.String,System.String,Anoicess.Anoicess.Anoicess._Append)">
+<member name="M:Anoicess.Anoicess.Anoicess.InsertToChildDB(System.String,System.String,System.String)">
  <summary>
  子库内添加
  </summary>
@@ -46,15 +150,44 @@ Anoicess
  <param name="Append"></param>
  <returns></returns>
 </member>
-<member name="M:Anoicess.Anoicess.Anoicess.Delete(System.String,System.Boolean)">
+<member name="M:Anoicess.Anoicess.Anoicess.InsertByKey(System.String,System.String)">
  <summary>
- 删除数据
+ 通过Key添加
  </summary>
- <param name="Name">项名称</param>
+ <param name="Key"></param>
+ <param name="Data"></param>
  <returns></returns>
- <remarks></remarks>
 </member>
-<member name="M:Anoicess.Anoicess.Anoicess.DeleteFromChildDB(System.String,System.String,System.Boolean)">
+<member name="M:Anoicess.Anoicess.Anoicess.InsertByName(System.String,System.String)">
+ <summary>
+ 通过名称添加
+ </summary>
+ <param name="Name"></param>
+ <param name="Data"></param>
+ <returns></returns>
+</member>
+<member name="M:Anoicess.Anoicess.Anoicess.Remove(System.String,System.String)">
+ <summary>
+ 删除入口
+ </summary>
+ <param name="Key"></param>
+ <returns></returns>
+</member>
+<member name="M:Anoicess.Anoicess.Anoicess.RemoveByKey(System.String)">
+ <summary>
+ 通过Key删除
+ </summary>
+ <param name="Key"></param>
+ <returns></returns>
+</member>
+<member name="M:Anoicess.Anoicess.Anoicess.RemoveByName(System.String)">
+ <summary>
+ 通过名称删除
+ </summary>
+ <param name="Name"></param>
+ <returns></returns>
+</member>
+<member name="M:Anoicess.Anoicess.Anoicess.RemoveFromChildDB(System.String,System.String)">
  <summary>
  子库内删除
  </summary>
@@ -63,7 +196,7 @@ Anoicess
  <param name="ForAll"></param>
  <returns></returns>
 </member>
-<member name="M:Anoicess.Anoicess.Anoicess.Update(System.String,System.String,System.String,System.Boolean)">
+<member name="M:Anoicess.Anoicess.Anoicess.Update(System.String,System.String,System.String,System.String)">
  <summary>
  更新数据
  </summary>
@@ -73,46 +206,75 @@ Anoicess
  <returns></returns>
  <remarks></remarks>
 </member>
-<member name="M:Anoicess.Anoicess.Anoicess.Read(System.String,Anoicess.Anoicess.Anoicess._Type)">
+<member name="M:Anoicess.Anoicess.Anoicess.UpdateByKey(System.String,System.String,System.String)">
  <summary>
- 读取单条数据
+ 通过Key修改
  </summary>
- <param name="Name">项名称</param>
- <param name="Type">希望返回的数据格式</param>
- <returns>出错返回Nothing</returns>
- <remarks></remarks>
+ <param name="Key"></param>
+ <param name="NewData"></param>
+ <param name="NewName"></param>
+ <returns></returns>
 </member>
-<member name="M:Anoicess.Anoicess.Anoicess.FullRead_String(System.String)">
+<member name="M:Anoicess.Anoicess.Anoicess.UpdateByName(System.String,System.String,System.String)">
  <summary>
- 读取所有名称符合的数据
+ 通过名称修改
  </summary>
- <param name="Name">项名称</param>
- <returns>字符串数组，出错返回Nothing</returns>
- <remarks></remarks>
+ <param name="Name"></param>
+ <param name="NewData"></param>
+ <param name="NewName"></param>
+ <returns></returns>
 </member>
-<member name="M:Anoicess.Anoicess.Anoicess.FullRead_Date(System.String)">
+<member name="M:Anoicess.Anoicess.Anoicess.ReadByKey(System.String)">
  <summary>
- 读取所有名称符合的数据
+ 根据Key读取Content
  </summary>
- <param name="Name">项名称</param>
- <returns>日期数组，出错返回Nothing，转换出错单个元素也可能为Nothing</returns>
- <remarks></remarks>
+ <param name="Key"></param>
+ <returns></returns>
 </member>
-<member name="M:Anoicess.Anoicess.Anoicess.FullRead_Integer(System.String)">
+<member name="M:Anoicess.Anoicess.Anoicess.ReadListByName(System.String)">
  <summary>
- 读取所有名称符合的数据
+ 根据名称读取一个集合
  </summary>
- <param name="Name">项名称</param>
- <returns>整数数组，出错返回Nothing，转换出错单个元素也可能为Nothing</returns>
- <remarks></remarks>
+ <param name="Name"></param>
+ <returns></returns>
 </member>
-<member name="M:Anoicess.Anoicess.Anoicess.FullRead_Double(System.String)">
+<member name="M:Anoicess.Anoicess.Anoicess.ReadFirstByName(System.String)">
  <summary>
- 读取所有名称符合的数据
+ 根据名称读出集合中的第一项的Content
  </summary>
- <param name="Name">项名称</param>
- <returns>双精度浮点数组，出错返回Nothing，转换出错单个元素也可能为Nothing</returns>
- <remarks></remarks>
+ <param name="Name"></param>
+ <returns></returns>
+</member>
+<member name="M:Anoicess.Anoicess.Anoicess.Encrypt(System.String,System.Int32,System.Boolean)">
+ <summary>
+ 计算MD5值
+ </summary>
+ <param name="strSource"></param>
+ <param name="CodeBit"></param>
+ <param name="Upper"></param>
+ <returns></returns>
+</member>
+<member name="M:Anoicess.Anoicess.Anoicess.Initialize(System.String,System.Boolean,Anoicess.Anoicess.Anoicess)">
+ <summary>
+ 初始化函数
+ </summary>
+ <param name="Name"></param>
+ <param name="LoadNow"></param>
+ <param name="ParentNode"></param>
+</member>
+<member name="M:Anoicess.Anoicess.Anoicess.GetSubPath(System.String)">
+ <summary>
+ 获取路径
+ </summary>
+ <param name="FullPath"></param>
+ <returns></returns>
+</member>
+<member name="M:Anoicess.Anoicess.Anoicess.GetFileNameWithoutExtensionname(System.String)">
+ <summary>
+ 获取名称（不包含扩展名）
+ </summary>
+ <param name="FileName"></param>
+ <returns></returns>
 </member>
 <member name="M:Anoicess.Anoicess.Anoicess.Create">
  <summary>
@@ -126,25 +288,19 @@ Anoicess
  </summary>
  <remarks></remarks>
 </member>
-<member name="M:Anoicess.Anoicess.Anoicess.WriteFile">
+<member name="M:Anoicess.Anoicess.Anoicess.Flush">
  <summary>
  写入文件
  </summary>
 </member>
-<member name="M:Anoicess.Anoicess.Anoicess.GetFreeIndex">
+<member name="M:Anoicess.Anoicess.Anoicess.GetobjContentByKey(System.String@)">
  <summary>
- 获取空索引
+ 根据Key查找对应项
  </summary>
+ <param name="Key"></param>
  <returns></returns>
 </member>
-<member name="M:Anoicess.Anoicess.Anoicess.FindIndex(System.String)">
- <summary>
- 根据名称查找索引
- </summary>
- <param name="Name"></param>
- <returns></returns>
-</member>
-<member name="M:Anoicess.Anoicess.Anoicess.FindIndices(System.String)">
+<member name="M:Anoicess.Anoicess.Anoicess.GetobjContentsByName(System.String)">
  <summary>
  根据名称查找索引(多项)
  </summary>

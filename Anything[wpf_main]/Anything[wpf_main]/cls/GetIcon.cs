@@ -180,6 +180,7 @@ namespace Anything
             rtnValue.StreamSource = ms;
             rtnValue.EndInit();
 
+
             return rtnValue;
         }
 
@@ -233,7 +234,7 @@ namespace Anything
             //填充流
             bmp.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
 
-            bmp.Save("123.png");
+           // bmp.Save("123.png");
             return ms.ToArray();
         }
 

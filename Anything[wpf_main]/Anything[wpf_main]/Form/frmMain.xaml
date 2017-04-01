@@ -10,7 +10,7 @@
         Title="Anything" x:Name="Me" Height="700" Width="350" AllowsTransparency="True" Opacity="0.97" 
     WindowStyle="None" Background="#00fefefe" 
         Loaded="Window_Loaded"   WindowStartupLocation="Manual" 
-    VerticalAlignment="Top" HorizontalAlignment="Left" LocationChanged="Window_LocationChanged" MouseDown="Me_MouseDown" 
+    VerticalAlignment="Top" HorizontalAlignment="Left" LocationChanged="Window_LocationChanged" MouseMove="Me_MouseMove"
      >
     <Border x:Name="bdrMain">
         <Border Background="#ffFEFEFE" BorderThickness="2" CornerRadius="10" >
@@ -80,7 +80,7 @@
                                      TextAlignment="Center" 
                                      FontSize="17" 
                                      Foreground="#FFEEEEEE" 
-                                     Text="" GotFocus="txtMain_GotFocus" LostFocus="txtMain_LostFocus"
+                                     Text="" GotFocus="txtMain_GotFocus" LostFocus="txtMain_LostFocus" TextChanged="txtMain_TextChanged"
                                      >
                                     <TextBox.ContextMenu>
                                         <ContextMenu>
@@ -102,7 +102,10 @@
                                   Grid.Row="3">
                         <WrapPanel x:Name="Recent" Width="{Binding ElementName=scrlist, Path=Width,Mode=TwoWay}"
                                
-                               ></WrapPanel>
+                               >
+
+
+                        </WrapPanel>
                     </ScrollViewer>
                     
                 </Grid>

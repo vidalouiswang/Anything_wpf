@@ -2,6 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Media;
+using IWshRuntimeLibrary;
+using System.Windows.Media.Imaging;
+using System.IO;
 
 namespace Anything_wpf_main_.cls
 {
@@ -21,31 +24,42 @@ namespace Anything_wpf_main_.cls
 
         public static Anoicess.Anoicess.Anoicess MAIN = new Anoicess.Anoicess.Anoicess("mData");
 
+        public static System.Windows.Threading.DispatcherTimer timer = new System.Windows.Threading.DispatcherTimer();
+
+        public static List<Item> RemoveList = new List<Item>();
+
+        public struct _Link
+        {
+             public string Name;
+             public string TargetPath;
+        }
+        private static _Link lnkInfo=new _Link();
+
+
 
         #endregion
 
         #region 外部函数
 
-        //public static List<int> GetIndicesByName(String Name)
-        //{
-        //    List<int> rtnValue = new List<int>();
+        public static List<string> GetObjsByNameAndPath(string Name,string Path ,ref  System.Windows.Controls.WrapPanel wp)
+        {
+            List<string> rtnValue = new List<string>();
 
-        //    try
-        //    {
-        //        foreach (ItemData idata in listData)
-        //        {
-        //            if (idata.GetName()==Name)
-        //            {
+            Name = Name.ToLower();
 
-        //            }
-        //        }
-        //    }
-        //    catch
-        //    {
+            foreach (ItemData i in listData)
+            {
+                if( (i.Name.ToLower().IndexOf(Name)>=0) || (i.Path.ToLower().IndexOf(Path)>=0))
+                {
+                    rtnValue.Add(i.Name);
+                }
+            }
 
-        //    }
-            
-        //}
+            if (rtnValue.Count > 0)
+                return rtnValue;
+            else
+                return null;
+        }
 
         public static void InitializeData(ref System.Windows.Controls.WrapPanel wp)
         { 
@@ -53,23 +67,73 @@ namespace Anything_wpf_main_.cls
             {
                 ItemData itemdata = new ItemData(adf);
 
+                listData.Add(itemdata);
+
                 Item item = new Item(itemdata.ID, itemdata.Name, itemdata.Icon_imagesource);
 
                 item.Margin = new System.Windows.Thickness(5);
 
+                item.DoubleClick += Item_DoubleClick;
+
                 wp.Children.Add(item);
+
+                //foreach (Item i in wp.Children)
+                //{
+                    
+                //}
+
             }
         }
 
+        private static void Item_DoubleClick(object sender, System.Windows.RoutedEventArgs e)
+        {
+            Item tmp = (Item)sender;
+            ItemData idTmp = GetObjByID(tmp.ID);
+            if (idTmp != null)
+            {
+                idTmp.Execute();
+            }
+        }
 
         public static Item AddItem(String Path )
         {
-            try
+            //try
             {
-                //获取图标
-                byte[] b = GetIcon.GetIconByteArray(Path);
+                //检查路径
+                CheckPath(Path);
 
-                string Name = FileOperation.GetNameWithoutExtension( FileOperation.GetName(Path));
+                string Name = "";
+
+                if (!string.IsNullOrEmpty(lnkInfo.Name))
+                {
+                    Path = lnkInfo.TargetPath;
+                    Name = lnkInfo.Name;
+                }
+                else
+                {
+                    Name = FileOperation.GetNameWithoutExtension(FileOperation.GetName(Path));
+                }
+
+                //获取图标
+                byte[] b;
+
+                if (FileOperation.IsFile(Path)==-1)
+                {
+                    System.Windows.Resources.StreamResourceInfo sri = System.Windows.Application.GetResourceStream(new Uri("/Resources/folder.png", UriKind.Relative));
+
+                    BinaryReader br = new BinaryReader(sri.Stream);
+                    
+                    b = br.ReadBytes((int)sri.Stream.Length);
+
+                    br.Close();
+                    br = null;                
+                }
+                else
+                {
+                     b = GetIcon.GetIconByteArray(Path);
+                }
+
+                
 
                 string id = ClsMD5.ClsMD5.Encrypt(Name + Path);
 
@@ -85,29 +149,21 @@ namespace Anything_wpf_main_.cls
 
                 item.Margin = new System.Windows.Thickness(5);
 
+                item.DoubleClick += Item_DoubleClick;
+
                 return item;
             }
-            catch
-            {
-                throw new Exception("Add Error");
-            }
+           
         }
 
-        public static ItemData GetIndexByID(String ID)
+        public static ItemData GetObjByID(String ID)
         {
-            try
+            foreach (ItemData it in listData)
             {
-                foreach (ItemData it in listData)
+                if (ID == it.ID)
                 {
-                    if (ID==it.ID)
-                    {
-                        return it;
-                    }
+                    return it;
                 }
-            }
-            catch
-            {
-
             }
             return null;
         }
@@ -126,9 +182,26 @@ namespace Anything_wpf_main_.cls
         }
 
 
-        public void RemoveItem(String ID)
+        public static void RemoveItem(object Parent, String ID)
         {
+            System.Windows.Controls.WrapPanel wp = (System.Windows.Controls.WrapPanel)Parent;
 
+            foreach (Item i in wp.Children)
+            {
+                if (i.ID==ID)
+                {
+                    wp.Children.Remove(i);
+                    MAIN.RemoveChild(i.Name_Property);
+                    foreach(ItemData j in listData)
+                    {
+                        if (j.ID==ID)
+                        {
+                            listData.Remove(j);
+                            break;
+                        }
+                    }
+                }
+            }
         }
         #endregion
 
@@ -136,6 +209,24 @@ namespace Anything_wpf_main_.cls
         private void InitializeList()
         {
 
+        }
+
+        private static void CheckPath(string path)
+        {
+            if (path.IndexOf(".lnk")>=0)
+            {
+                WshShell shell = new WshShell();
+                IWshShortcut iss = (IWshShortcut)shell.CreateShortcut(path);
+                lnkInfo.Name = FileOperation.GetNameWithoutExtension(FileOperation.GetName(path));
+                lnkInfo.TargetPath = iss.TargetPath;
+            }
+            else
+            {
+                lnkInfo.Name = "";
+                lnkInfo.TargetPath = path;
+                
+            }
+            
         }
         #endregion
     }

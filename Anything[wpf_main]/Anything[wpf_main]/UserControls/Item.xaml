@@ -5,10 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Anything_wpf_main_"
              mc:Ignorable="d" 
-             d:DesignHeight="128" d:DesignWidth="128" MaxHeight="128" MaxWidth="128" MinHeight="32" MinWidth="32" SizeChanged="UserControl_SizeChanged">
+             d:DesignHeight="128" d:DesignWidth="128" MaxHeight="128" MaxWidth="128" MinHeight="32"
+             MinWidth="32" 
+             SizeChanged="UserControl_SizeChanged"
+             Focusable="True" >
 
-<Border  x:Name="Bdr" Style="{DynamicResource BdrStyle}" BorderThickness="2" RenderTransformOrigin="0.5,0.5"
-                 CornerRadius="10" Background="#00FFFFFF">
+<Border  x:Name="Bdr" Style="{DynamicResource BdrStyle}" >
         <Border.RenderTransform>
             <TransformGroup x:Name="tg">
                 <ScaleTransform></ScaleTransform>
@@ -31,8 +33,9 @@
             </Grid.RowDefinitions>
             <DockPanel x:Name="dock"  LastChildFill="True"
                          HorizontalAlignment="Center" 
-                         Grid.Row="0" MouseLeftButtonDown="dock_MouseLeftButtonDown" MouseLeftButtonUp="dock_MouseLeftButtonUp" >
-
+                         Grid.Row="0" MouseLeftButtonDown="dock_MouseLeftButtonDown" MouseLeftButtonUp="dock_MouseLeftButtonUp"
+                       >
+                
                 <Image x:Name="Img" 
                        
                        VerticalAlignment="Stretch"
@@ -43,9 +46,11 @@
                        >
                     <Image.ContextMenu>
                         <ContextMenu >
-                            <MenuItem Header="Open"></MenuItem>
-                            <MenuItem Header="Send shortcut to desktop"></MenuItem>
-                            <MenuItem Header="Delete"></MenuItem>
+                            <MenuItem Header="Open" Click="OpenMenuItem_Click"></MenuItem>
+                            <MenuItem Header="Run as administrator" Click="AdminOpenMenuItem_Click"></MenuItem>
+                            <MenuItem Header="Delete" Click="DeleteMenuItem_Click"></MenuItem>
+                            <MenuItem Header="Find location" Click="LocationMenuItem_Click"></MenuItem>
+                            <MenuItem Header="Send shortcut to Desktop" Click="CreateShortcutMenuItem_Click"></MenuItem>
                         </ContextMenu>
                     </Image.ContextMenu>
                 </Image>
@@ -68,13 +73,13 @@
                             >
                     <TextBlock.ContextMenu>
                         <ContextMenu>
-                            <MenuItem>ReName</MenuItem>
+                            <MenuItem Header="Reset name" Click="ReNameMenuItem_Click"></MenuItem>
                         </ContextMenu>
                     </TextBlock.ContextMenu>
                 </TextBlock>
                 <TextBox x:Name="TxtWrite"
-                         Background="Transparent"
-                         Foreground="White"
+                         Background="White"
+                         Foreground="Black"
                          TextWrapping="Wrap"
                          Visibility="Hidden"
                          
@@ -82,7 +87,7 @@
                          Height="Auto"
                          Canvas.Left="0"
                          Canvas.Top="0"
-                         Width="{Binding ElementName=CanvasX, Path=ActualWidth}" LostFocus="TxtWrite_LostFocus"
+                         Width="{Binding ElementName=CanvasX, Path=ActualWidth}" LostFocus="TxtWrite_LostFocus" KeyUp="TxtWrite_KeyUp"
                          >
                         
                 </TextBox>

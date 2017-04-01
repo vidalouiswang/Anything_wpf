@@ -3,6 +3,8 @@ using System.Drawing;
 using Anything;
 using System.Windows.Media;
 using System.IO;
+using System.Diagnostics;
+using IWshRuntimeLibrary;
 
 namespace Anything_wpf_main_.cls
 {
@@ -33,6 +35,8 @@ namespace Anything_wpf_main_.cls
             public int RunAs;
             //自动运行
             public int AutoRun;
+            //热度
+            public int Levels;
 
             public DataST(string name,
                 string path,
@@ -42,7 +46,8 @@ namespace Anything_wpf_main_.cls
                 string arguments="",
                 int isuesd=0,
                 int runas=0,
-                int autorun=0)
+                int autorun=0,
+                int levels=0)
 
             {
                 Name = name;
@@ -54,30 +59,9 @@ namespace Anything_wpf_main_.cls
                 IsUesd = isuesd;
                 RunAs = runas;
                 AutoRun = autorun;
+                Levels = levels;
             }
 
-        }
-
-        /// <summary>
-        /// 自动运行方式
-        /// </summary>
-        public enum Run
-        {
-            //自动运行
-            AutoRun,
-            //正常
-            Normal,
-        }
-
-        /// <summary>
-        /// 运行权限
-        /// </summary>
-        public enum RunWay
-        {
-            //管理员
-            Administrator,
-            //默认
-            AsInvoker,
         }
 
         #endregion
@@ -87,6 +71,7 @@ namespace Anything_wpf_main_.cls
         public bool IsInit;
         public String DataStr;
         private DataST data;
+        public bool Rename { get; set; }
 
         private Anoicess.Anoicess.Anoicess objDB = null;
 
@@ -147,7 +132,7 @@ namespace Anything_wpf_main_.cls
 
         private void CreateDB()
         {
-            objDB = Manage.MAIN.CreateChildDB(data.Name, true);
+            objDB = Manage.MAIN.CreateChildDB(data.ID, true);
             objDB.Insert("ID", data.ID);
             objDB.Insert("Name", data.Name);
             objDB.Insert("Icon", data.Icon.Length.ToString());
@@ -155,6 +140,7 @@ namespace Anything_wpf_main_.cls
             objDB.Insert("Arguments", data.Arguments);
             objDB.Insert("Runas", data.RunAs.ToString());
             objDB.Insert("Autorun", data.AutoRun.ToString());
+            objDB.Insert("Levels", data.Levels.ToString());
 
             if (!Directory.Exists(Manage.IconPath))
             {
@@ -174,10 +160,6 @@ namespace Anything_wpf_main_.cls
             {
 
             }
-
-            
-            
-
         }
 
 
@@ -190,9 +172,9 @@ namespace Anything_wpf_main_.cls
         {
             if (objDB != null)
             {
-                this.data.Name = objDB.Read("Name") as string;
-                this.data.ID = objDB.Read("ID") as string;
-                int Count = Convert.ToInt32( objDB.Read("Icon"));
+                this.data.Name = objDB.ReadFirstByName("Name") as string;
+                this.data.ID = objDB.ReadFirstByName("ID") as string;
+                int Count = Convert.ToInt32( objDB.ReadFirstByName("Icon"));
 
                 try
                 {
@@ -208,14 +190,32 @@ namespace Anything_wpf_main_.cls
 
                 }
 
-                this.data.Path = objDB.Read("Path") as string;
-                this.data.Arguments = objDB.Read("Arguments") as string;
-                this.data.RunAs = Convert.ToInt32( objDB.Read("Runas"));
-                this.data.AutoRun = Convert.ToInt32(objDB.Read("Autorun"));
+                this.data.Path = objDB.ReadFirstByName("Path") as string;
+                this.data.Arguments = objDB.ReadFirstByName("Arguments") as string;
+                this.data.RunAs = Convert.ToInt32( objDB.ReadFirstByName("Runas"));
+                this.data.AutoRun = Convert.ToInt32(objDB.ReadFirstByName("Autorun"));
+                this.data.Levels = Convert.ToInt32(objDB.ReadFirstByName("Levels"));
 
                 return 0;
             }
             return -1;
+        }
+
+        private string GetPath()
+        {
+            int i = data.Path.Length-1;
+            while (i>0)
+            {
+                if (data.Path.Substring(i,1)=="\\")
+                {
+                    break;
+                }
+                else
+                {
+                    i--;
+                }
+            }
+            return data.Path.Substring(0, i);
         }
 
         #endregion
@@ -257,6 +257,7 @@ namespace Anything_wpf_main_.cls
             set
             {
                 this.data.Arguments = value;
+                objDB.Insert("Arguments", data.Arguments);
             }
 
         }
@@ -269,7 +270,35 @@ namespace Anything_wpf_main_.cls
             }
             set
             {
-                this.data.Name = value;
+                string OldID = data.ID;
+                data.Name = value;
+
+                data.ID = ClsMD5.ClsMD5.Encrypt(data.Name + data.Path);
+
+                //if (Rename)
+                //{
+
+                foreach (ItemData inListdata in Manage.listData)
+                {
+                    if (inListdata.ID == data.ID)
+                    {
+                        Manage.listData.Remove(inListdata);
+                        break;
+                    }
+                }
+
+                Manage.MAIN.RemoveChild(OldID);
+
+                objDB = null;
+
+                CreateDB();
+
+                Manage.listData.Add(this);
+
+                Rename = false;
+
+                //}
+
             }
         }
 
@@ -291,6 +320,7 @@ namespace Anything_wpf_main_.cls
             set
             {
                 this.data.RunAs = value;
+                objDB.Insert("Runas", data.RunAs.ToString());
             }
         }
 
@@ -303,6 +333,31 @@ namespace Anything_wpf_main_.cls
             set
             {
                 this.data.AutoRun = value;
+                objDB.Insert("Autorun", data.AutoRun.ToString());
+            }
+        }
+
+        public int Levels
+        {
+            get
+            {
+                return data.Levels;
+            }
+            set
+            {
+                data.Levels = value;
+            }
+        }
+
+        public String Path
+        {
+            get
+            {
+                return data.Path;
+            }
+            set
+            {
+                data.Path = value;
             }
         }
 
@@ -315,17 +370,58 @@ namespace Anything_wpf_main_.cls
         /// </summary>
         /// <param name="tempRun"></param>
         /// <returns></returns>
-        public int Execute(RunWay tempRun)
+        public int Execute(int Runas=0,bool Default=false )
         {
             try
             {
-                //todo
+                
+                ProcessStartInfo StartInfo = new ProcessStartInfo();
+                StartInfo.FileName = data.Path;
+                StartInfo.Arguments = data.Arguments;
+
+                if (Runas == 1 && Default)
+                    data.RunAs = 1;
+                else if (RunAs == 1 && Default == false)
+                    StartInfo.Verb = "runas";
+
+                
+                Process.Start(StartInfo);
+
             }
             catch
             {
-                throw new Exception("Error");
+                
             }
             return 0;
+        }
+
+        public int FindLocation()
+        {
+            try
+            {
+                Process.Start("explorer.exe", " /select," + data.Path);
+            }
+            catch
+            {
+
+            }
+            return 0;
+        }
+
+        public void CreateShortcut()
+        {
+            WshShell wsh = new WshShell();
+
+            string DesktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\";
+
+            IWshShortcut iss = (IWshShortcut)wsh.CreateShortcut(DesktopPath + data.Name + ".lnk");
+
+            iss.Description = data.Name;
+            iss.TargetPath = data.Path;
+            iss.WindowStyle = 1;
+            iss.WorkingDirectory = "";
+            iss.Save();
+
         }
 
         /// <summary>

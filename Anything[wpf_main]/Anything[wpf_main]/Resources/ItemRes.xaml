@@ -49,9 +49,48 @@
                 </EventTrigger.Actions>
             </EventTrigger>
 
+            <EventTrigger RoutedEvent="Mouse.MouseDown">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.Children[0].ScaleX"
+                                             Duration="0:0:0.0"
+                                             To="1"
+                                             ></DoubleAnimation>
+                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.Children[0].ScaleY"
+                                             Duration="0:0:0.0"
+                                             To="1"
+                                             ></DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
 
+
+            <EventTrigger RoutedEvent="Mouse.MouseUp">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.Children[0].ScaleX"
+                                             Duration="0:0:0.0"
+                                             To="1.1"
+                                             ></DoubleAnimation>
+                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.Children[0].ScaleY"
+                                             Duration="0:0:0.0"
+                                             To="1.1"
+                                             ></DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
 
         </Style.Triggers>
+
+        <Setter Property="Background" Value="#00000000"></Setter>
+
+        <Setter Property="BorderThickness" Value="2"></Setter>
+        <Setter Property="CornerRadius" Value="10"></Setter>
+        <Setter Property="RenderTransformOrigin" Value="0.5,0.5"></Setter>
     </Style>
 
     <Style TargetType="{x:Type ContextMenu}">
@@ -81,8 +120,8 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-        
-        
+
+    
         
     <ControlTemplate x:Key="MenuItemTemplate" TargetType="{x:Type MenuItem}">
         <Border Background="{TemplateBinding Background}" BorderThickness="2" BorderBrush="{TemplateBinding BorderBrush}"
