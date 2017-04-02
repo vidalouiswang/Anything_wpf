@@ -5,6 +5,7 @@ using System.Windows.Media;
 using IWshRuntimeLibrary;
 using System.Windows.Media.Imaging;
 using System.IO;
+using Anything_wpf_main_.Form;
 
 namespace Anything_wpf_main_.cls
 {
@@ -28,32 +29,33 @@ namespace Anything_wpf_main_.cls
 
         public static List<Item> RemoveList = new List<Item>();
 
+        public static MainWindow wnd;
+
         public struct _Link
         {
              public string Name;
              public string TargetPath;
         }
         private static _Link lnkInfo=new _Link();
-        
-        
 
-
+        public static wndTip TipPublic = new wndTip();
+        
 
         #endregion
 
         #region 外部函数
 
-        public static List<string> GetObjsByNameAndPath(string Name,string Path ,ref  System.Windows.Controls.WrapPanel wp)
+        public static List<Item> GetObjsByNameAndPath(string Name,string Path ,ref  System.Windows.Controls.WrapPanel wp)
         {
-            List<string> rtnValue = new List<string>();
+            List<Item> rtnValue = new List<Item>();
 
             Name = Name.ToLower();
 
-            foreach (ItemData i in listData)
+            foreach (Item i in wp.Children)
             {
-                if( (i.Name.ToLower().IndexOf(Name)>=0) || (i.Path.ToLower().IndexOf(Path)>=0))
+                if( (i.Name_Property.ToLower().IndexOf(Name)>=0) || (i.Path.ToLower().IndexOf(Path)>=0))
                 {
-                    rtnValue.Add(i.Name);
+                    rtnValue.Add(i);
                 }
             }
 
@@ -63,8 +65,9 @@ namespace Anything_wpf_main_.cls
                 return null;
         }
 
-        public static void InitializeData(ref System.Windows.Controls.WrapPanel wp)
-        { 
+        public static void InitializeData(MainWindow wnd_ ,ref System.Windows.Controls.WrapPanel wp)
+        {
+            wnd = wnd_;
             foreach (Anoicess.Anoicess.Anoicess adf in MAIN.GetAllChild())
             {
                 ItemData itemdata = new ItemData(adf);
@@ -73,47 +76,46 @@ namespace Anything_wpf_main_.cls
 
                 Item item = new Item(itemdata.ID, itemdata.Name, itemdata.Icon_imagesource);
 
+                item.Path = itemdata.Path;
+
+                item.RefItemData = itemdata;
+
                 item.Margin = new System.Windows.Thickness(5);
 
-                item.DoubleClick += Item_DoubleClick;
+                item.Click += Item_Click;
 
                 wp.Children.Add(item);
 
                 //foreach (Item i in wp.Children)
                 //{
-                    
+
                 //}
 
+               
             }
+            TipPublic.Show();
         }
 
-        private static void Item_DoubleClick(object sender, System.Windows.RoutedEventArgs e)
-        {
-            Item tmp = (Item)sender;
-            ItemData idTmp = GetObjByID(tmp.ID);
-            if (idTmp != null)
-            {
-                idTmp.Execute();
-            }
-        }
 
-        public static Item AddItem(String Path )
+        public static Item AddItem(String Path ,string Name ="",string Arguments="")
         {
             //try
             {
                 //检查路径
                 CheckPath(Path);
 
-                string Name = "";
-
                 if (!string.IsNullOrEmpty(lnkInfo.Name))
                 {
                     Path = lnkInfo.TargetPath;
-                    Name = lnkInfo.Name;
+                    if (string.IsNullOrEmpty(Name.Trim()))
+                    {
+                        Name = lnkInfo.Name;
+                    }
                 }
                 else
                 {
-                    Name = FileOperation.GetNameWithoutExtension(FileOperation.GetName(Path));
+                    if (string.IsNullOrEmpty(Name.Trim()))
+                        Name = FileOperation.GetNameWithoutExtension(FileOperation.GetName(Path));
                 }
 
                 //获取图标
@@ -135,8 +137,6 @@ namespace Anything_wpf_main_.cls
                      b = GetIcon.GetIconByteArray(Path);
                 }
 
-                
-
                 string id = ClsMD5.ClsMD5.Encrypt(Name + Path);
 
                 ImageSource IS = GetIcon.ByteArrayToIS(b);
@@ -144,49 +144,64 @@ namespace Anything_wpf_main_.cls
                 //构造UI对象
                 Item item = new Item(id,Name, IS);
 
+                item.Path = Path;
+
                 //构造itemdata类对象
                 ItemData itemdata = new ItemData(new ItemData.DataST(Name,Path,id,IS,b,"",1,0,0));
 
+                if (!string.IsNullOrEmpty(Arguments.Trim()))
+                    itemdata.Arguments = Arguments;
+
                 Manage.listData.Add(itemdata);
+
+                item.RefItemData = itemdata;
 
                 item.Margin = new System.Windows.Thickness(5);
 
-                item.DoubleClick += Item_DoubleClick;
+                item.Click += Item_Click;
 
                 return item;
             }
            
         }
 
-        public static ItemData GetObjByID(String ID)
+        private static void Item_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            foreach (ItemData it in listData)
-            {
-                if (ID == it.ID)
-                {
-                    return it;
-                }
-            }
-            return null;
+            Item tmp = (Item)sender;
+            tmp.RefItemData.Execute();
+            
+            wnd.txtMain.Text = "";
         }
 
-        public static int GetIndexByPath(String Path)
-        {
-            try
-            {
+        //public static ItemData GetObjByID(String ID)
+        //{
+        //    foreach (ItemData it in listData)
+        //    {
+        //        if (ID == it.ID)
+        //        {
+        //            return it;
+        //        }
+        //    }
+        //    return null;
+        //}
 
-            }
-            catch
-            {
+        //public static int GetIndexByPath(String Path)
+        //{
+        //    try
+        //    {
 
-            }
-            return -1;
-        }
+        //    }
+        //    catch
+        //    {
 
-
+        //    }
+        //    return -1;
+        //}
         public static void RemoveItem(object Parent, String ID)
         {
             System.Windows.Controls.WrapPanel wp = (System.Windows.Controls.WrapPanel)Parent;
+
+            Item tmp = null;
 
             foreach (Item i in wp.Children)
             {
@@ -194,16 +209,14 @@ namespace Anything_wpf_main_.cls
                 {
                     wp.Children.Remove(i);
                     MAIN.RemoveChild(i.Name_Property);
-                    foreach(ItemData j in listData)
-                    {
-                        if (j.ID==ID)
-                        {
-                            listData.Remove(j);
-                            break;
-                        }
-                    }
+                    i.RefItemData.Dispose();
+                    listData.Remove(i.RefItemData);
+                    i.Dispose();
+                    tmp = i;
+                    break;
                 }
             }
+            tmp = null;
         }
         #endregion
 

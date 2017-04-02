@@ -51,6 +51,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -162,7 +163,10 @@
     <Compile Include="Form\wndTip.xaml.cs">
       <DependentUpon>wndTip.xaml</DependentUpon>
     </Compile>
-    <Page Include="Form\frmMain.xaml">
+    <Compile Include="Form\wndArguments.xaml.cs">
+      <DependentUpon>wndArguments.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Form\wndMain.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -174,8 +178,8 @@
     <Compile Include="cls\FileOperation.cs" />
     <Compile Include="cls\ItemData.cs" />
     <Compile Include="cls\Manage.cs" />
-    <Compile Include="Form\frmMain.xaml.cs">
-      <DependentUpon>frmMain.xaml</DependentUpon>
+    <Compile Include="Form\wndMain.xaml.cs">
+      <DependentUpon>wndMain.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Form\wndAdd.xaml">
@@ -190,11 +194,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Resources\wndChildrenRes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\Item.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Form\wndTip.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Form\wndArguments.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

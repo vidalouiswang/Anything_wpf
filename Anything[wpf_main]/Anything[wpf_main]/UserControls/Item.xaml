@@ -8,7 +8,7 @@
              d:DesignHeight="128" d:DesignWidth="128" MaxHeight="128" MaxWidth="128" MinHeight="32"
              MinWidth="32" 
              SizeChanged="UserControl_SizeChanged"
-             Focusable="True" >
+             Focusable="True" MouseDoubleClick="UserControl_MouseDoubleClick" MouseDown="UserControl_MouseDown" >
 
 <Border  x:Name="Bdr" Style="{DynamicResource BdrStyle}" >
         <Border.RenderTransform>
@@ -33,7 +33,7 @@
             </Grid.RowDefinitions>
             <DockPanel x:Name="dock"  LastChildFill="True"
                          HorizontalAlignment="Center" 
-                         Grid.Row="0" MouseLeftButtonDown="dock_MouseLeftButtonDown" MouseLeftButtonUp="dock_MouseLeftButtonUp"
+                         Grid.Row="0"
                        >
                 
                 <Image x:Name="Img" 

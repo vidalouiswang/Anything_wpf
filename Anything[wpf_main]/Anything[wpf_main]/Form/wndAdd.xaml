@@ -5,48 +5,64 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Anything_wpf_main_.Form"
         mc:Ignorable="d"
-        Title="wndAdd" Height="234" Width="357.916" WindowStyle="None"  AllowsTransparency="True" Background="Transparent">
+        Title="wndAdd" Height="322" Width="471.416" WindowStyle="None"  AllowsTransparency="True" Background="Transparent">
     <Border x:Name="BdrOut" Background="#FFeeeeee" CornerRadius="5" BorderThickness="2" Width="auto" Height="auto" >
         <Border Background="#DE161616" BorderThickness="1" CornerRadius="5" Width="{Binding ElementName=BdrOut,Path=Width}" MouseMove="Border_MouseMove">
-            <StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    
-                    <Button x:Name="btnClose" Style="{StaticResource  ButtonStyle_Close}" HorizontalAlignment="Right"
-                            >
-                        <Grid>
-                            <Line X1="6" Y1="6" X2="20"  Y2="20" Stroke="#FFAAAAAA"  StrokeThickness="2"/>
-                            <Line X1="6" Y1="6" X2="20"  Y2="20" Stroke="#FFAAAAAA"  StrokeThickness="2" RenderTransformOrigin="0.5,0.5">
-                                <Line.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform/>
-                                        <SkewTransform/>
-                                        <RotateTransform Angle="90"/>
-                                        <TranslateTransform/>
-                                    </TransformGroup>
-                                </Line.RenderTransform>
-                            </Line>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
 
-                        </Grid>
+                <TextBlock Style="{StaticResource TextBlockStyle}" Text="Add" Grid.Row="0" Grid.ColumnSpan="3" VerticalAlignment="Center"></TextBlock>
+                <Button x:Name="btnClose" Style="{StaticResource  ButtonStyle_Close}"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            Grid.Row="0" Grid.Column="2" Click="btnClose_Click">
+                    <Grid>
+                        <Line X1="6" Y1="6" X2="20"  Y2="20" Stroke="#FFAAAAAA"  StrokeThickness="2"/>
+                        <Line X1="6" Y1="6" X2="20"  Y2="20" Stroke="#FFAAAAAA"  StrokeThickness="2" RenderTransformOrigin="0.5,0.5">
+                            <Line.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="90"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Line.RenderTransform>
+                        </Line>
 
-                    </Button>
-                    
-                </StackPanel>
+                    </Grid>
+                </Button>
 
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="20" >
-                    <TextBlock Foreground="White" FontSize="16" Text="Name:"></TextBlock>
-                    <TextBox MinWidth="260" Margin="10,0,10,0"></TextBox>
-                </StackPanel>
+                <TextBlock Style="{StaticResource TextBlockStyle}" Text="Name:" Grid.Row="1" VerticalAlignment="Center"></TextBlock>
+                <TextBox Style="{StaticResource TextBoxStyle}" x:Name="txtName" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
+                         Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:wndAdd}},Path=ItemName}"></TextBox>
 
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="20" >
-                    <TextBlock Foreground="White" FontSize="16" Text="Path:"></TextBlock>
-                    <TextBox MinWidth="263" Margin="22,0,10,0"></TextBox>
-                </StackPanel>
+                <TextBlock Style="{StaticResource TextBlockStyle}" Text="Path:" Grid.Row="2" VerticalAlignment="Center"></TextBlock>
+                <TextBox Style="{StaticResource TextBoxStyle}" x:Name="txtPath" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" 
+                         Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:wndAdd}},Path=Path}"></TextBox>
 
-                <Button Template="{StaticResource FunctionButton}" Background="#EE282828"
+                <TextBlock Style="{StaticResource TextBlockStyle}" Text="Arguments:" Grid.Row="3" VerticalAlignment="Center"></TextBlock>
+                <TextBox Style="{StaticResource TextBoxStyle}" x:Name="txtArguments" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"
+                         Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:wndAdd}},Path=Arguments}"></TextBox>
+
+                <Button x:Name="btnDone" Template="{StaticResource FunctionButton}" Background="#EE282828"
                         Width="80" Height="25" Margin="0,13,0,0" FontSize="16"
                         BorderThickness="2"
-                        Foreground="#EEEEEEEE">Done</Button>
-            </StackPanel>
+                        Foreground="#EEEEEEEE" Grid.Row="4"  VerticalAlignment="Top"
+                        Grid.ColumnSpan="3"
+                        HorizontalAlignment="Center" Click="btnDone_Click">Done</Button>
+            </Grid>
         </Border>
     </Border>
+
 </Window>

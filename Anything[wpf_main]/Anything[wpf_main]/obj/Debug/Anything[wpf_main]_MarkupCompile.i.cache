@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\Others\App.xaml
-61838366843
+8-716543300
 
-14-1122046772
+15-122129732
 191643020736
-Form\frmMain.xaml;Form\wndAdd.xaml;Resources\ItemRes.xaml;Resources\MainFormRes.xaml;UserControls\Item.xaml;Form\wndTip.xaml;
+Form\wndMain.xaml;Form\wndAdd.xaml;Resources\ItemRes.xaml;Resources\MainFormRes.xaml;Resources\wndChildrenRes.xaml;UserControls\Item.xaml;Form\wndTip.xaml;Form\wndArguments.xaml;
 images\wallhaven-10108.jpg
 True
 

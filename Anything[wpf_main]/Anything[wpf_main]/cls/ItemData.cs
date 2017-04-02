@@ -9,7 +9,7 @@ using System.Windows;
 
 namespace Anything_wpf_main_.cls
 {
-    class ItemData : IDisposable
+     public class ItemData : IDisposable
     {
         #region 结构
 
@@ -76,8 +76,6 @@ namespace Anything_wpf_main_.cls
 
         private Anoicess.Anoicess.Anoicess objDB = null;
 
-        
-
         internal DataST Data
         {
             get
@@ -108,6 +106,7 @@ namespace Anything_wpf_main_.cls
             CreateDB();
             //初始化成功
             this.IsInit = true;
+
         }
 
         /// <summary>
@@ -387,8 +386,9 @@ namespace Anything_wpf_main_.cls
  
                 Process.Start(StartInfo);
 
-                ((MainWindow)Application.Current.MainWindow).ClearSearch();
-               
+                Manage.wnd.ClearSearch();
+
+                Manage.TipPublic.ShowFixed(Manage.wnd, "Go!");
 
             }
             catch

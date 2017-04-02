@@ -10,7 +10,7 @@ namespace Anything_wpf_main_
     /// <summary>
     /// Item.xaml 的交互逻辑
     /// </summary>
-    public partial class Item : UserControl,IDisposable
+    public partial class Item : UserControl ,IDisposable
     {
         /// <summary>
         /// 无参构造
@@ -55,6 +55,9 @@ namespace Anything_wpf_main_
         //项目的唯一标识符
         private String iD = "";
 
+        //
+        private string _Path = "";
+
 
         //边长
         private double length = 0;
@@ -64,6 +67,9 @@ namespace Anything_wpf_main_
         private DateTime Clicked=new DateTime(0);
 
         private string OldName = "";
+
+        private ItemData refItemData = null;
+
 
 
 
@@ -94,22 +100,6 @@ namespace Anything_wpf_main_
             remove
             {
                 base.RemoveHandler(Item.ClickEvent, value);
-            }
-        }
-        #endregion
-
-        #region 双击
-        public static readonly RoutedEvent DoubleClickEvent = EventManager.RegisterRoutedEvent("DoubleClick", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Item));
-
-        public event RoutedEventHandler DoubleClick
-        {
-            add
-            {
-                base.AddHandler(Item.DoubleClickEvent, value);
-            }
-            remove
-            {
-                base.RemoveHandler(Item.DoubleClickEvent, value);
             }
         }
         #endregion
@@ -188,6 +178,32 @@ namespace Anything_wpf_main_
             }
         }
 
+        public string Path
+        {
+            get
+            {
+                return _Path;
+            }
+
+            set
+            {
+                _Path = value;
+            }
+        }
+
+        public ItemData RefItemData
+        {
+            get
+            {
+                return refItemData;
+            }
+
+            set
+            {
+                refItemData = value;
+            }
+        }
+
         #endregion
 
         #region public
@@ -228,6 +244,7 @@ namespace Anything_wpf_main_
         /// </summary>
         private void SetName()
         {
+            Manage.wnd.NowReName = true;
             OldName = Txt.Text;
             this.Txt.Visibility = Visibility.Hidden;
             this.TxtWrite.Visibility = Visibility.Visible;
@@ -244,14 +261,15 @@ namespace Anything_wpf_main_
             {
                 if (OldName != Name_Property)
                 {
-                    string path = Manage.GetObjByID(this.ID).Path;
-                    Manage.GetObjByID(this.iD).Rename = true;
-                    Manage.GetObjByID(this.iD).Name = this.TxtWrite.Text;
+                    string path = this.refItemData.Path;
+                    this.refItemData.Rename = true;
+                    this.refItemData.Name = this.TxtWrite.Text;
 
                     this.ID = ClsMD5.ClsMD5.Encrypt(this.name_Property + path);
 
                 }
             }
+            Manage.wnd.NowReName = false;
         }
 
         /// <summary>
@@ -276,52 +294,17 @@ namespace Anything_wpf_main_
             GC.Collect();
         }
 
-        private void dock_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            OnDown = DateTime.Now;
-            
-        }
-
-        private void dock_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            RoutedEventArgs ee;
-
-            DateTime n = DateTime.Now;
-
-            double DownUpInterval = (n - OnDown).TotalMilliseconds;
-            double ClickInterval = (n - Clicked).TotalMilliseconds;
-
-            if (DownUpInterval<500)
-            {
-                if (ClickInterval<1300)
-                {
-                    //双击
-                    ee = new RoutedEventArgs(Item.DoubleClickEvent, this);
-                    base.RaiseEvent(ee);
-                }
-                else
-                {
-
-                    //普通单击
-                    ee = new RoutedEventArgs(Item.ClickEvent, this);
-                    base.RaiseEvent(ee);
-
-                }
-                //记录信息
-                Clicked = n;
-            }
-        }
         #endregion
 
 
         private void OpenMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            Manage.GetObjByID(this.ID).Execute();
+           this.refItemData.Execute();
         }
 
         private void AdminOpenMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            Manage.GetObjByID(this.iD).Execute(1, true);
+            this.refItemData.Execute(1, true);
         }
 
         private void DeleteMenuItem_Click(object sender, RoutedEventArgs e)
@@ -346,12 +329,26 @@ namespace Anything_wpf_main_
 
         private void LocationMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            Manage.GetObjByID(ID).FindLocation();
+            this.refItemData.FindLocation();
         }
 
         private void CreateShortcutMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            Manage.GetObjByID(ID).CreateShortcut();
+            this.refItemData.CreateShortcut();
+        }
+
+
+        private void UserControl_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            RoutedEventArgs ee;
+            ee = new RoutedEventArgs(Item.ClickEvent, this);
+            base.RaiseEvent(ee);
+
+        }
+
+        private void UserControl_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            this.Focus();
         }
     }
 }
