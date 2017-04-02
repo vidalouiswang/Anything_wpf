@@ -10,7 +10,7 @@
         Title="Anything" x:Name="Me" Height="700" Width="350" AllowsTransparency="True" Opacity="0.97" 
     WindowStyle="None" Background="#00fefefe" 
         Loaded="Window_Loaded"   WindowStartupLocation="Manual" 
-    VerticalAlignment="Top" HorizontalAlignment="Left" LocationChanged="Window_LocationChanged" MouseMove="Me_MouseMove"
+    VerticalAlignment="Top" HorizontalAlignment="Left" LocationChanged="Window_LocationChanged" MouseMove="Me_MouseMove" KeyDown="Me_KeyDown"
      >
     <Border x:Name="bdrMain">
         <Border Background="#ffFEFEFE" BorderThickness="2" CornerRadius="10" >
@@ -78,9 +78,13 @@
                                      MaxHeight="25"
                                      Height="25"
                                      TextAlignment="Center" 
-                                     FontSize="17" 
+                                     FontSize="15" 
                                      Foreground="#FFEEEEEE" 
-                                     Text="" GotFocus="txtMain_GotFocus" LostFocus="txtMain_LostFocus" TextChanged="txtMain_TextChanged"
+                                     Text="Use keyword to search" 
+                                         GotFocus="txtMain_GotFocus" 
+                                         LostFocus="txtMain_LostFocus" 
+                                         TextChanged="txtMain_TextChanged" 
+                                         MouseMove="txtMain_MouseMove"
                                      >
                                     <TextBox.ContextMenu>
                                         <ContextMenu>
@@ -99,7 +103,7 @@
                    
 
                     <ScrollViewer x:Name="scrlist" Margin="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden"
-                                  Grid.Row="3">
+                                  Grid.Row="3" KeyDown="scrlist_KeyDown" >
                         <WrapPanel x:Name="Recent" Width="{Binding ElementName=scrlist, Path=Width,Mode=TwoWay}"
                                
                                >

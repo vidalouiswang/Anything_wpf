@@ -19,8 +19,6 @@ namespace Anything_wpf_main_
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
 
-
-
     public partial class MainWindow : Window
     {
         #region 改变大小
@@ -103,7 +101,13 @@ namespace Anything_wpf_main_
         //用于自动存储位置大小的开关指示
         public bool IsInformationsInitialized = false;
 
+        MouseEventArgs me = new MouseEventArgs(Mouse.PrimaryDevice, 0);
+
+        private wndTip tipMainForm = new wndTip();
+
+        private double ItemLength = 128;
         
+
 
         #endregion
 
@@ -120,6 +124,14 @@ namespace Anything_wpf_main_
             //边界颜色定义
             bdrColor = Color.FromArgb(0xff, 0x28, 0x28, 0x28);
             this.bdrMainForm.Background = new SolidColorBrush(bdrColor);
+        }
+
+        /// <summary>
+        /// 清空搜索框
+        /// </summary>
+        public void ClearSearch()
+        {
+            this.txtMain.Text = "Use keyword to search";
         }
 
         #endregion
@@ -179,9 +191,19 @@ namespace Anything_wpf_main_
             Manage.timer.Interval = TimeSpan.FromSeconds(3);
             Manage.timer.Stop();
             Manage.timer.Tick += Timer_Tick;
+
+            me.RoutedEvent = Border.MouseLeaveEvent;
+
+            tipMainForm.Show();
         }
 
-        
+        private void MainWindow_AfterExecuted(object sender, RoutedEventArgs e)
+        {
+            this.txtMain.Text = "";
+        }
+
+
+
 
 
         /// <summary>
@@ -229,10 +251,13 @@ namespace Anything_wpf_main_
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             this.btnCloseOnceClick++;
-            if (this.btnCloseOnceClick >= 2) 
+            if (this.btnCloseOnceClick >= 2)
+            {
+                tipMainForm.Close();
                 this.animation.Close(this);
+            }
             else
-                this.btnClose.ToolTip = "Click Again";
+                tipMainForm.ShowFixed(this, "Click again",10,15);
         }
 
         /// <summary>
@@ -273,6 +298,7 @@ namespace Anything_wpf_main_
         private void btnClose_MouseLeave(object sender, MouseEventArgs e)
         {
             this.btnCloseOnceClick = 0;
+            tipMainForm.HideMe();
         }
 
         /// <summary>
@@ -283,8 +309,13 @@ namespace Anything_wpf_main_
         private void bdrMainForm_DragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
                 e.Effects = DragDropEffects.Link;
-            else e.Effects = DragDropEffects.None;
+            }
+            else
+            {
+                e.Effects = DragDropEffects.None;
+            }
         }
 
         /// <summary>
@@ -315,52 +346,80 @@ namespace Anything_wpf_main_
         private void txtMain_GotFocus(object sender, RoutedEventArgs e)
         {
             this.BdrFunction.Style = null;
+            if (this.txtMain.Text.Trim() == "Use keyword to search") 
+                this.txtMain.Text = "";
 
         }
 
         private void txtMain_LostFocus(object sender, RoutedEventArgs e)
         {
             this.BdrFunction.Style = this.FindResource("BdrFunctionStyle") as Style;
+            if (this.txtMain.Text.Trim()=="")
+                this.txtMain.Text = "Use keyword to search";
+
+            this.BdrFunction.RaiseEvent(me);
         }
 
         private void Me_MouseMove(object sender, MouseEventArgs e)
         {
+            
             if (e.LeftButton == MouseButtonState.Pressed)
                 this.DragMove();
         }
 
         private void txtMain_TextChanged(object sender, TextChangedEventArgs e)
         {
-            string str = this.txtMain.Text;
-            if (!string.IsNullOrEmpty(str))
+            if (IsInformationsInitialized)
             {
-                foreach (Item item in this.Recent.Children)
+                string str = this.txtMain.Text.Trim();
+                if (!string.IsNullOrEmpty(str) && str!="Use keyword to search")
                 {
-                    item.Hide();
-                }
-                List<string> value = Manage.GetObjsByNameAndPath(str,str ,ref this.Recent);
-
-                if (value != null)
-                {
-                    foreach (string s in value)
+                    foreach (Item item in this.Recent.Children)
                     {
-                        foreach (Item i in this.Recent.Children)
+                        item.Hide();
+                    }
+                    List<string> value = Manage.GetObjsByNameAndPath(str, str, ref this.Recent);
+
+                    if (value != null)
+                    {
+                        foreach (string s in value)
                         {
-                            if (i.Name_Property == s)
-                                i.Show();
+                            foreach (Item i in this.Recent.Children)
+                            {
+                                if (i.Name_Property == s)
+                                    i.Show();
+                            }
                         }
                     }
                 }
-            }
-            else
-            {
-                foreach (Item item in this.Recent.Children)
+                else
                 {
-                    item.Show();
+                    foreach (Item item in this.Recent.Children)
+                    {
+                        item.Show();
+                    }
                 }
             }
         }
-        
 
+        private void txtMain_MouseMove(object sender, MouseEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void scrlist_KeyDown(object sender, KeyEventArgs e)
+        {
+            
+            this.txtMain.Focus();
+            DoubleAnimation da = new DoubleAnimation(this.BdrFunction.ActualHeight, 70, TimeSpan.FromSeconds(0.2), FillBehavior.HoldEnd);
+            this.BdrFunction.BeginAnimation(Border.HeightProperty, da);
+        }
+
+        private void Me_KeyDown(object sender, KeyEventArgs e)
+        {
+            this.txtMain.Focus();
+            DoubleAnimation da = new DoubleAnimation(this.BdrFunction.ActualHeight, 70, TimeSpan.FromSeconds(0.2), FillBehavior.HoldEnd);
+            this.BdrFunction.BeginAnimation(Border.HeightProperty, da);
+        }
     }
 }

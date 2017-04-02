@@ -26,10 +26,11 @@ namespace Anything_wpf_main_
         /// <param name="ID"></param>
         /// <param name="Name"></param>
         /// <param name="IS"></param>
-        public Item(String ID,String Name,ImageSource IS)
+        public Item(String ID,String Name,ImageSource IS,double Length =128)
         {
             InitializeComponent();
             Init(ID,Name,IS);
+            this.Length = Length;
         }
 
         /// <summary>

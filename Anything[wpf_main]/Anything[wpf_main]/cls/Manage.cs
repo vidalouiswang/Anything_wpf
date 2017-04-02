@@ -34,6 +34,8 @@ namespace Anything_wpf_main_.cls
              public string TargetPath;
         }
         private static _Link lnkInfo=new _Link();
+        
+        
 
 
 

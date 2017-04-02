@@ -5,6 +5,7 @@ using System.Windows.Media;
 using System.IO;
 using System.Diagnostics;
 using IWshRuntimeLibrary;
+using System.Windows;
 
 namespace Anything_wpf_main_.cls
 {
@@ -383,9 +384,11 @@ namespace Anything_wpf_main_.cls
                     data.RunAs = 1;
                 else if (RunAs == 1 && Default == false)
                     StartInfo.Verb = "runas";
-
-                
+ 
                 Process.Start(StartInfo);
+
+                ((MainWindow)Application.Current.MainWindow).ClearSearch();
+               
 
             }
             catch

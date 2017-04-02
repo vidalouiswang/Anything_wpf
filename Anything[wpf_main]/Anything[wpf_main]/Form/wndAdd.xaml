@@ -1,0 +1,52 @@
+﻿<Window x:Class="Anything_wpf_main_.Form.wndAdd"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Anything_wpf_main_.Form"
+        mc:Ignorable="d"
+        Title="wndAdd" Height="234" Width="357.916" WindowStyle="None"  AllowsTransparency="True" Background="Transparent">
+    <Border x:Name="BdrOut" Background="#FFeeeeee" CornerRadius="5" BorderThickness="2" Width="auto" Height="auto" >
+        <Border Background="#DE161616" BorderThickness="1" CornerRadius="5" Width="{Binding ElementName=BdrOut,Path=Width}" MouseMove="Border_MouseMove">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    
+                    <Button x:Name="btnClose" Style="{StaticResource  ButtonStyle_Close}" HorizontalAlignment="Right"
+                            >
+                        <Grid>
+                            <Line X1="6" Y1="6" X2="20"  Y2="20" Stroke="#FFAAAAAA"  StrokeThickness="2"/>
+                            <Line X1="6" Y1="6" X2="20"  Y2="20" Stroke="#FFAAAAAA"  StrokeThickness="2" RenderTransformOrigin="0.5,0.5">
+                                <Line.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform/>
+                                        <RotateTransform Angle="90"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </Line.RenderTransform>
+                            </Line>
+
+                        </Grid>
+
+                    </Button>
+                    
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="20" >
+                    <TextBlock Foreground="White" FontSize="16" Text="Name:"></TextBlock>
+                    <TextBox MinWidth="260" Margin="10,0,10,0"></TextBox>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="20" >
+                    <TextBlock Foreground="White" FontSize="16" Text="Path:"></TextBlock>
+                    <TextBox MinWidth="263" Margin="22,0,10,0"></TextBox>
+                </StackPanel>
+
+                <Button Template="{StaticResource FunctionButton}" Background="#EE282828"
+                        Width="80" Height="25" Margin="0,13,0,0" FontSize="16"
+                        BorderThickness="2"
+                        Foreground="#EEEEEEEE">Done</Button>
+            </StackPanel>
+        </Border>
+    </Border>
+</Window>
