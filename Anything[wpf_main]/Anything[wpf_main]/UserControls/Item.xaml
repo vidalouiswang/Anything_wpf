@@ -46,11 +46,12 @@
                        >
                     <Image.ContextMenu>
                         <ContextMenu >
-                            <MenuItem Header="Open" Click="OpenMenuItem_Click"></MenuItem>
+                            <MenuItem Header="Open"  Click="OpenMenuItem_Click"></MenuItem>
                             <MenuItem Header="Run as administrator" Click="AdminOpenMenuItem_Click"></MenuItem>
                             <MenuItem Header="Delete" Click="DeleteMenuItem_Click"></MenuItem>
                             <MenuItem Header="Find location" Click="LocationMenuItem_Click"></MenuItem>
                             <MenuItem Header="Send shortcut to Desktop" Click="CreateShortcutMenuItem_Click"></MenuItem>
+                            <MenuItem Header="Change arguments" Click="ArgumentsMenuItem_Click"></MenuItem>
                         </ContextMenu>
                     </Image.ContextMenu>
                 </Image>

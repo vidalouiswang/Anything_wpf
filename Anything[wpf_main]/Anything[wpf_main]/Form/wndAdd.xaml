@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Anything_wpf_main_.Form"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         Title="wndAdd" Height="322" Width="471.416" WindowStyle="None"  AllowsTransparency="True" Background="Transparent">
     <Border x:Name="BdrOut" Background="#FFeeeeee" CornerRadius="5" BorderThickness="2" Width="auto" Height="auto" >
         <Border Background="#DE161616" BorderThickness="1" CornerRadius="5" Width="{Binding ElementName=BdrOut,Path=Width}" MouseMove="Border_MouseMove">
@@ -55,7 +56,7 @@
                 <TextBox Style="{StaticResource TextBoxStyle}" x:Name="txtArguments" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"
                          Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:wndAdd}},Path=Arguments}"></TextBox>
 
-                <Button x:Name="btnDone" Template="{StaticResource FunctionButton}" Background="#EE282828"
+                <Button x:Name="btnDone" Style="{StaticResource NormalButtonStyle}" Background="#EE282828"
                         Width="80" Height="25" Margin="0,13,0,0" FontSize="16"
                         BorderThickness="2"
                         Foreground="#EEEEEEEE" Grid.Row="4"  VerticalAlignment="Top"

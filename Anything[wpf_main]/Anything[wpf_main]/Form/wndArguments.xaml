@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Anything_wpf_main_"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         Title="wndArguments" Height="283.312" Width="418.705" WindowStyle="None"  Background="#00000000" AllowsTransparency="True">
     <Border x:Name="BdrOut" Background="#FFeeeeee" CornerRadius="5" BorderThickness="2" Width="auto" Height="auto" >
         <Border Background="#DE161616" BorderThickness="1" CornerRadius="5" Width="{Binding ElementName=BdrOut,Path=Width}" MouseMove="Border_MouseMove">
@@ -24,7 +25,7 @@
                 <Button x:Name="btnClose" Style="{StaticResource  ButtonStyle_Close}"
                         HorizontalAlignment="Right"
                         Grid.Row="0" Grid.Column="2"
-                        VerticalAlignment="Top">
+                        VerticalAlignment="Top" Click="btnClose_Click">
                     <Grid>
                         <Line X1="6" Y1="6" X2="20"  Y2="20" Stroke="#FFAAAAAA"  StrokeThickness="2"/>
                         <Line X1="6" Y1="6" X2="20"  Y2="20" Stroke="#FFAAAAAA"  StrokeThickness="2" RenderTransformOrigin="0.5,0.5">
@@ -46,21 +47,23 @@
 
 
                 <TextBlock Text="Name:" Grid.Row="1" Style="{StaticResource TextBlockStyle}" VerticalAlignment="Center"></TextBlock>
-                <TextBlock  Grid.Row="1" Style="{StaticResource  TextBlockStyle}" Grid.Column="1" Grid.ColumnSpan="2"
-                    Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type local:wndArguments}} ,Path=ItemName}" >
+                <TextBlock  Grid.Row="1" Style="{StaticResource  TextBlockStyle}" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Center"
+                    Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type local:wndArguments}} ,Path=ItemName}" 
+                            HorizontalAlignment="Left">
                 </TextBlock>
 
 
                 <TextBlock Text="Arguments:" Grid.Row="2" Style="{StaticResource TextBlockStyle}" VerticalAlignment="Center"></TextBlock>
-                <TextBox x:Name="TxtArguments" Style="{StaticResource TextBoxStyle}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"></TextBox>
+                <TextBox x:Name="TxtArguments" Style="{StaticResource TextBoxStyle}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"
+                         Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:wndArguments}},Path=Arguments,Mode=TwoWay}" ></TextBox>
 
-                <Button Template="{StaticResource FunctionButton}" Background="#EE282828"
-                        Width="80" Height="25" Margin="10" FontSize="16"
+                <Button Style="{StaticResource NormalButtonStyle}" Background="#EE282828"
+                        Width="80" Height="25"
                         BorderThickness="2"
-                        Foreground="#EEEEEEEE"
+                        
                         x:Name="btnDone"
                          Grid.Row="3" Grid.ColumnSpan="3"
-                        VerticalAlignment="Top" HorizontalAlignment="Center">Done</Button>
+                        VerticalAlignment="Top" HorizontalAlignment="Center" Click="btnDone_Click">Done</Button>
             </Grid>
         </Border>
     </Border>

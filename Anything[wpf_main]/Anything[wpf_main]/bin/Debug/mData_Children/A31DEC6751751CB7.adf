@@ -1,0 +1,9 @@
+﻿<ID>A31DEC6751751CB7</ID>
+<Name>腾讯QQ</Name>
+<Icon>10267</Icon>
+<Path>C:\Program Files (x86)\Tencent\QQ\Bin\QQScLauncher.exe</Path>
+<Arguments></Arguments>
+<Runas>0</Runas>
+<Autorun>0</Autorun>
+<Levels>0</Levels>
+<WorkingDirectory></WorkingDirectory>

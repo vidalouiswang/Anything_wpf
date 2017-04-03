@@ -273,6 +273,21 @@
     <Resource Include="monitor.ico" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\controlpanel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\mydocument.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\recyclebin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\computer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\networkneighborhood.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="Resources\folder.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

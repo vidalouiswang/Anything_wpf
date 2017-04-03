@@ -38,6 +38,8 @@ namespace Anything_wpf_main_.cls
             public int AutoRun;
             //热度
             public int Levels;
+            //工作目录
+            public string WorkingDirectory;
 
             public DataST(string name,
                 string path,
@@ -48,7 +50,8 @@ namespace Anything_wpf_main_.cls
                 int isuesd=0,
                 int runas=0,
                 int autorun=0,
-                int levels=0)
+                int levels=0,
+                string workingdirectory="")
 
             {
                 Name = name;
@@ -61,6 +64,7 @@ namespace Anything_wpf_main_.cls
                 RunAs = runas;
                 AutoRun = autorun;
                 Levels = levels;
+                WorkingDirectory = workingdirectory;
             }
 
         }
@@ -75,6 +79,8 @@ namespace Anything_wpf_main_.cls
         public bool Rename { get; set; }
 
         private Anoicess.Anoicess.Anoicess objDB = null;
+
+        private ProcessStartInfo StartInfo = new ProcessStartInfo();
 
         internal DataST Data
         {
@@ -141,6 +147,7 @@ namespace Anything_wpf_main_.cls
             objDB.Insert("Runas", data.RunAs.ToString());
             objDB.Insert("Autorun", data.AutoRun.ToString());
             objDB.Insert("Levels", data.Levels.ToString());
+            objDB.Insert("WorkingDirectory", data.WorkingDirectory);
 
             if (!Directory.Exists(Manage.IconPath))
             {
@@ -195,6 +202,7 @@ namespace Anything_wpf_main_.cls
                 this.data.RunAs = Convert.ToInt32( objDB.ReadFirstByName("Runas"));
                 this.data.AutoRun = Convert.ToInt32(objDB.ReadFirstByName("Autorun"));
                 this.data.Levels = Convert.ToInt32(objDB.ReadFirstByName("Levels"));
+                this.data.WorkingDirectory = objDB.ReadFirstByName("WorkingDirectory");
 
                 return 0;
             }
@@ -374,10 +382,10 @@ namespace Anything_wpf_main_.cls
         {
             try
             {
-                
-                ProcessStartInfo StartInfo = new ProcessStartInfo();
+                StartInfo = new ProcessStartInfo();
                 StartInfo.FileName = data.Path;
                 StartInfo.Arguments = data.Arguments;
+                StartInfo.WorkingDirectory = data.WorkingDirectory;
 
                 if (Runas == 1 && Default)
                     data.RunAs = 1;
@@ -386,9 +394,9 @@ namespace Anything_wpf_main_.cls
  
                 Process.Start(StartInfo);
 
-                Manage.wnd.ClearSearch();
+                Manage.WindowMain.ClearSearch();
 
-                Manage.TipPublic.ShowFixed(Manage.wnd, "Go!");
+                Manage.TipPublic.ShowFixed(Manage.WindowMain, "Go!");
 
             }
             catch

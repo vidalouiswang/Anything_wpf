@@ -20,7 +20,6 @@ namespace Anything_wpf_main_.Form
     public partial class wndAdd : Window
     {
 
-        public MainWindow wnd = null;
         public string ItemName
         {
             get { return (string)GetValue(ItemNameProperty); }
@@ -62,7 +61,7 @@ namespace Anything_wpf_main_.Form
         {
             if (!string.IsNullOrEmpty(ItemName.Trim()) && !string.IsNullOrEmpty(Path.Trim()))
             {
-                wnd.Recent.Children.Add( Manage.AddItem(Path, ItemName, Arguments));
+                Manage.WindowMain.Recent.Children.Add( Manage.AddItem(Path, ItemName, Arguments));
                 this.Close();
             }
             else

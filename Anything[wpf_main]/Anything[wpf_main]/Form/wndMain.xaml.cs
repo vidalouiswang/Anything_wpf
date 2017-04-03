@@ -107,8 +107,6 @@ namespace Anything_wpf_main_
 
         private bool QuickStart = false;
 
-        private wndAdd WindowAdd = new wndAdd();
-
         public bool NowReName = false;
         
 
@@ -201,11 +199,6 @@ namespace Anything_wpf_main_
             tipMainForm.Show();
         }
 
-        private void MainWindow_AfterExecuted(object sender, RoutedEventArgs e)
-        {
-            this.txtMain.Text = "";
-        }
-
         /// <summary>
         /// 位置改变时响应函数
         /// </summary>
@@ -221,10 +214,49 @@ namespace Anything_wpf_main_
             
         }
 
+        /// <summary>
+        /// 防止因意外不能关闭强制措施
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Me_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            System.Diagnostics.Process.GetCurrentProcess().Kill();
+        }
+
+
         #endregion
 
-        #region 按钮事件响应
+        #region 控件事件响应
 
+        /// <summary>
+        /// 检索框获得焦点的响应函数
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtMain_GotFocus(object sender, RoutedEventArgs e)
+        {
+            this.BdrFunction.Style = null;
+            if (this.txtMain.Text.Trim() == "Use keyword to search")
+                this.txtMain.Text = "";
+
+        }
+
+        /// <summary>
+        /// 检索框丢失焦点的响应
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtMain_LostFocus(object sender, RoutedEventArgs e)
+        {
+            PackUp();
+        }
+
+        /// <summary>
+        /// 移除定时器的响应
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Timer_Tick(object sender, EventArgs e)
         {
             if (Manage.RemoveList.Count>0)
@@ -338,46 +370,34 @@ namespace Anything_wpf_main_
 
         }
 
-
-
-
-        #endregion
-
-        private void txtMain_GotFocus(object sender, RoutedEventArgs e)
-        {
-            this.BdrFunction.Style = null;
-            if (this.txtMain.Text.Trim() == "Use keyword to search") 
-                this.txtMain.Text = "";
-
-        }
-
-        private void txtMain_LostFocus(object sender, RoutedEventArgs e)
-        {
-            PackUp();
-        }
-
-        private void PackUp()
-        {
-            this.BdrFunction.Style = this.FindResource("BdrFunctionStyle") as Style;
-            if (this.txtMain.Text.Trim()=="")
-                this.txtMain.Text = "Use keyword to search";
-
-            this.BdrFunction.RaiseEvent(me);
-        }
-
+        /// <summary>
+        /// 主窗体鼠标移动的响应
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Me_MouseMove(object sender, MouseEventArgs e)
         {
-            
+
             if (e.LeftButton == MouseButtonState.Pressed)
+            {
                 this.DragMove();
+                e.Handled = true;
+            }
+
+
         }
 
+        /// <summary>
+        /// 检索框内容改变时的消息响应
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txtMain_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (IsInformationsInitialized)
             {
                 string str = this.txtMain.Text.Trim();
-                if (!string.IsNullOrEmpty(str) && str!="Use keyword to search")
+                if (!string.IsNullOrEmpty(str) && str != "Use keyword to search")
                 {
                     foreach (Item item in this.Recent.Children)
                     {
@@ -396,10 +416,10 @@ namespace Anything_wpf_main_
 
                         foreach (Item i in value)
                         {
-                            i.Show(); 
+                            i.Show();
                         }
                     }
-                    
+
                 }
                 else
                 {
@@ -411,39 +431,41 @@ namespace Anything_wpf_main_
             }
         }
 
+        /// <summary>
+        /// 检索框的鼠标移动的消息响应，用于取消事件冒泡，以防止鼠标选择文字时窗体移动
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txtMain_MouseMove(object sender, MouseEventArgs e)
         {
             e.Handled = true;
         }
 
-        private void SetFocus()
-        {
-            if (!NowReName)
-            {
-                this.txtMain.Focus();
-                DoubleAnimation daHeight = new DoubleAnimation(this.BdrFunction.ActualHeight, 70, TimeSpan.FromSeconds(0.2), FillBehavior.HoldEnd);
-                DoubleAnimation daOpacity = new DoubleAnimation(this.BdrFunction.Opacity, 1, TimeSpan.FromSeconds(0.2), FillBehavior.HoldEnd);
-                this.BdrFunction.BeginAnimation(Border.HeightProperty, daHeight);
-                this.BdrFunction.BeginAnimation(Border.OpacityProperty, daOpacity);
-
-            }
-        }
-
+        /// <summary>
+        /// 内容按键的消息响应，设置检索框焦点
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void scrlist_KeyDown(object sender, KeyEventArgs e)
         {
             SetFocus();
         }
 
+        /// <summary>
+        /// 主窗体按键时的消息响应，同上
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Me_KeyDown(object sender, KeyEventArgs e)
         {
             SetFocus();
         }
 
-        private void AddNewMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            WindowAdd.Show();
-        }
-
+        /// <summary>
+        /// 快速打开搜索后的结果
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txtMain_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
@@ -461,17 +483,27 @@ namespace Anything_wpf_main_
                     }
                 }
             }
-            
+
         }
 
+        /// <summary>
+        /// 离开窗体时收起标题栏
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void bdrMain_MouseLeave(object sender, MouseEventArgs e)
         {
             PackUp();
         }
 
+        /// <summary>
+        /// 清空检索框
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txtMain_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.LeftButton==MouseButtonState.Pressed)
+            if (e.LeftButton == MouseButtonState.Pressed)
             {
                 this.BdrFunction.Style = null;
                 if (this.txtMain.Text.Trim() == "Use keyword to search")
@@ -479,9 +511,79 @@ namespace Anything_wpf_main_
             }
         }
 
-        private void Me_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+
+        #endregion
+
+
+        #region 菜单项事件响应
+
+        /// <summary>
+        /// 打开手动添加窗口
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AddNewMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.GetCurrentProcess().Kill();
+            Manage.OpenAddWindow();
+        }
+
+        #endregion
+
+        #region 私有
+
+        /// <summary>
+        /// 收起标题栏
+        /// </summary>
+        private void PackUp()
+        {
+            this.BdrFunction.Style = this.FindResource("BdrFunctionStyle") as Style;
+            if (this.txtMain.Text.Trim() == "")
+                this.txtMain.Text = "Use keyword to search";
+
+            this.BdrFunction.RaiseEvent(me);
+        }
+
+        /// <summary>
+        /// 设置焦点到检索框
+        /// </summary>
+        private void SetFocus()
+        {
+            if (!NowReName)
+            {
+                this.txtMain.Focus();
+                DoubleAnimation daHeight = new DoubleAnimation(this.BdrFunction.ActualHeight, 70, TimeSpan.FromSeconds(0.2), FillBehavior.HoldEnd);
+                DoubleAnimation daOpacity = new DoubleAnimation(this.BdrFunction.Opacity, 1, TimeSpan.FromSeconds(0.2), FillBehavior.HoldEnd);
+                this.BdrFunction.BeginAnimation(Border.HeightProperty, daHeight);
+                this.BdrFunction.BeginAnimation(Border.OpacityProperty, daOpacity);
+
+            }
+        }
+
+        #endregion
+
+        private void AddComputerMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            this.Recent.Children.Add( Manage.AddComputer());
+        }
+
+        private void AddMyDocumentMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            this.Recent.Children.Add(Manage.AddMyDocument());
+        }
+
+        private void AddRecycleBinMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            this.Recent.Children.Add(Manage.AddRecycleBin());
+        }
+
+        private void AddControlPanelMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            this.Recent.Children.Add(Manage.AddControlPanel());
+        }
+
+        private void AddNetworkNeighborhoodMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            this.Recent.Children.Add(Manage.AddNetworkNeighbor());
         }
     }
 }

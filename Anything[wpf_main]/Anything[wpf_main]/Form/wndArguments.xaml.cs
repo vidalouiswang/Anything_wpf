@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Anything_wpf_main_.cls;
 
 namespace Anything_wpf_main_
 {
@@ -19,17 +20,11 @@ namespace Anything_wpf_main_
     public partial class wndArguments : Window
     {
 
-
-
-
-
         public string ItemName
         {
             get { return (string)GetValue(ItemNameProperty); }
             set { SetValue(ItemNameProperty, value); }
         }
-
-        // Using a DependencyProperty as the backing store for ItemName.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ItemNameProperty =
             DependencyProperty.Register("ItemName", typeof(string), typeof(wndArguments), new PropertyMetadata("Name"));
 
@@ -38,11 +33,22 @@ namespace Anything_wpf_main_
             get { return (string)GetValue(ArgumentsProperty); }
             set { SetValue(ArgumentsProperty, value); }
         }
-
-        // Using a DependencyProperty as the backing store for Arguments.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ArgumentsProperty =
             DependencyProperty.Register("Arguments", typeof(string), typeof(wndArguments), new PropertyMetadata(""));
 
+        private ItemData it = null;
+        public ItemData It
+        {
+            get
+            {
+                return it;
+            }
+
+            set
+            {
+                it = value;
+            }
+        }
 
         public wndArguments()
         {
@@ -53,6 +59,20 @@ namespace Anything_wpf_main_
         {
             if (e.LeftButton == MouseButtonState.Pressed)
                 this.DragMove();
+        }
+
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnDone_Click(object sender, RoutedEventArgs e)
+        {
+            if (It!=null)
+            {
+                it.Arguments = Arguments;
+                this.Close();
+            }
         }
     }
 }

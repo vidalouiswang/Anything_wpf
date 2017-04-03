@@ -1,8 +1,8 @@
-﻿<ID>A62C3D4194A97932</ID>
-<Name>hdd</Name>
+﻿<ID>68AE492A2C4D9741</ID>
+<Name>SmartHDD</Name>
 <Icon>7866</Icon>
 <Path>C:\Users\vidam\Desktop\SmartHDD.exe</Path>
-<Arguments></Arguments>
 <Runas>0</Runas>
 <Autorun>0</Autorun>
 <Levels>0</Levels>
+<Arguments> -how about</Arguments>

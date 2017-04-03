@@ -128,17 +128,7 @@
 
     </Style>
 
-    <ControlTemplate x:Key="FunctionButton" TargetType="{x:Type Button}">
-        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="5"
-                        Background="{TemplateBinding Background}"
-                        TextBlock.TextAlignment="Center"
-                        TextBlock.Foreground="{TemplateBinding Foreground}"
-                        TextBlock.FontSize="{TemplateBinding FontSize}">
-
-            <ContentPresenter RecognizesAccessKey="True" Margin="{Binding Source={TemplateBinding Padding}}"></ContentPresenter>
-        </Border>
-
-    </ControlTemplate>
+    
     <!--按钮-->
 
     <Style x:Key="BdrFunctionStyle" TargetType="Border">

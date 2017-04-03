@@ -109,6 +109,13 @@
                         <ScrollViewer.ContextMenu>
                             <ContextMenu>
                                 <MenuItem Header="Add new" Click="AddNewMenuItem_Click"></MenuItem>
+                                <MenuItem Header="Other function">
+                                    <MenuItem Header="Add Computer" Click="AddComputerMenuItem_Click"></MenuItem>
+                                    <MenuItem Header="Add My Document" Click="AddMyDocumentMenuItem_Click"></MenuItem>
+                                    <MenuItem Header="Add Recycle Bin" Click="AddRecycleBinMenuItem_Click"></MenuItem>
+                                    <MenuItem Header="Add Control Panel" Click="AddControlPanelMenuItem_Click"></MenuItem>
+                                    <MenuItem Header="Add Network Neighborhood" Click="AddNetworkNeighborhoodMenuItem_Click"></MenuItem>
+                                </MenuItem>
                             </ContextMenu>
                         </ScrollViewer.ContextMenu>
                     </ScrollViewer>

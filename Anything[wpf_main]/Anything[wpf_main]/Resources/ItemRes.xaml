@@ -113,16 +113,16 @@
         <Setter Property="Background" Value="#cc303030"></Setter>
         <Setter Property="BorderBrush" Value="#cc909090"></Setter>
         <Setter Property="Margin" Value="0.5"></Setter>
+
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="true">
                 <Setter Property="Background" Value="#ee606060"></Setter>
                 <Setter Property="BorderBrush" Value="#eeaaaaaa"></Setter>
             </Trigger>
         </Style.Triggers>
+
     </Style>
 
-    
-        
     <ControlTemplate x:Key="MenuItemTemplate" TargetType="{x:Type MenuItem}">
         <Border Background="{TemplateBinding Background}" BorderThickness="2" BorderBrush="{TemplateBinding BorderBrush}"
                 CornerRadius="5"
@@ -131,9 +131,13 @@
                 TextBlock.Foreground="White"
                 Padding="6,3,6,3"
                 >
-            
-            
-            <ContentPresenter ContentSource="Header"></ContentPresenter>
+            <Grid>
+                <Image Source="{ TemplateBinding Property=Icon}"></Image>
+                <ContentPresenter ContentSource="Header" RecognizesAccessKey="True"></ContentPresenter>
+                <Popup Placement="Mouse" IsOpen="{TemplateBinding IsSubmenuOpen}" AllowsTransparency="True" Focusable="False" PopupAnimation="Fade" >
+                    <StackPanel IsItemsHost="True"></StackPanel>
+                </Popup>
+            </Grid>
         </Border>
     </ControlTemplate>
 </ResourceDictionary>

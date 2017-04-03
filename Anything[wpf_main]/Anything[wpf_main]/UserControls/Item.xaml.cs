@@ -17,7 +17,7 @@ namespace Anything_wpf_main_
         /// </summary>
         public Item()
         {
-            InitializeComponent();   
+            InitializeComponent();
         }
 
         /// <summary>
@@ -71,16 +71,12 @@ namespace Anything_wpf_main_
         private ItemData refItemData = null;
 
 
-
-
         //热度    
         public int Levels
         {
             get { return (int)GetValue(LevelsProperty); }
             set { SetValue(LevelsProperty, value); }
         }
-
-        // Using a DependencyProperty as the backing store for Levels.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty LevelsProperty =
             DependencyProperty.Register("Levels", typeof(int), typeof(Item), new PropertyMetadata(0));
 
@@ -244,7 +240,7 @@ namespace Anything_wpf_main_
         /// </summary>
         private void SetName()
         {
-            Manage.wnd.NowReName = true;
+            Manage.WindowMain.NowReName = true;
             OldName = Txt.Text;
             this.Txt.Visibility = Visibility.Hidden;
             this.TxtWrite.Visibility = Visibility.Visible;
@@ -269,7 +265,7 @@ namespace Anything_wpf_main_
 
                 }
             }
-            Manage.wnd.NowReName = false;
+            Manage.WindowMain.NowReName = false;
         }
 
         /// <summary>
@@ -349,6 +345,12 @@ namespace Anything_wpf_main_
         private void UserControl_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             this.Focus();
+            e.Handled = true;
+        }
+
+        private void ArgumentsMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            Manage.OpenArgumentsWindow(this.RefItemData);
         }
     }
 }
