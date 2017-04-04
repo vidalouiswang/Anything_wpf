@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using Anything_wpf_main_.cls;
 
 namespace Anything_wpf_main_
@@ -266,6 +267,7 @@ namespace Anything_wpf_main_
                 }
             }
             Manage.WindowMain.NowReName = false;
+
         }
 
         /// <summary>
@@ -352,5 +354,11 @@ namespace Anything_wpf_main_
         {
             Manage.OpenArgumentsWindow(this.RefItemData);
         }
+
+        private void TxtWrite_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            e.Handled = true;
+        }
+
     }
 }

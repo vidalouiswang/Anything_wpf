@@ -8,7 +8,8 @@
              d:DesignHeight="128" d:DesignWidth="128" MaxHeight="128" MaxWidth="128" MinHeight="32"
              MinWidth="32" 
              SizeChanged="UserControl_SizeChanged"
-             Focusable="True" MouseDoubleClick="UserControl_MouseDoubleClick" MouseDown="UserControl_MouseDown" >
+             Focusable="True" MouseDoubleClick="UserControl_MouseDoubleClick" MouseDown="UserControl_MouseDown"
+             >
 
 <Border  x:Name="Bdr" Style="{DynamicResource BdrStyle}" >
         <Border.RenderTransform>
@@ -70,7 +71,8 @@
                             TextWrapping="Wrap"
                             Canvas.Left="0"
                             Canvas.Top="0"
-                           Width="{Binding ElementName=CanvasX, Path=ActualWidth}"
+                           Width="{Binding ElementName=CanvasX, Path=ActualWidth}" 
+                           
                             >
                     <TextBlock.ContextMenu>
                         <ContextMenu>
@@ -88,7 +90,7 @@
                          Height="Auto"
                          Canvas.Left="0"
                          Canvas.Top="0"
-                         Width="{Binding ElementName=CanvasX, Path=ActualWidth}" LostFocus="TxtWrite_LostFocus" KeyUp="TxtWrite_KeyUp"
+                         Width="{Binding ElementName=CanvasX, Path=ActualWidth}" LostFocus="TxtWrite_LostFocus" KeyUp="TxtWrite_KeyUp" MouseMove="TxtWrite_MouseMove"
                          >
                         
                 </TextBox>
