@@ -142,5 +142,11 @@ namespace Anything
                 return 1;
             }
         }
+
+        public static FileInfo  GetFileInfo(string Path)
+        {
+            return objComputer.FileSystem.GetFileInfo(Path);
+        }
+
     }
 }

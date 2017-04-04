@@ -369,6 +369,18 @@ namespace Anything_wpf_main_.cls
             }
         }
 
+        public String WorkingDirectory
+        {
+            get
+            {
+                return data.WorkingDirectory;
+            }
+            set
+            {
+                data.WorkingDirectory = value;
+            }
+        }
+
         #endregion
 
         #region 其他

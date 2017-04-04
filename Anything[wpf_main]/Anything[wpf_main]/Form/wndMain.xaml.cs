@@ -108,7 +108,7 @@ namespace Anything_wpf_main_
         private bool QuickStart = false;
 
         public bool NowReName = false;
-        
+
 
 
         #endregion
@@ -224,6 +224,31 @@ namespace Anything_wpf_main_
             System.Diagnostics.Process.GetCurrentProcess().Kill();
         }
 
+        /// <summary>
+        /// 主窗体鼠标移动的响应
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Me_MouseMove(object sender, MouseEventArgs e)
+        {
+
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                this.DragMove();
+                e.Handled = true;
+            }
+            else
+            {
+                if (this.Left <= 50 && this.Left > 0)
+                    this.Left = 0;
+
+                if (this.Top <= 50 && this.Top > 0)
+                    this.Top = 0;
+            }
+
+
+        }
+
 
         #endregion
 
@@ -319,7 +344,6 @@ namespace Anything_wpf_main_
         {
             //effect.Hide(true);
             this.animation.SetMin(this);
-            
         }
 
         /// <summary>
@@ -367,23 +391,6 @@ namespace Anything_wpf_main_
                 this.Recent.Children.Add(Manage.AddItem(s));
                 byte[] b = GetIcon.GetIconByteArray(s);
             }
-
-        }
-
-        /// <summary>
-        /// 主窗体鼠标移动的响应
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Me_MouseMove(object sender, MouseEventArgs e)
-        {
-
-            if (e.LeftButton == MouseButtonState.Pressed)
-            {
-                this.DragMove();
-                e.Handled = true;
-            }
-
 
         }
 
@@ -514,7 +521,6 @@ namespace Anything_wpf_main_
 
         #endregion
 
-
         #region 菜单项事件响应
 
         /// <summary>
@@ -527,6 +533,31 @@ namespace Anything_wpf_main_
             Manage.OpenAddWindow();
         }
 
+
+        private void AddComputerMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            this.Recent.Children.Add(Manage.AddComputer());
+        }
+
+        private void AddMyDocumentMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            this.Recent.Children.Add(Manage.AddMyDocument());
+        }
+
+        private void AddRecycleBinMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            this.Recent.Children.Add(Manage.AddRecycleBin());
+        }
+
+        private void AddControlPanelMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            this.Recent.Children.Add(Manage.AddControlPanel());
+        }
+
+        private void AddNetworkNeighborhoodMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            this.Recent.Children.Add(Manage.AddNetworkNeighbor());
+        }
         #endregion
 
         #region 私有
@@ -559,31 +590,8 @@ namespace Anything_wpf_main_
             }
         }
 
+
         #endregion
 
-        private void AddComputerMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            this.Recent.Children.Add( Manage.AddComputer());
-        }
-
-        private void AddMyDocumentMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            this.Recent.Children.Add(Manage.AddMyDocument());
-        }
-
-        private void AddRecycleBinMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            this.Recent.Children.Add(Manage.AddRecycleBin());
-        }
-
-        private void AddControlPanelMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            this.Recent.Children.Add(Manage.AddControlPanel());
-        }
-
-        private void AddNetworkNeighborhoodMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            this.Recent.Children.Add(Manage.AddNetworkNeighbor());
-        }
     }
 }

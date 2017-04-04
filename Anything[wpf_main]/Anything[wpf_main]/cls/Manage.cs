@@ -43,6 +43,7 @@ namespace Anything_wpf_main_.cls
              public string Name;
              public string WorkingDirectory;
              public string TargetPath;
+             public string Arguments;
         }
 
         //lnk文件信息
@@ -190,19 +191,39 @@ namespace Anything_wpf_main_.cls
                 //检查路径
                 CheckPath(Path);
 
+                string subPath = "";
+
                 if (!string.IsNullOrEmpty(lnkInfo.Name))
                 {
                     Path = lnkInfo.TargetPath;
                     if (string.IsNullOrEmpty(Name.Trim()))
                     {
                         Name = lnkInfo.Name;
+                        if (string.IsNullOrEmpty(Arguments.Trim()))
+                            Arguments = lnkInfo.Arguments;
+                        
+                        if (string.IsNullOrEmpty(lnkInfo.WorkingDirectory.Trim()))
+                        {
+                            subPath = GetSubPath(Path);
+                        }
+                        else
+                        {
+                            subPath = lnkInfo.WorkingDirectory;
+                        }
                     }
                 }
                 else
                 {
                     if (string.IsNullOrEmpty(Name.Trim()))
                         Name = FileOperation.GetNameWithoutExtension(FileOperation.GetName(Path));
+
+                    subPath = GetSubPath(Path);
+
+                    if (string.IsNullOrEmpty(Arguments.Trim()))
+                        Arguments = GetArgumentsFromFullPath(Path);
                 }
+
+                
 
                 //获取图标
                 byte[] b;
@@ -256,8 +277,14 @@ namespace Anything_wpf_main_.cls
                 //构造itemdata类对象
                 ItemData itemdata = new ItemData(new ItemData.DataST(Name,Path,id,IS,b,"",1,0,0));
 
+                //有参数则填充参数
                 if (!string.IsNullOrEmpty(Arguments.Trim()))
                     itemdata.Arguments = Arguments;
+
+                //填充工作路径
+                if (!string.IsNullOrEmpty(subPath.Trim()))
+                    itemdata.WorkingDirectory = subPath;
+
 
                 Manage.listData.Add(itemdata);
 
@@ -337,12 +364,14 @@ namespace Anything_wpf_main_.cls
                 lnkInfo.Name = FileOperation.GetNameWithoutExtension(FileOperation.GetName(path));
                 lnkInfo.TargetPath = iss.TargetPath;
                 lnkInfo.WorkingDirectory = iss.WorkingDirectory;
+                lnkInfo.Arguments = iss.Arguments;
             }
             else
             {
                 lnkInfo.Name = "";
                 lnkInfo.TargetPath = path;
                 lnkInfo.WorkingDirectory = "";
+                lnkInfo.Arguments = "";
             }
             
         }
@@ -360,6 +389,11 @@ namespace Anything_wpf_main_.cls
             WindowMain.txtMain.Text = "";
         }
 
+        /// <summary>
+        /// 从资源中获取指定的图片
+        /// </summary>
+        /// <param name="Name"></param>
+        /// <returns></returns>
         private static byte[] GetResourcesIcon(string Name)
         {
             byte[] b;
@@ -375,6 +409,65 @@ namespace Anything_wpf_main_.cls
 
         }
 
+        /// <summary>
+        /// 获取子路径
+        /// </summary>
+        /// <param name="Path"></param>
+        /// <returns></returns>
+        private static string GetSubPath(string Path)
+        {
+            int LastPos = Path.LastIndexOf("\\");
+            if (LastPos > 0)
+            {
+                return Path.Substring(0, LastPos+1);
+            }
+            else
+                return Path;
+        }
+
+        /// <summary>
+        /// 从路径获取参数
+        /// </summary>
+        /// <param name="Path"></param>
+        /// <returns></returns>
+        private static string GetArgumentsFromFullPath(string Path)
+        {
+            string FileNameWithExtension = FileOperation.GetName(Path);
+            if (!string.IsNullOrEmpty(FileNameWithExtension.Trim()))
+            {
+                int LastPos = Path.LastIndexOf(FileNameWithExtension);
+                if (LastPos >= 0)
+                {
+                    int spaceIndex = FileNameWithExtension.LastIndexOf(" ");
+                    int MinusIndex = FileNameWithExtension.LastIndexOf("-");
+                    int speatorIndex = FileNameWithExtension.LastIndexOf("/");
+
+                    if (spaceIndex>=0)
+                    {
+                        if (MinusIndex>=0)
+                        {
+                            LastPos += MinusIndex;
+                        }
+                        else
+                        {
+                            LastPos += spaceIndex;
+                        }
+                    }
+                    else if (MinusIndex>=0)
+                    {
+                        LastPos += MinusIndex;
+                    }
+                    else if (speatorIndex>=0)
+                    {
+                        LastPos += speatorIndex;
+                    }
+                    
+                    return Path.Substring(LastPos, Path.Length - LastPos);
+                }
+                else return "";
+            }
+            else return "";
+        }
         #endregion
 
         //public static ItemData GetObjByID(String ID)

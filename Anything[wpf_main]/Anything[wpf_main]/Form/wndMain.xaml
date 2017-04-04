@@ -10,7 +10,9 @@
         Title="Anything" x:Name="Me" Height="700" Width="350" AllowsTransparency="True" Opacity="0.97" 
     WindowStyle="None" Background="#00fefefe" 
         Loaded="Window_Loaded"   WindowStartupLocation="Manual" 
-    VerticalAlignment="Top" HorizontalAlignment="Left" LocationChanged="Window_LocationChanged" MouseMove="Me_MouseMove" KeyDown="Me_KeyDown" Closing="Me_Closing"
+    VerticalAlignment="Top" HorizontalAlignment="Left" LocationChanged="Window_LocationChanged" 
+    MouseMove="Me_MouseMove" KeyDown="Me_KeyDown" Closing="Me_Closing" 
+    
      >
     <Border x:Name="bdrMain" MouseLeave="bdrMain_MouseLeave">
         <Border Background="#ffFEFEFE" BorderThickness="2" CornerRadius="10" >
@@ -100,12 +102,12 @@
 
                     <!--第四层常规项目区-->
 
-                   
 
+                  
                     <ScrollViewer x:Name="scrlist" Margin="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden"
-                                  Grid.Row="3" KeyDown="scrlist_KeyDown" >
+                                  Grid.Row="3" KeyDown="scrlist_KeyDown"  >
                         <WrapPanel x:Name="Recent" Width="{Binding ElementName=scrlist, Path=Width,Mode=TwoWay}"></WrapPanel>
-
+                        
                         <ScrollViewer.ContextMenu>
                             <ContextMenu>
                                 <MenuItem Header="Add new" Click="AddNewMenuItem_Click"></MenuItem>
