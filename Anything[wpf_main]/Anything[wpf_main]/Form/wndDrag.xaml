@@ -1,0 +1,30 @@
+﻿<Window x:Class="Anything_wpf_main_.Form.wndDrag"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Anything_wpf_main_.Form"
+        mc:Ignorable="d"
+        
+        Title="wndDrag" Height="128" Width="128" WindowStyle="None" AllowsTransparency="True" Background="#00282828" MouseMove="Window_MouseMove">
+    
+    <Window.ContextMenu>
+        <ContextMenu>
+            <MenuItem Header="Send me back" Click="MenuItem_Click"></MenuItem>
+        </ContextMenu>
+        
+    </Window.ContextMenu>
+
+    <Border x:Name="bdrMain">
+        <Border Background="#aaeeeeee" BorderThickness="2" CornerRadius="10" >
+            <Border x:Name="bdrMainForm" Background="#aa282828"
+                        BorderThickness="2" CornerRadius="9">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <StackPanel x:Name="spMain" Orientation="Vertical" VerticalAlignment="Center">
+
+                        </StackPanel>
+                    </StackPanel>
+            </Border>
+        </Border>
+    </Border>
+</Window>

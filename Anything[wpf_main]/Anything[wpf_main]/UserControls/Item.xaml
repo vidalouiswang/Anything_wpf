@@ -7,8 +7,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="128" d:DesignWidth="128" MaxHeight="128" MaxWidth="128" MinHeight="32"
              MinWidth="32" 
-             SizeChanged="UserControl_SizeChanged"
-             Focusable="True" MouseDoubleClick="UserControl_MouseDoubleClick" MouseDown="UserControl_MouseDown"
+             SizeChanged="Me_SizeChanged"
+             Focusable="True" MouseDoubleClick="Me_DoubleClick" MouseDown="Me_MouseDown"
              >
 
 <Border  x:Name="Bdr" Style="{DynamicResource BdrStyle}" >

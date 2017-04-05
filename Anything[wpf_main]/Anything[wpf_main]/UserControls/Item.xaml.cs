@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using Anything_wpf_main_.cls;
+using Anything_wpf_main_.Form;
 
 namespace Anything_wpf_main_
 {
@@ -225,11 +226,66 @@ namespace Anything_wpf_main_
         #region 事件响应
 
         /// <summary>
+        /// 取消冒泡已防止冒泡到parent
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TxtWrite_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        /// <summary>
+        /// 鼠标按下响应
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Me_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            this.Focus();
+            e.Handled = true;
+
+
+            if (this.Parent.ToString().IndexOf("WrapPanel")>0)
+            {
+                wndDrag drag = new wndDrag();
+                drag.Show();
+                drag.IParent = this.Parent as WrapPanel;
+                (this.Parent as WrapPanel).Children.Remove(this);
+
+                Point ItemPos = System.Windows.Input.Mouse.GetPosition(Manage.WindowMain.Parent as Window);
+
+                drag.Width = this.Length + 18;
+                drag.Height = this.Length + 18;
+
+                drag.InnerObj = this;
+                
+                drag.Left = ItemPos.X -drag.Width/2;
+                drag.Top = ItemPos.Y-drag.Height /2;
+                
+            }
+        }
+
+
+        /// <summary>
+        /// 双击响应
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Me_DoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            RoutedEventArgs ee;
+            ee = new RoutedEventArgs(Item.ClickEvent, this);
+            base.RaiseEvent(ee);
+
+        }
+
+        /// <summary>
         /// 尺寸改变时调整字体大小
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void UserControl_SizeChanged(object sender, SizeChangedEventArgs e)
+        private void Me_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             this.Txt.FontSize = this.ActualWidth / 8;
             this.TxtWrite.FontSize = this.ActualWidth / 8;
@@ -248,6 +304,9 @@ namespace Anything_wpf_main_
             this.TxtWrite.Focus();
         }
 
+        /// <summary>
+        /// 命名完成
+        /// </summary>
         private void DoneName()
         {
             this.Name_Property = this.TxtWrite.Text;
@@ -294,6 +353,12 @@ namespace Anything_wpf_main_
 
         #endregion
 
+        #region 菜单响应
+
+        private void ArgumentsMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            Manage.OpenArgumentsWindow(this.RefItemData);
+        }
 
         private void OpenMenuItem_Click(object sender, RoutedEventArgs e)
         {
@@ -335,30 +400,14 @@ namespace Anything_wpf_main_
             this.refItemData.CreateShortcut();
         }
 
+        #endregion
 
-        private void UserControl_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+
+        private Item Clone()
         {
-            RoutedEventArgs ee;
-            ee = new RoutedEventArgs(Item.ClickEvent, this);
-            base.RaiseEvent(ee);
-
+            Item item = new Item();
+            item = this;
+            return item;
         }
-
-        private void UserControl_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            this.Focus();
-            e.Handled = true;
-        }
-
-        private void ArgumentsMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            Manage.OpenArgumentsWindow(this.RefItemData);
-        }
-
-        private void TxtWrite_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            e.Handled = true;
-        }
-
     }
 }

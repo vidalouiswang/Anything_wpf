@@ -160,12 +160,19 @@
     <Compile Include="Form\wndAdd.xaml.cs">
       <DependentUpon>wndAdd.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Form\wndDrag.xaml.cs">
+      <DependentUpon>wndDrag.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Form\wndTip.xaml.cs">
       <DependentUpon>wndTip.xaml</DependentUpon>
     </Compile>
     <Compile Include="Form\wndArguments.xaml.cs">
       <DependentUpon>wndArguments.xaml</DependentUpon>
     </Compile>
+    <Page Include="Form\wndDrag.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Form\wndMain.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
