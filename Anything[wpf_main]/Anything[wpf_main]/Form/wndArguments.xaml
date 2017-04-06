@@ -58,7 +58,7 @@
                          Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:wndArguments}},Path=Arguments,Mode=TwoWay}" ></TextBox>
 
                 <Button Style="{StaticResource NormalButtonStyle}" Background="#EE282828"
-                        Width="80" Height="25"
+                        
                         BorderThickness="2"
                         
                         x:Name="btnDone"

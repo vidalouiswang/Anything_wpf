@@ -71,6 +71,7 @@ namespace Anything_wpf_main_
         private string OldName = "";
 
         private ItemData refItemData = null;
+        //private bool IsMouseDown
 
 
         //热度    
@@ -244,26 +245,6 @@ namespace Anything_wpf_main_
         {
             this.Focus();
             e.Handled = true;
-
-
-            if (this.Parent.ToString().IndexOf("WrapPanel")>0)
-            {
-                wndDrag drag = new wndDrag();
-                drag.Show();
-                drag.IParent = this.Parent as WrapPanel;
-                (this.Parent as WrapPanel).Children.Remove(this);
-
-                Point ItemPos = System.Windows.Input.Mouse.GetPosition(Manage.WindowMain.Parent as Window);
-
-                drag.Width = this.Length + 18;
-                drag.Height = this.Length + 18;
-
-                drag.InnerObj = this;
-                
-                drag.Left = ItemPos.X -drag.Width/2;
-                drag.Top = ItemPos.Y-drag.Height /2;
-                
-            }
         }
 
 
@@ -408,6 +389,61 @@ namespace Anything_wpf_main_
             Item item = new Item();
             item = this;
             return item;
+        }
+
+        private void Me_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            //if (e.LeftButton == System.Windows.Input.MouseButtonState.Pressed)
+            //{
+            //    MoveOut();
+            //}
+            //e.Handled = true;
+        }
+
+        private void MoveOut()
+        {
+            if (this.Parent.ToString().IndexOf("WrapPanel") > 0)
+            {
+                wndDrag drag = new wndDrag();
+
+                drag.IParent = this.Parent as WrapPanel;
+                (this.Parent as WrapPanel).Children.Remove(this);
+
+                this.Bdr.Style = this.FindResource("BdrStyleOut") as Style;
+
+                drag.InnerObj = this;
+
+                drag.Width = this.length;
+                drag.Height =this.length;
+
+                drag.Left = 0;
+                drag.Top =0;
+                drag.Show();
+            }
+        }
+
+        private void MoveOutMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            MoveOut();
+        }
+
+        private void AttributeMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.Parent.ToString().IndexOf("WrapPanel")<0)
+            {
+                wndDrag wnddrag = (wndDrag)this.Parent;
+                wnddrag.SendBack();
+            }
+            wndItemInformation wndInfo = new wndItemInformation();
+            wndInfo.Item = this;
+            wndInfo.ItemName = this.refItemData.Name;
+            wndInfo.Path = this.refItemData.Path;
+            wndInfo.Arguments = this.refItemData.Arguments;
+            wndInfo.ItemIcon = this.refItemData.Icon_imagesource;
+            wndInfo.WorkingDirectory = this.refItemData.WorkingDirectory;
+            wndInfo.Itemdata = this.refItemData;
+            wndInfo.Show();
+
         }
     }
 }

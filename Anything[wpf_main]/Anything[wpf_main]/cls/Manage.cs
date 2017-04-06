@@ -58,6 +58,8 @@ namespace Anything_wpf_main_.cls
         //手动添加窗体
         public static wndAdd WindowAdd = new wndAdd();
 
+        public static RECT WindowMainRect = new RECT();
+
         //系统引用
         public const string MyComputer = "::{20D04FE0-3AEA-1069-A2D8-08002B30309D}";
         public const string MyDocument= "::{450D8FBA-AD25-11D0-98A8-0800361B1103}";
@@ -149,6 +151,11 @@ namespace Anything_wpf_main_.cls
         public static void InitializeData(MainWindow wnd_ ,ref System.Windows.Controls.WrapPanel wp)
         {
             WindowMain = wnd_;
+            WindowMainRect.left = (int)wnd_.Left;
+            WindowMainRect.right = (int)(wnd_.Left + wnd_.ActualWidth);
+            WindowMainRect.top = (int)wnd_.Top;
+            WindowMainRect.bottom = (int)(wnd_.Top + wnd_.ActualHeight);
+
             foreach (Anoicess.Anoicess.Anoicess adf in MAIN.GetAllChild())
             {
                 ItemData itemdata = new ItemData(adf);
@@ -175,6 +182,17 @@ namespace Anything_wpf_main_.cls
                
             }
             TipPublic.Show();
+        }
+
+        public static void RefreshSingle(Item item,ItemData itemdata)
+        {
+            WindowMain.Recent.Children.Remove(item);
+            Item newOne = new Item(itemdata.ID, itemdata.Name, itemdata.Icon_imagesource);
+            newOne.Path = itemdata.Path;
+            newOne.Margin = new System.Windows.Thickness(5);
+            newOne.RefItemData = itemdata;
+            newOne.Click += Item_Click;
+            WindowMain.Recent.Children.Add(newOne);
         }
 
         /// <summary>

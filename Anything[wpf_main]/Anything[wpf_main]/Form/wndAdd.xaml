@@ -57,7 +57,7 @@
                          Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:wndAdd}},Path=Arguments}"></TextBox>
 
                 <Button x:Name="btnDone" Style="{StaticResource NormalButtonStyle}" Background="#EE282828"
-                        Width="80" Height="25" Margin="0,13,0,0" FontSize="16"
+                        FontSize="16"
                         BorderThickness="2"
                         Foreground="#EEEEEEEE" Grid.Row="4"  VerticalAlignment="Top"
                         Grid.ColumnSpan="3"

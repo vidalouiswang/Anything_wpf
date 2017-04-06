@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Anything_wpf_main_.cls;
 
 namespace Anything_wpf_main_.Form
 {
@@ -58,14 +59,34 @@ namespace Anything_wpf_main_.Form
         private void Window_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
+            {
                 this.DragMove();
-        }
+                if (this.Left>=Manage.WindowMainRect.left
+                    && (this.Left+this.ActualWidth)<=Manage.WindowMainRect.right
+                    && this.Top>=Manage.WindowMainRect.top
+                    && (this.Top+this.ActualHeight)<=Manage.WindowMainRect.bottom)
+                {
+                    SendBack();
+                }
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
+                if (this.Left <=100)
+                    this.Left = 0;
+                if (this.Top <= 100)
+                    this.Top = 0;
+                if (this.Left >= (SystemParameters.FullPrimaryScreenWidth - this.ActualWidth-100))
+                    this.Left = SystemParameters.FullPrimaryScreenWidth - this.ActualWidth;
+                if (this.Top >= (SystemParameters.FullPrimaryScreenHeight - this.ActualHeight-100))
+                    this.Top = SystemParameters.FullPrimaryScreenHeight - this.ActualHeight;
+            }
+
+        }
+        public void SendBack()
         {
             this.spMain.Children.Remove(innerObj);
+            innerObj.Bdr.Style = innerObj.FindResource("BdrStyle") as Style;
             IParent.Children.Add(innerObj);
             this.Close();
         }
+
     }
 }

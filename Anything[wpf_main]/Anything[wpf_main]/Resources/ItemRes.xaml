@@ -66,7 +66,6 @@
                 </EventTrigger.Actions>
             </EventTrigger>
 
-
             <EventTrigger RoutedEvent="Mouse.MouseUp">
                 <EventTrigger.Actions>
                     <BeginStoryboard>
@@ -83,6 +82,56 @@
                     </BeginStoryboard>
                 </EventTrigger.Actions>
             </EventTrigger>
+
+        </Style.Triggers>
+
+        <Setter Property="Background" Value="#00000000"></Setter>
+
+        <Setter Property="BorderThickness" Value="2"></Setter>
+        <Setter Property="CornerRadius" Value="10"></Setter>
+        <Setter Property="RenderTransformOrigin" Value="0.5,0.5"></Setter>
+    </Style>
+
+    <Style x:Key="BdrStyleOut" TargetType="{x:Type Border}">
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="true">
+                <Setter Property="Background" Value="#33FFFFFF"></Setter>
+            </Trigger>
+        
+        <!--<EventTrigger RoutedEvent="Mouse.MouseDown">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.Children[0].ScaleX"
+                                             Duration="0:0:0.0"
+                                             To="1"
+                                             ></DoubleAnimation>
+                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.Children[0].ScaleY"
+                                             Duration="0:0:0.0"
+                                             To="1"
+                                             ></DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+
+
+            <EventTrigger RoutedEvent="Mouse.MouseUp">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.Children[0].ScaleX"
+                                             Duration="0:0:0.0"
+                                             To="1.1"
+                                             ></DoubleAnimation>
+                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.Children[0].ScaleY"
+                                             Duration="0:0:0.0"
+                                             To="1.1"
+                                             ></DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>-->
 
         </Style.Triggers>
 

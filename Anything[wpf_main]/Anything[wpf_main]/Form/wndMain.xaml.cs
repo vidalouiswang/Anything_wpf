@@ -210,6 +210,11 @@ namespace Anything_wpf_main_
             {
                 AppInfoOperations.SetLeft(this.Left);
                 AppInfoOperations.SetTop(this.Top);
+
+                Manage.WindowMainRect.left = (int)this.Left;
+                Manage.WindowMainRect.right = (int)(this.Left + this.ActualWidth);
+                Manage.WindowMainRect.top = (int)this.Top;
+                Manage.WindowMainRect.bottom = (int)(this.Top + this.ActualHeight);
             }
             
         }
@@ -264,7 +269,7 @@ namespace Anything_wpf_main_
             this.BdrFunction.Style = null;
             if (this.txtMain.Text.Trim() == "Use keyword to search")
                 this.txtMain.Text = "";
-
+            CheckHidden();
         }
 
         /// <summary>
@@ -310,6 +315,10 @@ namespace Anything_wpf_main_
             this.btnCloseOnceClick++;
             if (this.btnCloseOnceClick >= 2)
             {
+                foreach (ItemData itemdata in Manage.listData)
+                {
+                    itemdata.SaveIcon();
+                }
                 tipMainForm.Close();
                 this.animation.Close(this);
             }
@@ -403,6 +412,7 @@ namespace Anything_wpf_main_
         {
             if (IsInformationsInitialized)
             {
+                
                 string str = this.txtMain.Text.Trim();
                 if (!string.IsNullOrEmpty(str) && str != "Use keyword to search")
                 {
@@ -503,20 +513,6 @@ namespace Anything_wpf_main_
             PackUp();
         }
 
-        /// <summary>
-        /// 清空检索框
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void txtMain_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.LeftButton == MouseButtonState.Pressed)
-            {
-                this.BdrFunction.Style = null;
-                if (this.txtMain.Text.Trim() == "Use keyword to search")
-                    this.txtMain.Text = "";
-            }
-        }
 
 
         #endregion
@@ -581,6 +577,9 @@ namespace Anything_wpf_main_
         {
             if (!NowReName)
             {
+                CheckHidden();
+                if (this.txtMain.Text.Trim() == "Use keyword to search")
+                    this.txtMain.Text = "";
                 this.txtMain.Focus();
                 DoubleAnimation daHeight = new DoubleAnimation(this.BdrFunction.ActualHeight, 70, TimeSpan.FromSeconds(0.2), FillBehavior.HoldEnd);
                 DoubleAnimation daOpacity = new DoubleAnimation(this.BdrFunction.Opacity, 1, TimeSpan.FromSeconds(0.2), FillBehavior.HoldEnd);
@@ -590,8 +589,65 @@ namespace Anything_wpf_main_
             }
         }
 
+        /// <summary>
+        /// 清空检索框
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtMain_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            this.BdrFunction.Style = null;
+            if (this.txtMain.Text.Trim() == "Use keyword to search")
+                this.txtMain.Text = "";
+        }
 
         #endregion
 
+        private void CheckHidden()
+        {
+            if (this.bdrMain.Opacity<AppInfoOperations.GetMaxOpacity())
+            {
+                DoubleAnimation da = new DoubleAnimation(AppInfoOperations.GetMaxOpacity(), TimeSpan.FromSeconds(0.2), FillBehavior.HoldEnd);
+                this.bdrMain.BeginAnimation(OpacityProperty, da);
+            }
+        }
+
+        private void Me_Activated(object sender, EventArgs e)
+        {
+            
+            this.WindowState = WindowState.Normal;
+            if (IsInformationsInitialized)
+            {
+                if (this.bdrMain.Opacity < AppInfoOperations.GetMaxOpacity())
+                {
+                    if (this.WindowState==WindowState.Minimized)
+                    {
+                        this.animation.SetNormal(this);
+                    }
+                    else
+                    {
+                        DoubleAnimation da = new DoubleAnimation(AppInfoOperations.GetMaxOpacity(), TimeSpan.FromSeconds(0.2), FillBehavior.HoldEnd);
+                        this.bdrMain.BeginAnimation(OpacityProperty, da);
+                    }
+                }
+            }
+                
+            
+        }
+
+        private void txtMain_MouseEnter(object sender, MouseEventArgs e)
+        {
+            
+            //this.BdrFunction.Style = null;
+            if (this.txtMain.Text.Trim() == "Use keyword to search")
+                this.txtMain.Text = "";
+        }
+
+        private void txtMain_MouseLeave(object sender, MouseEventArgs e)
+        {
+            //this.BdrFunction.Style = this.FindResource("BdrFunctionStyle") as Style;
+            if (string.IsNullOrEmpty(this.txtMain.Text.Trim()))
+                this.txtMain.Text = "Use keyword to search";
+        }
     }
 }

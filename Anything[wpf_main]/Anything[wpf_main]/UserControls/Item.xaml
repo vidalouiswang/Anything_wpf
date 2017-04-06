@@ -8,7 +8,7 @@
              d:DesignHeight="128" d:DesignWidth="128" MaxHeight="128" MaxWidth="128" MinHeight="32"
              MinWidth="32" 
              SizeChanged="Me_SizeChanged"
-             Focusable="True" MouseDoubleClick="Me_DoubleClick" MouseDown="Me_MouseDown"
+             Focusable="True" MouseDoubleClick="Me_DoubleClick" MouseDown="Me_MouseDown" MouseMove="Me_MouseMove"
              >
 
 <Border  x:Name="Bdr" Style="{DynamicResource BdrStyle}" >
@@ -53,6 +53,8 @@
                             <MenuItem Header="Find location" Click="LocationMenuItem_Click"></MenuItem>
                             <MenuItem Header="Send shortcut to Desktop" Click="CreateShortcutMenuItem_Click"></MenuItem>
                             <MenuItem Header="Change arguments" Click="ArgumentsMenuItem_Click"></MenuItem>
+                            <MenuItem Header="Move out this item" Click="MoveOutMenuItem_Click"></MenuItem>
+                            <MenuItem Header="Attribute" Click="AttributeMenuItem_Click"></MenuItem>
                         </ContextMenu>
                     </Image.ContextMenu>
                 </Image>

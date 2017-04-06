@@ -40,6 +40,8 @@ namespace Anything_wpf_main_.cls
             public int Levels;
             //工作目录
             public string WorkingDirectory;
+            //标签名
+            public string tagName;
 
             public DataST(string name,
                 string path,
@@ -51,7 +53,8 @@ namespace Anything_wpf_main_.cls
                 int runas=0,
                 int autorun=0,
                 int levels=0,
-                string workingdirectory="")
+                string workingdirectory="",
+                string tagname="")
 
             {
                 Name = name;
@@ -65,6 +68,7 @@ namespace Anything_wpf_main_.cls
                 AutoRun = autorun;
                 Levels = levels;
                 WorkingDirectory = workingdirectory;
+                tagName = tagname;
             }
 
         }
@@ -81,6 +85,8 @@ namespace Anything_wpf_main_.cls
         private Anoicess.Anoicess.Anoicess objDB = null;
 
         private ProcessStartInfo StartInfo = new ProcessStartInfo();
+
+        private bool iconChanged = false;
 
         internal DataST Data
         {
@@ -148,6 +154,7 @@ namespace Anything_wpf_main_.cls
             objDB.Insert("Autorun", data.AutoRun.ToString());
             objDB.Insert("Levels", data.Levels.ToString());
             objDB.Insert("WorkingDirectory", data.WorkingDirectory);
+            objDB.Insert("TagName", data.tagName);
 
             if (!Directory.Exists(Manage.IconPath))
             {
@@ -203,6 +210,7 @@ namespace Anything_wpf_main_.cls
                 this.data.AutoRun = Convert.ToInt32(objDB.ReadFirstByName("Autorun"));
                 this.data.Levels = Convert.ToInt32(objDB.ReadFirstByName("Levels"));
                 this.data.WorkingDirectory = objDB.ReadFirstByName("WorkingDirectory");
+                this.data.tagName = objDB.ReadFirstByName("TagName");
 
                 return 0;
             }
@@ -381,6 +389,31 @@ namespace Anything_wpf_main_.cls
             }
         }
 
+        public String TagName
+        {
+            get
+            {
+                return data.tagName;
+            }
+            set
+            {
+                data.tagName = value;
+            }
+        }
+
+        public bool IconChanged
+        {
+            get
+            {
+                return iconChanged;
+            }
+
+            set
+            {
+                iconChanged = value;
+            }
+        }
+
         #endregion
 
         #region 其他
@@ -444,6 +477,27 @@ namespace Anything_wpf_main_.cls
             iss.WindowStyle = 1;
             iss.WorkingDirectory = "";
             iss.Save();
+
+        }
+
+        public void SaveIcon()
+        {
+            if (IconChanged)
+            {
+                try
+                {
+                    using (BinaryWriter bw = new BinaryWriter(new FileStream(Manage.IconPath + data.ID + ".ib", FileMode.Create)))
+                    {
+                        bw.Write(data.Icon);
+                        bw.Flush();
+                        bw.Close();
+                    }
+                }
+                catch
+                {
+
+                }
+            }
 
         }
 

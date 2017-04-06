@@ -11,7 +11,7 @@
     WindowStyle="None" Background="#00fefefe" 
         Loaded="Window_Loaded"   WindowStartupLocation="Manual" 
     VerticalAlignment="Top" HorizontalAlignment="Left" LocationChanged="Window_LocationChanged" 
-    MouseMove="Me_MouseMove" KeyDown="Me_KeyDown" Closing="Me_Closing" 
+    MouseMove="Me_MouseMove" KeyDown="Me_KeyDown" Closing="Me_Closing" Activated="Me_Activated" 
     
      >
     <Border x:Name="bdrMain" MouseLeave="bdrMain_MouseLeave">
@@ -86,7 +86,7 @@
                                          GotFocus="txtMain_GotFocus" 
                                          LostFocus="txtMain_LostFocus" 
                                          TextChanged="txtMain_TextChanged" 
-                                         MouseMove="txtMain_MouseMove" KeyDown="txtMain_KeyDown" MouseDown="txtMain_MouseDown"
+                                         MouseMove="txtMain_MouseMove" KeyDown="txtMain_KeyDown" MouseUp="txtMain_MouseUp" MouseEnter="txtMain_MouseEnter" MouseLeave="txtMain_MouseLeave" 
                                      >
                                     <TextBox.ContextMenu>
                                         <ContextMenu>

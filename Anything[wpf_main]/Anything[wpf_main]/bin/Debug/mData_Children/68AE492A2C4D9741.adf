@@ -5,4 +5,6 @@
 <Runas>0</Runas>
 <Autorun>0</Autorun>
 <Levels>0</Levels>
+<WorkingDirectory></WorkingDirectory>
+<TagName></TagName>
 <Arguments> -how about</Arguments>

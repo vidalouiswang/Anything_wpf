@@ -6,25 +6,12 @@
         xmlns:local="clr-namespace:Anything_wpf_main_.Form"
         mc:Ignorable="d"
         
-        Title="wndDrag" Height="128" Width="128" WindowStyle="None" AllowsTransparency="True" Background="#00282828" MouseMove="Window_MouseMove">
-    
-    <Window.ContextMenu>
-        <ContextMenu>
-            <MenuItem Header="Send me back" Click="MenuItem_Click"></MenuItem>
-        </ContextMenu>
-        
-    </Window.ContextMenu>
+        Title="wndDrag" Height="128" Width="128" WindowStyle="None" AllowsTransparency="True" Background="Transparent" MouseMove="Window_MouseMove">
 
-    <Border x:Name="bdrMain">
-        <Border Background="#aaeeeeee" BorderThickness="2" CornerRadius="10" >
-            <Border x:Name="bdrMainForm" Background="#aa282828"
-                        BorderThickness="2" CornerRadius="9">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <StackPanel x:Name="spMain" Orientation="Vertical" VerticalAlignment="Center">
+    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+        <StackPanel x:Name="spMain" Orientation="Vertical" VerticalAlignment="Center">
 
-                        </StackPanel>
-                    </StackPanel>
-            </Border>
-        </Border>
-    </Border>
+        </StackPanel>
+    </StackPanel>
+
 </Window>

@@ -163,6 +163,9 @@
     <Compile Include="Form\wndDrag.xaml.cs">
       <DependentUpon>wndDrag.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Form\wndItemInformation.xaml.cs">
+      <DependentUpon>wndItemInformation.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Form\wndTip.xaml.cs">
       <DependentUpon>wndTip.xaml</DependentUpon>
     </Compile>
@@ -170,6 +173,10 @@
       <DependentUpon>wndArguments.xaml</DependentUpon>
     </Compile>
     <Page Include="Form\wndDrag.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Form\wndItemInformation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
