@@ -157,6 +157,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="cls\Animation.cs" />
+    <Compile Include="cls\StyleManagement.cs" />
     <Compile Include="Form\wndAdd.xaml.cs">
       <DependentUpon>wndAdd.xaml</DependentUpon>
     </Compile>
@@ -165,6 +166,9 @@
     </Compile>
     <Compile Include="Form\wndItemInformation.xaml.cs">
       <DependentUpon>wndItemInformation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Form\wndSE.xaml.cs">
+      <DependentUpon>wndSE.xaml</DependentUpon>
     </Compile>
     <Compile Include="Form\wndTip.xaml.cs">
       <DependentUpon>wndTip.xaml</DependentUpon>
@@ -197,6 +201,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Form\wndAdd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Form\wndSE.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

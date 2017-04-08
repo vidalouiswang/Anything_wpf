@@ -23,7 +23,7 @@
     
     
     <ControlTemplate x:Key="FunctionButton" TargetType="{x:Type Button}">
-        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="5"
+        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"  CornerRadius="5"
                         Background="{TemplateBinding Background}"
                         Padding="{TemplateBinding Padding}"
                         TextBlock.TextAlignment="Center"
@@ -32,21 +32,31 @@
 
             <ContentPresenter RecognizesAccessKey="True" Margin="{Binding Source={TemplateBinding Padding}}"></ContentPresenter>
         </Border>
-
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <SolidColorBrush Color="#D9EEEEEE" />
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </ControlTemplate.Triggers>
     </ControlTemplate>
 
     <Style x:Key="NormalButtonStyle" TargetType="Button">
         <Setter Property="Template" Value="{StaticResource FunctionButton}"></Setter>
         <Setter Property="Foreground" Value="White" ></Setter>
-        <Setter Property="Background" Value="#ff000000"></Setter>
+        <Setter Property="Background" Value="#ff282828"></Setter>
         <Setter Property="BorderThickness" Value="2"></Setter>
         <Setter Property="FontSize" Value="16"></Setter>
         <Setter Property="Margin" Value="10"></Setter>
         <Setter Property="Padding" Value="5"></Setter>
         <Style.Triggers>
+
             <Trigger Property="IsMouseOver" Value="true">
                 <Setter Property="Foreground" Value="#FFAAAAAA"></Setter>
             </Trigger>
         </Style.Triggers>
+
     </Style>
 </ResourceDictionary>

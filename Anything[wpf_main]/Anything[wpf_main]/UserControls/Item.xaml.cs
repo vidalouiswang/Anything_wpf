@@ -402,7 +402,7 @@ namespace Anything_wpf_main_
 
         private void MoveOut()
         {
-            if (this.Parent.ToString().IndexOf("WrapPanel") > 0)
+            if (this.Parent is WrapPanel)
             {
                 wndDrag drag = new wndDrag();
 
@@ -412,6 +412,7 @@ namespace Anything_wpf_main_
                 this.Bdr.Style = this.FindResource("BdrStyleOut") as Style;
 
                 drag.InnerObj = this;
+                
 
                 drag.Width = this.length;
                 drag.Height =this.length;

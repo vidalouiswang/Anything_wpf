@@ -427,6 +427,16 @@ namespace Anything_wpf_main_.cls
         {
             try
             {
+                if (FileOperation.IsFile(data.Path)==1)
+                {
+                    if (!System.IO.File.Exists(data.Path))
+                        return -1;
+                }
+                else
+                {
+                    if (!System.IO.File.Exists(data.Path))
+                        return -1;
+                }
                 StartInfo = new ProcessStartInfo();
                 StartInfo.FileName = data.Path;
                 StartInfo.Arguments = data.Arguments;
@@ -446,7 +456,7 @@ namespace Anything_wpf_main_.cls
             }
             catch
             {
-                
+                return -2;
             }
             return 0;
         }

@@ -71,9 +71,11 @@
                             <!--第一层功能区完-->
 
                             <!--第二层关键字检索区-->
-                            <StackPanel Grid.Row="1" Height="auto">
-
+                            <Canvas x:Name="cvsTxt">
+                                <StackPanel Grid.Row="1" Canvas.Top="0" Canvas.Left="0" Width="{Binding ElementName=cvsTxt,Path=ActualWidth}">
                                 <TextBox x:Name="txtMain" 
+                                     Canvas.Top="0"
+                                     Canvas.Left="0"
                                      Background="#FF505050" 
                                      Margin="10,0,10,5" 
                                      MinHeight="25"
@@ -86,15 +88,21 @@
                                          GotFocus="txtMain_GotFocus" 
                                          LostFocus="txtMain_LostFocus" 
                                          TextChanged="txtMain_TextChanged" 
-                                         MouseMove="txtMain_MouseMove" KeyDown="txtMain_KeyDown" MouseUp="txtMain_MouseUp" MouseEnter="txtMain_MouseEnter" MouseLeave="txtMain_MouseLeave" 
+                                         MouseMove="txtMain_MouseMove" KeyDown="txtMain_KeyDown" MouseUp="txtMain_MouseUp"
+                                         MouseEnter="txtMain_MouseEnter" MouseLeave="txtMain_MouseLeave" 
                                      >
                                     <TextBox.ContextMenu>
                                         <ContextMenu>
-                                            <MenuItem Header="Search on the Web"></MenuItem>
+                                            <MenuItem Header="Search on the Web" Click="SearchWebMenuItem_Click"></MenuItem>
                                         </ContextMenu>
                                     </TextBox.ContextMenu>
                                 </TextBox>
                             </StackPanel>
+                                <Button x:Name="btnSearch" Canvas.Right="10" Canvas.Top="0" Content="Search on Web" Style="{StaticResource NormalButtonStyle}" 
+                                        Background="Transparent" Height="{Binding ElementName=txtMain,Path=ActualHeight}"
+                                        FontSize="12" Margin="0" Visibility="Collapsed"
+                                        BorderThickness="0" Click="btnSearch_Click"></Button>
+                            </Canvas>
                             <!--第二层关键字检索区完-->
 
                         </StackPanel>
@@ -105,7 +113,7 @@
 
                   
                     <ScrollViewer x:Name="scrlist" Margin="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden"
-                                  Grid.Row="3" KeyDown="scrlist_KeyDown"  >
+                                  Grid.Row="3" KeyDown="scrlist_KeyDown" Height="auto" >
                         <WrapPanel x:Name="Recent" Width="{Binding ElementName=scrlist, Path=Width,Mode=TwoWay}"></WrapPanel>
                         
                         <ScrollViewer.ContextMenu>

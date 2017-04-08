@@ -82,10 +82,13 @@ namespace Anything_wpf_main_.Form
         }
         public void SendBack()
         {
-            this.spMain.Children.Remove(innerObj);
-            innerObj.Bdr.Style = innerObj.FindResource("BdrStyle") as Style;
-            IParent.Children.Add(innerObj);
-            this.Close();
+            if (this.innerObj.Parent is StackPanel)
+            {
+                this.spMain.Children.Remove(innerObj);
+                innerObj.Bdr.Style = innerObj.FindResource("BdrStyle") as Style;
+                IParent.Children.Add(innerObj);
+                this.Close();
+            }
         }
 
     }

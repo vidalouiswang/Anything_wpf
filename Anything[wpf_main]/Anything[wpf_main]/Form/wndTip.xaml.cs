@@ -87,8 +87,8 @@ namespace Anything_wpf_main_
 
             if (wnd != null)
             {
-                double x = Mouse.GetPosition(wnd).X;
-                double y = Mouse.GetPosition(wnd).Y;
+                double x = Mouse.GetPosition(wnd).X + wnd.Left;
+                double y = Mouse.GetPosition(wnd).Y +wnd.Top;
                 return new Point(x, y);
             }
             else

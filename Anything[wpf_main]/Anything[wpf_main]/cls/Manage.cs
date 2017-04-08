@@ -28,6 +28,14 @@ namespace Anything_wpf_main_.cls
         //主库，存储其他子库的信息
         public static Anoicess.Anoicess.Anoicess MAIN = new Anoicess.Anoicess.Anoicess("mData");
 
+        public static Anoicess.Anoicess.Anoicess mRecentList = new Anoicess.Anoicess.Anoicess("mRecentList");
+
+        public static Anoicess.Anoicess.Anoicess mSE = new Anoicess.Anoicess.Anoicess("mSE");
+
+        public static List<Anoicess.Anoicess.Anoicess._Content> SEList = new List<Anoicess.Anoicess.Anoicess._Content>();
+
+        public static List<string> RecentList = new List<string>();
+
         //用于延迟移除项目的timer
         public static System.Windows.Threading.DispatcherTimer timer = new System.Windows.Threading.DispatcherTimer();
 
@@ -174,12 +182,18 @@ namespace Anything_wpf_main_.cls
 
                 wp.Children.Add(item);
 
-                //foreach (Item i in wp.Children)
-                //{
+                List<string> tmp= mRecentList.ReadAllString();
 
-                //}
+                if (tmp != null)
+                    RecentList = tmp;
 
-               
+                List<Anoicess.Anoicess.Anoicess._Content> t = mSE.ReadAllContent();
+                if (t!=null)
+                {
+                    if (t.Count > 0)
+                        SEList = t;
+                }
+
             }
             TipPublic.Show();
         }
@@ -365,6 +379,15 @@ namespace Anything_wpf_main_.cls
         {
             return AddItem(NetworkNeighborhood, "Network Neighborhood");
         }
+
+        public static void SaveKeyword( string str)
+        {
+            if (!string.IsNullOrEmpty(str) && str!="Use keyword to search")
+            {
+                RecentList.Add(str);
+                mRecentList.Insert(str, str);
+            }
+        }
         #endregion
 
         #region 内部函数
@@ -402,7 +425,16 @@ namespace Anything_wpf_main_.cls
         private static void Item_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             Item tmp = (Item)sender;
-            tmp.RefItemData.Execute();
+            int errCode = 0;
+            if ( (errCode=tmp.RefItemData.Execute())<0)
+            {
+                if (errCode == -1)
+                    TipPublic.ShowFixed(WindowMain, "File or folder doesn't exist.");
+                else
+                    TipPublic.ShowFixed(WindowMain, "Unknown error.");
+            }
+
+            SaveKeyword(WindowMain.txtMain.Text);
 
             WindowMain.txtMain.Text = "";
         }

@@ -202,4 +202,12 @@
         <Setter Property="BorderBrush" Value="Blue"></Setter>
         <Setter Property="BorderThickness" Value="5"></Setter>
     </Style>-->
+
+    <Style x:Key="SETextBlockStyle" TargetType="TextBlock">
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="true">
+                <Setter Property="Foreground" Value="Gray"></Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 </ResourceDictionary>

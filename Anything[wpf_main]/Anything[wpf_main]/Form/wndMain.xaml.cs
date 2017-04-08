@@ -269,6 +269,8 @@ namespace Anything_wpf_main_
             this.BdrFunction.Style = null;
             if (this.txtMain.Text.Trim() == "Use keyword to search")
                 this.txtMain.Text = "";
+
+            
             CheckHidden();
         }
 
@@ -323,7 +325,7 @@ namespace Anything_wpf_main_
                 this.animation.Close(this);
             }
             else
-                tipMainForm.ShowFixed(this, "Click again",10,15);
+                tipMainForm.ShowFixed(this, "Click again");
         }
 
         /// <summary>
@@ -352,7 +354,9 @@ namespace Anything_wpf_main_
         private void btnMin_Click(object sender, RoutedEventArgs e)
         {
             //effect.Hide(true);
-            this.animation.SetMin(this);
+            //this.animation.SetMin(this);
+            //this.Recent.Children.Add(StyleManagement.GetXAML() as Button);
+
         }
 
         /// <summary>
@@ -416,6 +420,8 @@ namespace Anything_wpf_main_
                 string str = this.txtMain.Text.Trim();
                 if (!string.IsNullOrEmpty(str) && str != "Use keyword to search")
                 {
+                    this.btnSearch.Visibility = Visibility.Visible;
+
                     foreach (Item item in this.Recent.Children)
                     {
                         item.Hide();
@@ -440,6 +446,7 @@ namespace Anything_wpf_main_
                 }
                 else
                 {
+                    this.btnSearch.Visibility = Visibility.Collapsed;
                     foreach (Item item in this.Recent.Children)
                     {
                         item.Show();
@@ -485,8 +492,10 @@ namespace Anything_wpf_main_
         /// <param name="e"></param>
         private void txtMain_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Enter)
+            //MessageBox.Show(e.Key.ToString());
+            if (e.Key == Key.Enter && !((e.KeyboardDevice.Modifiers & ModifierKeys.Control)==ModifierKeys.Control))
             {
+
                 if (QuickStart)
                 {
                     foreach (Item i in this.Recent.Children)
@@ -494,11 +503,20 @@ namespace Anything_wpf_main_
                         if (i.Visibility == Visibility.Visible)
                         {
                             i.RefItemData.Execute();
+                            Manage.SaveKeyword(this.txtMain.Text);
                             this.txtMain.Text = "";
                             break;
                         }
                     }
                 }
+            }
+            else if (e.Key == Key.Enter && ((e.KeyboardDevice.Modifiers & ModifierKeys.Control) == ModifierKeys.Control))
+            {
+                SEOpen();
+            }
+            else if (e.Key == Key.C && ((e.KeyboardDevice.Modifiers & ModifierKeys.Alt) == ModifierKeys.Alt) && ((e.KeyboardDevice.Modifiers & ModifierKeys.Control) == ModifierKeys.Control))
+            {
+                this.txtMain.Text = "";
             }
 
         }
@@ -567,7 +585,7 @@ namespace Anything_wpf_main_
             if (this.txtMain.Text.Trim() == "")
                 this.txtMain.Text = "Use keyword to search";
 
-            this.BdrFunction.RaiseEvent(me);
+            //this.BdrFunction.RaiseEvent(me);
         }
 
         /// <summary>
@@ -648,6 +666,25 @@ namespace Anything_wpf_main_
             //this.BdrFunction.Style = this.FindResource("BdrFunctionStyle") as Style;
             if (string.IsNullOrEmpty(this.txtMain.Text.Trim()))
                 this.txtMain.Text = "Use keyword to search";
+        }
+
+        private void btnSearch_Click(object sender, RoutedEventArgs e)
+        {
+            SEOpen();
+
+        }
+
+        private void SEOpen()
+        {
+            wndSE wndse = new wndSE();
+            wndse.Keyword = this.txtMain.Text;
+            wndse.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            wndse.ShowDialog();
+        }
+
+        private void SearchWebMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            SEOpen();
         }
     }
 }

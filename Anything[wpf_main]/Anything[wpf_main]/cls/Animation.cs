@@ -14,6 +14,7 @@ namespace Anything
         private Window wnd = null;
         private int Way = 0;
         private bool Closing = false;
+        
 
         
         /// <summary>
@@ -22,6 +23,7 @@ namespace Anything
         public Animation()
         {
         }
+
 
         
         /// <summary>
