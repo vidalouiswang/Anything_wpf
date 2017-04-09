@@ -14,18 +14,87 @@ namespace Anything
         private Window wnd = null;
         private int Way = 0;
         private bool Closing = false;
-        
 
-        
+
+
         /// <summary>
         /// 无参构造
         /// </summary>
-        public Animation()
+        public Animation() { }
+
+        /// <summary>
+        /// 用于执行单个动画的通用函数
+        /// </summary>
+        /// <typeparam name="TYPE">主体类型</typeparam>
+        /// <param name="TarObj">主体引用</param>
+        /// <param name="dp">用于动画的依赖项属性</param>
+        /// <param name="secTS">时间长度，以秒为单位</param>
+        /// <param name="To">目标值</param>
+        /// <param name="From">初始值</param>
+        /// <param name="fl">完成后的动作</param>
+        /// <returns></returns>
+        public static int UniversalBeginAnimation<TYPE>(ref TYPE TarObj,DependencyProperty dp,double secTS, double To, double From=0F,FillBehavior fl=FillBehavior.HoldEnd)
         {
+            if (TarObj== null)
+            {
+                return -1;
+            }
+
+            DoubleAnimation da = new DoubleAnimation();
+            if (From!=0)
+                da.From = From;
+            da.To = To;
+            da.Duration = TimeSpan.FromSeconds(secTS);
+            da.FillBehavior = fl;
+            da.AutoReverse = false;
+
+            if (typeof(TYPE)==typeof(Window))
+            {
+                Window wnd = TarObj as Window;
+                if (wnd == null)
+                {
+                    return -2;
+                }
+                wnd.BeginAnimation(dp, da);
+                return 0;
+            }
+            else if (typeof(TYPE)==typeof(StackPanel))
+            {
+                StackPanel stackpanel = TarObj as StackPanel;
+                if (stackpanel == null)
+                {
+                    return -2;
+                }
+                stackpanel.BeginAnimation(dp, da);
+                return 0;
+            }
+            else if (typeof(TYPE)==typeof(Border))
+            {
+                Border border = TarObj as Border;
+                if (border == null)
+                {
+                    return -2;
+                }
+                border.BeginAnimation(dp, da);
+                return 0;
+            }
+            else if (typeof(TYPE)==typeof(Button))
+            {
+                Button button = TarObj as Button;
+                if (button == null)
+                {
+                    return -2;
+                }
+                button.BeginAnimation(dp, da);
+                return 0;
+            }
+            else
+            {
+                return -3;
+            }
+            
         }
 
-
-        
         /// <summary>
         /// 初始化窗体border的样式
         /// </summary>
@@ -138,6 +207,7 @@ namespace Anything
         }
 
         #region 操作
+
         /// <summary>
         /// 最小化
         /// </summary>
@@ -159,7 +229,7 @@ namespace Anything
         /// 还原
         /// </summary>
         /// <param name="wnd"></param>
-        public  void SetNormal(Window wnd)
+        public void SetNormal(Window wnd)
         {
             DoubleAnimation da1 = new DoubleAnimation();
 
@@ -204,7 +274,7 @@ namespace Anything
 
         #endregion
 
-        public void SetStackPanelStyle(ref Border bdr   ,double InneraActualHeight)
+        public void SetStackPanelStyle(ref Border bdr,double InneraActualHeight)
         {
 
             DoubleAnimation daShowHeight = new DoubleAnimation(5, InneraActualHeight, TimeSpan.FromSeconds(0.5), FillBehavior.HoldEnd);

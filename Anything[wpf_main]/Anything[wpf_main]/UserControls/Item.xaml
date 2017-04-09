@@ -25,7 +25,6 @@
             </SolidColorBrush>
 
         </Border.BorderBrush>
-        <!--thisis s s fds fsd fds gdfsgfdgfdgdfgfdgfdgfdgdfgdfgdfgdfgdfgd-->
 
         <Grid>
             <Grid.RowDefinitions>
@@ -97,6 +96,7 @@
                         
                 </TextBox>
             </Canvas>
+            
         </Grid>
             
 </Border>

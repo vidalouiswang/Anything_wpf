@@ -11,8 +11,8 @@ namespace Anything_wpf_main_.cls
 {
     class Manage
     {
-
-        public Manage() { }
+        //不允许实例化使用
+        private Manage() { }
 
         #region 成员变量
 
@@ -26,15 +26,19 @@ namespace Anything_wpf_main_.cls
         public static List<ItemData> listData = new List<ItemData>();
 
         //主库，存储其他子库的信息
-        public static Anoicess.Anoicess.Anoicess MAIN = new Anoicess.Anoicess.Anoicess("mData");
+        public static Anoicess.Anoicess.Anoicess mMAIN = new Anoicess.Anoicess.Anoicess("mData");
 
-        public static Anoicess.Anoicess.Anoicess mRecentList = new Anoicess.Anoicess.Anoicess("mRecentList");
+        //用于保存近期搜索关键字的库
+        public static Anoicess.Anoicess.Anoicess mKeywordRecent = new Anoicess.Anoicess.Anoicess("mKeywordRecent");
 
+        //用于保存搜索引擎的库
         public static Anoicess.Anoicess.Anoicess mSE = new Anoicess.Anoicess.Anoicess("mSE");
 
+        //用于保存搜索引擎的内部列表
         public static List<Anoicess.Anoicess.Anoicess._Content> SEList = new List<Anoicess.Anoicess.Anoicess._Content>();
 
-        public static List<string> RecentList = new List<string>();
+        //用于保存近期搜索关键字的内部列表
+        public static List<string> KeywordRecent = new List<string>();
 
         //用于延迟移除项目的timer
         public static System.Windows.Threading.DispatcherTimer timer = new System.Windows.Threading.DispatcherTimer();
@@ -66,6 +70,7 @@ namespace Anything_wpf_main_.cls
         //手动添加窗体
         public static wndAdd WindowAdd = new wndAdd();
 
+        //用于保存主窗体的位置信息
         public static RECT WindowMainRect = new RECT();
 
         //系统引用
@@ -74,11 +79,77 @@ namespace Anything_wpf_main_.cls
         public const string ControlPanel = "::{21EC2020-3AEA-1069-A2DD-08002B30309D}";
         public const string RecycleBin = "::{645FF040-5081-101B-9F08-00AA002F954E}";
         public const string NetworkNeighborhood = "::{208D2C60-3AEA-1069-A2D7-08002B30309D}";
+        public const string SystemRefUnion = MyComputer + MyDocument + ControlPanel + RecycleBin + NetworkNeighborhood;
 
 
         #endregion
 
         #region 外部函数
+
+        /// <summary>
+        /// 打开属性窗口
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        public static int OpenAttributeWindow(Item item)
+        {
+            if (!(item.Parent is System.Windows.Controls.WrapPanel))
+            {
+                wndDrag wnddrag = (wndDrag)item.Parent;
+                wnddrag.SendBack();
+            }
+            wndItemInformation wndInfo = new wndItemInformation();
+            wndInfo.Item = item;
+            wndInfo.ItemName = item.refItemData.Name;
+            wndInfo.Path = item.refItemData.Path;
+            wndInfo.Arguments = item.refItemData.Arguments;
+            wndInfo.ItemIcon = item.refItemData.Icon_imagesource;
+            wndInfo.WorkingDirectory = item.refItemData.WorkingDirectory;
+            wndInfo.Itemdata = item.refItemData;
+            wndInfo.Show();
+            return 0;
+        }
+
+        /// <summary>
+        /// 打开搜索引擎选择窗口
+        /// </summary>
+        /// <param name="Keyword"></param>
+        /// <returns></returns>
+        public static int OpenSearchWindow(string Keyword)
+        {
+            wndSE wndse = new wndSE();
+            wndse.Keyword = Keyword;
+            wndse.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
+            wndse.ShowDialog();
+            return 0; 
+        }
+
+        /// <summary>
+        /// 用于设置搜索框的显示相关
+        /// </summary>
+        /// <param name="txtMain"></param>
+        /// <param name="Show"></param>
+        /// <param name="FillText"></param>
+        /// <returns></returns>
+        public static int ClearOrFillText(ref System.Windows.Controls.TextBox txtMain, bool Show,string FillText="Use keyword to search")
+        {
+            if (txtMain != null)
+            {
+                if (Show)
+                {
+                    if (txtMain.Text.Trim() == "Use keyword to search")
+                        txtMain.Text = "";
+                }
+                else
+                {
+                    if (string.IsNullOrEmpty(txtMain.Text.Trim()))
+                        txtMain.Text = FillText;
+                }
+            }
+            else
+                return -1;
+            return 0;
+        }
 
         /// <summary>
         /// 打开手动添加窗体
@@ -164,7 +235,7 @@ namespace Anything_wpf_main_.cls
             WindowMainRect.top = (int)wnd_.Top;
             WindowMainRect.bottom = (int)(wnd_.Top + wnd_.ActualHeight);
 
-            foreach (Anoicess.Anoicess.Anoicess adf in MAIN.GetAllChild())
+            foreach (Anoicess.Anoicess.Anoicess adf in mMAIN.GetAllChild())
             {
                 ItemData itemdata = new ItemData(adf);
 
@@ -182,10 +253,10 @@ namespace Anything_wpf_main_.cls
 
                 wp.Children.Add(item);
 
-                List<string> tmp= mRecentList.ReadAllString();
+                List<string> tmp= mKeywordRecent.ReadAllString();
 
                 if (tmp != null)
-                    RecentList = tmp;
+                    KeywordRecent = tmp;
 
                 List<Anoicess.Anoicess.Anoicess._Content> t = mSE.ReadAllContent();
                 if (t!=null)
@@ -198,6 +269,11 @@ namespace Anything_wpf_main_.cls
             TipPublic.Show();
         }
 
+        /// <summary>
+        /// 用于刷新项目的图标
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="itemdata"></param>
         public static void RefreshSingle(Item item,ItemData itemdata)
         {
             WindowMain.Recent.Children.Remove(item);
@@ -347,7 +423,7 @@ namespace Anything_wpf_main_.cls
                 if (i.ID==ID)
                 {
                     wp.Children.Remove(i);
-                    MAIN.RemoveChild(i.Name_Property);
+                    mMAIN.RemoveChild(i.Name_Property);
                     i.RefItemData.Dispose();
                     listData.Remove(i.RefItemData);
                     i.Dispose();
@@ -358,34 +434,61 @@ namespace Anything_wpf_main_.cls
             tmp = null;
         }
 
-
+        /// <summary>
+        /// 添加我的电脑
+        /// </summary>
+        /// <returns></returns>
         public static Item AddComputer()
         {
             return AddItem(MyComputer, "My Computer");
         }
+
+        /// <summary>
+        /// 添加控制面板
+        /// </summary>
+        /// <returns></returns>
         public static Item AddControlPanel()
         {
             return AddItem(ControlPanel, "Control Panel");
         }
+
+        /// <summary>
+        /// 添加回收站
+        /// </summary>
+        /// <returns></returns>
         public static Item AddRecycleBin()
         {
             return AddItem(RecycleBin, "Recycle Bin");
         }
+
+        /// <summary>
+        /// 添加家我的文档
+        /// </summary>
+        /// <returns></returns>
         public static Item AddMyDocument()
         {
             return AddItem(MyDocument, "My Document");
         }
+
+        /// <summary>
+        /// 添加网络邻居
+        /// </summary>
+        /// <returns></returns>
         public static Item AddNetworkNeighbor()
         {
             return AddItem(NetworkNeighborhood, "Network Neighborhood");
         }
 
+        /// <summary>
+        /// 用于保存搜索关键字，暂未完成
+        /// </summary>
+        /// <param name="str"></param>
         public static void SaveKeyword( string str)
         {
             if (!string.IsNullOrEmpty(str) && str!="Use keyword to search")
             {
-                RecentList.Add(str);
-                mRecentList.Insert(str, str);
+                KeywordRecent.Add(str);
+                mKeywordRecent.Insert(str, str);
             }
         }
         #endregion
@@ -433,10 +536,11 @@ namespace Anything_wpf_main_.cls
                 else
                     TipPublic.ShowFixed(WindowMain, "Unknown error.");
             }
+            else
+                WindowMain.txtMain.Text = "";
 
             SaveKeyword(WindowMain.txtMain.Text);
 
-            WindowMain.txtMain.Text = "";
         }
 
         /// <summary>

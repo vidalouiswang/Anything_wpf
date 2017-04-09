@@ -14,6 +14,8 @@ namespace Anything_wpf_main_
     /// </summary>
     public partial class Item : UserControl ,IDisposable
     {
+        #region 构造函数
+
         /// <summary>
         /// 无参构造
         /// </summary>
@@ -48,6 +50,9 @@ namespace Anything_wpf_main_
             this.Img_Property = IS;
         }
 
+        #endregion
+
+        #region 成员变量
         //项目的可视化资源
         private ImageSource img_Property = null;
 
@@ -57,24 +62,25 @@ namespace Anything_wpf_main_
         //项目的唯一标识符
         private String iD = "";
 
-        //
+        //路径
         private string _Path = "";
-
 
         //边长
         private double length = 0;
 
-        //事件辅助
+        //事件辅助，暂时不用
         private DateTime OnDown=new DateTime(0);
         private DateTime Clicked=new DateTime(0);
 
+        //旧名称，用于比对是否改变了名称
         private string OldName = "";
 
-        private ItemData refItemData = null;
+        //后台数据对象的引用
+        public ItemData refItemData = null;
         //private bool IsMouseDown
 
 
-        //热度    
+        //热度，暂时不用
         public int Levels
         {
             get { return (int)GetValue(LevelsProperty); }
@@ -83,7 +89,7 @@ namespace Anything_wpf_main_
         public static readonly DependencyProperty LevelsProperty =
             DependencyProperty.Register("Levels", typeof(int), typeof(Item), new PropertyMetadata(0));
 
-
+        #endregion 
 
         #region 事件
 
@@ -227,6 +233,20 @@ namespace Anything_wpf_main_
         #region 事件响应
 
         /// <summary>
+        /// 将项目移出主窗体体时，暂时不用
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Me_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            //if (e.LeftButton == System.Windows.Input.MouseButtonState.Pressed)
+            //{
+            //    MoveOut();
+            //}
+            //e.Handled = true;
+        }
+
+        /// <summary>
         /// 取消冒泡已防止冒泡到parent
         /// </summary>
         /// <param name="sender"></param>
@@ -246,7 +266,6 @@ namespace Anything_wpf_main_
             this.Focus();
             e.Handled = true;
         }
-
 
         /// <summary>
         /// 双击响应
@@ -298,9 +317,9 @@ namespace Anything_wpf_main_
             {
                 if (OldName != Name_Property)
                 {
-                    string path = this.refItemData.Path;
-                    this.refItemData.Rename = true;
-                    this.refItemData.Name = this.TxtWrite.Text;
+                    string path = this.RefItemData.Path;
+                    this.RefItemData.Rename = true;
+                    this.RefItemData.Name = this.TxtWrite.Text;
 
                     this.ID = ClsMD5.ClsMD5.Encrypt(this.name_Property + path);
 
@@ -336,21 +355,41 @@ namespace Anything_wpf_main_
 
         #region 菜单响应
 
+        /// <summary>
+        /// 打开参数窗口
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ArgumentsMenuItem_Click(object sender, RoutedEventArgs e)
         {
             Manage.OpenArgumentsWindow(this.RefItemData);
         }
 
+        /// <summary>
+        /// 打开
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OpenMenuItem_Click(object sender, RoutedEventArgs e)
         {
-           this.refItemData.Execute();
+           this.RefItemData.Execute();
         }
 
+        /// <summary>
+        /// 管理员权限打开
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AdminOpenMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            this.refItemData.Execute(1, true);
+            this.RefItemData.Execute(1, true);
         }
 
+        /// <summary>
+        /// 删除项目
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DeleteMenuItem_Click(object sender, RoutedEventArgs e)
         {
 
@@ -359,47 +398,72 @@ namespace Anything_wpf_main_
             Manage.timer.Start();
         }
 
-
+        /// <summary>
+        /// 重命名项目
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ReNameMenuItem_Click(object sender, RoutedEventArgs e)
         {
             SetName();
         }
 
+        /// <summary>
+        /// 完成重命名
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TxtWrite_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
         {
             if (e.Key==System.Windows.Input.Key.Enter)
                 DoneName();
         }
 
+        /// <summary>
+        /// 查找位置
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LocationMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            this.refItemData.FindLocation();
+            this.RefItemData.FindLocation();
         }
 
+        /// <summary>
+        /// 创建快捷方式
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CreateShortcutMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            this.refItemData.CreateShortcut();
+            this.RefItemData.CreateShortcut();
+        }
+
+        /// <summary>
+        /// 移出项目的菜单项响应
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MoveOutMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            MoveOut();
+        }
+
+        /// <summary>
+        /// 查看属性
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AttributeMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            Manage.OpenAttributeWindow(this);
         }
 
         #endregion
 
-
-        private Item Clone()
-        {
-            Item item = new Item();
-            item = this;
-            return item;
-        }
-
-        private void Me_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            //if (e.LeftButton == System.Windows.Input.MouseButtonState.Pressed)
-            //{
-            //    MoveOut();
-            //}
-            //e.Handled = true;
-        }
-
+        /// <summary>
+        /// 将项目移出主窗体独立出去
+        /// </summary>
         private void MoveOut()
         {
             if (this.Parent is WrapPanel)
@@ -413,7 +477,6 @@ namespace Anything_wpf_main_
 
                 drag.InnerObj = this;
                 
-
                 drag.Width = this.length;
                 drag.Height =this.length;
 
@@ -423,28 +486,5 @@ namespace Anything_wpf_main_
             }
         }
 
-        private void MoveOutMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            MoveOut();
-        }
-
-        private void AttributeMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            if (this.Parent.ToString().IndexOf("WrapPanel")<0)
-            {
-                wndDrag wnddrag = (wndDrag)this.Parent;
-                wnddrag.SendBack();
-            }
-            wndItemInformation wndInfo = new wndItemInformation();
-            wndInfo.Item = this;
-            wndInfo.ItemName = this.refItemData.Name;
-            wndInfo.Path = this.refItemData.Path;
-            wndInfo.Arguments = this.refItemData.Arguments;
-            wndInfo.ItemIcon = this.refItemData.Icon_imagesource;
-            wndInfo.WorkingDirectory = this.refItemData.WorkingDirectory;
-            wndInfo.Itemdata = this.refItemData;
-            wndInfo.Show();
-
-        }
     }
 }

@@ -77,6 +77,7 @@ namespace Anything_wpf_main_.Form
                 }
             }
         }
+
         private void Btn_Click(object sender, RoutedEventArgs e)
         {
             Run(sender);
@@ -90,6 +91,11 @@ namespace Anything_wpf_main_.Form
         private void Window_Activated(object sender, EventArgs e)
         {
             this.spMain.Focus();
+        }
+
+        private void spMain_LostFocus(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

@@ -144,7 +144,7 @@ namespace Anything_wpf_main_.cls
 
         private void CreateDB()
         {
-            objDB = Manage.MAIN.CreateChildDB(data.ID, true);
+            objDB = Manage.mMAIN.CreateChildDB(data.ID, true);
             objDB.Insert("ID", data.ID);
             objDB.Insert("Name", data.Name);
             objDB.Insert("Icon", data.Icon.Length.ToString());
@@ -303,7 +303,7 @@ namespace Anything_wpf_main_.cls
                     }
                 }
 
-                Manage.MAIN.RemoveChild(OldID);
+                Manage.mMAIN.RemoveChild(OldID);
 
                 objDB = null;
 
@@ -427,16 +427,20 @@ namespace Anything_wpf_main_.cls
         {
             try
             {
-                if (FileOperation.IsFile(data.Path)==1)
+                if (Manage.SystemRefUnion.IndexOf(data.Path)<0)
                 {
-                    if (!System.IO.File.Exists(data.Path))
-                        return -1;
+                    if (FileOperation.IsFile(data.Path) == 1)
+                    {
+                        if (!System.IO.File.Exists(data.Path))
+                            return -1;
+                    }
+                    else
+                    {
+                        if (!System.IO.Directory.Exists(data.Path))
+                            return -1;
+                    }
                 }
-                else
-                {
-                    if (!System.IO.File.Exists(data.Path))
-                        return -1;
-                }
+                
                 StartInfo = new ProcessStartInfo();
                 StartInfo.FileName = data.Path;
                 StartInfo.Arguments = data.Arguments;

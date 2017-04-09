@@ -91,6 +91,7 @@ namespace Anything_wpf_main_
         //边界颜色
         private Color bdrColor = new Color();
 
+        //用于设置动画相关
         private Animation animation = new Animation();
 
         //关闭按钮的计数
@@ -99,14 +100,19 @@ namespace Anything_wpf_main_
         //用于自动存储位置大小的开关指示
         public bool IsInformationsInitialized = false;
 
+        //用去触发上部标题栏的卷起动画，暂时不用
         MouseEventArgs me = new MouseEventArgs(Mouse.PrimaryDevice, 0);
 
+        //提示窗体
         private wndTip tipMainForm = new wndTip();
 
+        //项目图标大小，暂时不用
         private double ItemLength = 128;
 
+        //用于搜索后的快速打开操作
         private bool QuickStart = false;
 
+        //指示是否正在重命名项目
         public bool NowReName = false;
 
 
@@ -254,10 +260,79 @@ namespace Anything_wpf_main_
 
         }
 
+        /// <summary>
+        /// 当窗体被激活时
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Me_Activated(object sender, EventArgs e)
+        {
+            //当窗体被激活时无论如何都要正常显示
+            this.WindowState = WindowState.Normal;
+
+            //检查是否初始化完成
+            if (IsInformationsInitialized)
+            {
+
+                //如果透明度小于设定的最大值且为最小化状态
+                if (this.WindowState == WindowState.Minimized)
+                {
+                    //直接还原窗体
+                    this.animation.SetNormal(this);
+                }
+                else
+                {
+                    //否则只是未最小化而临时隐藏的，所以直接还原透明度
+                    CheckHidden();
+                }
+            }
+        }
+
 
         #endregion
 
         #region 控件事件响应
+
+        /// <summary>
+        /// 光标进入输入框时
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtMain_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Manage.ClearOrFillText(ref this.txtMain, true);
+        }
+
+        /// <summary>
+        /// 光标离开输入框时
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtMain_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Manage.ClearOrFillText(ref this.txtMain, false);
+        }
+
+        /// <summary>
+        /// 点击网络搜索按钮时
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSearch_Click(object sender, RoutedEventArgs e)
+        {
+            Manage.OpenSearchWindow(this.txtMain.Text);
+        }
+
+        /// <summary>
+        /// 清空检索框
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtMain_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            this.BdrFunction.Style = null;
+            Manage.ClearOrFillText(ref this.txtMain, true);
+        }
 
         /// <summary>
         /// 检索框获得焦点的响应函数
@@ -267,9 +342,7 @@ namespace Anything_wpf_main_
         private void txtMain_GotFocus(object sender, RoutedEventArgs e)
         {
             this.BdrFunction.Style = null;
-            if (this.txtMain.Text.Trim() == "Use keyword to search")
-                this.txtMain.Text = "";
-
+            Manage.ClearOrFillText(ref this.txtMain, true);
             
             CheckHidden();
         }
@@ -295,7 +368,7 @@ namespace Anything_wpf_main_
             {
                 foreach(Item i in Manage.RemoveList)
                 {
-                    Manage.MAIN.RemoveChild(i.ID);
+                    Manage.mMAIN.RemoveChild(i.ID);
 
                     FileOperation.DeleteFile(Manage.IconPath + i.ID + ".ib");
 
@@ -354,7 +427,7 @@ namespace Anything_wpf_main_
         private void btnMin_Click(object sender, RoutedEventArgs e)
         {
             //effect.Hide(true);
-            //this.animation.SetMin(this);
+            this.animation.SetMin(this);
             //this.Recent.Children.Add(StyleManagement.GetXAML() as Button);
 
         }
@@ -512,13 +585,26 @@ namespace Anything_wpf_main_
             }
             else if (e.Key == Key.Enter && ((e.KeyboardDevice.Modifiers & ModifierKeys.Control) == ModifierKeys.Control))
             {
-                SEOpen();
+                Manage.OpenSearchWindow(this.txtMain.Text);
+            }
+            else if (e.Key == Key.F && ((e.KeyboardDevice.Modifiers & ModifierKeys.Control) == ModifierKeys.Control))
+            {
+                foreach (Item i in this.Recent.Children)
+                {
+                    if (i.Visibility == Visibility.Visible)
+                    {
+                        i.refItemData.FindLocation();
+                        Manage.SaveKeyword(this.txtMain.Text);
+                        this.txtMain.Text = "";
+                        break;
+                    }
+                }
             }
             else if (e.Key == Key.C && ((e.KeyboardDevice.Modifiers & ModifierKeys.Alt) == ModifierKeys.Alt) && ((e.KeyboardDevice.Modifiers & ModifierKeys.Control) == ModifierKeys.Control))
             {
                 this.txtMain.Text = "";
             }
-
+            
         }
 
         /// <summary>
@@ -531,11 +617,19 @@ namespace Anything_wpf_main_
             PackUp();
         }
 
-
-
         #endregion
 
         #region 菜单项事件响应
+
+        /// <summary>
+        /// 从菜单项进入网络搜索
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SearchWebMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            Manage.OpenSearchWindow(this.txtMain.Text);
+        }
 
         /// <summary>
         /// 打开手动添加窗口
@@ -547,27 +641,51 @@ namespace Anything_wpf_main_
             Manage.OpenAddWindow();
         }
 
-
+        /// <summary>
+        /// 添加我的电脑
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddComputerMenuItem_Click(object sender, RoutedEventArgs e)
         {
             this.Recent.Children.Add(Manage.AddComputer());
         }
 
+        /// <summary>
+        /// 添加我的文档
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddMyDocumentMenuItem_Click(object sender, RoutedEventArgs e)
         {
             this.Recent.Children.Add(Manage.AddMyDocument());
         }
 
+        /// <summary>
+        /// 添加回收站
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddRecycleBinMenuItem_Click(object sender, RoutedEventArgs e)
         {
             this.Recent.Children.Add(Manage.AddRecycleBin());
         }
 
+        /// <summary>
+        /// 添加控制面板
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddControlPanelMenuItem_Click(object sender, RoutedEventArgs e)
         {
             this.Recent.Children.Add(Manage.AddControlPanel());
         }
 
+        /// <summary>
+        /// 添加网络邻居
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddNetworkNeighborhoodMenuItem_Click(object sender, RoutedEventArgs e)
         {
             this.Recent.Children.Add(Manage.AddNetworkNeighbor());
@@ -582,10 +700,8 @@ namespace Anything_wpf_main_
         private void PackUp()
         {
             this.BdrFunction.Style = this.FindResource("BdrFunctionStyle") as Style;
-            if (this.txtMain.Text.Trim() == "")
-                this.txtMain.Text = "Use keyword to search";
-
-            //this.BdrFunction.RaiseEvent(me);
+            Manage.ClearOrFillText(ref this.txtMain, false);
+            this.BdrFunction.RaiseEvent(me);
         }
 
         /// <summary>
@@ -595,96 +711,46 @@ namespace Anything_wpf_main_
         {
             if (!NowReName)
             {
+                this.BdrFunction.Style = null;
                 CheckHidden();
-                if (this.txtMain.Text.Trim() == "Use keyword to search")
-                    this.txtMain.Text = "";
-                this.txtMain.Focus();
-                DoubleAnimation daHeight = new DoubleAnimation(this.BdrFunction.ActualHeight, 70, TimeSpan.FromSeconds(0.2), FillBehavior.HoldEnd);
-                DoubleAnimation daOpacity = new DoubleAnimation(this.BdrFunction.Opacity, 1, TimeSpan.FromSeconds(0.2), FillBehavior.HoldEnd);
-                this.BdrFunction.BeginAnimation(Border.HeightProperty, daHeight);
-                this.BdrFunction.BeginAnimation(Border.OpacityProperty, daOpacity);
-
+                Manage.ClearOrFillText(ref this.txtMain, true);
+                if (Keyboard.FocusedElement!=this.txtMain)
+                {
+                    this.txtMain.Focus();
+                    Animation.UniversalBeginAnimation<Border>(ref this.BdrFunction,Border.HeightProperty,0.2,70,this.BdrFunction.ActualHeight);
+                    Animation.UniversalBeginAnimation<Border>(ref this.BdrFunction, Border.OpacityProperty,0.2,1,this.BdrFunction.Opacity);
+                }
             }
         }
 
         /// <summary>
-        /// 清空检索框
+        /// 检查窗体是否隐藏
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void txtMain_MouseUp(object sender, MouseButtonEventArgs e)
+        private void CheckHidden()
         {
-            this.BdrFunction.Style = null;
-            if (this.txtMain.Text.Trim() == "Use keyword to search")
-                this.txtMain.Text = "";
+            if (this.bdrMain.Opacity < AppInfoOperations.GetMaxOpacity())
+            {
+                Animation.UniversalBeginAnimation<Border>(ref this.bdrMain, OpacityProperty, 0.2, AppInfoOperations.GetMaxOpacity());
+            }
         }
+
+
 
         #endregion
 
-        private void CheckHidden()
+        private void scrlist_KeyUp(object sender, KeyEventArgs e)
         {
-            if (this.bdrMain.Opacity<AppInfoOperations.GetMaxOpacity())
+            if (e.Key == Key.Up || e.Key == Key.Down || e.Key == Key.Left || e.Key == Key.Right)
             {
-                DoubleAnimation da = new DoubleAnimation(AppInfoOperations.GetMaxOpacity(), TimeSpan.FromSeconds(0.2), FillBehavior.HoldEnd);
-                this.bdrMain.BeginAnimation(OpacityProperty, da);
-            }
-        }
-
-        private void Me_Activated(object sender, EventArgs e)
-        {
-            
-            this.WindowState = WindowState.Normal;
-            if (IsInformationsInitialized)
-            {
-                if (this.bdrMain.Opacity < AppInfoOperations.GetMaxOpacity())
+                if (Keyboard.FocusedElement is ScrollViewer)
                 {
-                    if (this.WindowState==WindowState.Minimized)
+                    foreach (Item i in this.Recent.Children)
                     {
-                        this.animation.SetNormal(this);
-                    }
-                    else
-                    {
-                        DoubleAnimation da = new DoubleAnimation(AppInfoOperations.GetMaxOpacity(), TimeSpan.FromSeconds(0.2), FillBehavior.HoldEnd);
-                        this.bdrMain.BeginAnimation(OpacityProperty, da);
+                        i.Bdr.Focus();
+                        break;
                     }
                 }
             }
-                
-            
-        }
-
-        private void txtMain_MouseEnter(object sender, MouseEventArgs e)
-        {
-            
-            //this.BdrFunction.Style = null;
-            if (this.txtMain.Text.Trim() == "Use keyword to search")
-                this.txtMain.Text = "";
-        }
-
-        private void txtMain_MouseLeave(object sender, MouseEventArgs e)
-        {
-            //this.BdrFunction.Style = this.FindResource("BdrFunctionStyle") as Style;
-            if (string.IsNullOrEmpty(this.txtMain.Text.Trim()))
-                this.txtMain.Text = "Use keyword to search";
-        }
-
-        private void btnSearch_Click(object sender, RoutedEventArgs e)
-        {
-            SEOpen();
-
-        }
-
-        private void SEOpen()
-        {
-            wndSE wndse = new wndSE();
-            wndse.Keyword = this.txtMain.Text;
-            wndse.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            wndse.ShowDialog();
-        }
-
-        private void SearchWebMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            SEOpen();
         }
     }
 }

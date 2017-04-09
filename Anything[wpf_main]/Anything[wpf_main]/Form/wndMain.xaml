@@ -113,7 +113,7 @@
 
                   
                     <ScrollViewer x:Name="scrlist" Margin="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden"
-                                  Grid.Row="3" KeyDown="scrlist_KeyDown" Height="auto" >
+                                  Grid.Row="3" KeyDown="scrlist_KeyDown" Height="auto" KeyUp="scrlist_KeyUp" >
                         <WrapPanel x:Name="Recent" Width="{Binding ElementName=scrlist, Path=Width,Mode=TwoWay}"></WrapPanel>
                         
                         <ScrollViewer.ContextMenu>

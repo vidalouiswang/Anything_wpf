@@ -8,7 +8,7 @@
         Title="wndSE" Height="232.333" Width="230.583" AllowsTransparency="True" WindowStyle="None" Background="Transparent" MouseLeave="Window_MouseLeave" Activated="Window_Activated">
     <Border x:Name="BdrOut" Background="#aaeeeeee" CornerRadius="5" BorderThickness="2" Width="auto" Height="auto" >
         <Border Background="#DE161616" BorderThickness="1" CornerRadius="5" Width="{Binding ElementName=BdrOut,Path=Width}">
-            <StackPanel x:Name="spMain" Height="auto"
+            <StackPanel x:Name="spMain" Height="auto" LostFocus="spMain_LostFocus"
                         >
 
 
