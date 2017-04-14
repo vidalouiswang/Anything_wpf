@@ -116,7 +116,7 @@
     </StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>monitor.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\monitor.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Anoicess, Version=1.0.1.8, Culture=neutral, processorArchitecture=MSIL">
@@ -256,8 +256,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <None Include="Anything[wpf_main]_TemporaryKey.pfx" />
-    <None Include="app.config" />
+    <None Include="Others\Anything[wpf_main]_TemporaryKey.pfx" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -271,7 +270,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <SplashScreen Include="Images\wallhaven-10108.jpg" />
+    <SplashScreen Include="Resources\wallhaven-10108.jpg" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
@@ -292,7 +291,7 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="monitor.ico" />
+    <Resource Include="Resources\monitor.ico" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\controlpanel.png" />
@@ -312,6 +311,7 @@
   <ItemGroup>
     <Resource Include="Resources\folder.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

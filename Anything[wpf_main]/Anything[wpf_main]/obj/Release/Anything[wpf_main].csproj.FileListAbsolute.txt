@@ -2,12 +2,9 @@ C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_mai
 C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\bin\Release\Anything[wpf_main].exe
 C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\bin\Release\Anything[wpf_main].pdb
 C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\bin\Release\Anoicess.dll
-C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\bin\Release\ApplicationInformations.dll
 C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\bin\Release\ClsMD5.dll
 C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\bin\Release\Anoicess.pdb
 C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\bin\Release\Anoicess.xml
-C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\bin\Release\ApplicationInformations.pdb
-C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\bin\Release\ApplicationInformations.xml
 C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\bin\Release\Interop.IWshRuntimeLibrary.dll
 C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\obj\Release\Interop.IWshRuntimeLibrary.dll
 C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\obj\Release\Anything[wpf_main].csproj.ResolveComReference.cache
@@ -40,3 +37,4 @@ C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_mai
 C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\obj\Release\Anything[wpf_main].csproj.GenerateResource.Cache
 C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\obj\Release\Anything[wpf_main].exe
 C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\obj\Release\Anything[wpf_main].pdb
+C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\obj\Release\Anything[wpf_main].csprojResolveAssemblyReference.cache

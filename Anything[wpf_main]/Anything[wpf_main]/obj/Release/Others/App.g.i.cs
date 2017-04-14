@@ -73,7 +73,7 @@ namespace Anything_wpf_main_ {
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
         public static void Main() {
-            SplashScreen splashScreen = new SplashScreen("images/wallhaven-10108.jpg");
+            SplashScreen splashScreen = new SplashScreen("resources/wallhaven-10108.jpg");
             splashScreen.Show(true);
             Anything_wpf_main_.App app = new Anything_wpf_main_.App();
             app.InitializeComponent();
