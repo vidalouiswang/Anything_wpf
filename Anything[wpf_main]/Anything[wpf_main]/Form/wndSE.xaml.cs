@@ -85,7 +85,15 @@ namespace Anything_wpf_main_.Form
 
         private void Window_MouseLeave(object sender, MouseEventArgs e)
         {
-            this.Close();
+            try
+            {
+                Manage.WindowMain.ClearSearch();
+                this.Close();
+            }
+            catch
+            {
+
+            }
         }
 
         private void Window_Activated(object sender, EventArgs e)
@@ -95,7 +103,15 @@ namespace Anything_wpf_main_.Form
 
         private void spMain_LostFocus(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            try
+            {
+                Manage.WindowMain.ClearSearch();
+                this.Close();
+            }
+            catch
+            {
+
+            }
         }
     }
 }

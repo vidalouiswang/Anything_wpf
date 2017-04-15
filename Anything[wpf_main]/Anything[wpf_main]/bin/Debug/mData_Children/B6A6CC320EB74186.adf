@@ -1,0 +1,9 @@
+﻿<ID>B6A6CC320EB74186</ID>
+<Name>Maxthon 5</Name>
+<Icon>33867</Icon>
+<Path>C:\Program Files (x86)\Maxthon5\Bin\MxStart.exe</Path>
+<Arguments></Arguments>
+<Runas>0</Runas>
+<Autorun>0</Autorun>
+<Levels>0</Levels>
+<WorkingDirectory>C:\Program Files (x86)\Maxthon5\Bin</WorkingDirectory>

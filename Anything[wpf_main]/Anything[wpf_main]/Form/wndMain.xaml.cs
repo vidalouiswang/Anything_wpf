@@ -92,7 +92,7 @@ namespace Anything_wpf_main_
         private Color bdrColor = new Color();
 
         //用于设置动画相关
-        private Animation animation = new Animation();
+        private Animation.animation animationInstance = Animation.GetInstance();
 
         //关闭按钮的计数
         private byte btnCloseOnceClick = 0;
@@ -154,8 +154,8 @@ namespace Anything_wpf_main_
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             //关联事件处理
-            this.StateChanged += new EventHandler(this.animation.Window_StateChanged);
-            this.SizeChanged += new SizeChangedEventHandler(this.animation.Window_SizeChanged);
+            this.StateChanged += new EventHandler(animationInstance.Window_StateChanged);
+            this.SizeChanged += new SizeChangedEventHandler(animationInstance.Window_SizeChanged);
 
             double ScreenWidth = SystemParameters.PrimaryScreenWidth;
             double ScreenHeight = SystemParameters.PrimaryScreenHeight;
@@ -189,7 +189,7 @@ namespace Anything_wpf_main_
             this.Height = readHeight;
 
             //设置窗体渐隐与显示
-            animation.InitBdrStyle(ref this.bdrMain);
+            animationInstance.InitBdrStyle(ref this.bdrMain);
 
             //用于自动存储位置大小的开关指示
             IsInformationsInitialized = true;
@@ -278,7 +278,7 @@ namespace Anything_wpf_main_
                 if (this.WindowState == WindowState.Minimized)
                 {
                     //直接还原窗体
-                    this.animation.SetNormal(this);
+                    animationInstance.SetNormal(this);
                 }
                 else
                 {
@@ -395,7 +395,7 @@ namespace Anything_wpf_main_
                     itemdata.SaveIcon();
                 }
                 tipMainForm.Close();
-                this.animation.Close(this);
+                animationInstance.Close(this);
             }
             else
                 tipMainForm.ShowFixed(this, "Click again");
@@ -410,11 +410,11 @@ namespace Anything_wpf_main_
         {
             if (this.WindowState == WindowState.Normal)
             {
-                this.animation.SetMax(this);
+                animationInstance.SetMax(this);
             }
             else
             {
-                this.animation.SetMax(this, 1);
+                animationInstance.SetMax(this, 1);
             }
 
         }
@@ -427,7 +427,7 @@ namespace Anything_wpf_main_
         private void btnMin_Click(object sender, RoutedEventArgs e)
         {
             //effect.Hide(true);
-            this.animation.SetMin(this);
+            animationInstance.SetMin(this);
             //this.Recent.Children.Add(StyleManagement.GetXAML() as Button);
 
         }
@@ -699,9 +699,14 @@ namespace Anything_wpf_main_
         /// </summary>
         private void PackUp()
         {
-            this.BdrFunction.Style = this.FindResource("BdrFunctionStyle") as Style;
-            Manage.ClearOrFillText(ref this.txtMain, false);
-            this.BdrFunction.RaiseEvent(me);
+            if (IsInformationsInitialized)
+            {
+                this.BdrFunction.Style = this.FindResource("BdrFunctionStyle") as Style;
+                Manage.ClearOrFillText(ref this.txtMain, false);
+                me.RoutedEvent = Mouse.MouseLeaveEvent;
+                this.BdrFunction.RaiseEvent(me);
+
+            }
         }
 
         /// <summary>
@@ -751,6 +756,12 @@ namespace Anything_wpf_main_
                     }
                 }
             }
+        }
+
+        private void SettingsMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            wndSettings ws = new wndSettings();
+            ws.Show();
         }
     }
 }

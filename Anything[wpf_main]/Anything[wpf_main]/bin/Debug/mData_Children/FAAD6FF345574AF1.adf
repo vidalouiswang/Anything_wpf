@@ -1,0 +1,9 @@
+﻿<ID>FAAD6FF345574AF1</ID>
+<Name>迅雷影音</Name>
+<Icon>17144</Icon>
+<Path>C:\Program Files (x86)\Thunder Network\XMP\V5.2.3.4991\Bin\XMP.exe</Path>
+<Runas>0</Runas>
+<Autorun>0</Autorun>
+<Levels>0</Levels>
+<WorkingDirectory></WorkingDirectory>
+<Arguments>/sstartfrom Desktop /sopenfrom Desktop</Arguments>

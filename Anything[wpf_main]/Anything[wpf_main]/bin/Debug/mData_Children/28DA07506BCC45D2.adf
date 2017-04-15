@@ -1,0 +1,9 @@
+﻿<ID>28DA07506BCC45D2</ID>
+<Name>iTunes</Name>
+<Icon>15326</Icon>
+<Path>C:\Program Files\iTunes\iTunes.exe</Path>
+<Arguments></Arguments>
+<Runas>0</Runas>
+<Autorun>0</Autorun>
+<Levels>0</Levels>
+<WorkingDirectory></WorkingDirectory>

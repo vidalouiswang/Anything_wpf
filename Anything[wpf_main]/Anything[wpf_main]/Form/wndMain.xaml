@@ -7,7 +7,7 @@
         xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="Anything_wpf_main_.MainWindow"
         mc:Ignorable="d"
         xmlns:anything="clr-namespace:Anything"
-        Title="Anything" x:Name="Me" Height="700" Width="350" AllowsTransparency="True" Opacity="0.97" 
+        Title="Anything" x:Name="Me" Height="700" Width="350" AllowsTransparency="True" Opacity="0" 
     WindowStyle="None" Background="#00fefefe" 
         Loaded="Window_Loaded"   WindowStartupLocation="Manual" 
     VerticalAlignment="Top" HorizontalAlignment="Left" LocationChanged="Window_LocationChanged" 
@@ -126,6 +126,7 @@
                                     <MenuItem Header="Add Control Panel" Click="AddControlPanelMenuItem_Click"></MenuItem>
                                     <MenuItem Header="Add Network Neighborhood" Click="AddNetworkNeighborhoodMenuItem_Click"></MenuItem>
                                 </MenuItem>
+                                <MenuItem Header="Settings" Click="SettingsMenuItem_Click"></MenuItem>
                             </ContextMenu>
                         </ScrollViewer.ContextMenu>
                     </ScrollViewer>

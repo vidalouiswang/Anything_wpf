@@ -1,0 +1,10 @@
+﻿<ID>F45A61CEE5079076</ID>
+<Name>TQQ</Name>
+<Icon>10267</Icon>
+<Path>C:\Program Files (x86)\Tencent\QQ\Bin\QQScLauncher.exe</Path>
+<Runas>0</Runas>
+<Autorun>0</Autorun>
+<Levels>0</Levels>
+<WorkingDirectory>C:\Program Files (x86)\Tencent\QQ\Bin</WorkingDirectory>
+<TagName></TagName>
+<Arguments>QQ.exe</Arguments>

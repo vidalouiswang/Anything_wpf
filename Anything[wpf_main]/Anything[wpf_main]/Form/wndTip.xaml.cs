@@ -58,7 +58,7 @@ namespace Anything_wpf_main_
 
         private void TimerFixed_Tick(object sender, EventArgs e)
         {
-            if (this.Mode==0)
+            if (this.Mode == 0)
             {
                 this.HideMe();
                 if (timerFixed.IsEnabled == true)
@@ -88,11 +88,11 @@ namespace Anything_wpf_main_
             if (wnd != null)
             {
                 double x = Mouse.GetPosition(wnd).X + wnd.Left;
-                double y = Mouse.GetPosition(wnd).Y +wnd.Top;
+                double y = Mouse.GetPosition(wnd).Y + wnd.Top;
                 return new Point(x, y);
             }
             else
-                return new Point(0,0);
+                return new Point(0, 0);
         }
 
         public void ClearOffset()
@@ -101,7 +101,7 @@ namespace Anything_wpf_main_
             this.OffsetY = 0;
         }
 
-        public void ShowFixed(Window wnd,string Text,double OffsetX=0,double OffsetY=0)
+        public void ShowFixed(Window wnd, string Text, double OffsetX = 0, double OffsetY = 0)
         {
             ClearOffset();
             this.wnd = wnd;
@@ -115,7 +115,7 @@ namespace Anything_wpf_main_
             timerFixed.Start();
         }
 
-        public void ShowFollow(Window wnd,string Text,double OffsetX = 0,double OffsetY = 0)
+        public void ShowFollow(Window wnd, string Text, double OffsetX = 0, double OffsetY = 0)
         {
             this.Mode = 1;
             this.wnd = wnd;

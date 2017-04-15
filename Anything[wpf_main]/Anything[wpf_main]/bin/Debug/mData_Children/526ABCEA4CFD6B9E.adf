@@ -1,0 +1,10 @@
+﻿<ID>526ABCEA4CFD6B9E</ID>
+<Name>LeFei</Name>
+<Icon>18663</Icon>
+<Path>D:\LeFei.Client\LeFei.exe</Path>
+<Runas>0</Runas>
+<Autorun>0</Autorun>
+<Levels>0</Levels>
+<WorkingDirectory>D:\LeFei.Client\</WorkingDirectory>
+<TagName></TagName>
+<Arguments>LeFei.exe</Arguments>

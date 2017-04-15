@@ -119,13 +119,13 @@
     <ApplicationIcon>Resources\monitor.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Anoicess, Version=1.0.1.8, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Anoicess, Version=1.0.2.8, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Anoicess\Anoicess\Anoicess\bin\Debug\Anoicess.dll</HintPath>
+      <HintPath>..\..\..\Anoicess\Anoicess\Anoicess\bin\Release\Anoicess.dll</HintPath>
     </Reference>
     <Reference Include="ApplicationInformations, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\ClassLibrary\ApplicationInformations\ApplicationInformations\bin\Debug\ApplicationInformations.dll</HintPath>
+      <HintPath>..\ApplicationInformations\bin\Release\ApplicationInformations.dll</HintPath>
     </Reference>
     <Reference Include="ClsMD5, Version=1.0.0.2, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -167,8 +167,14 @@
     <Compile Include="Form\wndItemInformation.xaml.cs">
       <DependentUpon>wndItemInformation.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Form\wndProgressBar.xaml.cs">
+      <DependentUpon>wndProgressBar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Form\wndSE.xaml.cs">
       <DependentUpon>wndSE.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Form\wndSettings.xaml.cs">
+      <DependentUpon>wndSettings.xaml</DependentUpon>
     </Compile>
     <Compile Include="Form\wndTip.xaml.cs">
       <DependentUpon>wndTip.xaml</DependentUpon>
@@ -204,7 +210,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Form\wndProgressBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Form\wndSE.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Form\wndSettings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

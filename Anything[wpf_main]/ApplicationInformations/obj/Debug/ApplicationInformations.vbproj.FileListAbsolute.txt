@@ -9,3 +9,15 @@ C:\Users\vidam\Documents\GitHub\ClassLibrary\ApplicationInformations\Application
 C:\Users\vidam\Documents\GitHub\ClassLibrary\ApplicationInformations\ApplicationInformations\obj\Debug\ApplicationInformations.dll
 C:\Users\vidam\Documents\GitHub\ClassLibrary\ApplicationInformations\ApplicationInformations\obj\Debug\ApplicationInformations.xml
 C:\Users\vidam\Documents\GitHub\ClassLibrary\ApplicationInformations\ApplicationInformations\obj\Debug\ApplicationInformations.pdb
+C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\ApplicationInformations\bin\Debug\ApplicationInformations.dll
+C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\ApplicationInformations\bin\Debug\ApplicationInformations.pdb
+C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\ApplicationInformations\bin\Debug\ApplicationInformations.xml
+C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\ApplicationInformations\bin\Debug\Anoicess.dll
+C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\ApplicationInformations\bin\Debug\Anoicess.pdb
+C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\ApplicationInformations\bin\Debug\Anoicess.xml
+C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\ApplicationInformations\obj\Debug\ApplicationInformations.vbprojResolveAssemblyReference.cache
+C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\ApplicationInformations\obj\Debug\ApplicationInformations.Resources.resources
+C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\ApplicationInformations\obj\Debug\ApplicationInformations.vbproj.GenerateResource.Cache
+C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\ApplicationInformations\obj\Debug\ApplicationInformations.dll
+C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\ApplicationInformations\obj\Debug\ApplicationInformations.xml
+C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\ApplicationInformations\obj\Debug\ApplicationInformations.pdb

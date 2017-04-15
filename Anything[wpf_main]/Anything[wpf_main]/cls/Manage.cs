@@ -6,6 +6,8 @@ using IWshRuntimeLibrary;
 using System.Windows.Media.Imaging;
 using System.IO;
 using Anything_wpf_main_.Form;
+using System.Threading;
+using System.Windows.Threading;
 
 namespace Anything_wpf_main_.cls
 {
@@ -85,6 +87,7 @@ namespace Anything_wpf_main_.cls
         #endregion
 
         #region 外部函数
+
 
         /// <summary>
         /// 打开属性窗口
@@ -229,15 +232,22 @@ namespace Anything_wpf_main_.cls
         /// <param name="wp"></param>
         public static void InitializeData(MainWindow wnd_ ,ref System.Windows.Controls.WrapPanel wp)
         {
+            //保存主窗体相关信息
             WindowMain = wnd_;
             WindowMainRect.left = (int)wnd_.Left;
             WindowMainRect.right = (int)(wnd_.Left + wnd_.ActualWidth);
             WindowMainRect.top = (int)wnd_.Top;
             WindowMainRect.bottom = (int)(wnd_.Top + wnd_.ActualHeight);
 
-            foreach (Anoicess.Anoicess.Anoicess adf in mMAIN.GetAllChild())
+            //创建进度窗体实例
+            wndProgressBar wndpb = new wndProgressBar("Loading data","Please wait...",mMAIN.GetAllChild().Count);
+
+
+            //开始加载数据
+            for (int i =0;i<mMAIN.GetAllChild().Count;i++)
             {
-                ItemData itemdata = new ItemData(adf);
+
+                ItemData itemdata = new ItemData(mMAIN.GetAllChild()[i]);
 
                 listData.Add(itemdata);
 
@@ -253,19 +263,29 @@ namespace Anything_wpf_main_.cls
 
                 wp.Children.Add(item);
 
-                List<string> tmp= mKeywordRecent.ReadAllString();
+                wndpb.Increase();
 
-                if (tmp != null)
-                    KeywordRecent = tmp;
-
-                List<Anoicess.Anoicess.Anoicess._Content> t = mSE.ReadAllContent();
-                if (t!=null)
-                {
-                    if (t.Count > 0)
-                        SEList = t;
-                }
+                wnd_.Opacity = i / mMAIN.GetAllChild().Count;
 
             }
+            wndpb.Increase();
+
+            wnd_.Opacity = 1;
+
+
+            List<string> tmp = mKeywordRecent.ReadAllString();
+
+            if (tmp != null)
+                KeywordRecent = tmp;
+
+            List<Anoicess.Anoicess.Anoicess._Content> t = mSE.ReadAllContent();
+            if (t != null)
+            {
+                if (t.Count > 0)
+                    SEList = t;
+            }
+
+
             TipPublic.Show();
         }
 

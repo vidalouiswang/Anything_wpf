@@ -1,0 +1,9 @@
+﻿<ID>536662BA842AA3F5</ID>
+<Name>火绒安全软件</Name>
+<Icon>26366</Icon>
+<Path>C:\Program Files (x86)\Huorong\Sysdiag\bin\HipsMain.exe</Path>
+<Arguments></Arguments>
+<Runas>0</Runas>
+<Autorun>0</Autorun>
+<Levels>0</Levels>
+<WorkingDirectory></WorkingDirectory>

@@ -1,0 +1,9 @@
+﻿<ID>513F3CC6971F05EF</ID>
+<Name>迅雷</Name>
+<Icon>30993</Icon>
+<Path>C:\Program Files (x86)\Thunder Network\Thunder\Program\Thunder.exe</Path>
+<Arguments>-StartType:DesktopIcon -UnfinishTaskNum:</Arguments>
+<Runas>0</Runas>
+<Autorun>0</Autorun>
+<Levels>0</Levels>
+<WorkingDirectory>C:\Program Files (x86)\Thunder Network\Thunder\Program\</WorkingDirectory>

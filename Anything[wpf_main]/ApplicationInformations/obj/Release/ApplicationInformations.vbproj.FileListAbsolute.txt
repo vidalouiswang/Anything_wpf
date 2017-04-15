@@ -1,0 +1,11 @@
+C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\ApplicationInformations\bin\Release\ApplicationInformations.dll
+C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\ApplicationInformations\bin\Release\ApplicationInformations.pdb
+C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\ApplicationInformations\bin\Release\ApplicationInformations.xml
+C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\ApplicationInformations\bin\Release\Anoicess.dll
+C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\ApplicationInformations\bin\Release\Anoicess.pdb
+C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\ApplicationInformations\bin\Release\Anoicess.xml
+C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\ApplicationInformations\obj\Release\ApplicationInformations.Resources.resources
+C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\ApplicationInformations\obj\Release\ApplicationInformations.vbproj.GenerateResource.Cache
+C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\ApplicationInformations\obj\Release\ApplicationInformations.dll
+C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\ApplicationInformations\obj\Release\ApplicationInformations.xml
+C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\ApplicationInformations\obj\Release\ApplicationInformations.pdb

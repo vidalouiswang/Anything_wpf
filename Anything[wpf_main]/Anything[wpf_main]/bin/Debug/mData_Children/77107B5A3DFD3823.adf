@@ -1,0 +1,9 @@
+﻿<ID>77107B5A3DFD3823</ID>
+<Name>TeamViewer 12</Name>
+<Icon>24240</Icon>
+<Path>C:\Program Files (x86)\TeamViewer\TeamViewer.exe</Path>
+<Arguments></Arguments>
+<Runas>0</Runas>
+<Autorun>0</Autorun>
+<Levels>0</Levels>
+<WorkingDirectory></WorkingDirectory>

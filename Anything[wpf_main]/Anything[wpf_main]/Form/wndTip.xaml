@@ -10,8 +10,8 @@
         Opacity="0"
         Title="wndTip" Height="{Binding ElementName=txt, Path=ActualHeight}" Width="{Binding ElementName=txt, Path=ActualWidth}" 
         WindowStyle="None" Background="Transparent"  >
-    
-    
+
+
     <Border x:Name="BdrOut" Background="#FF0033a0" CornerRadius="5" BorderThickness="2" Width="auto" Height="auto" >
         <Border Background="#FFeeeeee" BorderThickness="1" CornerRadius="3" Width="{Binding ElementName=BdrOut,Path=Width}">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">

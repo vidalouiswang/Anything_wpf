@@ -1,0 +1,10 @@
+﻿<ID>792EF15DE089FAEB</ID>
+<Name>Shutdown</Name>
+<Icon>10856</Icon>
+<Path>C:\Users\vidam\Desktop\Desktop Temp Files\关机.bat</Path>
+<Arguments>关机.bat</Arguments>
+<Runas>0</Runas>
+<Autorun>0</Autorun>
+<Levels>0</Levels>
+<WorkingDirectory>C:\Users\vidam\Desktop\Desktop Temp Files\</WorkingDirectory>
+<TagName></TagName>

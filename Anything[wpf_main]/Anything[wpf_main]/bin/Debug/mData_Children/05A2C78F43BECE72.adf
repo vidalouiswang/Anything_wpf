@@ -1,0 +1,9 @@
+﻿<ID>05A2C78F43BECE72</ID>
+<Name>Mute</Name>
+<Icon>9054</Icon>
+<Path>C:\Users\vidam\Desktop\Mute.wav</Path>
+<Runas>0</Runas>
+<Autorun>0</Autorun>
+<Levels>0</Levels>
+<WorkingDirectory></WorkingDirectory>
+<Arguments>Mute.wav</Arguments>

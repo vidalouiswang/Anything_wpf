@@ -1,0 +1,9 @@
+﻿<ID>3BC635682E38E496</ID>
+<Name>Wireshark</Name>
+<Icon>60108</Icon>
+<Path>C:\Program Files\Wireshark\Wireshark.exe</Path>
+<Arguments></Arguments>
+<Runas>0</Runas>
+<Autorun>0</Autorun>
+<Levels>0</Levels>
+<WorkingDirectory></WorkingDirectory>

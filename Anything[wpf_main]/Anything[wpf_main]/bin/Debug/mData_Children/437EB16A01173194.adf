@@ -1,0 +1,9 @@
+﻿<ID>437EB16A01173194</ID>
+<Name>GitShell</Name>
+<Icon>49330</Icon>
+<Path>C:\Users\vidam\AppData\Local\GitHub\GitHub.appref-ms</Path>
+<Arguments>--open-shell</Arguments>
+<Runas>0</Runas>
+<Autorun>0</Autorun>
+<Levels>0</Levels>
+<WorkingDirectory></WorkingDirectory>

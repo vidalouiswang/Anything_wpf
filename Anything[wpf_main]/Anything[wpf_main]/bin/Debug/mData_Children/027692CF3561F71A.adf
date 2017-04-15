@@ -1,0 +1,9 @@
+﻿<ID>027692CF3561F71A</ID>
+<Name>Plantronics Hub</Name>
+<Icon>6272</Icon>
+<Path>C:\Program Files (x86)\Plantronics\Spokes3G\PLTHub.exe</Path>
+<Arguments></Arguments>
+<Runas>0</Runas>
+<Autorun>0</Autorun>
+<Levels>0</Levels>
+<WorkingDirectory></WorkingDirectory>

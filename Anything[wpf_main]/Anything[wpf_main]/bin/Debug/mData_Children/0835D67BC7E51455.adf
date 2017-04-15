@@ -1,0 +1,9 @@
+﻿<ID>0835D67BC7E51455</ID>
+<Name>IObit Uninstaller</Name>
+<Icon>4056</Icon>
+<Path>C:\Program Files (x86)\IObit\IObit Uninstaller\Uninstaler_SkipUac.exe</Path>
+<Arguments></Arguments>
+<Runas>0</Runas>
+<Autorun>0</Autorun>
+<Levels>0</Levels>
+<WorkingDirectory></WorkingDirectory>
