@@ -13,15 +13,13 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 
-namespace Anything_wpf_main_
+namespace Anything_wpf_main_.Form
 {
     /// <summary>
     /// wndTip.xaml 的交互逻辑
     /// </summary>
     public partial class wndTip : Window
     {
-
-
         public string Tip
         {
             get { return (string)GetValue(TipProperty); }

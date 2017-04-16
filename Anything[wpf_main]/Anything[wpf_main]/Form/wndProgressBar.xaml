@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Anything_wpf_main_.Form"
+        xmlns:uc="clr-namespace:Anything_wpf_main_.UserControls"
         mc:Ignorable="d"
         Title="wndProgressBar" Height="130"
         Width="500" WindowStyle="None" AllowsTransparency="True" Background="#A9282828"
@@ -16,11 +17,17 @@
                 <TextBlock x:Name="txtHead" Style="{StaticResource TextBlockStyle}" TextAlignment="Center"
                    Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor ,AncestorType={x:Type local:wndProgressBar}},Path=Head}"></TextBlock>
 
-                <ProgressBar x:Name="pbMain" Width="auto" Height="30" Margin="5"
+                <!--<ProgressBar x:Name="pbMain" Width="auto" Height="30" Margin="5"
                      Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type local:wndProgressBar}},Path=Value}"
                      Maximum="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type local:wndProgressBar}},Path=Max}">
 
-                </ProgressBar>
+                </ProgressBar>-->
+                <uc:ProgressBarEx x:Name="proMain"
+                                  Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:wndProgressBar},Path=Value}"
+                                  Height="30"
+                                  Margin="5"
+                                  >
+                </uc:ProgressBarEx>
 
                 <TextBlock x:Name="txtFoot" Style="{StaticResource TextBlockStyle}" TextAlignment="Center"
                    Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor ,AncestorType={x:Type local:wndProgressBar}},Path=Foot}"></TextBlock>

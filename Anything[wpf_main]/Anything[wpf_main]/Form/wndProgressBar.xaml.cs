@@ -23,7 +23,7 @@ namespace Anything_wpf_main_.Form
         {
             InitializeComponent();
         }
-        public wndProgressBar(string Head,string Foot,int Max=100,int Value=0)
+        public wndProgressBar(string Head,string Foot,double Max=100,double Value=0)
         {
             InitializeComponent();
             this.Head = Head;
@@ -59,27 +59,32 @@ namespace Anything_wpf_main_.Form
 
 
 
-        public int Value
+
+        public double Value
         {
-            get { return (int)GetValue(ValueProperty); }
+            get { return (double)GetValue(ValueProperty); }
             set { SetValue(ValueProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for Value.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ValueProperty =
-            DependencyProperty.Register("Value", typeof(int), typeof(wndProgressBar), new PropertyMetadata(0));
+            DependencyProperty.Register("Value", typeof(double), typeof(wndProgressBar), new PropertyMetadata(0.0));
 
 
 
-        public int Max
+
+
+        public double Max
         {
-            get { return (int)GetValue(MaxProperty); }
+            get { return (double)GetValue(MaxProperty); }
             set { SetValue(MaxProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for Max.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MaxProperty =
-            DependencyProperty.Register("Max", typeof(int), typeof(wndProgressBar), new PropertyMetadata(0));
+            DependencyProperty.Register("Max", typeof(double), typeof(wndProgressBar), new PropertyMetadata(100.0));
+
+
 
         public void Increase()
         {

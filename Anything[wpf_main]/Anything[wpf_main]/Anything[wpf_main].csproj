@@ -152,7 +152,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="Others\App.xaml">
+    <ApplicationDefinition Include="Resources\App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
@@ -176,11 +176,11 @@
     <Compile Include="Form\wndSettings.xaml.cs">
       <DependentUpon>wndSettings.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Form\wndTip.xaml.cs">
-      <DependentUpon>wndTip.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Form\wndArguments.xaml.cs">
       <DependentUpon>wndArguments.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ProgressBarEx.xaml.cs">
+      <DependentUpon>ProgressBarEx.xaml</DependentUpon>
     </Compile>
     <Page Include="Form\wndDrag.xaml">
       <SubType>Designer</SubType>
@@ -195,7 +195,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Compile Include="cls\NativeMethods.cs" />
-    <Compile Include="Others\App.xaml.cs">
+    <Compile Include="Form\wndTip.xaml.cs">
+      <DependentUpon>wndTip.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -222,6 +225,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Form\wndTip.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\ItemRes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -238,11 +245,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Form\wndTip.xaml">
+    <Page Include="Form\wndArguments.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Form\wndArguments.xaml">
+    <Page Include="UserControls\ProgressBarEx.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -270,18 +277,13 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <None Include="Others\Anything[wpf_main]_TemporaryKey.pfx" />
+    <None Include="Anything[wpf_main]_TemporaryKey.pfx" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Others\App.config">
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <SplashScreen Include="Resources\wallhaven-10108.jpg" />
