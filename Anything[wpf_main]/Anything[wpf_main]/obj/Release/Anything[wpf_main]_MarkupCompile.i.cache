@@ -9,12 +9,12 @@ Anything_wpf_main_
 none
 false
 TRACE
-C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\Others\App.xaml
-112094265380
+C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\Resources\App.xaml
+14704321078
 
-191553661613
-19170122228
-Form\wndDrag.xaml;Form\wndItemInformation.xaml;Form\wndMain.xaml;Form\wndAdd.xaml;Form\wndSE.xaml;Resources\ItemRes.xaml;Resources\MainFormRes.xaml;Resources\wndChildrenRes.xaml;UserControls\Item.xaml;Form\wndTip.xaml;Form\wndArguments.xaml;
+241265102389
+19-1190281004
+Form\wndDrag.xaml;Form\wndItemInformation.xaml;Form\wndMain.xaml;Form\wndAdd.xaml;Form\wndProgressBar.xaml;Form\wndSE.xaml;Form\wndSettings.xaml;Form\wndTip.xaml;Resources\ItemRes.xaml;Resources\MainFormRes.xaml;Resources\wndChildrenRes.xaml;UserControls\Item.xaml;Form\wndArguments.xaml;UserControls\ProgressBarEx.xaml;
 resources\wallhaven-10108.jpg
 True
 

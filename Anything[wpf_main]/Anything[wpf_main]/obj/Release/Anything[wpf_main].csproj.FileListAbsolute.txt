@@ -1,4 +1,3 @@
-C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\bin\Release\Anything[wpf_main].exe.config
 C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\bin\Release\Anything[wpf_main].exe
 C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\bin\Release\Anything[wpf_main].pdb
 C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\bin\Release\Anoicess.dll
@@ -16,11 +15,9 @@ C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_mai
 C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\obj\Release\UserControls\Item.g.cs
 C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\obj\Release\Form\wndTip.g.cs
 C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\obj\Release\Form\wndArguments.g.cs
-C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\obj\Release\Others\App.g.cs
 C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\obj\Release\GeneratedInternalTypeHelper.g.cs
 C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\obj\Release\Anything[wpf_main]_MarkupCompile.cache
 C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\obj\Release\Anything[wpf_main]_MarkupCompile.lref
-C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\obj\Release\Others\App.baml
 C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\obj\Release\Form\wndDrag.baml
 C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\obj\Release\Form\wndItemInformation.baml
 C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\obj\Release\Form\wndMain.baml
@@ -38,3 +35,11 @@ C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_mai
 C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\obj\Release\Anything[wpf_main].exe
 C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\obj\Release\Anything[wpf_main].pdb
 C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\obj\Release\Anything[wpf_main].csprojResolveAssemblyReference.cache
+C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\obj\Release\Form\wndProgressBar.g.cs
+C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\obj\Release\Form\wndSettings.g.cs
+C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\obj\Release\UserControls\ProgressBarEx.g.cs
+C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\obj\Release\Resources\App.g.cs
+C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\obj\Release\Resources\App.baml
+C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\obj\Release\Form\wndProgressBar.baml
+C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\obj\Release\Form\wndSettings.baml
+C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\obj\Release\UserControls\ProgressBarEx.baml

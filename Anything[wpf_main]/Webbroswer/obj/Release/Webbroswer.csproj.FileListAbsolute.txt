@@ -1,0 +1,10 @@
+C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Webbroswer\bin\Release\Webbroswer.dll
+C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Webbroswer\bin\Release\Webbroswer.pdb
+C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Webbroswer\obj\Release\Webbroswer.csprojResolveAssemblyReference.cache
+C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Webbroswer\obj\Release\wndMain.g.cs
+C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Webbroswer\obj\Release\Webbroswer_MarkupCompile.cache
+C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Webbroswer\obj\Release\Webbroswer_MarkupCompile.lref
+C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Webbroswer\obj\Release\wndMain.baml
+C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Webbroswer\obj\Release\Webbroswer.g.resources
+C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Webbroswer\obj\Release\Webbroswer.dll
+C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Webbroswer\obj\Release\Webbroswer.pdb

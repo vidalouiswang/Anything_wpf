@@ -72,7 +72,14 @@ namespace Anything_wpf_main_.Form
             {
                 if (i.Name == btn.Content.ToString())
                 {
-                    System.Diagnostics.Process.Start(i.Content.Replace("#@#", Keyword));
+                    if (!Manage.MOWeb.IsUsed)
+                    {
+                        System.Diagnostics.Process.Start(i.Content.Replace("#@#", Keyword));
+                    }
+                    else
+                    {
+                        Plugins.Run(Manage.MOWeb.Name, i.Content.Replace("#@#", Keyword));
+                    }
                     this.Close();
                 }
             }

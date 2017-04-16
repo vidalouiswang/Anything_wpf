@@ -157,6 +157,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="cls\Animation.cs" />
+    <Compile Include="cls\PluginInterface.cs" />
+    <Compile Include="cls\Plugins.cs" />
     <Compile Include="cls\StyleManagement.cs" />
     <Compile Include="Form\wndAdd.xaml.cs">
       <DependentUpon>wndAdd.xaml</DependentUpon>
@@ -327,7 +329,9 @@
   <ItemGroup>
     <Resource Include="Resources\folder.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="PluginDocument.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

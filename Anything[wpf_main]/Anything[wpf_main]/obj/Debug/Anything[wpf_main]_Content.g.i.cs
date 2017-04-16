@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/folder.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("plugindocument.txt")]
 
 

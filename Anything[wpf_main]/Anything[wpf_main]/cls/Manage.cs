@@ -18,14 +18,20 @@ namespace Anything_wpf_main_.cls
 
         #region 成员变量
 
+        #region Path
+
         //指示当前路径
         public static string CurrentPath = Environment.CurrentDirectory + "\\";
 
         //图标文件的存放路径
         public static string IconPath = CurrentPath + "icon\\";
 
-        //数据类对象数据集合
-        public static List<ItemData> listData = new List<ItemData>();
+        //存放插件的目录
+        public static string Plugins = CurrentPath + "Plugins\\";
+
+        #endregion
+
+        #region Anoicess
 
         //主库，存储其他子库的信息
         public static Anoicess.Anoicess.Anoicess mMAIN = new Anoicess.Anoicess.Anoicess("mData");
@@ -36,21 +42,46 @@ namespace Anything_wpf_main_.cls
         //用于保存搜索引擎的库
         public static Anoicess.Anoicess.Anoicess mSE = new Anoicess.Anoicess.Anoicess("mSE");
 
+        #endregion
+
+        #region List
+
+        //数据类对象数据集合
+        public static List<ItemData> listData = new List<ItemData>();
+
         //用于保存搜索引擎的内部列表
         public static List<Anoicess.Anoicess.Anoicess._Content> SEList = new List<Anoicess.Anoicess.Anoicess._Content>();
 
         //用于保存近期搜索关键字的内部列表
         public static List<string> KeywordRecent = new List<string>();
 
-        //用于延迟移除项目的timer
-        public static System.Windows.Threading.DispatcherTimer timer = new System.Windows.Threading.DispatcherTimer();
-
         //待删除项目的集合
         public static List<Item> RemoveList = new List<Item>();
 
-        //主窗体引用
-        public static MainWindow WindowMain;
+        #endregion
 
+        #region MO
+        //接管信息结构
+        public struct ManagedOperation
+        {
+           public  bool IsUsed;
+           public  string Name;
+            public ManagedOperation(bool used,string name)
+            {
+                IsUsed = used;
+                Name = name;
+            }
+        }
+
+        //是否接管网络浏览器功能
+        public static ManagedOperation MOWeb = new ManagedOperation(false,"");
+
+        //是否接管文件夹浏览功能
+        public static ManagedOperation MOFolder = new ManagedOperation(false, "");
+
+        #endregion
+
+        #region lnk
         //Lnk数据结构，仅主要信息
         public struct _Link
         {
@@ -63,6 +94,9 @@ namespace Anything_wpf_main_.cls
         //lnk文件信息
         private static _Link lnkInfo=new _Link();
 
+        #endregion
+
+        #region Window
         //提示窗体
         public static wndTip TipPublic = new wndTip();
 
@@ -72,9 +106,22 @@ namespace Anything_wpf_main_.cls
         //手动添加窗体
         public static wndAdd WindowAdd = new wndAdd();
 
+        //主窗体引用
+        public static MainWindow WindowMain;
+
+        #endregion
+
+        #region Others
+
+        //用于延迟移除项目的timer
+        public static System.Windows.Threading.DispatcherTimer timer = new System.Windows.Threading.DispatcherTimer();
+
         //用于保存主窗体的位置信息
         public static RECT WindowMainRect = new RECT();
 
+        #endregion
+
+        #region System Reference
         //系统引用
         public const string MyComputer = "::{20D04FE0-3AEA-1069-A2D8-08002B30309D}";
         public const string MyDocument= "::{450D8FBA-AD25-11D0-98A8-0800361B1103}";
@@ -83,6 +130,7 @@ namespace Anything_wpf_main_.cls
         public const string NetworkNeighborhood = "::{208D2C60-3AEA-1069-A2D7-08002B30309D}";
         public const string SystemRefUnion = MyComputer + MyDocument + ControlPanel + RecycleBin + NetworkNeighborhood;
 
+        #endregion
 
         #endregion
 

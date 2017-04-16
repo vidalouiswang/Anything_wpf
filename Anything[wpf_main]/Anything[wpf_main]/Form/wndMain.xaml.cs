@@ -203,6 +203,8 @@ namespace Anything_wpf_main_
             me.RoutedEvent = Border.MouseLeaveEvent;
 
             tipMainForm.Show();
+
+            Anything_wpf_main_.cls.Plugins.GetPlugins();
         }
 
         /// <summary>
