@@ -486,5 +486,10 @@ namespace Anything_wpf_main_
             }
         }
 
+        private void Me_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key== System.Windows.Input.Key.Enter)
+                this.refItemData.Execute();
+        }
     }
 }

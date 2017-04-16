@@ -290,9 +290,13 @@ namespace Anything_wpf_main_.cls
             //创建进度窗体实例
             wndProgressBar wndpb = new wndProgressBar("Loading data","Please wait...",mMAIN.GetAllChild().Count);
 
+            //wnd_.Opacity = 0.000001;
+            wnd_.WindowState = System.Windows.WindowState.Normal;
+
+            int ChildCount = mMAIN.GetAllChild().Count;
 
             //开始加载数据
-            for (int i =0;i<mMAIN.GetAllChild().Count;i++)
+            for (int i =0;i< ChildCount; i++)
             {
 
                 ItemData itemdata = new ItemData(mMAIN.GetAllChild()[i]);
@@ -313,12 +317,12 @@ namespace Anything_wpf_main_.cls
 
                 wndpb.Increase();
 
-                wnd_.Opacity = i / mMAIN.GetAllChild().Count;
+                wnd_.Opacity = (double)((double)i / (double)ChildCount);
 
             }
             wndpb.Increase();
 
-            wnd_.Opacity = 1;
+            wnd_.Opacity = ApplicationInformations.Anything.AppInfoOperations.GetMaxOpacity();
 
 
             List<string> tmp = mKeywordRecent.ReadAllString();

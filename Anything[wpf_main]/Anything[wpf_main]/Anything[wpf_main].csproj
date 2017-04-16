@@ -288,9 +288,6 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <SplashScreen Include="Resources\wallhaven-10108.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
       <Visible>False</Visible>
       <ProductName>.NET Framework 3.5 SP1</ProductName>
@@ -331,6 +328,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="PluginDocument.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <SplashScreen Include="Resources\Anything.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -153,13 +153,9 @@ namespace Anything_wpf_main_
         /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            //关联事件处理
-            this.StateChanged += new EventHandler(animationInstance.Window_StateChanged);
-            this.SizeChanged += new SizeChangedEventHandler(animationInstance.Window_SizeChanged);
-
+            this.WindowState = WindowState.Normal;
             double ScreenWidth = SystemParameters.PrimaryScreenWidth;
             double ScreenHeight = SystemParameters.PrimaryScreenHeight;
-
 
             //获取位置
             //并检查合法性
@@ -188,9 +184,6 @@ namespace Anything_wpf_main_
             this.Width = readWidth;
             this.Height = readHeight;
 
-            //设置窗体渐隐与显示
-            animationInstance.InitBdrStyle(ref this.bdrMain);
-
             //用于自动存储位置大小的开关指示
             IsInformationsInitialized = true;
 
@@ -205,6 +198,13 @@ namespace Anything_wpf_main_
             tipMainForm.Show();
 
             Anything_wpf_main_.cls.Plugins.GetPlugins();
+
+            //关联事件处理
+            this.StateChanged += new EventHandler(animationInstance.Window_StateChanged);
+            this.SizeChanged += new SizeChangedEventHandler(animationInstance.Window_SizeChanged);
+
+            //设置窗体渐隐与显示
+            animationInstance.InitBdrStyle(ref this.bdrMain);
         }
 
         /// <summary>

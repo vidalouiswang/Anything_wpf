@@ -113,7 +113,15 @@ namespace Anything_wpf_main_.Form
                     return null;
                 }
             ), tf);
-            Dispatcher.PushFrame(tf);
+            try
+            {
+                Dispatcher.PushFrame(tf);
+
+            }
+            catch
+            {
+
+            }
         }
 
         public void Decrease()

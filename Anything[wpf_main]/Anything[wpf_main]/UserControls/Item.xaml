@@ -8,7 +8,7 @@
              d:DesignHeight="128" d:DesignWidth="128" MaxHeight="128" MaxWidth="128" MinHeight="32"
              MinWidth="32" 
              SizeChanged="Me_SizeChanged"
-             Focusable="True" MouseDoubleClick="Me_DoubleClick" MouseDown="Me_MouseDown" MouseMove="Me_MouseMove"
+             Focusable="True" MouseDoubleClick="Me_DoubleClick" MouseDown="Me_MouseDown" MouseMove="Me_MouseMove" KeyDown="Me_KeyDown"
              >
 
 <Border  x:Name="Bdr" Style="{DynamicResource BdrStyle}" >

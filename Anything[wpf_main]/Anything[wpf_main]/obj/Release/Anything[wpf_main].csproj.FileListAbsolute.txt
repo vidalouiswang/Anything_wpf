@@ -34,7 +34,6 @@ C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_mai
 C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\obj\Release\Anything[wpf_main].csproj.GenerateResource.Cache
 C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\obj\Release\Anything[wpf_main].exe
 C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\obj\Release\Anything[wpf_main].pdb
-C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\obj\Release\Anything[wpf_main].csprojResolveAssemblyReference.cache
 C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\obj\Release\Form\wndProgressBar.g.cs
 C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\obj\Release\Form\wndSettings.g.cs
 C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\obj\Release\UserControls\ProgressBarEx.g.cs
@@ -43,3 +42,6 @@ C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_mai
 C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\obj\Release\Form\wndProgressBar.baml
 C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\obj\Release\Form\wndSettings.baml
 C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\obj\Release\UserControls\ProgressBarEx.baml
+C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\bin\Release\ApplicationInformations.dll
+C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\bin\Release\ApplicationInformations.pdb
+C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\bin\Release\ApplicationInformations.xml

@@ -7,4 +7,3 @@ C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Webbroswer\obj\D
 C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Webbroswer\obj\Debug\Webbroswer.g.resources
 C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Webbroswer\obj\Debug\Webbroswer.dll
 C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Webbroswer\obj\Debug\Webbroswer.pdb
-C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Webbroswer\obj\Debug\Webbroswer.csprojResolveAssemblyReference.cache

@@ -10,9 +10,14 @@ namespace Webbroswer
         public void AnythingPluginMain()
         {
             wndMain wnd = new wndMain();
-            if (Argument == null)
-                Argument = "";
-            wnd.broswer.Source = new Uri((string)Argument);
+            string Url = "";
+
+            if (Argument == null || Argument.ToString()=="")
+                Url = "http://www.baidu.com/";
+            else
+                Url = (string)Argument;
+
+            wnd.broswer.Source = new Uri(Url);
             wnd.Show();
         }
 
