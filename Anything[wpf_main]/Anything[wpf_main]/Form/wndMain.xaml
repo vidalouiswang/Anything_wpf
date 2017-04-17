@@ -75,7 +75,7 @@
                             <!--第二层关键字检索区-->
                             <Canvas x:Name="cvsTxt">
                                 <StackPanel Grid.Row="1" Canvas.Top="0" Canvas.Left="0" Width="{Binding ElementName=cvsTxt,Path=ActualWidth}">
-                                <TextBox x:Name="txtMain" 
+                                    <TextBox x:Name="txtMain" 
                                      Canvas.Top="0"
                                      Canvas.Left="0"
                                      Background="#FF505050" 
@@ -93,13 +93,13 @@
                                          MouseMove="txtMain_MouseMove" KeyDown="txtMain_KeyDown" MouseUp="txtMain_MouseUp"
                                          MouseEnter="txtMain_MouseEnter" MouseLeave="txtMain_MouseLeave" 
                                      >
-                                    <TextBox.ContextMenu>
-                                        <ContextMenu>
-                                            <MenuItem Header="Search on the Web" Click="SearchWebMenuItem_Click"></MenuItem>
-                                        </ContextMenu>
-                                    </TextBox.ContextMenu>
-                                </TextBox>
-                            </StackPanel>
+                                        <TextBox.ContextMenu>
+                                            <ContextMenu>
+                                                <MenuItem Header="Search on the Web" Click="SearchWebMenuItem_Click"></MenuItem>
+                                            </ContextMenu>
+                                        </TextBox.ContextMenu>
+                                    </TextBox>
+                                </StackPanel>
                                 <Button x:Name="btnSearch" Canvas.Right="10" Canvas.Top="0" Content="Search on Web" Style="{StaticResource NormalButtonStyle}" 
                                         Background="Transparent" Height="{Binding ElementName=txtMain,Path=ActualHeight}"
                                         FontSize="12" Margin="0" Visibility="Collapsed"
@@ -113,11 +113,11 @@
                     <!--第四层常规项目区-->
 
 
-                  
+
                     <ScrollViewer x:Name="scrlist" Margin="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden"
                                   Grid.Row="3" KeyDown="scrlist_KeyDown" Height="auto" KeyUp="scrlist_KeyUp" >
                         <WrapPanel x:Name="Recent" Width="{Binding ElementName=scrlist, Path=Width,Mode=TwoWay}"></WrapPanel>
-                        
+
                         <ScrollViewer.ContextMenu>
                             <ContextMenu>
                                 <MenuItem Header="Add new" Click="AddNewMenuItem_Click"></MenuItem>
@@ -129,13 +129,13 @@
                                     <MenuItem Header="Add Network Neighborhood" Click="AddNetworkNeighborhoodMenuItem_Click"></MenuItem>
                                 </MenuItem>
                                 <MenuItem x:Name="Plugins" Header="Plugins">
-                                    
+
                                 </MenuItem>
                                 <MenuItem Header="Settings" Click="SettingsMenuItem_Click"></MenuItem>
                             </ContextMenu>
                         </ScrollViewer.ContextMenu>
                     </ScrollViewer>
-                    
+
                 </Grid>
             </Border>
         </Border>

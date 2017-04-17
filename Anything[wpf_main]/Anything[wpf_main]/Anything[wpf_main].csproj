@@ -157,6 +157,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="cls\Animation.cs" />
+    <Compile Include="cls\HotKey.cs" />
     <Compile Include="cls\PluginInterface.cs" />
     <Compile Include="cls\Plugins.cs" />
     <Compile Include="cls\StyleManagement.cs" />

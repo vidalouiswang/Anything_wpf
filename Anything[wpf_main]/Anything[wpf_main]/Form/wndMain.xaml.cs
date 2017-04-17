@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -19,18 +20,21 @@ namespace Anything_wpf_main_
 
     public partial class MainWindow : Window
     {
-        #region 改变大小
+
+
+
+        #region 重载
 
         /// <summary>
-        /// 改变窗体大小
+        /// 重载
         /// </summary>
         /// <param name="hwnd"></param>
         /// <param name="msg"></param>
         /// <param name="wParam"></param>
         /// <param name="lParam"></param>
-        /// <param name="handled"></param>
+        /// <param name="handle"></param>
         /// <returns></returns>
-        protected IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
+        protected IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handle)
         {
             //定义距离
             int GripSize = 8;
@@ -38,6 +42,8 @@ namespace Anything_wpf_main_
 
             //定义Window
             Window wnd = (Window)HwndSource.FromHwnd(hwnd).RootVisual;
+
+           
 
             //判断消息
             if (msg == NativeMethods.WM_NCHITTEST)
@@ -48,22 +54,33 @@ namespace Anything_wpf_main_
                 //底部
                 if (pt.X > GripSize && pt.X < wnd.ActualWidth - GripSize && pt.Y >= wnd.ActualHeight - BorderSize)
                 {
-                    handled = true;
+                    handle = true;
                     return (IntPtr)NativeMethods.HTBOTTOM;
                 }
 
                 //右侧
                 if (pt.Y > GripSize && pt.X > wnd.ActualWidth - BorderSize && pt.Y < wnd.ActualHeight - GripSize)
                 {
-                    handled = true;
+                    handle = true;
                     return (IntPtr)NativeMethods.HTRIGHT;
                 }
 
                 //右下角
                 if (pt.X > wnd.ActualWidth - GripSize && pt.Y >= wnd.ActualHeight - GripSize)
                 {
-                    handled = true;
+                    handle = true;
                     return (IntPtr)NativeMethods.HTBOTTOMRIGHT;
+                }
+            }
+            else if (msg==HotKey.WM_HOTKEY)
+            {
+                if (wParam.ToInt32() == HotKey.HOTKEYID_)
+                {
+                    //设置活动窗体
+                    HotKey.SetForegroundWindow(new WindowInteropHelper(this).Handle);
+
+                    //聚焦到检索框
+                    SetFocus();
                 }
             }
 
@@ -77,11 +94,14 @@ namespace Anything_wpf_main_
         protected override void OnSourceInitialized(EventArgs e)
         {
             base.OnSourceInitialized(e);
+
             HwndSource hwndSource = PresentationSource.FromVisual(this) as HwndSource;
             if (hwndSource != null)
             {
                 hwndSource.AddHook(new HwndSourceHook(this.WndProc));
             }
+
+            
         }
 
         #endregion
@@ -153,6 +173,10 @@ namespace Anything_wpf_main_
         /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+
+            IntPtr handle = new WindowInteropHelper(this).Handle;
+            HotKey.RegisterHotKey(handle, HotKey.HOTKEYID_,(uint)HotKey.KeyModifiers.Ctrl|(uint)HotKey.KeyModifiers.Alt, (uint)System.Windows.Forms.Keys.D1);
+
 
             #region first layer
             this.WindowState = WindowState.Normal;
@@ -247,6 +271,7 @@ namespace Anything_wpf_main_
         /// <param name="e"></param>
         private void Me_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            HotKey.UnregisterHotKey(new WindowInteropHelper(this).Handle, HotKey.HOTKEYID_);
             System.Diagnostics.Process.GetCurrentProcess().Kill();
         }
 
@@ -721,6 +746,7 @@ namespace Anything_wpf_main_
                 me.RoutedEvent = Mouse.MouseLeaveEvent;
                 this.BdrFunction.RaiseEvent(me);
 
+                this.Topmost = false;
             }
         }
 
