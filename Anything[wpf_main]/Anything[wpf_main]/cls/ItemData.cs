@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Drawing;
 using Anything;
 using System.Windows.Media;
 using System.IO;
 using System.Diagnostics;
 using IWshRuntimeLibrary;
-using System.Windows;
 
 namespace Anything_wpf_main_.cls
 {
-     public class ItemData : IDisposable
+    public class ItemData : IDisposable
     {
         #region 结构
 
@@ -427,7 +425,8 @@ namespace Anything_wpf_main_.cls
         {
             try
             {
-                if (Manage.SystemRefUnion.IndexOf(data.Path)<0)
+                
+                if (Manage.SystemRefUnion.IndexOf(data.Path)<0 || !(Manage.reURL.IsMatch(data.Path)))
                 {
                     if (FileOperation.IsFile(data.Path) == 1)
                     {
@@ -450,7 +449,7 @@ namespace Anything_wpf_main_.cls
                     data.RunAs = 1;
                 else if (RunAs == 1 && Default == false)
                     StartInfo.Verb = "runas";
- 
+
                 Process.Start(StartInfo);
 
                 Manage.WindowMain.ClearSearch();

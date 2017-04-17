@@ -8,6 +8,49 @@
     <Style x:Key="BdrStyle" TargetType="{x:Type Border}">
         <Style.Triggers>
 
+            <Trigger Property="IsMouseOver" Value="true">
+                <Setter Property="Background" Value="#33FFFFFF"></Setter>
+            </Trigger>
+
+            <EventTrigger RoutedEvent="Mouse.MouseDown">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetProperty="(Border.BorderBrush).Color"
+                                                To="#FFFFFFFF"
+                                                Duration="0:0:0"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+
+            <EventTrigger RoutedEvent="Mouse.MouseUp">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetProperty="(Border.BorderBrush).Color"
+                                                Duration="0:0:0"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="Background"   Value="#33FFFFFF"></Setter>
+            </Trigger>
+
+        </Style.Triggers>
+
+        <Setter Property="Background" Value="#00000000"></Setter>
+        <Setter Property="Focusable" Value="True"></Setter>
+        <Setter Property="BorderThickness" Value="1"></Setter>
+        <Setter Property="CornerRadius" Value="10"></Setter>
+        <Setter Property="RenderTransformOrigin" Value="0.5,0.5"></Setter>
+    </Style>
+        
+    <!--<Style x:Key="BdrStyle" TargetType="{x:Type Border}">
+        <Style.Triggers>
+
             <EventTrigger RoutedEvent="Mouse.MouseEnter">
                 <EventTrigger.Actions>
                     <BeginStoryboard>
@@ -95,7 +138,7 @@
         <Setter Property="BorderThickness" Value="1"></Setter>
         <Setter Property="CornerRadius" Value="10"></Setter>
         <Setter Property="RenderTransformOrigin" Value="0.5,0.5"></Setter>
-    </Style>
+    </Style>-->
 
     <Style x:Key="BdrStyleOut" TargetType="{x:Type Border}">
         <Style.Triggers>

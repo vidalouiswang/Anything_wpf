@@ -8,6 +8,7 @@ using System.IO;
 using Anything_wpf_main_.Form;
 using System.Threading;
 using System.Windows.Threading;
+using System.Text.RegularExpressions;
 
 namespace Anything_wpf_main_.cls
 {
@@ -121,6 +122,9 @@ namespace Anything_wpf_main_.cls
 
         //用于保存主窗体的位置信息
         public static RECT WindowMainRect = new RECT();
+
+        //匹配网址的正则
+        public static Regex reURL = new Regex("((http|ftp|https):\\/\\/)?[\\w\\-_]+(\\.[\\w\\-_]+)+([\\w\\-\\.,@?^=%&amp;:/~\\+#]*[\\w\\-\\@?^=%&amp;/~\\+#])?", RegexOptions.IgnoreCase);
 
         #endregion
 
@@ -581,7 +585,7 @@ namespace Anything_wpf_main_.cls
         /// <param name="path"></param>
         private static void CheckPath(string path)
         {
-            if (path.IndexOf(".lnk")>=0)
+            if (path.ToLower().IndexOf(".lnk")>=0)
             {
                 WshShell shell = new WshShell();
                 IWshShortcut iss = (IWshShortcut)shell.CreateShortcut(path);

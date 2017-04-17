@@ -1,0 +1,10 @@
+﻿<Width>350</Width>
+<Height>700</Height>
+<ItemSize>128</ItemSize>
+<MaxOpacity>0.98</MaxOpacity>
+<MinOpacity>0.05</MinOpacity>
+<ShowTimeSpan>0.3</ShowTimeSpan>
+<HideTimeSpan>0.3</HideTimeSpan>
+<TimeOut>3</TimeOut>
+<Left>392.5</Left>
+<Top>63</Top>

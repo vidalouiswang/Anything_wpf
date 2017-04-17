@@ -31,7 +31,8 @@
                     </Grid.RowDefinitions>
 
                     <!--一二层-->
-                    <Border x:Name="BdrFunction" Style="{DynamicResource BdrFunctionStyle}" Background="#00000000" Height="70" BorderThickness="1" BorderBrush="#01FFFFFF"
+                    <Border x:Name="BdrFunction" Style="{DynamicResource BdrFunctionStyle}" Background="#00000000" 
+                            Height="70" BorderThickness="1" BorderBrush="#01FFFFFF"
                             CornerRadius="5">
                         <StackPanel >
 

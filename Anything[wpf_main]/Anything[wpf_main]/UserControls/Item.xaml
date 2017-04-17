@@ -12,13 +12,13 @@
              >
 
 <Border  x:Name="Bdr" Style="{DynamicResource BdrStyle}" >
-        <Border.RenderTransform>
+        <!--<Border.RenderTransform>
             <TransformGroup x:Name="tg">
                 <ScaleTransform></ScaleTransform>
                 <SkewTransform></SkewTransform>
             </TransformGroup>
             
-        </Border.RenderTransform>
+        </Border.RenderTransform>-->
         <Border.BorderBrush>
             <SolidColorBrush x:Name="scb" Color="#00FFFFFF">
 
