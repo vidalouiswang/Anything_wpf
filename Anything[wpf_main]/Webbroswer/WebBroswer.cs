@@ -17,8 +17,12 @@ namespace Webbroswer
             else
                 Url = (string)Argument;
 
-            wnd.broswer.Source = new Uri(Url);
+            //wnd.broswer.Source = new Uri(Url);
+            wnd.broswer.Navigate(new Uri(Url));
+
             wnd.Show();
+
+            //wnd.Focus();
         }
 
         public string MdlName { get;} = "Web Broswer";

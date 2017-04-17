@@ -109,6 +109,9 @@ namespace Anything_wpf_main_.cls
         //主窗体引用
         public static MainWindow WindowMain;
 
+        //加载窗体引用
+        public static wndLoading WindowLoading;
+
         #endregion
 
         #region Others

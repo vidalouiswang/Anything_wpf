@@ -1,9 +1,0 @@
-﻿<ID>87CF2B08911218CE</ID>
-<Name>Mozilla Firefox</Name>
-<Icon>61709</Icon>
-<Path>C:\Program Files (x86)\Mozilla Firefox\firefox.exe</Path>
-<Arguments></Arguments>
-<Runas>0</Runas>
-<Autorun>0</Autorun>
-<Levels>0</Levels>
-<WorkingDirectory></WorkingDirectory>

@@ -29,7 +29,7 @@ namespace Anything
         /// <param name="From">初始值</param>
         /// <param name="fl">完成后的动作</param>
         /// <returns></returns>
-        public static int UniversalBeginAnimation<TYPE>(ref TYPE TarObj, DependencyProperty dp, double secTS, double To, double From = 0F, FillBehavior fl = FillBehavior.HoldEnd)
+        public static int UniversalBeginDoubleAnimation<TYPE>(ref TYPE TarObj, DependencyProperty dp, double secTS, double To, double From = 0F, FillBehavior fl = FillBehavior.HoldEnd)
         {
             if (TarObj == null)
             {
@@ -97,9 +97,6 @@ namespace Anything
             private Window wnd = null;
             private int Way = 0;
             private bool Closing = false;
-
-
-            
 
             /// <summary>
             /// 无参构造

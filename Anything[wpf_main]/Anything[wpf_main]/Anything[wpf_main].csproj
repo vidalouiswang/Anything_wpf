@@ -169,6 +169,9 @@
     <Compile Include="Form\wndItemInformation.xaml.cs">
       <DependentUpon>wndItemInformation.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Form\wndLoading.xaml.cs">
+      <DependentUpon>wndLoading.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Form\wndProgressBar.xaml.cs">
       <DependentUpon>wndProgressBar.xaml</DependentUpon>
     </Compile>
@@ -189,6 +192,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Form\wndItemInformation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Form\wndLoading.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -240,6 +247,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\wndChildrenRes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\wndLoadingRes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -5,10 +5,29 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Webbroswer"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-        <WebBrowser x:Name="broswer" Source="http://www.baidu.com/">
-            
-        </WebBrowser>
-    </Grid>
+        WindowStartupLocation="CenterScreen"
+             Width="800" Height="500" WindowStyle="None" AllowsTransparency="True" Background="Transparent">
+    
+    
+    <Border Background="White" BorderThickness="2" CornerRadius="5">
+        <Border Background="#FF282828" BorderThickness="1" CornerRadius="5">
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button x:Name="btnClose" Width="25" Height="25" Foreground="White" Background="#FF282828" HorizontalAlignment="Right"
+                    Margin="5" Click="btnClose_Click">X</Button>
+                </StackPanel>
+
+                <WebBrowser x:Name="broswer" Grid.Row="1" Source="http://www.baidu.com/">
+
+                </WebBrowser>
+
+
+            </Grid>
+        </Border>
+    </Border>
+    
 </Window>

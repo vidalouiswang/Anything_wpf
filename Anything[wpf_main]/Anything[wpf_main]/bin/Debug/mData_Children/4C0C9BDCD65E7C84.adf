@@ -1,9 +1,0 @@
-﻿<ID>4C0C9BDCD65E7C84</ID>
-<Name>iptool</Name>
-<Icon>1939</Icon>
-<Path>C:\Users\vidam\Desktop\iptool.zip</Path>
-<Runas>0</Runas>
-<Autorun>0</Autorun>
-<Levels>0</Levels>
-<WorkingDirectory></WorkingDirectory>
-<Arguments>iptool.zip</Arguments>

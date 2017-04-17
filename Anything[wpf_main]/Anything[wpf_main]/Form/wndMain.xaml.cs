@@ -205,6 +205,8 @@ namespace Anything_wpf_main_
 
             //设置窗体渐隐与显示
             animationInstance.InitBdrStyle(ref this.bdrMain);
+
+            Manage.WindowLoading.Close();
         }
 
         /// <summary>
@@ -724,8 +726,8 @@ namespace Anything_wpf_main_
                 if (Keyboard.FocusedElement!=this.txtMain)
                 {
                     this.txtMain.Focus();
-                    Animation.UniversalBeginAnimation<Border>(ref this.BdrFunction,Border.HeightProperty,0.2,70,this.BdrFunction.ActualHeight);
-                    Animation.UniversalBeginAnimation<Border>(ref this.BdrFunction, Border.OpacityProperty,0.2,1,this.BdrFunction.Opacity);
+                    Animation.UniversalBeginDoubleAnimation<Border>(ref this.BdrFunction,Border.HeightProperty,0.2,70,this.BdrFunction.ActualHeight);
+                    Animation.UniversalBeginDoubleAnimation<Border>(ref this.BdrFunction, Border.OpacityProperty,0.2,1,this.BdrFunction.Opacity);
                 }
             }
         }
@@ -737,7 +739,7 @@ namespace Anything_wpf_main_
         {
             if (this.bdrMain.Opacity < AppInfoOperations.GetMaxOpacity())
             {
-                Animation.UniversalBeginAnimation<Border>(ref this.bdrMain, OpacityProperty, 0.2, AppInfoOperations.GetMaxOpacity());
+                Animation.UniversalBeginDoubleAnimation<Border>(ref this.bdrMain, OpacityProperty, 0.2, AppInfoOperations.GetMaxOpacity());
             }
         }
 

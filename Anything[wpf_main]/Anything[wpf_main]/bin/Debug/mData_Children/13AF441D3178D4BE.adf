@@ -1,9 +1,0 @@
-﻿<ID>13AF441D3178D4BE</ID>
-<Name>SciTE</Name>
-<Icon>2707</Icon>
-<Path>C:\Program Files (x86)\Lua\5.1\SciTE\SciTE.exe</Path>
-<Arguments></Arguments>
-<Runas>0</Runas>
-<Autorun>0</Autorun>
-<Levels>0</Levels>
-<WorkingDirectory></WorkingDirectory>

@@ -1,9 +1,0 @@
-﻿<ID>4D7C26B37A1275B0</ID>
-<Name>开启免费WiFi</Name>
-<Icon>14692</Icon>
-<Path>C:\Program Files (x86)\kingsoft\kwifi\kwifi.exe</Path>
-<Runas>0</Runas>
-<Autorun>0</Autorun>
-<Levels>0</Levels>
-<WorkingDirectory></WorkingDirectory>
-<Arguments>/desktop</Arguments>

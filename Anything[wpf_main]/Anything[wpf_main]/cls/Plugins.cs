@@ -107,8 +107,14 @@ namespace Anything_wpf_main_.cls
                     {
                         t.GetProperty("Argument").SetValue(obj, Argument, null);
                     }
-
-                    t.GetMethod("AnythingPluginMain").Invoke(obj, null);
+                    try
+                    {
+                        t.GetMethod("AnythingPluginMain").Invoke(obj, null);
+                    }
+                    catch
+                    {
+                        System.Windows.MessageBox.Show("Plug-in [" + Name + "] error");
+                    }
                     break;
                 }
             }

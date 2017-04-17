@@ -1,0 +1,36 @@
+﻿<Window x:Class="Anything_wpf_main_.Form.wndLoading"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Anything_wpf_main_.Form"
+        mc:Ignorable="d"
+        Title="wndLoading" Height="300" Width="500" WindowStyle="None" AllowsTransparency="True" Background="Transparent"
+        WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+    <Grid>
+        <Grid>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Panel.ZIndex="0">
+                <TextBlock x:Name="txtFront0" Text="A" Style="{DynamicResource ResourceKey=LoadingTextBlockFrontStyle}"></TextBlock>
+                <TextBlock x:Name="txtFront1" Text="n" Style="{DynamicResource ResourceKey=LoadingTextBlockFrontStyle}"></TextBlock>
+                <TextBlock x:Name="txtFront2" Text="y" Style="{DynamicResource ResourceKey=LoadingTextBlockFrontStyle}"></TextBlock>
+                <TextBlock x:Name="txtFront3" Text="t" Style="{DynamicResource ResourceKey=LoadingTextBlockFrontStyle}"></TextBlock>
+                <TextBlock x:Name="txtFront4" Text="h" Style="{DynamicResource ResourceKey=LoadingTextBlockFrontStyle}"></TextBlock>
+                <TextBlock x:Name="txtFront5" Text="i" Style="{DynamicResource ResourceKey=LoadingTextBlockFrontStyle}"></TextBlock>
+                <TextBlock x:Name="txtFront6" Text="n" Style="{DynamicResource ResourceKey=LoadingTextBlockFrontStyle}"></TextBlock>
+                <TextBlock x:Name="txtFront7" Text="g" Style="{DynamicResource ResourceKey=LoadingTextBlockFrontStyle}"></TextBlock>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock x:Name="txtBack0" Text="A" Style="{DynamicResource ResourceKey=LoadingTextBlockBackStyle}"></TextBlock>
+                <TextBlock x:Name="txtBack1" Text="n" Style="{DynamicResource ResourceKey=LoadingTextBlockBackStyle}"></TextBlock>
+                <TextBlock x:Name="txtBack2" Text="y" Style="{DynamicResource ResourceKey=LoadingTextBlockBackStyle}"></TextBlock>
+                <TextBlock x:Name="txtBack3" Text="t" Style="{DynamicResource ResourceKey=LoadingTextBlockBackStyle}"></TextBlock>
+                <TextBlock x:Name="txtBack4" Text="h" Style="{DynamicResource ResourceKey=LoadingTextBlockBackStyle}"></TextBlock>
+                <TextBlock x:Name="txtBack5" Text="i" Style="{DynamicResource ResourceKey=LoadingTextBlockBackStyle}"></TextBlock>
+                <TextBlock x:Name="txtBack6" Text="n" Style="{DynamicResource ResourceKey=LoadingTextBlockBackStyle}"></TextBlock>
+                <TextBlock x:Name="txtBack7" Text="g" Style="{DynamicResource ResourceKey=LoadingTextBlockBackStyle}"></TextBlock>
+            </StackPanel>
+        </Grid>
+        
+    </Grid>
+</Window>
