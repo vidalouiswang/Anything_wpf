@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Anything_wpf_main_"
              mc:Ignorable="d" 
-             d:DesignHeight="128" d:DesignWidth="128" MaxHeight="128" MaxWidth="128" MinHeight="32"
+             d:DesignHeight="128" d:DesignWidth="128" MaxHeight="256" MaxWidth="256" MinHeight="32"
              MinWidth="32" 
              SizeChanged="Me_SizeChanged"
              Focusable="True" MouseDoubleClick="Me_DoubleClick" MouseDown="Me_MouseDown" MouseMove="Me_MouseMove" KeyDown="Me_KeyDown"

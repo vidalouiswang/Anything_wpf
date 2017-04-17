@@ -140,6 +140,8 @@ namespace Anything_wpf_main_.cls
         #region 外部函数
 
 
+
+
         /// <summary>
         /// 打开属性窗口
         /// </summary>
@@ -298,6 +300,9 @@ namespace Anything_wpf_main_.cls
 
             int ChildCount = mMAIN.GetAllChild().Count;
 
+            //获取项目尺寸
+            double ItemSize = ApplicationInformations.Anything.AppInfoOperations.GetItemSize();
+
             //开始加载数据
             for (int i =0;i< ChildCount; i++)
             {
@@ -306,7 +311,7 @@ namespace Anything_wpf_main_.cls
 
                 listData.Add(itemdata);
 
-                Item item = new Item(itemdata.ID, itemdata.Name, itemdata.Icon_imagesource);
+                Item item = new Item(itemdata.ID, itemdata.Name, itemdata.Icon_imagesource, ItemSize);
 
                 item.Path = itemdata.Path;
 
@@ -320,7 +325,7 @@ namespace Anything_wpf_main_.cls
 
                 wndpb.Increase();
 
-                wnd_.Opacity = (double)((double)i / (double)ChildCount);
+                //wnd_.Opacity = (double)((double)i / (double)ChildCount);
 
             }
             wndpb.Increase();

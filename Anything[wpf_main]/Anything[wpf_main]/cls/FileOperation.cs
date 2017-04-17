@@ -21,7 +21,7 @@ namespace Anything
         /// <summary>
         /// 构造函数
         /// </summary>
-        public FileOperation() { }
+        private FileOperation() { }
 
         /// <summary>
         /// 读文件

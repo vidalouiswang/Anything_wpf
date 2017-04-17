@@ -1,0 +1,10 @@
+﻿<ID>B8E5218F28903D3F</ID>
+<Name>monitor</Name>
+<Icon>7488</Icon>
+<Path>C:\Users\vidam\Desktop\Desktop Temp Files\monitor.ico</Path>
+<Runas>0</Runas>
+<Autorun>0</Autorun>
+<Levels>0</Levels>
+<WorkingDirectory></WorkingDirectory>
+<TagName></TagName>
+<Arguments>monitor.ico</Arguments>

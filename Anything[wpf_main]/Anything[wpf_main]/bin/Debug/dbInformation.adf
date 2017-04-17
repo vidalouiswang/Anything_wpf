@@ -1,9 +1,10 @@
 ﻿<TimeOut>3</TimeOut>
 <Width>753.5</Width>
 <Height>461</Height>
-<Top>23.5</Top>
-<Left>88.5</Left>
-<MaxOpacity>0.98</MaxOpacity>
-<MinOpacity>0.05</MinOpacity>
-<ShowTimeSpan>0.3</ShowTimeSpan>
-<HideTimeSpan>0.3</HideTimeSpan>
+<Left>11.5</Left>
+<Top>86.5</Top>
+<MaxOpacity>0.967301038062284</MaxOpacity>
+<MinOpacity>0.0234688581314879</MinOpacity>
+<ShowTimeSpan>0.207612456747405</ShowTimeSpan>
+<HideTimeSpan>0.41522491349481</HideTimeSpan>
+<ItemSize>222.36678200692</ItemSize>

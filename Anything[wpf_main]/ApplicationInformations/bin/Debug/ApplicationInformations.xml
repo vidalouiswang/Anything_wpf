@@ -123,6 +123,19 @@ ApplicationInformations
  </summary>
  <returns></returns>
 </member>
+<member name="M:ApplicationInformations.Anything.AppInfoOperations.GetItemSize">
+ <summary>
+ 获取项目尺寸
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:ApplicationInformations.Anything.AppInfoOperations.SetItemSize(System.Double)">
+ <summary>
+ 设置项目尺寸
+ </summary>
+ <param name="ItemSize"></param>
+ <returns></returns>
+</member>
 <member name="T:ApplicationInformations.My.Resources.Resources">
 <summary>
   一个强类型的资源类，用于查找本地化的字符串等。

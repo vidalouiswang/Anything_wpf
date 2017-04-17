@@ -302,6 +302,38 @@ Namespace Anything
 
             Return Convert.ToDouble(rtnValue)
         End Function
+
+        ''' <summary>
+        ''' 获取项目尺寸
+        ''' </summary>
+        ''' <returns></returns>
+        Public Shared Function GetItemSize() As Double
+            Dim rtnValue As String = dbInformation.ReadFirstByName("ItemSize")
+            If rtnValue = Nothing Then
+                rtnValue = "128"
+                dbInformation.Insert("ItemSize", rtnValue)
+            End If
+
+            Return Convert.ToDouble(rtnValue)
+        End Function
+
+        ''' <summary>
+        ''' 设置项目尺寸
+        ''' </summary>
+        ''' <param name="ItemSize"></param>
+        ''' <returns></returns>
+        Public Shared Function SetItemSize(ItemSize As Double) As Integer
+            If Not ItemSize = Nothing Then
+                If ItemSize >= 0 Then
+                    dbInformation.Insert("ItemSize", ItemSize.ToString)
+                Else
+                    Return -1
+                End If
+            Else
+                Return -1
+            End If
+            Return 0
+        End Function
 #End Region
 
     End Class

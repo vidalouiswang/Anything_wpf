@@ -92,7 +92,7 @@
 
         <Setter Property="Background" Value="#00000000"></Setter>
         <Setter Property="Focusable" Value="True"></Setter>
-        <Setter Property="BorderThickness" Value="2"></Setter>
+        <Setter Property="BorderThickness" Value="1"></Setter>
         <Setter Property="CornerRadius" Value="10"></Setter>
         <Setter Property="RenderTransformOrigin" Value="0.5,0.5"></Setter>
     </Style>

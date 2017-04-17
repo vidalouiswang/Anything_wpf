@@ -7,7 +7,7 @@
         xmlns:cls="clr-namespace:Anything_wpf_main_.cls"
         mc:Ignorable="d"
         Title="wndSettings" Height="362" Width="600" WindowStyle="None" AllowsTransparency="True" Background="#00000000"
-        Closing="Window_Closing" MouseMove="Window_MouseMove"
+        MouseMove="Window_MouseMove"
         WindowStartupLocation="CenterScreen">
     <Border x:Name="BdrOut" Background="#aaeeeeee" CornerRadius="5" BorderThickness="2" Width="auto" Height="auto" >
         <Border Background="#DE161616" BorderThickness="1" CornerRadius="5" Width="{Binding ElementName=BdrOut,Path=Width}">
@@ -40,29 +40,85 @@
                 <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
                     <StackPanel  x:Name="spMain" Height="auto">
 
-                        <Expander Foreground="White" Header="Visual Settings">
+                        <Expander Foreground="White" Header="Visual Settings" FontSize="16">
 
                             <StackPanel Orientation="Vertical">
+                                
+                                
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="Maximum Opacity:" Style="{StaticResource TextBlockStyle}"></TextBlock>
-                                    <TextBox x:Name="txtMaxOpacity" Style="{StaticResource TextBoxStyle}" TextChanged="txtOpacity_TextChanged" MouseMove="txt_MouseMove"
-                                     Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type local:wndSettings}},Path=MaxOpacity}"></TextBox>
+                                    
+                                    <Slider x:Name="sldrMaxOpacity" Width="300" VerticalAlignment="Center" 
+                                            Maximum="1.0" Minimum="0.1"
+                                            Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor,
+                                        AncestorType=local:wndSettings},Path=MaxOpacity,Mode=TwoWay}"
+                                            MouseMove="sldr_MouseMove"></Slider>
+                                    
+                                    <TextBlock Style="{StaticResource TextBlockStyle}"
+                                               Text="{Binding ElementName=sldrMaxOpacity,Path=Value}"
+                                               MaxWidth="50"></TextBlock>
                                 </StackPanel>
+                                
+                                
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="Minimum Opacity:" Style="{StaticResource TextBlockStyle}"></TextBlock>
-                                    <TextBox x:Name="txtMinOpacity" Style="{StaticResource TextBoxStyle}" TextChanged="txtOpacity_TextChanged" MouseMove="txt_MouseMove"
-                                     Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type local:wndSettings}},Path=MinOpacity}"></TextBox>
+                                    
+                                    <Slider x:Name="sldrMinOpacity" Width="300" VerticalAlignment="Center"
+                                            Maximum="1.0" Minimum="0.05"
+                                            Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor,
+                                        AncestorType=local:wndSettings},Path=MinOpacity,Mode=TwoWay}"
+                                            MouseMove="sldr_MouseMove"></Slider>
+                                    
+                                    <TextBlock Style="{StaticResource TextBlockStyle}"
+                                               Text="{Binding ElementName=sldrMinOpacity,Path=Value}"
+                                               MaxWidth="50"></TextBlock>
                                 </StackPanel>
+                                
+                                
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="Fadein Duration:" Style="{StaticResource TextBlockStyle}"></TextBlock>
-                                    <TextBox x:Name="txtFadein" Style="{StaticResource TextBoxStyle}" MouseMove="txt_MouseMove"
-                                         Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:wndSettings},Path=Fadein}"></TextBox>
+                                    
+                                    <Slider x:Name="sldrFadein" Width="300" VerticalAlignment="Center"
+                                            Maximum="60.0" Minimum="0.001"
+                                            Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor,
+                                        AncestorType=local:wndSettings},Path=Fadein,Mode=TwoWay}"
+                                            MouseMove="sldr_MouseMove"></Slider>
+                                    
+                                    <TextBlock Style="{StaticResource TextBlockStyle}"
+                                               Text="{Binding ElementName=sldrFadein,Path=Value}"
+                                               MaxWidth="50"></TextBlock>
                                 </StackPanel>
+                                
+                                
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="Fadeout Duration:" Style="{StaticResource TextBlockStyle}"></TextBlock>
-                                    <TextBox x:Name="txtFadeout" Style="{StaticResource TextBoxStyle}" MouseMove="txt_MouseMove"
-                                         Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:wndSettings},Path=Fadeout}"></TextBox>
+                                    
+                                    <Slider x:Name="sldrFadeout" Width="300" VerticalAlignment="Center"
+                                            Maximum="60.0" Minimum="0.001"
+                                            Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor,
+                                        AncestorType=local:wndSettings},Path=Fadeout,Mode=TwoWay}"
+                                            MouseMove="sldr_MouseMove"></Slider>
+                                    
+                                    <TextBlock Style="{StaticResource TextBlockStyle}"
+                                               Text="{Binding ElementName=sldrFadeout,Path=Value}"
+                                               MaxWidth="50"></TextBlock>
                                 </StackPanel>
+
+
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Item Size:" Style="{StaticResource TextBlockStyle}"></TextBlock>
+
+                                    <Slider x:Name="sldrItemSize" Width="300" VerticalAlignment="Center"
+                                            Maximum="256" Minimum="16"
+                                            Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor,
+                                        AncestorType=local:wndSettings},Path=ItemSize,Mode=TwoWay}"
+                                            MouseMove="sldr_MouseMove"></Slider>
+
+                                    <TextBlock Style="{StaticResource TextBlockStyle}"
+                                               Text="{Binding ElementName=sldrItemSize,Path=Value}"
+                                               MaxWidth="50"></TextBlock>
+                                </StackPanel>
+
 
                             </StackPanel>
 

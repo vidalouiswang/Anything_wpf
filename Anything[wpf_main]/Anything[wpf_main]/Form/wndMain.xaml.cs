@@ -153,6 +153,8 @@ namespace Anything_wpf_main_
         /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+
+            #region first layer
             this.WindowState = WindowState.Normal;
             double ScreenWidth = SystemParameters.PrimaryScreenWidth;
             double ScreenHeight = SystemParameters.PrimaryScreenHeight;
@@ -184,19 +186,25 @@ namespace Anything_wpf_main_
             this.Width = readWidth;
             this.Height = readHeight;
 
+            #endregion
+
+            #region second layer
             //用于自动存储位置大小的开关指示
             IsInformationsInitialized = true;
 
+            //初始化后台数据
             Manage.InitializeData(this,ref this.Recent);
 
+            //初始化删除计时器
             Manage.timer.Interval = TimeSpan.FromSeconds(3);
             Manage.timer.Stop();
             Manage.timer.Tick += Timer_Tick;
 
+            //其他
             me.RoutedEvent = Border.MouseLeaveEvent;
-
             tipMainForm.Show();
 
+            //获取插件
             Anything_wpf_main_.cls.Plugins.GetPlugins();
 
             //关联事件处理
@@ -206,7 +214,10 @@ namespace Anything_wpf_main_
             //设置窗体渐隐与显示
             animationInstance.InitBdrStyle(ref this.bdrMain);
 
+            //关闭加载窗体
             Manage.WindowLoading.Close();
+
+            #endregion
         }
 
         /// <summary>

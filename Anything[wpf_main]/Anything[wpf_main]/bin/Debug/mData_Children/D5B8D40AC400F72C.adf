@@ -1,0 +1,10 @@
+﻿<ID>D5B8D40AC400F72C</ID>
+<Name>Adobe Application Manager</Name>
+<Icon>13357</Icon>
+<Path>C:\Program Files (x86)\Common Files\Adobe\OOBE\PDApp\core\PDapp.exe</Path>
+<Runas>0</Runas>
+<Autorun>0</Autorun>
+<Levels>0</Levels>
+<WorkingDirectory></WorkingDirectory>
+<TagName></TagName>
+<Arguments>--appletID=CCM_UI --appletVersion=1.0 --workflow=CCM_workflow_launch</Arguments>
