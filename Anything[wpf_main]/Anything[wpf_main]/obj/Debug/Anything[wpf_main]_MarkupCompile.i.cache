@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\Resources\App.xaml
-161115804209
+211864680656
 
-25-1369438511
-19-588888504
-Form\wndDrag.xaml;Form\wndItemInformation.xaml;Form\wndLoading.xaml;Form\wndMain.xaml;Form\wndAdd.xaml;Form\wndProgressBar.xaml;Form\wndSE.xaml;Form\wndSettings.xaml;Form\wndTip.xaml;Resources\ItemRes.xaml;Resources\MainFormRes.xaml;Resources\wndChildrenRes.xaml;Resources\wndLoadingRes.xaml;UserControls\Item.xaml;Form\wndArguments.xaml;UserControls\ProgressBarEx.xaml;
+32-1689445947
+19-1899864678
+Form\wndDrag.xaml;Form\wndHotKeyManagement.xaml;Form\wndItemInformation.xaml;Form\wndLoading.xaml;Form\wndMain.xaml;Form\wndAdd.xaml;Form\wndPreSet.xaml;Form\wndProgressBar.xaml;Form\wndSE.xaml;Form\wndSettings.xaml;Form\wndTip.xaml;Resources\ItemRes.xaml;Resources\MainFormRes.xaml;Resources\SearchEngineItemRes.xaml;Resources\wndChildrenRes.xaml;Resources\wndLoadingRes.xaml;UserControls\HotKeyVisualItem.xaml;UserControls\Item.xaml;Form\wndArguments.xaml;UserControls\ProgressBarEx.xaml;UserControls\SearchEngineItem.xaml;
 resources\anything.png
-True
+False
 

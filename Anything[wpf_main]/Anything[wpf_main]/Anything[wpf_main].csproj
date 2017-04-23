@@ -125,7 +125,7 @@
     </Reference>
     <Reference Include="ApplicationInformations, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ApplicationInformations\bin\Debug\ApplicationInformations.dll</HintPath>
+      <HintPath>..\ApplicationInformations\bin\Release\ApplicationInformations.dll</HintPath>
     </Reference>
     <Reference Include="ClsMD5, Version=1.0.0.2, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -158,6 +158,7 @@
     </ApplicationDefinition>
     <Compile Include="cls\Animation.cs" />
     <Compile Include="cls\HotKey.cs" />
+    <Compile Include="cls\HotKeyItem.cs" />
     <Compile Include="cls\PluginInterface.cs" />
     <Compile Include="cls\Plugins.cs" />
     <Compile Include="cls\StyleManagement.cs" />
@@ -167,11 +168,17 @@
     <Compile Include="Form\wndDrag.xaml.cs">
       <DependentUpon>wndDrag.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Form\wndHotKeyManagement.xaml.cs">
+      <DependentUpon>wndHotKeyManagement.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Form\wndItemInformation.xaml.cs">
       <DependentUpon>wndItemInformation.xaml</DependentUpon>
     </Compile>
     <Compile Include="Form\wndLoading.xaml.cs">
       <DependentUpon>wndLoading.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Form\wndPreSet.xaml.cs">
+      <DependentUpon>wndPreSet.xaml</DependentUpon>
     </Compile>
     <Compile Include="Form\wndProgressBar.xaml.cs">
       <DependentUpon>wndProgressBar.xaml</DependentUpon>
@@ -185,10 +192,21 @@
     <Compile Include="Form\wndArguments.xaml.cs">
       <DependentUpon>wndArguments.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\ExpanderEx.cs" />
+    <Compile Include="UserControls\HotKeyVisualItem.xaml.cs">
+      <DependentUpon>HotKeyVisualItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\ProgressBarEx.xaml.cs">
       <DependentUpon>ProgressBarEx.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\SearchEngineItem.xaml.cs">
+      <DependentUpon>SearchEngineItem.xaml</DependentUpon>
+    </Compile>
     <Page Include="Form\wndDrag.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Form\wndHotKeyManagement.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -223,6 +241,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Form\wndPreSet.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Form\wndProgressBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -247,11 +269,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Resources\SearchEngineItemRes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\wndChildrenRes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\wndLoadingRes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\HotKeyVisualItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -264,6 +294,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\ProgressBarEx.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\SearchEngineItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

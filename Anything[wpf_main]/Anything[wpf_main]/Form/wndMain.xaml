@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Anything_wpf_main_"
         xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="Anything_wpf_main_.MainWindow"
+        xmlns:uc="clr-namespace:Anything_wpf_main_.UserControls"
         mc:Ignorable="d"
         xmlns:anything="clr-namespace:Anything"
         Title="Anything" x:Name="Me" Height="700" Width="350" AllowsTransparency="True" Opacity="0.00001" 
@@ -35,7 +36,7 @@
                             Height="70" BorderThickness="1" BorderBrush="#01FFFFFF"
                             CornerRadius="5">
                         <StackPanel >
-
+                            
                             <!--第一层功能区-->
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0"
                                         Height="auto">
@@ -115,7 +116,8 @@
 
 
                     <ScrollViewer x:Name="scrlist" Margin="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden"
-                                  Grid.Row="3" KeyDown="scrlist_KeyDown" Height="auto" KeyUp="scrlist_KeyUp" >
+                                  Grid.Row="3" KeyDown="scrlist_KeyDown" Height="auto"  >
+                        <!--KeyUp="scrlist_KeyUp"-->
                         <WrapPanel x:Name="Recent" Width="{Binding ElementName=scrlist, Path=Width,Mode=TwoWay}"></WrapPanel>
 
                         <ScrollViewer.ContextMenu>

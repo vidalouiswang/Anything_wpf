@@ -10,7 +10,7 @@
 
     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
         <StackPanel x:Name="spMain" Orientation="Vertical" VerticalAlignment="Center">
-
+            
         </StackPanel>
     </StackPanel>
 

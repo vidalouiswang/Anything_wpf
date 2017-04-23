@@ -1,0 +1,12 @@
+﻿ID{B9C88BB2C332E181}
+Name{正则表达式测试器}
+Icon{1399}
+Path{C:\Program Files (x86)\deerchao\RegexTester\RegexTester.exe}
+Arguments{}
+Runas{0}
+Autorun{0}
+Levels{0}
+WorkingDirectory{}
+TagName{}
+HotKey{,,}
+EnableHotKey{False}

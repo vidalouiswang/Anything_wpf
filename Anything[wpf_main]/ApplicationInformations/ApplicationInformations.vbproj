@@ -44,9 +44,9 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Anoicess, Version=1.0.1.8, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Anoicess, Version=1.0.2.8, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Anoicess\Anoicess\Anoicess\bin\Debug\Anoicess.dll</HintPath>
+      <HintPath>..\..\..\Anoicess\Anoicess\Anoicess\bin\Release\Anoicess.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />

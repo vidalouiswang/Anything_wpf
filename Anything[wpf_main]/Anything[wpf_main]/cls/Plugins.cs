@@ -5,6 +5,7 @@ using System.Text;
 using System.IO;
 using System.Reflection;
 using System.Windows.Controls;
+using Anything_wpf_main_.UserControls;
 
 namespace Anything_wpf_main_.cls
 {
@@ -56,13 +57,35 @@ namespace Anything_wpf_main_.cls
                                         if (t.GetProperty("ManageOperation").GetValue(obj, null).ToString() == "Web")
                                         {
                                             Manage.MOWeb.IsUsed = true;
-                                            Manage.MOWeb.Name = t.GetProperty("MdlName").GetValue(obj, null).ToString();
+                                            Manage.MOWeb.MdlName = t.GetProperty("MdlName").GetValue(obj, null).ToString();
                                         }
                                         //接管文件夹浏览
                                         else if (t.GetProperty("ManageOperation").GetValue(obj, null).ToString() == "Folder")
                                         {
                                             Manage.MOFolder.IsUsed = true;
-                                            Manage.MOFolder.Name = t.GetProperty("MdlName").GetValue(obj, null).ToString();
+                                            Manage.MOFolder.MdlName = t.GetProperty("MdlName").GetValue(obj, null).ToString();
+                                        }
+                                    }
+
+                                    //检查插件是否申请了快捷键
+                                    if ((bool)t.GetProperty("ApplyForHotKey").GetValue(obj,null))
+                                    {
+                                        bool Ctrl = false;
+                                        bool Alt = false;
+                                        bool Shift = false;
+                                        bool Key_ = false;
+
+                                        string KeyGot = t.GetProperty("HotKey").GetValue(obj, null).ToString();
+
+                                        if (!string.IsNullOrEmpty(KeyGot))
+                                        {
+                                            HotKeyVisualItem HKVI = new HotKeyVisualItem();
+                                            HKVI.HotKeysString = KeyGot;
+
+                                            if (HKVI.Available)
+                                            {
+                                                Manage.CheckAndRegisterHotKey(HKVI,menuitem.Header.ToString());
+                                            }
                                         }
                                     }
 

@@ -5,10 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Anything_wpf_main_.Form"
         mc:Ignorable="d"
-        Title="wndSE" Height="232.333" Width="230.583" AllowsTransparency="True" WindowStyle="None" Background="Transparent" MouseLeave="Window_MouseLeave" Activated="Window_Activated">
+        Title="wndSE" Height="232.333" Width="230.583" AllowsTransparency="True" WindowStyle="None"
+        Background="Transparent" Activated="Window_Activated" Closing="Window_Closing">
+    
     <Border x:Name="BdrOut" Background="#aaeeeeee" CornerRadius="5" BorderThickness="2" Width="auto" Height="auto" >
         <Border Background="#DE161616" BorderThickness="1" CornerRadius="5" Width="{Binding ElementName=BdrOut,Path=Width}">
-            <StackPanel x:Name="spMain" Height="auto" LostFocus="spMain_LostFocus"
+            <StackPanel x:Name="spMain" Height="auto"
                         >
 
 

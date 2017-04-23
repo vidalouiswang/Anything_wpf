@@ -4,12 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Anything_wpf_main_.Form"
+        xmlns:uc="clr-namespace:Anything_wpf_main_.UserControls"
         mc:Ignorable="d"
         Title="wndItemInformation" Height="498.083" Width="649.75" Background="Transparent" WindowStyle="None" AllowsTransparency="True">
     <Border x:Name="BdrOut" Background="#FFeeeeee" CornerRadius="5" BorderThickness="2" Width="auto" Height="auto" >
         <Border Background="#DE161616" BorderThickness="1" CornerRadius="5" Width="{Binding ElementName=BdrOut,Path=Width}">
             <Grid>
                 <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
@@ -71,12 +74,21 @@
                 Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type local:wndItemInformation}},Path=WorkingDirectory,Mode=TwoWay}">
                 </TextBox>
 
+                <TextBlock Text="Tag Name:" Grid.Row="5" Style="{StaticResource TextBlockStyle}" VerticalAlignment="Center"></TextBlock>
+                <TextBox x:Name="txtTagName" VerticalAlignment="Center" Style="{StaticResource TextBoxStyle}"
+                         Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2"
+                Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type local:wndItemInformation}},Path=TagName,Mode=TwoWay}">
+                </TextBox>
 
-                <TextBlock Text="Icon:" Grid.Row="5" Style="{StaticResource TextBlockStyle}" VerticalAlignment="Center"></TextBlock>
+                <TextBlock Text="Hot Key:" Grid.Row="6" Style="{StaticResource TextBlockStyle}" VerticalAlignment="Center"></TextBlock>
+                <uc:HotKeyVisualItem x:Name="txtHotKey" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" Margin="12"></uc:HotKeyVisualItem>
+
+
+                <TextBlock Text="Icon:" Grid.Row="7" Style="{StaticResource TextBlockStyle}" VerticalAlignment="Center"></TextBlock>
                 <Image x:Name="imgIcon" MaxHeight="128" MaxWidth="128"
                        Source="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type local:wndItemInformation}},Path=ItemIcon,Mode=TwoWay}"
-                       Grid.Row="5" Grid.RowSpan="2" Grid.Column="1"></Image>
-                <Button x:Name="btnChangeIcon" Click="btnChangeIcon_Click" Grid.Row="5" Grid.RowSpan="2" Grid.Column="2" VerticalAlignment="Center"
+                       Grid.Row="7" Grid.RowSpan="2" Grid.Column="1"></Image>
+                <Button x:Name="btnChangeIcon" Click="btnChangeIcon_Click" Grid.Row="7" Grid.RowSpan="2" Grid.Column="2" VerticalAlignment="Center"
                         HorizontalAlignment="Center" Content="Change icon" Style="{StaticResource NormalButtonStyle}" Background="Transparent"  ></Button>
             </Grid>
         </Border>

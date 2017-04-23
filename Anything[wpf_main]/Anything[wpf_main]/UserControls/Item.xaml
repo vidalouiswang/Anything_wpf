@@ -91,10 +91,13 @@
                          Height="Auto"
                          Canvas.Left="0"
                          Canvas.Top="0"
-                         Width="{Binding ElementName=CanvasX, Path=ActualWidth}" LostFocus="TxtWrite_LostFocus" KeyUp="TxtWrite_KeyUp" MouseMove="TxtWrite_MouseMove"
+                         Width="{Binding ElementName=CanvasX, Path=ActualWidth}" LostFocus="TxtWrite_LostFocus"
+                          MouseMove="TxtWrite_MouseMove" KeyUp="TxtWrite_KeyUp" KeyDown="TxtWrite_KeyDown" 
                          >
+                
                         
                 </TextBox>
+
             </Canvas>
             
         </Grid>

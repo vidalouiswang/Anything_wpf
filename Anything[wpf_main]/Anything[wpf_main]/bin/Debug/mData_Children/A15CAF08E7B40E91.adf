@@ -1,0 +1,12 @@
+﻿ID{A15CAF08E7B40E91}
+Name{regextester.installer}
+Icon{1939}
+Path{C:\Users\vidam\Desktop\regextester.installer.zip}
+Runas{0}
+Autorun{0}
+Levels{0}
+WorkingDirectory{}
+TagName{}
+HotKey{,,}
+EnableHotKey{False}
+Arguments{regextester.installer.zip}

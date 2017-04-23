@@ -12,7 +12,7 @@ namespace Webbroswer
             wndMain wnd = new wndMain();
             string Url = "";
 
-            if (Argument == null || Argument.ToString()=="")
+            if (string.IsNullOrEmpty((string)Argument))
                 Url = "http://www.baidu.com/";
             else
                 Url = (string)Argument;
@@ -32,5 +32,9 @@ namespace Webbroswer
         public bool NeedArgument { get; } = true;
 
         public object Argument { get; set; } = null;
+
+        public bool ApplyForHotKey { get; set; } = true;
+
+        public string HotKey { get; set; } = "Ctrl+Alt+D0";
     }
 }

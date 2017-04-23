@@ -334,6 +334,34 @@ Namespace Anything
             End If
             Return 0
         End Function
+
+        ''' <summary>
+        ''' 获取热键
+        ''' </summary>
+        ''' <returns></returns>
+        Public Shared Function GetHotKey() As String
+            Dim rtnValue As String = dbInformation.ReadFirstByName("HotKey")
+            If rtnValue = Nothing Then
+                rtnValue = "Ctrl+Alt+D1"
+                dbInformation.Insert("HotKey", rtnValue)
+            End If
+
+            Return rtnValue
+        End Function
+
+        ''' <summary>
+        ''' 设置热键
+        ''' </summary>
+        ''' <param name="HotKey"></param>
+        ''' <returns></returns>
+        Public Shared Function SetHotKey(HotKey As String) As Integer
+            If Not String.IsNullOrEmpty(HotKey) Then
+                dbInformation.Insert("HotKey", HotKey)
+                Return 0
+            Else
+                Return -1
+            End If
+        End Function
 #End Region
 
     End Class

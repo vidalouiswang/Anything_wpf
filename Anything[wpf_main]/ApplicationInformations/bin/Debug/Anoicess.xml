@@ -66,22 +66,6 @@ Anoicess
  <param name="Name"></param>
  <param name="Content"></param>
 </member>
-<member name="M:Anoicess.Anoicess.Anoicess._Content.op_Equality(Anoicess.Anoicess.Anoicess._Content,Anoicess.Anoicess.Anoicess._Content)">
- <summary>
- 重载等于操作符
- </summary>
- <param name="obj1"></param>
- <param name="obj2"></param>
- <returns></returns>
-</member>
-<member name="M:Anoicess.Anoicess.Anoicess._Content.op_Inequality(Anoicess.Anoicess.Anoicess._Content,Anoicess.Anoicess.Anoicess._Content)">
- <summary>
- 重载不等于操作符
- </summary>
- <param name="obj1"></param>
- <param name="obj2"></param>
- <returns></returns>
-</member>
 <member name="M:Anoicess.Anoicess.Anoicess._Content.Fill(System.String,System.String)">
  <summary>
  一次填充所有内容
@@ -132,13 +116,12 @@ Anoicess
 </member>
 <member name="M:Anoicess.Anoicess.Anoicess.Insert(System.String,System.String,System.String)">
  <summary>
- 添加数据
+ 增加
  </summary>
- <param name="Name">项名称</param>
- <param name="Data">项数据</param>
- <param name="Append">是否覆盖原有数据</param>
+ <param name="Name"></param>
+ <param name="Data"></param>
+ <param name="Key"></param>
  <returns></returns>
- <remarks></remarks>
 </member>
 <member name="M:Anoicess.Anoicess.Anoicess.InsertToChildDB(System.String,System.String,System.String)">
  <summary>
@@ -147,7 +130,6 @@ Anoicess
  <param name="ChildName"></param>
  <param name="Name"></param>
  <param name="Data"></param>
- <param name="Append"></param>
  <returns></returns>
 </member>
 <member name="M:Anoicess.Anoicess.Anoicess.InsertByKey(System.String,System.String)">
@@ -192,19 +174,18 @@ Anoicess
  子库内删除
  </summary>
  <param name="ChildName"></param>
- <param name="Name"></param>
- <param name="ForAll"></param>
+ <param name="Key"></param>
  <returns></returns>
 </member>
 <member name="M:Anoicess.Anoicess.Anoicess.Update(System.String,System.String,System.String,System.String)">
  <summary>
  更新数据
  </summary>
- <param name="Name">项名称</param>
- <param name="Data">项数据</param>
- <param name="NewName">是否改变项名称</param>
+ <param name="Name"></param>
+ <param name="NewData"></param>
+ <param name="Key"></param>
+ <param name="NewName"></param>
  <returns></returns>
- <remarks></remarks>
 </member>
 <member name="M:Anoicess.Anoicess.Anoicess.UpdateByKey(System.String,System.String,System.String)">
  <summary>
@@ -305,17 +286,6 @@ Anoicess
  根据名称查找索引(多项)
  </summary>
  <param name="Name"></param>
- <returns></returns>
-</member>
-<member name="M:Anoicess.Anoicess.Anoicess.GetTargetStr(System.String,System.String,System.String,System.Int32,System.Boolean)">
- <summary>
- 获取目标串
- </summary>
- <param name="Src"></param>
- <param name="Left"></param>
- <param name="Right"></param>
- <param name="Start"></param>
- <param name="FullCharId"></param>
  <returns></returns>
 </member>
 <member name="T:Anoicess.My.Resources.Resources">

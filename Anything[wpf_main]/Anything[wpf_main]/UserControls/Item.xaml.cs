@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using Anything_wpf_main_.cls;
@@ -30,11 +31,10 @@ namespace Anything_wpf_main_
         /// <param name="ID"></param>
         /// <param name="Name"></param>
         /// <param name="IS"></param>
-        public Item(String ID,String Name,ImageSource IS,double Length =128)
+        public Item(String ID,String Name,ImageSource IS,double Length =128,string TagName="")
         {
             InitializeComponent();
-            Init(ID,Name,IS);
-            this.Length = Length;
+            Init(ID, Name, IS, Length, TagName);
         }
 
         /// <summary>
@@ -43,11 +43,13 @@ namespace Anything_wpf_main_
         /// <param name="ID"></param>
         /// <param name="Name"></param>
         /// <param name="IS"></param>
-        private void Init(String ID, String Name = "Default Name", ImageSource IS = null)
+        private void Init(String ID, String Name = "Default Name", ImageSource IS = null,double Length=128,string TagName="")
         {
             this.Name_Property = Name;
             this.ID = ID;
             this.Img_Property = IS;
+            this.Length = Length;
+            this.TagName = TagName;
         }
 
         #endregion
@@ -80,6 +82,9 @@ namespace Anything_wpf_main_
         //private bool IsMouseDown
 
 
+        public bool IsOut { get; set; } = false;
+
+
         //热度，暂时不用
         public int Levels
         {
@@ -88,6 +93,8 @@ namespace Anything_wpf_main_
         }
         public static readonly DependencyProperty LevelsProperty =
             DependencyProperty.Register("Levels", typeof(int), typeof(Item), new PropertyMetadata(0));
+
+        private string tagName = "";
 
         #endregion 
 
@@ -206,6 +213,19 @@ namespace Anything_wpf_main_
             set
             {
                 refItemData = value;
+            }
+        }
+
+        public string TagName
+        {
+            get
+            {
+                return tagName;
+            }
+
+            set
+            {
+                tagName = value;
             }
         }
 
@@ -394,7 +414,7 @@ namespace Anything_wpf_main_
         {
 
             this.Visibility = Visibility.Collapsed;
-            Manage.RemoveList.Add(this);
+            Manage.listOfRemoveItem.Add(this);
             Manage.timer.Start();
         }
 
@@ -408,16 +428,6 @@ namespace Anything_wpf_main_
             SetName();
         }
 
-        /// <summary>
-        /// 完成重命名
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void TxtWrite_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
-        {
-            if (e.Key==System.Windows.Input.Key.Enter)
-                DoneName();
-        }
 
         /// <summary>
         /// 查找位置
@@ -466,30 +476,54 @@ namespace Anything_wpf_main_
         /// </summary>
         private void MoveOut()
         {
-            if (this.Parent is WrapPanel)
+            if (!this.IsOut)
             {
-                wndDrag drag = new wndDrag();
+                //if (!(this.Parent is Window))
+                //{
+                    wndDrag drag = new wndDrag();
 
-                drag.IParent = this.Parent as WrapPanel;
-                (this.Parent as WrapPanel).Children.Remove(this);
+                    if (this.Parent is WrapPanel)
+                    {
+                        drag.IParent = this.Parent as WrapPanel;
+                        (this.Parent as WrapPanel).Children.Remove(this);
+                    }
 
-                this.Bdr.Style = this.FindResource("BdrStyleOut") as Style;
+                    this.Bdr.Style = this.FindResource("BdrStyleOut") as Style;
 
-                drag.InnerObj = this;
-                
-                drag.Width = this.length;
-                drag.Height =this.length;
+                    drag.InnerObj = this;
 
-                drag.Left = 0;
-                drag.Top =0;
-                drag.Show();
+                    drag.Width = this.length;
+                    drag.Height = this.length;
+
+                    drag.Left = 0;
+                    drag.Top = 0;
+                    IsOut = true;
+                    drag.Show();
+                //}
             }
+            
         }
 
         private void Me_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
-            if (e.Key== System.Windows.Input.Key.Enter)
+            if (e.Key == System.Windows.Input.Key.Enter)
                 this.refItemData.Execute();
+
+        }
+
+        private void TxtWrite_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                DoneName();
+                e.Handled = true;
+            }
+        }
+
+        private void TxtWrite_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+                e.Handled = true;
         }
     }
 }

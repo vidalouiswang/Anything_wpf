@@ -11,6 +11,8 @@ using Anything;
 using Anything_wpf_main_.cls;
 using Anything_wpf_main_.Form;
 using ApplicationInformations.Anything;
+using Anything_wpf_main_.UserControls;
+using System.Text.RegularExpressions;
 
 namespace Anything_wpf_main_
 {
@@ -21,9 +23,7 @@ namespace Anything_wpf_main_
     public partial class MainWindow : Window
     {
 
-
-
-        #region 重载
+        #region 重载WndProc完成改变大小及响应热键
 
         /// <summary>
         /// 重载
@@ -42,8 +42,6 @@ namespace Anything_wpf_main_
 
             //定义Window
             Window wnd = (Window)HwndSource.FromHwnd(hwnd).RootVisual;
-
-           
 
             //判断消息
             if (msg == NativeMethods.WM_NCHITTEST)
@@ -74,13 +72,23 @@ namespace Anything_wpf_main_
             }
             else if (msg==HotKey.WM_HOTKEY)
             {
-                if (wParam.ToInt32() == HotKey.HOTKEYID_)
+                int wparam = wParam.ToInt32();
+                if (wparam == HotKey.QUICK_SEARCH_HOTKEY_ID)
                 {
                     //设置活动窗体
-                    HotKey.SetForegroundWindow(new WindowInteropHelper(this).Handle);
+                    HotKey.SetForegroundWindow(Manage.WindowMainHandle);
+
+                    this.BdrFunction.RaiseEvent(MEEnter);
+
+                    this.ClearSearch();
 
                     //聚焦到检索框
                     SetFocus();
+                }
+                else
+                {
+                    //检查其他热键
+                    Manage.FindHotKeyAndExecute(wparam);
                 }
             }
 
@@ -88,7 +96,7 @@ namespace Anything_wpf_main_
         }
 
         /// <summary>
-        /// 注册钩子
+        /// 资源初始化完成后Hook WndProc
         /// </summary>
         /// <param name="e"></param>
         protected override void OnSourceInitialized(EventArgs e)
@@ -100,8 +108,6 @@ namespace Anything_wpf_main_
             {
                 hwndSource.AddHook(new HwndSourceHook(this.WndProc));
             }
-
-            
         }
 
         #endregion
@@ -120,8 +126,11 @@ namespace Anything_wpf_main_
         //用于自动存储位置大小的开关指示
         public bool IsInformationsInitialized = false;
 
-        //用去触发上部标题栏的卷起动画，暂时不用
-        MouseEventArgs me = new MouseEventArgs(Mouse.PrimaryDevice, 0);
+        //用去触发上部标题栏的卷起动画
+        MouseEventArgs MELeave = new MouseEventArgs(Mouse.PrimaryDevice, 0);
+
+        //用去触发上部标题栏的显示动画
+        MouseEventArgs MEEnter = new MouseEventArgs(Mouse.PrimaryDevice, 0);
 
         //提示窗体
         private wndTip tipMainForm = new wndTip();
@@ -146,13 +155,16 @@ namespace Anything_wpf_main_
         /// </summary>
         public MainWindow()
         {
-
             InitializeComponent();
 
             //边界颜色定义
             bdrColor = Color.FromArgb(0xff, 0x28, 0x28, 0x28);
             this.bdrMainForm.Background = new SolidColorBrush(bdrColor);
         }
+
+        #endregion
+
+        #region public
 
         /// <summary>
         /// 清空搜索框
@@ -161,6 +173,7 @@ namespace Anything_wpf_main_
         {
             this.txtMain.Text = "Use keyword to search";
         }
+
 
         #endregion
 
@@ -173,12 +186,39 @@ namespace Anything_wpf_main_
         /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            #region Register Hot Key
 
-            IntPtr handle = new WindowInteropHelper(this).Handle;
-            HotKey.RegisterHotKey(handle, HotKey.HOTKEYID_,(uint)HotKey.KeyModifiers.Ctrl|(uint)HotKey.KeyModifiers.Alt, (uint)System.Windows.Forms.Keys.D1);
+            Manage.WindowMainHandle = new WindowInteropHelper(this).Handle; ;
+
+            HotKeyVisualItem hkvi = new HotKeyVisualItem();
+            hkvi.HotKeysString = AppInfoOperations.GetHotKey();
+
+            if (hkvi.Available)
+            {
+                if (!HotKey.TestHotKey(3, System.Windows.Forms.Keys.D1, HotKey.QUICK_SEARCH_HOTKEY_ID, false))
+                {
+                    if (!HotKey.TestHotKey(3, System.Windows.Forms.Keys.D1, HotKey.QUICK_SEARCH_HOTKEY_ID, false))
+                    {
+                        tipMainForm.ShowFixed(this, "Hot Key Register failed");
+                    }
+                }
+            }
+            else
+            {
+                if (!HotKey.TestHotKey(3, System.Windows.Forms.Keys.D1, HotKey.QUICK_SEARCH_HOTKEY_ID, false))
+                {
+                    tipMainForm.ShowFixed(this, "Hot Key Register failed");
+                }
+            }
+            //(uint)HotKey.KeyModifiers.Ctrl | (uint)HotKey.KeyModifiers.Alt
+
+           
+            hkvi = null;
+
+            #endregion
 
 
-            #region first layer
+            #region Initialize Visual Settings
             this.WindowState = WindowState.Normal;
             double ScreenWidth = SystemParameters.PrimaryScreenWidth;
             double ScreenHeight = SystemParameters.PrimaryScreenHeight;
@@ -212,12 +252,14 @@ namespace Anything_wpf_main_
 
             #endregion
 
-            #region second layer
+
+            #region Initialize Background Data
+
             //用于自动存储位置大小的开关指示
             IsInformationsInitialized = true;
 
             //初始化后台数据
-            Manage.InitializeData(this,ref this.Recent);
+            Manage.InitializeData(this);
 
             //初始化删除计时器
             Manage.timer.Interval = TimeSpan.FromSeconds(3);
@@ -225,7 +267,9 @@ namespace Anything_wpf_main_
             Manage.timer.Tick += Timer_Tick;
 
             //其他
-            me.RoutedEvent = Border.MouseLeaveEvent;
+            MELeave.RoutedEvent = Border.MouseLeaveEvent;
+            MEEnter.RoutedEvent = Border.MouseEnterEvent;
+
             tipMainForm.Show();
 
             //获取插件
@@ -242,6 +286,7 @@ namespace Anything_wpf_main_
             Manage.WindowLoading.Close();
 
             #endregion
+
         }
 
         /// <summary>
@@ -251,11 +296,14 @@ namespace Anything_wpf_main_
         /// <param name="e"></param>
         private void Window_LocationChanged(object sender, EventArgs e)
         {
+            //检查信息是否已初始化
             if (IsInformationsInitialized)
             {
+                //保存位置信息
                 AppInfoOperations.SetLeft(this.Left);
                 AppInfoOperations.SetTop(this.Top);
 
+                //更新Manage类的主窗体位置信息
                 Manage.WindowMainRect.left = (int)this.Left;
                 Manage.WindowMainRect.right = (int)(this.Left + this.ActualWidth);
                 Manage.WindowMainRect.top = (int)this.Top;
@@ -271,7 +319,9 @@ namespace Anything_wpf_main_
         /// <param name="e"></param>
         private void Me_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            HotKey.UnregisterHotKey(new WindowInteropHelper(this).Handle, HotKey.HOTKEYID_);
+            //卸载注册的热键
+            Manage.UnregisterAllHotKeys();
+
             System.Diagnostics.Process.GetCurrentProcess().Kill();
         }
 
@@ -282,14 +332,18 @@ namespace Anything_wpf_main_
         /// <param name="e"></param>
         private void Me_MouseMove(object sender, MouseEventArgs e)
         {
-
+            //检查是否是鼠标左键
             if (e.LeftButton == MouseButtonState.Pressed)
             {
+                //移动窗体
                 this.DragMove();
+                
+                //取消冒泡
                 e.Handled = true;
             }
             else
             {
+                //边缘吸附
                 if (this.Left <= 50 && this.Left > 0)
                     this.Left = 0;
 
@@ -404,9 +458,9 @@ namespace Anything_wpf_main_
         /// <param name="e"></param>
         private void Timer_Tick(object sender, EventArgs e)
         {
-            if (Manage.RemoveList.Count>0)
+            if (Manage.listOfRemoveItem.Count>0)
             {
-                foreach(Item i in Manage.RemoveList)
+                foreach(Item i in Manage.listOfRemoveItem)
                 {
                     Manage.mMAIN.RemoveChild(i.ID);
 
@@ -430,7 +484,7 @@ namespace Anything_wpf_main_
             this.btnCloseOnceClick++;
             if (this.btnCloseOnceClick >= 2)
             {
-                foreach (ItemData itemdata in Manage.listData)
+                foreach (ItemData itemdata in Manage.listOfInnerData)
                 {
                     itemdata.SaveIcon();
                 }
@@ -510,13 +564,9 @@ namespace Anything_wpf_main_
             //获取拖放的文件
             String[] arr = (String[])e.Data.GetData(DataFormats.FileDrop);
 
-            //添加项目
-            foreach (string s in arr)
-            {
-                //
-                this.Recent.Children.Add(Manage.AddItem(s));
-                byte[] b = GetIcon.GetIconByteArray(s);
-            }
+            wndPreSet wps = new wndPreSet(arr);
+
+            wps.ShowDialog();
 
         }
 
@@ -535,11 +585,39 @@ namespace Anything_wpf_main_
                 {
                     this.btnSearch.Visibility = Visibility.Visible;
 
-                    foreach (Item item in this.Recent.Children)
+                    foreach (object obj in this.Recent.Children)
                     {
-                        item.Hide();
+                        if (obj is ExpanderEx)
+                        {
+                            ((ExpanderEx)obj).Visibility = Visibility.Collapsed;
+                            foreach (Item i in (((ExpanderEx)obj).Content as WrapPanel).Children)
+                            {
+                                i.Hide();
+                            }
+                        }
+                        else if (obj is Item)
+                        {
+                            ((Item)obj).Hide();
+                        }
                     }
-                    List<Item> value = Manage.GetObjsByNameAndPath(str, str, ref this.Recent);
+
+                    List<Item> value;
+
+                    if (str.IndexOf("+") >= 0)
+                    {
+                        Match ma = new Regex(@"(\S*)\+(\S*)\+(\S*)").Match(str);
+
+                        string Name = ma.Groups[0].Value;
+                        string Path = ma.Groups[1].Value;
+                        string Tag = ma.Groups[2].Value;
+
+                        value= Manage.GetObjsByNameAndPathAndTag(Name, Path, Tag,true);
+                    }
+                    else
+                    {
+                        value = Manage.GetObjsByNameAndPathAndTag(str, str, str);
+                    }
+                    
 
                     if (value != null)
                     {
@@ -552,6 +630,15 @@ namespace Anything_wpf_main_
 
                         foreach (Item i in value)
                         {
+                            if (i.Parent is WrapPanel)
+                            {
+                                WrapPanel wpTmp = (WrapPanel)i.Parent;
+                                if (wpTmp.Parent is ExpanderEx)
+                                {
+                                    ((ExpanderEx)wpTmp.Parent).IsExpanded = true;
+                                    ((ExpanderEx)wpTmp.Parent).Visibility = Visibility.Visible;
+                                }
+                            }
                             i.Show();
                         }
                     }
@@ -560,9 +647,29 @@ namespace Anything_wpf_main_
                 else
                 {
                     this.btnSearch.Visibility = Visibility.Collapsed;
-                    foreach (Item item in this.Recent.Children)
+                    foreach (object obj in this.Recent.Children)
                     {
-                        item.Show();
+                        if (obj is ExpanderEx)
+                        {
+                            ((ExpanderEx)obj).Visibility = Visibility.Visible;
+                            WrapPanel wp =(WrapPanel)((ExpanderEx)obj).Content;
+
+                            if (wp.Children.Count > 0)
+                            {
+                                foreach (Item i in wp.Children)
+                                {
+                                    i.Show();
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (obj is Item)
+                            {
+                                (obj as Item).Show();
+                            }
+                        }
+                        
                     }
                 }
             }
@@ -585,7 +692,12 @@ namespace Anything_wpf_main_
         /// <param name="e"></param>
         private void scrlist_KeyDown(object sender, KeyEventArgs e)
         {
-            SetFocus();
+            if (e.Key!=Key.Enter && e.Key!=Key.Up && e.Key!=Key.Down && e.Key!= Key.Left && e.Key!=Key.Right)
+            {
+                SetFocus();
+            }
+
+            //e.Handled = true;
         }
 
         /// <summary>
@@ -595,7 +707,8 @@ namespace Anything_wpf_main_
         /// <param name="e"></param>
         private void Me_KeyDown(object sender, KeyEventArgs e)
         {
-            SetFocus();
+            if (e.Key!=Key.Enter)
+                SetFocus();
         }
 
         /// <summary>
@@ -656,6 +769,27 @@ namespace Anything_wpf_main_
         {
             PackUp();
         }
+
+        ///// <summary>
+        ///// 移动选中
+        ///// </summary>
+        ///// <param name="sender"></param>
+        ///// <param name="e"></param>
+        //private void scrlist_KeyUp(object sender, KeyEventArgs e)
+        //{
+            
+        //    //if (e.Key == Key.Up || e.Key == Key.Down || e.Key == Key.Left || e.Key == Key.Right)
+        //    //{
+        //    //    if (Keyboard.FocusedElement is ScrollViewer)
+        //    //    {
+        //    //        foreach (Item i in this.Recent.Children)
+        //    //        {
+        //    //            i.Bdr.Focus();
+        //    //            break;
+        //    //        }
+        //    //    }
+        //    //}
+        //}
 
         #endregion
 
@@ -743,8 +877,8 @@ namespace Anything_wpf_main_
             {
                 this.BdrFunction.Style = this.FindResource("BdrFunctionStyle") as Style;
                 Manage.ClearOrFillText(ref this.txtMain, false);
-                me.RoutedEvent = Mouse.MouseLeaveEvent;
-                this.BdrFunction.RaiseEvent(me);
+                MELeave.RoutedEvent = Mouse.MouseLeaveEvent;
+                this.BdrFunction.RaiseEvent(MELeave);
 
                 this.Topmost = false;
             }
@@ -763,8 +897,9 @@ namespace Anything_wpf_main_
                 if (Keyboard.FocusedElement!=this.txtMain)
                 {
                     this.txtMain.Focus();
-                    Animation.UniversalBeginDoubleAnimation<Border>(ref this.BdrFunction,Border.HeightProperty,0.2,70,this.BdrFunction.ActualHeight);
-                    Animation.UniversalBeginDoubleAnimation<Border>(ref this.BdrFunction, Border.OpacityProperty,0.2,1,this.BdrFunction.Opacity);
+
+                    Animation.UniversalBeginDoubleAnimation<Border>(ref this.BdrFunction, Border.HeightProperty, 0.2, 70, this.BdrFunction.ActualHeight);
+                    Animation.UniversalBeginDoubleAnimation<Border>(ref this.BdrFunction, Border.OpacityProperty, 0.2, 1, this.BdrFunction.Opacity);
                 }
             }
         }
@@ -784,20 +919,7 @@ namespace Anything_wpf_main_
 
         #endregion
 
-        private void scrlist_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Up || e.Key == Key.Down || e.Key == Key.Left || e.Key == Key.Right)
-            {
-                if (Keyboard.FocusedElement is ScrollViewer)
-                {
-                    foreach (Item i in this.Recent.Children)
-                    {
-                        i.Bdr.Focus();
-                        break;
-                    }
-                }
-            }
-        }
+        
 
         private void SettingsMenuItem_Click(object sender, RoutedEventArgs e)
         {

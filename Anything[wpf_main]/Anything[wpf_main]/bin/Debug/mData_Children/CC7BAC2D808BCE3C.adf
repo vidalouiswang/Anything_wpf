@@ -1,0 +1,12 @@
+﻿ID{CC7BAC2D808BCE3C}
+Name{dtemp}
+Icon{22312}
+Path{C:\Users\vidam\Desktop\dtemp}
+Runas{0}
+Autorun{0}
+Levels{0}
+WorkingDirectory{}
+TagName{}
+HotKey{,,}
+EnableHotKey{False}
+Arguments{dtemp}

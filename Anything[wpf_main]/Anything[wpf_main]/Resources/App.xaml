@@ -11,6 +11,7 @@
                 <ResourceDictionary Source="../Resources/MainFormRes.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="../Resources/wndChildrenRes.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="../Resources/wndLoadingRes.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="../Resources/SearchEngineItemRes.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
             
         </ResourceDictionary>

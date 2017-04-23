@@ -19,8 +19,7 @@ namespace Anything_wpf_main_.Form
     /// </summary>
     public partial class wndDrag : Window
     {
-
-        private WrapPanel _IParent;
+        private object _IParent;
         private Item innerObj = null;
 
         public wndDrag()
@@ -29,7 +28,7 @@ namespace Anything_wpf_main_.Form
             this.Topmost = true;
         }
 
-        public WrapPanel IParent
+        public object IParent
         {
             get
             {
@@ -86,7 +85,11 @@ namespace Anything_wpf_main_.Form
             {
                 this.spMain.Children.Remove(innerObj);
                 innerObj.Bdr.Style = innerObj.FindResource("BdrStyle") as Style;
-                IParent.Children.Add(innerObj);
+                if (IParent is WrapPanel)
+                {
+                    (IParent as WrapPanel).Children.Add(innerObj);
+                }
+                innerObj.IsOut = false;
                 this.Close();
             }
         }

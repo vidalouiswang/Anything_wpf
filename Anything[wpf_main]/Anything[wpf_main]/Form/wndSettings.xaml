@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Anything_wpf_main_.Form"
         xmlns:cls="clr-namespace:Anything_wpf_main_.cls"
+        xmlns:uc="clr-namespace:Anything_wpf_main_.UserControls"
         mc:Ignorable="d"
         Title="wndSettings" Height="362" Width="600" WindowStyle="None" AllowsTransparency="True" Background="#00000000"
         MouseMove="Window_MouseMove"
@@ -40,65 +41,64 @@
                 <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
                     <StackPanel  x:Name="spMain" Height="auto">
 
-                        <Expander Foreground="White" Header="Visual Settings" FontSize="16">
+                        <Expander x:Name="exp" Margin="10,0" Foreground="White" Header="Visual Settings" FontSize="16">
 
                             <StackPanel Orientation="Vertical">
-                                
-                                
+
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="Maximum Opacity:" Style="{StaticResource TextBlockStyle}"></TextBlock>
-                                    
+
                                     <Slider x:Name="sldrMaxOpacity" Width="300" VerticalAlignment="Center" 
                                             Maximum="1.0" Minimum="0.1"
                                             Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor,
                                         AncestorType=local:wndSettings},Path=MaxOpacity,Mode=TwoWay}"
                                             MouseMove="sldr_MouseMove"></Slider>
-                                    
+
                                     <TextBlock Style="{StaticResource TextBlockStyle}"
                                                Text="{Binding ElementName=sldrMaxOpacity,Path=Value}"
                                                MaxWidth="50"></TextBlock>
                                 </StackPanel>
-                                
-                                
+
+
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="Minimum Opacity:" Style="{StaticResource TextBlockStyle}"></TextBlock>
-                                    
+
                                     <Slider x:Name="sldrMinOpacity" Width="300" VerticalAlignment="Center"
                                             Maximum="1.0" Minimum="0.05"
                                             Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor,
                                         AncestorType=local:wndSettings},Path=MinOpacity,Mode=TwoWay}"
                                             MouseMove="sldr_MouseMove"></Slider>
-                                    
+
                                     <TextBlock Style="{StaticResource TextBlockStyle}"
                                                Text="{Binding ElementName=sldrMinOpacity,Path=Value}"
                                                MaxWidth="50"></TextBlock>
                                 </StackPanel>
-                                
-                                
+
+
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="Fadein Duration:" Style="{StaticResource TextBlockStyle}"></TextBlock>
-                                    
+
                                     <Slider x:Name="sldrFadein" Width="300" VerticalAlignment="Center"
                                             Maximum="60.0" Minimum="0.001"
                                             Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor,
                                         AncestorType=local:wndSettings},Path=Fadein,Mode=TwoWay}"
                                             MouseMove="sldr_MouseMove"></Slider>
-                                    
+
                                     <TextBlock Style="{StaticResource TextBlockStyle}"
                                                Text="{Binding ElementName=sldrFadein,Path=Value}"
                                                MaxWidth="50"></TextBlock>
                                 </StackPanel>
-                                
-                                
+
+
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="Fadeout Duration:" Style="{StaticResource TextBlockStyle}"></TextBlock>
-                                    
+
                                     <Slider x:Name="sldrFadeout" Width="300" VerticalAlignment="Center"
                                             Maximum="60.0" Minimum="0.001"
                                             Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor,
                                         AncestorType=local:wndSettings},Path=Fadeout,Mode=TwoWay}"
                                             MouseMove="sldr_MouseMove"></Slider>
-                                    
+
                                     <TextBlock Style="{StaticResource TextBlockStyle}"
                                                Text="{Binding ElementName=sldrFadeout,Path=Value}"
                                                MaxWidth="50"></TextBlock>
@@ -119,6 +119,62 @@
                                                MaxWidth="50"></TextBlock>
                                 </StackPanel>
 
+
+                            </StackPanel>
+
+
+                        </Expander>
+
+                        <Expander Margin="10,0" Foreground="White" Header="Search Engine Management" FontSize="16">
+
+                            <StackPanel Orientation="Vertical">
+
+
+                                <StackPanel>
+                                    <TextBlock Style="{StaticResource TextBlockStyle}" HorizontalAlignment="Left" Text="Add New(Use &quot;%keyword%&quot; to  instead keyword):"></TextBlock>
+
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                        </Grid.RowDefinitions>
+
+
+                                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Name:" Style="{StaticResource TextBlockStyle}"></TextBlock>
+                                        <TextBox Grid.Row="0" Grid.Column="1" x:Name="txtSEName" Style="{StaticResource TextBoxStyle}" MouseMove="txtSEName_MouseMove"></TextBox>
+
+
+                                        <TextBlock Grid.Row="1" Grid.Column="0" Text="URL:" Style="{StaticResource TextBlockStyle}"></TextBlock>
+                                        <TextBox Grid.Row="1" Grid.Column="1"  x:Name="txtSEContent" Style="{StaticResource TextBoxStyle}" MouseMove="txtSEContent_MouseMove"  ></TextBox>
+
+
+                                        <Button x:Name="btnAdd" MaxWidth="130" Style="{StaticResource NormalButtonStyle}" Grid.Row="2" Grid.ColumnSpan="2"
+                                                Content="Add" Click="btnAdd_Click"></Button>
+                                    </Grid>
+                                </StackPanel>
+
+
+                            </StackPanel>
+
+
+                        </Expander>
+
+                        <Expander Margin="10,0" Foreground="White" Header="Hot Key Management" FontSize="16">
+
+                            <StackPanel Orientation="Vertical">
+
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                   
+
+                                    <uc:HotKeyVisualItem x:Name="HotKeyVisual" Margin="20,0,0,0" MouseMove="HotKeyVisualItem_MouseMove"
+                                                         />
+                                    <Button x:Name="btnAddHotKey" Content="Add" Style="{StaticResource NormalButtonStyle}" Click="btnAddHotKey_Click"></Button>
+                                </StackPanel>
 
                             </StackPanel>
 

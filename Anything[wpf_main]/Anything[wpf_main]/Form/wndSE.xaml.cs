@@ -7,10 +7,13 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using Anything_wpf_main_.cls;
+using Anything_wpf_main_.UserControls;
 
 namespace Anything_wpf_main_.Form
 {
@@ -19,106 +22,56 @@ namespace Anything_wpf_main_.Form
     /// </summary>
     public partial class wndSE : Window
     {
+
+        private DispatcherTimer timer = new DispatcherTimer();
+
         public wndSE()
         {
             InitializeComponent();
-            if (Manage.SEList.Count>0)
-            {
-                foreach (Anoicess.Anoicess.Anoicess._Content i in Manage.SEList)
-                {
-                    Button btn = new Button();
-                    btn.Style = btn.FindResource("NormalButtonStyle") as Style;
-                    //btn.Background = brushTrans;
-                    btn.VerticalAlignment = VerticalAlignment.Center;
-                    btn.HorizontalAlignment = HorizontalAlignment.Center;
-                    btn.Content = i.Name;
-                    btn.Click += Btn_Click;
-                    btn.KeyDown += Btn_KeyDown;
-                    btn.Width = this.Width-10;
-                    btn.Margin = new Thickness(1);
-                    btn.BorderThickness = new Thickness(1);
-                    this.spMain.Children.Add(btn);
-                }
-            }
+            InitTimer();
         }
 
-        private void Btn_KeyDown(object sender, KeyEventArgs e)
+        private void InitTimer()
         {
-            if (e.Key == Key.Enter)
-            {
-                Run(sender);
-            }
+            timer.Tick += Timer_Tick;
+            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Start();
         }
 
-        private string _Keyword="";
-
-        public string Keyword
+        private void Timer_Tick(object sender, EventArgs e)
         {
-            get
+            if (new WindowInteropHelper(this).Handle != HotKey.GetActiveWindow())
             {
-                return _Keyword;
-            }
-
-            set
-            {
-                _Keyword = value;
-            }
-        }
-
-        private void Run(object sender)
-        {
-            Button btn = sender as Button;
-            foreach (Anoicess.Anoicess.Anoicess._Content i in Manage.SEList)
-            {
-                if (i.Name == btn.Content.ToString())
-                {
-                    if (!Manage.MOWeb.IsUsed)
-                    {
-                        System.Diagnostics.Process.Start(i.Content.Replace("#@#", Keyword));
-                    }
-                    else
-                    {
-                        Plugins.Run(Manage.MOWeb.Name, i.Content.Replace("#@#", Keyword));
-                    }
-                    this.Close();
-                }
-            }
-        }
-
-        private void Btn_Click(object sender, RoutedEventArgs e)
-        {
-            Run(sender);
-        }
-
-        private void Window_MouseLeave(object sender, MouseEventArgs e)
-        {
-            try
-            {
-                Manage.WindowMain.ClearSearch();
+                this.timer.Stop();
                 this.Close();
             }
-            catch
-            {
+        }
 
+        public wndSE(string keyword)
+        {
+            InitializeComponent();
+            InitTimer();
+            if (Manage.listOfSearchEngineInnerData.Count > 0)
+            {
+                foreach (SearchEngineItem item in Manage.listOfSearchEnginesVisualElement)
+                {
+                    item.Keyword = keyword;
+                    this.spMain.Children.Add(item);
+                }
             }
         }
+
 
         private void Window_Activated(object sender, EventArgs e)
         {
-            this.spMain.Focus();
+            if (this.spMain.Children.Count>0)
+                this.spMain.Children[0].Focus();
         }
 
-        private void spMain_LostFocus(object sender, RoutedEventArgs e)
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            try
-            {
-                Manage.WindowMain.ClearSearch();
-                this.Close();
-            }
-            catch
-            {
-
-            }
+            this.spMain.Children.Clear();
         }
+
     }
 }

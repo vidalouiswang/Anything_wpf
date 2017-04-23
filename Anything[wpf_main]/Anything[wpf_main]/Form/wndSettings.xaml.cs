@@ -151,6 +151,7 @@ namespace Anything_wpf_main_.Form
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+            //MessageBox.Show(exp.Parent.ToString());
         }
         private void LoadData()
         {
@@ -178,6 +179,33 @@ namespace Anything_wpf_main_.Form
         private void sldr_MouseMove(object sender, MouseEventArgs e)
         {
             e.Handled = true;
+        }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            Manage.mSearchEngine.Insert(this.txtSEName.Text, this.txtSEContent.Text);
+            Manage.LoadSE();
+            Manage.TipPublic.ShowFixed(this, "Done",10,10);
+        }
+
+        private void txtSEName_MouseMove(object sender, MouseEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void txtSEContent_MouseMove(object sender, MouseEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void HotKeyVisualItem_MouseMove(object sender, MouseEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void btnAddHotKey_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -30,37 +30,24 @@ namespace Anything_wpf_main_.Form
             get { return (string )GetValue(ItemNameProperty); }
             set { SetValue(ItemNameProperty, value); }
         }
-
-        // Using a DependencyProperty as the backing store for ItemName.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ItemNameProperty =
             DependencyProperty.Register("ItemName", typeof(string ), typeof(wndItemInformation), new PropertyMetadata(""));
-
-
-
 
         public string  Path
         {
             get { return (string )GetValue(PathProperty); }
             set { SetValue(PathProperty, value); }
         }
-
-        // Using a DependencyProperty as the backing store for Path.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty PathProperty =
             DependencyProperty.Register("Path", typeof(string ), typeof(wndItemInformation), new PropertyMetadata(""));
-
-
 
         public string  Arguments
         {
             get { return (string )GetValue(ArgumentsProperty); }
             set { SetValue(ArgumentsProperty, value); }
         }
-
-        // Using a DependencyProperty as the backing store for Arguments.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ArgumentsProperty =
             DependencyProperty.Register("Arguments", typeof(string ), typeof(wndItemInformation), new PropertyMetadata(""));
-
-
 
 
         public string TagName
@@ -68,29 +55,16 @@ namespace Anything_wpf_main_.Form
             get { return (string)GetValue(TagNameProperty); }
             set { SetValue(TagNameProperty, value); }
         }
-
-        // Using a DependencyProperty as the backing store for TagName.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TagNameProperty =
             DependencyProperty.Register("TagName", typeof(string), typeof(wndItemInformation), new PropertyMetadata(""));
-
-
-
-
-
-
 
         public ImageSource ItemIcon
         {
             get { return (ImageSource)GetValue(ItemIconProperty); }
             set { SetValue(ItemIconProperty, value); }
         }
-
-        // Using a DependencyProperty as the backing store for ItemIcon.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ItemIconProperty =
             DependencyProperty.Register("ItemIcon", typeof(ImageSource), typeof(wndItemInformation), new PropertyMetadata(null));
-
-
-
 
 
         public string WorkingDirectory
@@ -98,10 +72,9 @@ namespace Anything_wpf_main_.Form
             get { return (string)GetValue(WorkingDirectoryProperty); }
             set { SetValue(WorkingDirectoryProperty, value); }
         }
-
-        // Using a DependencyProperty as the backing store for WorkingDirectory.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty WorkingDirectoryProperty =
             DependencyProperty.Register("WorkingDirectory", typeof(string), typeof(wndItemInformation), new PropertyMetadata(""));
+
 
         public ItemData Itemdata
         {
@@ -129,10 +102,23 @@ namespace Anything_wpf_main_.Form
             }
         }
 
-
-        public wndItemInformation()
+        public wndItemInformation(Item item)
         {
             InitializeComponent();
+
+            //填充信息
+            this.Item = item;
+            this.Itemdata = item.refItemData;
+            this.ItemName = item.Name_Property;
+            this.Path = item.refItemData.Path;
+            this.Arguments = item.refItemData.Arguments;
+            this.ItemIcon = item.refItemData.Icon_imagesource;
+            this.WorkingDirectory = item.refItemData.WorkingDirectory;
+            this.Itemdata = item.refItemData;
+            this.TagName = item.TagName;
+            this.txtHotKey.InputKeyString(itemdata.HotKey);
+
+            this.Show();
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
@@ -143,16 +129,30 @@ namespace Anything_wpf_main_.Form
             if (!string.IsNullOrEmpty(this.Path.Trim()))
                 itemdata.Path = this.Path;
 
-            if (!string.IsNullOrEmpty(this.Arguments))
+            if (!string.IsNullOrEmpty(this.Arguments.Trim()))
                 itemdata.Arguments = this.Arguments;
 
-            if (!string.IsNullOrEmpty(this.WorkingDirectory))
+            if (!string.IsNullOrEmpty(this.WorkingDirectory.Trim()))
                 itemdata.WorkingDirectory = this.WorkingDirectory;
 
-            if (this.ItemIcon != null)
+            if (this.ItemIcon != null && this.itemdata.IconChanged)
             {
                 itemdata.Icon_imagesource = this.ItemIcon;
                 itemdata.Icon_byte = GetIcon.ImageSourceToByteArray(this.ItemIcon);
+            }
+
+            if (!string.IsNullOrEmpty(this.TagName.Trim()))
+            {
+                itemdata.TagName = TagName;
+            }
+
+            if (this.txtHotKey.Available)
+            {
+                this.itemdata.AddHotKey(this.txtHotKey);
+            }
+            else
+            {
+                this.itemdata.RemoveHotKey();
             }
 
             Manage.RefreshSingle(item, itemdata);

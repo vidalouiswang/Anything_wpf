@@ -108,6 +108,10 @@ namespace Anything
                 count = 128;
             else if (count > 128 && count <= 256)
                 count = 256;
+            else
+            {
+                count = 128;
+            }
 
             Rectangle rect = new Rectangle(0, 0, count, count);
             Bitmap bmSmall = new Bitmap(rect.Width, rect.Height, bit.PixelFormat);

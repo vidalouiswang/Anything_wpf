@@ -1,0 +1,12 @@
+﻿ID{FDE73E7820EC925C}
+Name{Anything[wpf_main]}
+Icon{91452}
+Path{C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\bin\Debug\Anything[wpf_main].exe}
+Runas{0}
+Autorun{0}
+Levels{0}
+WorkingDirectory{}
+TagName{}
+HotKey{,,}
+EnableHotKey{False}
+Arguments{Anything[wpf_main].exe}

@@ -136,6 +136,19 @@ ApplicationInformations
  <param name="ItemSize"></param>
  <returns></returns>
 </member>
+<member name="M:ApplicationInformations.Anything.AppInfoOperations.GetHotKey">
+ <summary>
+ 获取热键
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:ApplicationInformations.Anything.AppInfoOperations.SetHotKey(System.String)">
+ <summary>
+ 设置热键
+ </summary>
+ <param name="HotKey"></param>
+ <returns></returns>
+</member>
 <member name="T:ApplicationInformations.My.Resources.Resources">
 <summary>
   一个强类型的资源类，用于查找本地化的字符串等。

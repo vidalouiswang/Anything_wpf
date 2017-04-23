@@ -40,19 +40,25 @@ namespace Anything_wpf_main_.cls
             public string WorkingDirectory;
             //标签名
             public string tagName;
+            //热键
+            public HotKeyItem HotKey;
+            //是否启用热键
+            public bool EnableHotKey;
 
             public DataST(string name,
                 string path,
                 string id,
-                ImageSource _is=null,
-                byte[] icon=null,
-                string arguments="",
-                int isuesd=0,
-                int runas=0,
-                int autorun=0,
-                int levels=0,
-                string workingdirectory="",
-                string tagname="")
+                ImageSource _is = null,
+                byte[] icon = null,
+                string arguments = "",
+                int isuesd = 0,
+                int runas = 0,
+                int autorun = 0,
+                int levels = 0,
+                string workingdirectory = "",
+                string tagname = "",
+                HotKeyItem hotkey = null,
+                bool enablehotkey=false)
 
             {
                 Name = name;
@@ -67,6 +73,8 @@ namespace Anything_wpf_main_.cls
                 Levels = levels;
                 WorkingDirectory = workingdirectory;
                 tagName = tagname;
+                HotKey = hotkey;
+                EnableHotKey = enablehotkey;
             }
 
         }
@@ -123,9 +131,9 @@ namespace Anything_wpf_main_.cls
         /// 从给定的数据文件路径构造对象
         /// </summary>
         /// <param name="path"></param>
-        public  ItemData(Anoicess.Anoicess.Anoicess objDB)
+        public ItemData(Anoicess.Anoicess.Anoicess objDB)
         {
-            if (objDB!=null)
+            if (objDB != null)
             {
                 this.objDB = objDB;
                 ConnectDB();
@@ -153,6 +161,17 @@ namespace Anything_wpf_main_.cls
             objDB.Insert("Levels", data.Levels.ToString());
             objDB.Insert("WorkingDirectory", data.WorkingDirectory);
             objDB.Insert("TagName", data.tagName);
+            if (data.HotKey==null)
+            {
+                data.HotKey = new HotKeyItem(this, System.Windows.Forms.Keys.None, 0, 0, HotKeyItem.HotKeyParentType.Item);
+            }
+
+            if (data.HotKey.KeyValue!= System.Windows.Forms.Keys.None)
+                objDB.Insert("HotKey", data.HotKey.KeyValue.ToString() + "," + data.HotKey.ModifiersValue.ToString() + "," + data.HotKey.ID.ToString());
+            else
+                objDB.Insert("HotKey", ",,");
+
+            objDB.Insert("EnableHotKey", data.EnableHotKey.ToString());
 
             if (!Directory.Exists(Manage.IconPath))
             {
@@ -186,7 +205,7 @@ namespace Anything_wpf_main_.cls
             {
                 this.data.Name = objDB.ReadFirstByName("Name") as string;
                 this.data.ID = objDB.ReadFirstByName("ID") as string;
-                int Count = Convert.ToInt32( objDB.ReadFirstByName("Icon"));
+                int Count = Convert.ToInt32(objDB.ReadFirstByName("Icon"));
 
                 try
                 {
@@ -204,11 +223,47 @@ namespace Anything_wpf_main_.cls
 
                 this.data.Path = objDB.ReadFirstByName("Path") as string;
                 this.data.Arguments = objDB.ReadFirstByName("Arguments") as string;
-                this.data.RunAs = Convert.ToInt32( objDB.ReadFirstByName("Runas"));
+                this.data.RunAs = Convert.ToInt32(objDB.ReadFirstByName("Runas"));
                 this.data.AutoRun = Convert.ToInt32(objDB.ReadFirstByName("Autorun"));
                 this.data.Levels = Convert.ToInt32(objDB.ReadFirstByName("Levels"));
                 this.data.WorkingDirectory = objDB.ReadFirstByName("WorkingDirectory");
                 this.data.tagName = objDB.ReadFirstByName("TagName");
+
+                string strHKI = objDB.ReadFirstByName("HotKey");
+
+                if (strHKI != null)
+                {
+                    if (!string.IsNullOrEmpty(strHKI.Replace(",", "").Replace(" ", "")))
+                    {
+                        string[] HKISplit;
+                        try
+                        {
+                            HKISplit = strHKI.Split(',');
+                        }
+                        catch
+                        {
+                            HKISplit = new string[] { };
+                        }
+                        if (HKISplit.Length >= 3)
+                        {
+                            System.Windows.Forms.KeysConverter keyCvt = new System.Windows.Forms.KeysConverter();
+
+                            this.data.HotKey = new HotKeyItem(this, (System.Windows.Forms.Keys)keyCvt.ConvertFromString(HKISplit[0]), Convert.ToUInt32(HKISplit[1]), Convert.ToInt32(HKISplit[2]), HotKeyItem.HotKeyParentType.Item);
+
+                            if (Manage.CheckAndRegisterHotKey(data.HotKey))
+                            {
+                                Anything_wpf_main_.cls.HotKey.CurrentID++;
+                                data.EnableHotKey = true;
+                            }
+                        }
+                        else
+                        {
+                            this.data.HotKey = new HotKeyItem(null,System.Windows.Forms.Keys.None,0,0, HotKeyItem.HotKeyParentType.Item);
+                        }
+                    }
+                    else
+                        data.HotKey = new HotKeyItem(this, System.Windows.Forms.Keys.None, 0, 0, HotKeyItem.HotKeyParentType.Item);
+                }
 
                 return 0;
             }
@@ -217,10 +272,10 @@ namespace Anything_wpf_main_.cls
 
         private string GetPath()
         {
-            int i = data.Path.Length-1;
-            while (i>0)
+            int i = data.Path.Length - 1;
+            while (i > 0)
             {
-                if (data.Path.Substring(i,1)=="\\")
+                if (data.Path.Substring(i, 1) == "\\")
                 {
                     break;
                 }
@@ -237,7 +292,7 @@ namespace Anything_wpf_main_.cls
         #region 外部函数
 
         #region 属性
-        
+
         public ImageSource Icon_imagesource
         {
             get
@@ -289,30 +344,26 @@ namespace Anything_wpf_main_.cls
 
                 data.ID = ClsMD5.ClsMD5.Encrypt(data.Name + data.Path);
 
-                //if (Rename)
-                //{
-
-                foreach (ItemData inListdata in Manage.listData)
+                if (data.ID != OldID)
                 {
-                    if (inListdata.ID == data.ID)
+                    foreach (ItemData inListdata in Manage.listOfInnerData)
                     {
-                        Manage.listData.Remove(inListdata);
-                        break;
+                        if (inListdata.ID == data.ID)
+                        {
+                            Manage.listOfInnerData.Remove(inListdata);
+                            break;
+                        }
                     }
+
+                    Manage.mMAIN.RemoveChild(OldID);
+
+                    objDB = null;
+
+                    CreateDB();
+
+                    Manage.listOfInnerData.Add(this);
                 }
-
-                Manage.mMAIN.RemoveChild(OldID);
-
-                objDB = null;
-
-                CreateDB();
-
-                Manage.listData.Add(this);
-
-                Rename = false;
-
-                //}
-
+                
             }
         }
 
@@ -329,7 +380,7 @@ namespace Anything_wpf_main_.cls
         {
             get
             {
-                return this.data.RunAs; 
+                return this.data.RunAs;
             }
             set
             {
@@ -396,6 +447,7 @@ namespace Anything_wpf_main_.cls
             set
             {
                 data.tagName = value;
+                objDB.Insert("TagName", data.tagName);
             }
         }
 
@@ -412,6 +464,30 @@ namespace Anything_wpf_main_.cls
             }
         }
 
+        public HotKeyItem HotKey
+        {
+            get
+            {
+                return data.HotKey;
+            }
+            set
+            {
+                data.HotKey = value;
+            }
+        }
+
+        public bool EnableHotKey
+        {
+            get
+            {
+                return data.EnableHotKey;
+            }
+            set
+            {
+                data.EnableHotKey = value;
+            }
+        }
+
         #endregion
 
         #region 其他
@@ -421,41 +497,75 @@ namespace Anything_wpf_main_.cls
         /// </summary>
         /// <param name="tempRun"></param>
         /// <returns></returns>
-        public int Execute(int Runas=0,bool Default=false )
+        public int Execute(int Runas = 0, bool Default = false)
         {
             try
             {
-                
-                if (Manage.SystemRefUnion.IndexOf(data.Path)<0 || !(Manage.reURL.IsMatch(data.Path)))
+                //如果是系统引用
+                if (Manage.reSysRef.IsMatch(data.Path))
                 {
+                    //DO NOTHING
+                }
+                //如果是网址(URL正则有时也会匹配到程序全路径所以再加个文件存在性检测)
+                else if (Manage.reURL.IsMatch(data.Path) && !System.IO.File.Exists(data.Path))
+                {
+                    //如果接管了浏览器
+                    if (Manage.MOWeb.IsUsed)
+                    {
+                        Plugins.Run(Manage.MOWeb.MdlName, data.Path);
+                    }
+                }
+                //文件或目录
+                else
+                {
+                    //若文件不存在
                     if (FileOperation.IsFile(data.Path) == 1)
                     {
                         if (!System.IO.File.Exists(data.Path))
+                        {
                             return -1;
+                        }
                     }
                     else
                     {
+                        //若目录不存在
                         if (!System.IO.Directory.Exists(data.Path))
+                        {
                             return -1;
+                        }
+                        else
+                        {
+                            if (Manage.MOFolder.IsUsed)
+                            {
+                                //TODO:使用插件
+                            }
+                        }
                     }
+
+                    //正常流程
+                    //实例化
+                    StartInfo = new ProcessStartInfo();
+
+                    //填充信息
+                    StartInfo.FileName = data.Path;
+                    StartInfo.Arguments = data.Arguments;
+                    StartInfo.WorkingDirectory = data.WorkingDirectory;
+
+                    //确定是否使用管理员权限执行
+                    if (Runas == 1 && Default)
+                        data.RunAs = 1;
+                    else if (RunAs == 1 && Default == false)
+                        StartInfo.Verb = "runas";
+
+                    //执行
+                    Process.Start(StartInfo);
+
+                    //清空主窗体上的检索框
+                    Manage.WindowMain.ClearSearch();
+
+                    //给出提示
+                    Manage.TipPublic.ShowFixed(Manage.WindowMain, "Go!");
                 }
-                
-                StartInfo = new ProcessStartInfo();
-                StartInfo.FileName = data.Path;
-                StartInfo.Arguments = data.Arguments;
-                StartInfo.WorkingDirectory = data.WorkingDirectory;
-
-                if (Runas == 1 && Default)
-                    data.RunAs = 1;
-                else if (RunAs == 1 && Default == false)
-                    StartInfo.Verb = "runas";
-
-                Process.Start(StartInfo);
-
-                Manage.WindowMain.ClearSearch();
-
-                Manage.TipPublic.ShowFixed(Manage.WindowMain, "Go!");
-
             }
             catch
             {
@@ -464,11 +574,22 @@ namespace Anything_wpf_main_.cls
             return 0;
         }
 
+        /// <summary>
+        /// 定位文件
+        /// </summary>
+        /// <returns></returns>
         public int FindLocation()
         {
             try
             {
-                Process.Start("explorer.exe", " /select," + data.Path);
+                if (Manage.MOFolder.IsUsed)
+                {
+                    //////////使用插件
+                }
+                else
+                {
+                    Process.Start("explorer.exe", " /select," + data.Path);
+                }
             }
             catch
             {
@@ -477,6 +598,9 @@ namespace Anything_wpf_main_.cls
             return 0;
         }
 
+        /// <summary>
+        /// 在桌面上创建快捷方式
+        /// </summary>
         public void CreateShortcut()
         {
             WshShell wsh = new WshShell();
@@ -493,6 +617,9 @@ namespace Anything_wpf_main_.cls
 
         }
 
+        /// <summary>
+        /// 保存图标数据
+        /// </summary>
         public void SaveIcon()
         {
             if (IconChanged)
@@ -511,6 +638,60 @@ namespace Anything_wpf_main_.cls
 
                 }
             }
+        }
+
+        public void AddHotKey(UserControls.HotKeyVisualItem HKVI)
+        {
+
+            int Set = -1;
+            if (!EnableHotKey)
+            {
+                Set = 0;
+            }
+            else
+            {
+                if (data.HotKey.KeyValue!=HKVI.KeyValue || data.HotKey.ModifiersValue!=HKVI.ModifiersValue)
+                {
+                    Set = 1;
+                }
+            }
+            if (Set > 0)
+            {
+                int id = 0;
+                if (Set == 0)
+                {
+                    id = ++Anything_wpf_main_.cls.HotKey.CurrentID;
+                }
+                else if (Set == 1)
+                {
+                    id = this.data.HotKey.ID;
+                }
+
+                HotKeyItem hki = new HotKeyItem(this, HKVI.KeyValue, HKVI.ModifiersValue, id, HotKeyItem.HotKeyParentType.Item);
+
+                this.HotKey = hki;
+
+                if (Manage.CheckAndRegisterHotKey(hki))
+                {
+                    objDB.Insert("HotKey", data.HotKey.KeyValue.ToString() + "," + data.HotKey.ModifiersValue.ToString() + "," + data.HotKey.ID.ToString());
+                }
+                EnableHotKey = true;
+            }
+            
+        }
+
+
+        public void RemoveHotKey()
+        {
+            int id = data.HotKey.ID;
+
+            this.HotKey.ID = 0;
+            this.HotKey.KeyValue = System.Windows.Forms.Keys.None;
+            this.HotKey.ModifiersValue = 0;
+
+            Manage.UnregisterHotKey(id);
+
+            objDB.Insert("HotKey", "");
 
         }
 
@@ -519,13 +700,11 @@ namespace Anything_wpf_main_.cls
         /// </summary>
         public void Dispose()
         {
-            
+
         }
         #endregion
 
         #endregion
-
-
 
     }
 }
