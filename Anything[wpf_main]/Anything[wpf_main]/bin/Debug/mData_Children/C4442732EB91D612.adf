@@ -1,0 +1,12 @@
+﻿ID{C4442732EB91D612}
+Name{iTools 4}
+Icon{33678}
+Path{C:\Program Files (x86)\ThinkSky\iTools 4\iTools4.exe}
+Arguments{}
+Runas{0}
+Autorun{0}
+Levels{0}
+WorkingDirectory{}
+HotKey{,,}
+EnableHotKey{False}
+TagName{Others}

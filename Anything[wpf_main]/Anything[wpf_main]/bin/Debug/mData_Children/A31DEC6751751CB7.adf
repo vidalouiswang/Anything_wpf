@@ -1,0 +1,12 @@
+﻿ID{A31DEC6751751CB7}
+Name{腾讯QQ}
+Icon{10265}
+Path{C:\Program Files (x86)\Tencent\QQ\Bin\QQScLauncher.exe}
+Arguments{}
+Runas{0}
+Autorun{0}
+Levels{0}
+WorkingDirectory{}
+HotKey{,,}
+EnableHotKey{False}
+TagName{IM}

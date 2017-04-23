@@ -1,0 +1,12 @@
+﻿ID{261CC4D27E3C8BE5}
+Name{新版简历}
+Icon{4055}
+Path{C:\Users\vidam\Desktop\dtemp\新版简历.docx}
+Runas{0}
+Autorun{0}
+Levels{0}
+WorkingDirectory{}
+HotKey{,,}
+EnableHotKey{False}
+TagName{Doc}
+Arguments{新版简历.docx}

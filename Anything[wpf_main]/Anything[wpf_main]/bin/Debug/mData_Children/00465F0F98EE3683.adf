@@ -1,0 +1,12 @@
+﻿ID{00465F0F98EE3683}
+Name{工作周记}
+Icon{3588}
+Path{C:\Users\vidam\Desktop\dtemp\工作周记.doc}
+Runas{0}
+Autorun{0}
+Levels{0}
+WorkingDirectory{}
+HotKey{,,}
+EnableHotKey{False}
+TagName{Doc}
+Arguments{工作周记.doc}

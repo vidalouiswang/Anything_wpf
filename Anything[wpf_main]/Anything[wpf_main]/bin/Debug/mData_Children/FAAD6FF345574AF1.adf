@@ -1,0 +1,12 @@
+﻿ID{FAAD6FF345574AF1}
+Name{迅雷影音}
+Icon{17131}
+Path{C:\Program Files (x86)\Thunder Network\XMP\V5.2.3.4991\Bin\XMP.exe}
+Runas{0}
+Autorun{0}
+Levels{0}
+WorkingDirectory{}
+HotKey{,,}
+EnableHotKey{False}
+TagName{Media}
+Arguments{/sstartfrom Desktop /sopenfrom Desktop}

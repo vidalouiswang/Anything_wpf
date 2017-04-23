@@ -1,0 +1,12 @@
+﻿ID{8AA68F0418C906D9}
+Name{Foobar2000}
+Icon{26325}
+Path{C:\Program Files (x86)\Foobar2000\foobar2000.exe}
+Arguments{}
+Runas{0}
+Autorun{0}
+Levels{0}
+WorkingDirectory{}
+HotKey{,,}
+EnableHotKey{False}
+TagName{Media}

@@ -1,0 +1,12 @@
+﻿ID{16F57CB0953CFAA5}
+Name{迅雷极速版}
+Icon{30993}
+Path{C:\Program Files (x86)\Thunder Network\Thunder\Program\Thunder.exe}
+Runas{0}
+Autorun{0}
+Levels{0}
+WorkingDirectory{}
+HotKey{,,}
+EnableHotKey{False}
+TagName{Network Tools}
+Arguments{-StartType:DesktopIcon -UnfinishTaskNum:}

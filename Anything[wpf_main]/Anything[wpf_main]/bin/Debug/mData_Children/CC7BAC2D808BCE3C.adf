@@ -6,7 +6,7 @@ Runas{0}
 Autorun{0}
 Levels{0}
 WorkingDirectory{}
-TagName{}
 HotKey{,,}
 EnableHotKey{False}
+TagName{Folder}
 Arguments{dtemp}

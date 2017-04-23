@@ -1,0 +1,12 @@
+﻿ID{DB0326DB01A04720}
+Name{Git Shell}
+Icon{49304}
+Path{C:\Users\vidam\AppData\Local\GitHub\GitHub.appref-ms}
+Runas{0}
+Autorun{0}
+Levels{0}
+WorkingDirectory{}
+HotKey{,,}
+EnableHotKey{False}
+TagName{Code}
+Arguments{--open-shell}

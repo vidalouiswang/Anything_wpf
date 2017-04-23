@@ -1,0 +1,12 @@
+﻿ID{3E3070FBFC8A1DA2}
+Name{Control Panel}
+Icon{12522}
+Path{::{21EC2020-3AEA-1069-A2DD-08002B30309D}}
+Arguments{}
+Runas{0}
+Autorun{0}
+Levels{0}
+WorkingDirectory{}
+EnableHotKey{False}
+TagName{System Tools}
+HotKey{}

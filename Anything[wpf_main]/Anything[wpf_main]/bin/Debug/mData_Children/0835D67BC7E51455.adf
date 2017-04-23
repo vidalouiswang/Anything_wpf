@@ -1,0 +1,12 @@
+﻿ID{0835D67BC7E51455}
+Name{IObit Uninstaller}
+Icon{4058}
+Path{C:\Program Files (x86)\IObit\IObit Uninstaller\Uninstaler_SkipUac.exe}
+Arguments{}
+Runas{0}
+Autorun{0}
+Levels{0}
+WorkingDirectory{}
+HotKey{,,}
+EnableHotKey{False}
+TagName{System Tools}

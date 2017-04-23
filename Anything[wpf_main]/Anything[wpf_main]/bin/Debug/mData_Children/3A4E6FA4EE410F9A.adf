@@ -1,0 +1,12 @@
+﻿ID{3A4E6FA4EE410F9A}
+Name{OneNote 2016}
+Icon{5784}
+Path{C:\Program Files (x86)\Microsoft Office\root\Office16\ONENOTE.EXE}
+Arguments{}
+Runas{0}
+Autorun{0}
+Levels{0}
+WorkingDirectory{}
+HotKey{,,}
+EnableHotKey{False}
+TagName{Words Edit}

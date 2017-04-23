@@ -1,0 +1,12 @@
+﻿ID{4F53C8C00FBFCA97}
+Name{傲游5}
+Icon{33882}
+Path{C:\Program Files (x86)\Maxthon5\Bin\MxStart.exe}
+Arguments{}
+Runas{0}
+Autorun{0}
+Levels{0}
+WorkingDirectory{}
+HotKey{,,}
+EnableHotKey{False}
+TagName{Browser}

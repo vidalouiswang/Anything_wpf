@@ -492,62 +492,65 @@ namespace Anything_wpf_main_.cls
                 {
                     foreach (Item i in ((System.Windows.Controls.WrapPanel)(((ExpanderEx)obj).Content)).Children)
                     {
-                        if (!Union)
+                        if (i != null && i.Name_Property != null && i.Path != null && i.TagName != null)
                         {
-                            if ((i.Name_Property.ToLower().IndexOf(Name) >= 0) || (i.Path.ToLower().IndexOf(Path) >= 0) || (i.TagName.ToLower().IndexOf(TagName) >= 0))
+                            if (!Union)
                             {
-                                rtnValue.Add(i);
-                            }
-                        }
-                        else
-                        {
-                            if (!emptyName && !emptyPath && !emptyTagName) //三字段全有
-                            {
-                                if ((i.Name_Property.ToLower().IndexOf(Name) >= 0) && (i.Path.ToLower().IndexOf(Path) >= 0) && (i.TagName.ToLower().IndexOf(TagName) >= 0))
+                                if ((i.Name_Property.ToLower().IndexOf(Name) >= 0) || (i.Path.ToLower().IndexOf(Path) >= 0) || (i.TagName.ToLower().IndexOf(TagName) >= 0))
                                 {
                                     rtnValue.Add(i);
                                 }
                             }
-                            else if (!emptyName && !emptyPath && emptyTagName) //没有标签
+                            else
                             {
-                                if ((i.Name_Property.ToLower().IndexOf(Name) >= 0) && (i.Path.ToLower().IndexOf(Path) >= 0))
+                                if (!emptyName && !emptyPath && !emptyTagName) //三字段全有
                                 {
-                                    rtnValue.Add(i);
+                                    if ((i.Name_Property.ToLower().IndexOf(Name) >= 0) && (i.Path.ToLower().IndexOf(Path) >= 0) && (i.TagName.ToLower().IndexOf(TagName) >= 0))
+                                    {
+                                        rtnValue.Add(i);
+                                    }
                                 }
-                            }
-                            else if (!emptyName && emptyPath & emptyTagName) //没有标签和路径
-                            {
-                                if ((i.Name_Property.ToLower().IndexOf(Name) >= 0))
+                                else if (!emptyName && !emptyPath && emptyTagName) //没有标签
                                 {
-                                    rtnValue.Add(i);
+                                    if ((i.Name_Property.ToLower().IndexOf(Name) >= 0) && (i.Path.ToLower().IndexOf(Path) >= 0))
+                                    {
+                                        rtnValue.Add(i);
+                                    }
                                 }
-                            }
-                            else if (emptyTagName && !emptyPath && !emptyTagName) //没有名
-                            {
-                                if ((i.Path.ToLower().IndexOf(Path) >= 0) && (i.TagName.ToLower().IndexOf(TagName) >= 0))
+                                else if (!emptyName && emptyPath & emptyTagName) //没有标签和路径
                                 {
-                                    rtnValue.Add(i);
+                                    if ((i.Name_Property.ToLower().IndexOf(Name) >= 0))
+                                    {
+                                        rtnValue.Add(i);
+                                    }
                                 }
-                            }
-                            else if (emptyName && emptyPath && !emptyTagName) //只有标签
-                            {
-                                if ((i.TagName.ToLower().IndexOf(TagName) >= 0))
+                                else if (emptyTagName && !emptyPath && !emptyTagName) //没有名
                                 {
-                                    rtnValue.Add(i);
+                                    if ((i.Path.ToLower().IndexOf(Path) >= 0) && (i.TagName.ToLower().IndexOf(TagName) >= 0))
+                                    {
+                                        rtnValue.Add(i);
+                                    }
                                 }
-                            }
-                            else if (emptyName && !emptyPath && emptyTagName) //只有路径
-                            {
-                                if ((i.Path.ToLower().IndexOf(Path) >= 0))
+                                else if (emptyName && emptyPath && !emptyTagName) //只有标签
                                 {
-                                    rtnValue.Add(i);
+                                    if ((i.TagName.ToLower().IndexOf(TagName) >= 0))
+                                    {
+                                        rtnValue.Add(i);
+                                    }
                                 }
-                            }
-                            else if (!emptyName && emptyPath && !emptyTagName) //有名和标签
-                            {
-                                if ((i.Name_Property.ToLower().IndexOf(Name) >= 0) && (i.TagName.ToLower().IndexOf(TagName) >= 0))
+                                else if (emptyName && !emptyPath && emptyTagName) //只有路径
                                 {
-                                    rtnValue.Add(i);
+                                    if ((i.Path.ToLower().IndexOf(Path) >= 0))
+                                    {
+                                        rtnValue.Add(i);
+                                    }
+                                }
+                                else if (!emptyName && emptyPath && !emptyTagName) //有名和标签
+                                {
+                                    if ((i.Name_Property.ToLower().IndexOf(Name) >= 0) && (i.TagName.ToLower().IndexOf(TagName) >= 0))
+                                    {
+                                        rtnValue.Add(i);
+                                    }
                                 }
                             }
                         }

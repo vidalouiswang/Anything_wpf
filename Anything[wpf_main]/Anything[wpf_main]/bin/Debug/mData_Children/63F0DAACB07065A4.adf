@@ -1,0 +1,12 @@
+﻿ID{63F0DAACB07065A4}
+Name{Lua}
+Icon{1461}
+Path{C:\Program Files (x86)\Lua\5.1\lua.exe}
+Arguments{}
+Runas{0}
+Autorun{0}
+Levels{0}
+WorkingDirectory{}
+HotKey{,,}
+EnableHotKey{False}
+TagName{Code}

@@ -1,0 +1,12 @@
+﻿ID{DC3AE07BA0FA7841}
+Name{Visual Studio 2015}
+Icon{7376}
+Path{C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\devenv.exe}
+Arguments{}
+Runas{0}
+Autorun{0}
+Levels{0}
+WorkingDirectory{}
+HotKey{,,}
+EnableHotKey{False}
+TagName{Code}

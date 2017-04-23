@@ -1,0 +1,12 @@
+﻿ID{74CAB1B33EFCF0BF}
+Name{WallPaper}
+Icon{8934}
+Path{C:\Program Files (x86)\wallpaper_engine\wallpaper64.exe}
+Arguments{}
+Runas{0}
+Autorun{0}
+Levels{0}
+WorkingDirectory{}
+HotKey{,,}
+EnableHotKey{False}
+TagName{System Tools}

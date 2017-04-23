@@ -1,0 +1,12 @@
+﻿ID{13AF441D3178D4BE}
+Name{SciTE}
+Icon{2707}
+Path{C:\Program Files (x86)\Lua\5.1\SciTE\SciTE.exe}
+Arguments{}
+Runas{0}
+Autorun{0}
+Levels{0}
+WorkingDirectory{}
+HotKey{,,}
+EnableHotKey{False}
+TagName{System Tools}

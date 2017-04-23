@@ -1,0 +1,12 @@
+﻿ID{C7494C168825B63B}
+Name{WinRAR}
+Icon{1939}
+Path{C:\Program Files\WinRAR\WinRAR.exe}
+Arguments{}
+Runas{0}
+Autorun{0}
+Levels{0}
+WorkingDirectory{}
+HotKey{,,}
+EnableHotKey{False}
+TagName{System Tools}

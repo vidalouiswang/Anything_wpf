@@ -1,0 +1,12 @@
+﻿ID{4E369DB4DC677A80}
+Name{开题报告-修改}
+Icon{3588}
+Path{C:\Users\vidam\Desktop\dtemp\开题报告-修改.doc}
+Runas{0}
+Autorun{0}
+Levels{0}
+WorkingDirectory{}
+HotKey{,,}
+EnableHotKey{False}
+TagName{Doc}
+Arguments{-修改.doc}

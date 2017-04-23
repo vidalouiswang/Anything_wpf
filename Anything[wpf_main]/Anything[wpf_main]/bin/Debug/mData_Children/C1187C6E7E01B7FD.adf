@@ -1,0 +1,12 @@
+﻿ID{C1187C6E7E01B7FD}
+Name{360极速浏览器}
+Icon{25071}
+Path{C:\Users\vidam\AppData\Local\360Chrome\Chrome\Application\360chrome.exe}
+Arguments{}
+Runas{0}
+Autorun{0}
+Levels{0}
+WorkingDirectory{}
+HotKey{,,}
+EnableHotKey{False}
+TagName{Browser}

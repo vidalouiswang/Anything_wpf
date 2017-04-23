@@ -1,0 +1,12 @@
+﻿ID{DC2B919B7439A1C3}
+Name{茄子快传}
+Icon{48624}
+Path{C:\Program Files (x86)\SHAREit Technologies\SHAREit\SHAREit.exe}
+Arguments{}
+Runas{0}
+Autorun{0}
+Levels{0}
+WorkingDirectory{}
+HotKey{,,}
+EnableHotKey{False}
+TagName{Network Tools}

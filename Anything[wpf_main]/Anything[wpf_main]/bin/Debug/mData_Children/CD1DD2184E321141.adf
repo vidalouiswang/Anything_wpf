@@ -1,0 +1,12 @@
+﻿ID{CD1DD2184E321141}
+Name{Notepad++}
+Icon{88421}
+Path{C:\Program Files (x86)\Notepad++\notepad++.exe}
+Arguments{}
+Runas{0}
+Autorun{0}
+Levels{0}
+WorkingDirectory{}
+HotKey{,,}
+EnableHotKey{False}
+TagName{Words Edit}

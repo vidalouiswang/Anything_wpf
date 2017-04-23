@@ -1,0 +1,12 @@
+﻿ID{89C23DB2D9C3D101}
+Name{关机}
+Icon{10856}
+Path{C:\Users\vidam\Desktop\dtemp\关机.bat}
+Runas{0}
+Autorun{0}
+Levels{0}
+WorkingDirectory{}
+HotKey{,,}
+EnableHotKey{False}
+TagName{Others}
+Arguments{关机.bat}

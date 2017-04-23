@@ -1,0 +1,12 @@
+﻿ID{28DA07506BCC45D2}
+Name{iTunes}
+Icon{15320}
+Path{C:\Program Files\iTunes\iTunes.exe}
+Arguments{}
+Runas{0}
+Autorun{0}
+Levels{0}
+WorkingDirectory{}
+HotKey{,,}
+EnableHotKey{False}
+TagName{Media}

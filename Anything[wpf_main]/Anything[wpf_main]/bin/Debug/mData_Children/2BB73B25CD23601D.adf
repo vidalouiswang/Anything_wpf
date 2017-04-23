@@ -1,0 +1,12 @@
+﻿ID{2BB73B25CD23601D}
+Name{简历}
+Icon{4055}
+Path{C:\Users\vidam\Desktop\dtemp\简历.docx}
+Runas{0}
+Autorun{0}
+Levels{0}
+WorkingDirectory{}
+HotKey{,,}
+EnableHotKey{False}
+TagName{Doc}
+Arguments{简历.docx}

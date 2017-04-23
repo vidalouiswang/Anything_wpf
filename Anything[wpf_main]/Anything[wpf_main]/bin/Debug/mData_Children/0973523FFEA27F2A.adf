@@ -1,0 +1,12 @@
+﻿ID{0973523FFEA27F2A}
+Name{Recycle Bin}
+Icon{10603}
+Path{::{645FF040-5081-101B-9F08-00AA002F954E}}
+Arguments{}
+Runas{0}
+Autorun{0}
+Levels{0}
+WorkingDirectory{}
+EnableHotKey{False}
+TagName{System Tools}
+HotKey{}

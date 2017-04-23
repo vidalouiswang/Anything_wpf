@@ -607,9 +607,9 @@ namespace Anything_wpf_main_
                     {
                         Match ma = new Regex(@"(\S*)\+(\S*)\+(\S*)").Match(str);
 
-                        string Name = ma.Groups[0].Value;
-                        string Path = ma.Groups[1].Value;
-                        string Tag = ma.Groups[2].Value;
+                        string Name = ma.Groups[1].Value;
+                        string Path = ma.Groups[2].Value;
+                        string Tag = ma.Groups[3].Value;
 
                         value= Manage.GetObjsByNameAndPathAndTag(Name, Path, Tag,true);
                     }

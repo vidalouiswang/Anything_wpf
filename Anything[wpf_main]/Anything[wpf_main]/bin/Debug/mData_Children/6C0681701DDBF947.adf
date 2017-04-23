@@ -1,0 +1,12 @@
+﻿ID{6C0681701DDBF947}
+Name{XMind 8}
+Icon{33680}
+Path{C:\Program Files (x86)\XMind\XMind.exe}
+Arguments{}
+Runas{0}
+Autorun{0}
+Levels{0}
+WorkingDirectory{}
+HotKey{,,}
+EnableHotKey{False}
+TagName{Others}

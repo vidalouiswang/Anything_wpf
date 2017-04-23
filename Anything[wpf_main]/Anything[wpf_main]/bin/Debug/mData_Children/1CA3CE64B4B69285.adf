@@ -1,0 +1,12 @@
+﻿ID{1CA3CE64B4B69285}
+Name{Acronis True Image}
+Icon{8360}
+Path{C:\Program Files (x86)\Acronis\TrueImageHome\TrueImageLauncher.exe}
+Arguments{}
+Runas{0}
+Autorun{0}
+Levels{0}
+WorkingDirectory{}
+HotKey{,,}
+EnableHotKey{False}
+TagName{System Tools}

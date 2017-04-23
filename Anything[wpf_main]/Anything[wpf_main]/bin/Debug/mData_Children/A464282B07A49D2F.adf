@@ -1,0 +1,12 @@
+﻿ID{A464282B07A49D2F}
+Name{Microsoft Expression - 快捷方式}
+Icon{22312}
+Path{C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Microsoft Expression}
+Arguments{}
+Runas{0}
+Autorun{0}
+Levels{0}
+WorkingDirectory{}
+HotKey{,,}
+EnableHotKey{False}
+TagName{Code}

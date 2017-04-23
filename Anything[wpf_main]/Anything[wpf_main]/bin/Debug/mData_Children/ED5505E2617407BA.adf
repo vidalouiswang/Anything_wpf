@@ -1,0 +1,12 @@
+﻿ID{ED5505E2617407BA}
+Name{格式工厂}
+Icon{21582}
+Path{C:\Program Files (x86)\FormatFactory\FormatFactory.exe}
+Arguments{}
+Runas{0}
+Autorun{0}
+Levels{0}
+WorkingDirectory{}
+HotKey{,,}
+EnableHotKey{False}
+TagName{Media}

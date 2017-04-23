@@ -1,0 +1,12 @@
+﻿ID{868D42C1372F9121}
+Name{GitHub}
+Icon{49304}
+Path{C:\Users\vidam\Lnk\GitHub.appref-ms}
+Runas{0}
+Autorun{0}
+Levels{0}
+WorkingDirectory{}
+HotKey{,,}
+EnableHotKey{False}
+TagName{Code}
+Arguments{-ms}

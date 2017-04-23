@@ -1,0 +1,12 @@
+﻿ID{B47C61A809C513AC}
+Name{简历无封面}
+Icon{4055}
+Path{C:\Users\vidam\Desktop\dtemp\简历无封面.docx}
+Runas{0}
+Autorun{0}
+Levels{0}
+WorkingDirectory{}
+HotKey{,,}
+EnableHotKey{False}
+TagName{Doc}
+Arguments{简历无封面.docx}

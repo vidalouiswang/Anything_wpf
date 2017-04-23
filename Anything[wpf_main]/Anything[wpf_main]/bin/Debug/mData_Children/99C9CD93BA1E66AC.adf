@@ -1,0 +1,12 @@
+﻿ID{99C9CD93BA1E66AC}
+Name{My Computer}
+Icon{13135}
+Path{::{20D04FE0-3AEA-1069-A2D8-08002B30309D}}
+Arguments{}
+Runas{0}
+Autorun{0}
+Levels{0}
+WorkingDirectory{}
+TagName{}
+EnableHotKey{False}
+HotKey{}

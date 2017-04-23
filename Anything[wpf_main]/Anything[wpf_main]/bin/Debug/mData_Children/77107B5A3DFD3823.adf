@@ -1,0 +1,12 @@
+﻿ID{77107B5A3DFD3823}
+Name{TeamViewer 12}
+Icon{24192}
+Path{C:\Program Files (x86)\TeamViewer\TeamViewer.exe}
+Arguments{}
+Runas{0}
+Autorun{0}
+Levels{0}
+WorkingDirectory{}
+HotKey{,,}
+EnableHotKey{False}
+TagName{System Tools}

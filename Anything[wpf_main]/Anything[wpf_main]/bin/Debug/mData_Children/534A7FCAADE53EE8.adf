@@ -1,0 +1,12 @@
+﻿ID{534A7FCAADE53EE8}
+Name{Lantern}
+Icon{3425}
+Path{C:\Users\vidam\AppData\Roaming\Lantern\lantern.exe}
+Arguments{}
+Runas{0}
+Autorun{0}
+Levels{0}
+WorkingDirectory{}
+HotKey{,,}
+EnableHotKey{False}
+TagName{Network Tools}

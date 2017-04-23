@@ -1,0 +1,12 @@
+﻿ID{556BC1CFA6E8B455}
+Name{GitHub}
+Icon{22312}
+Path{C:\Users\vidam\Documents\GitHub}
+Arguments{}
+Runas{0}
+Autorun{0}
+Levels{0}
+WorkingDirectory{}
+HotKey{,,}
+EnableHotKey{False}
+TagName{Code}

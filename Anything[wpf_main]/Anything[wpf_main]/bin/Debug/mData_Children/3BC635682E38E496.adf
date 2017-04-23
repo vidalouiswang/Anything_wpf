@@ -1,0 +1,12 @@
+﻿ID{3BC635682E38E496}
+Name{Wireshark}
+Icon{60114}
+Path{C:\Program Files\Wireshark\Wireshark.exe}
+Arguments{}
+Runas{0}
+Autorun{0}
+Levels{0}
+WorkingDirectory{}
+HotKey{,,}
+EnableHotKey{False}
+TagName{System Tools}

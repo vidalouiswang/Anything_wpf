@@ -1,0 +1,12 @@
+﻿ID{87CF2B08911218CE}
+Name{Mozilla Firefox}
+Icon{61725}
+Path{C:\Program Files (x86)\Mozilla Firefox\firefox.exe}
+Arguments{}
+Runas{0}
+Autorun{0}
+Levels{0}
+WorkingDirectory{}
+HotKey{,,}
+EnableHotKey{False}
+TagName{Browser}
