@@ -25,8 +25,6 @@ namespace Anything_wpf_main_.Form
             get { return (string)GetValue(TipProperty); }
             set { SetValue(TipProperty, value); }
         }
-
-        // Using a DependencyProperty as the backing store for Tip.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TipProperty =
             DependencyProperty.Register("Tip", typeof(string), typeof(wndTip), new PropertyMetadata("This is tip"));
 
@@ -77,6 +75,16 @@ namespace Anything_wpf_main_.Form
                 Point pt = GetPoint();
                 this.Left = pt.X + OffsetX;
                 this.Top = pt.Y + OffsetY;
+
+                if ((Left + this.ActualWidth) > SystemParameters.PrimaryScreenWidth)
+                {
+                    this.Left -= this.ActualWidth;
+                }
+
+                if ((this.Top + this.ActualHeight) > SystemParameters.PrimaryScreenHeight)
+                {
+                    this.Top -= this.ActualHeight;
+                }
             }
         }
 
@@ -108,6 +116,17 @@ namespace Anything_wpf_main_.Form
             Point pt = GetPoint();
             this.Left = pt.X + OffsetX;
             this.Top = pt.Y + OffsetY;
+
+            if ((Left+this.ActualWidth)>SystemParameters.PrimaryScreenWidth)
+            {
+                this.Left -= this.ActualWidth;
+            }
+
+            if ((this.Top + this.ActualHeight) > SystemParameters.PrimaryScreenHeight)
+            {
+                this.Top -= this.ActualHeight;
+            }
+
             DoubleAnimation da = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(0.1), FillBehavior.HoldEnd);
             this.BeginAnimation(OpacityProperty, da);
             timerFixed.Start();
@@ -121,6 +140,17 @@ namespace Anything_wpf_main_.Form
             Point pt = GetPoint();
             this.Left = pt.X + OffsetX;
             this.Top = pt.Y + OffsetY;
+
+            if ((Left + this.ActualWidth) > SystemParameters.PrimaryScreenWidth)
+            {
+                this.Left -= this.ActualWidth;
+            }
+
+            if ((this.Top + this.ActualHeight) > SystemParameters.PrimaryScreenHeight)
+            {
+                this.Top -= this.ActualHeight;
+            }
+
             this.OffsetX = OffsetX;
             this.OffsetY = OffsetY;
             DoubleAnimation da = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(0.1), FillBehavior.HoldEnd);

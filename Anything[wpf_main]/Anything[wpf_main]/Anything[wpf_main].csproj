@@ -123,8 +123,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Anoicess\Anoicess\Anoicess\bin\Release\Anoicess.dll</HintPath>
     </Reference>
-    <Reference Include="ApplicationInformations, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="ApplicationInformations">
       <HintPath>..\ApplicationInformations\bin\Release\ApplicationInformations.dll</HintPath>
     </Reference>
     <Reference Include="ClsMD5, Version=1.0.0.2, Culture=neutral, processorArchitecture=MSIL">

@@ -7,7 +7,7 @@
         xmlns:uc="clr-namespace:Anything_wpf_main_.UserControls"
         mc:Ignorable="d"
         Title="wndProgressBar" Height="130"
-        Width="500" WindowStyle="None" AllowsTransparency="True" Background="#A9282828"
+        Width="500" WindowStyle="None" AllowsTransparency="True" Background="Transparent"
 
         >
     

@@ -567,9 +567,16 @@ namespace Anything_wpf_main_.cls
                     Manage.TipPublic.ShowFixed(Manage.WindowMain, "Go!");
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                return -2;
+                if (ex.GetType()== typeof(System.ComponentModel.Win32Exception))
+                {
+                    //DO NOTHING
+                }
+                else
+                {
+                    return -2;
+                }
             }
             return 0;
         }

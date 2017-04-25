@@ -70,11 +70,6 @@ namespace Anything_wpf_main_.cls
                                     //检查插件是否申请了快捷键
                                     if ((bool)t.GetProperty("ApplyForHotKey").GetValue(obj,null))
                                     {
-                                        bool Ctrl = false;
-                                        bool Alt = false;
-                                        bool Shift = false;
-                                        bool Key_ = false;
-
                                         string KeyGot = t.GetProperty("HotKey").GetValue(obj, null).ToString();
 
                                         if (!string.IsNullOrEmpty(KeyGot))

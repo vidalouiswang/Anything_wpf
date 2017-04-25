@@ -23,6 +23,9 @@ namespace Anything_wpf_main_
     public partial class MainWindow : Window
     {
 
+
+
+
         #region 重载WndProc完成改变大小及响应热键
 
         /// <summary>
@@ -112,6 +115,9 @@ namespace Anything_wpf_main_
 
         #endregion
 
+
+
+
         #region 成员变量
 
         //边界颜色
@@ -135,18 +141,17 @@ namespace Anything_wpf_main_
         //提示窗体
         private wndTip tipMainForm = new wndTip();
 
-        //项目图标大小，暂时不用
-        private double ItemLength = 128;
-
         //用于搜索后的快速打开操作
         private bool QuickStart = false;
 
         //指示是否正在重命名项目
         public bool NowReName = false;
 
-
+        private List<Item> SearchValue;
 
         #endregion
+
+
 
         #region 构造函数
 
@@ -164,6 +169,9 @@ namespace Anything_wpf_main_
 
         #endregion
 
+
+
+
         #region public
 
         /// <summary>
@@ -176,6 +184,9 @@ namespace Anything_wpf_main_
 
 
         #endregion
+
+
+
 
         #region 窗体事件响应
 
@@ -228,12 +239,12 @@ namespace Anything_wpf_main_
             double readLeft = AppInfoOperations.GetLeft();
             double readTop = AppInfoOperations.GetTop();
 
-            if (readLeft <= 2)
+            if (readLeft > 2)
                 this.Left = readLeft - 2;
             else
                 this.Left = 0;
 
-            if (readTop <= 1)
+            if (readTop > 1)
                 this.Top = readTop - 1;
             else
                 this.Top = 0;
@@ -384,6 +395,9 @@ namespace Anything_wpf_main_
 
 
         #endregion
+
+
+
 
         #region 控件事件响应
 
@@ -601,7 +615,7 @@ namespace Anything_wpf_main_
                         }
                     }
 
-                    List<Item> value;
+                    
 
                     if (str.IndexOf("+") >= 0)
                     {
@@ -611,24 +625,24 @@ namespace Anything_wpf_main_
                         string Path = ma.Groups[2].Value;
                         string Tag = ma.Groups[3].Value;
 
-                        value= Manage.GetObjsByNameAndPathAndTag(Name, Path, Tag,true);
+                        SearchValue= Manage.GetObjsByNameAndPathAndTag(Name, Path, Tag,true);
                     }
                     else
                     {
-                        value = Manage.GetObjsByNameAndPathAndTag(str, str, str);
+                        SearchValue = Manage.GetObjsByNameAndPathAndTag(str, str, str);
                     }
                     
 
-                    if (value != null)
+                    if (SearchValue != null)
                     {
 
-                        if (value.Count <= 3)
+                        if (SearchValue.Count <= 3)
                             QuickStart = true;
                         else
                             QuickStart = false;
 
 
-                        foreach (Item i in value)
+                        foreach (Item i in SearchValue)
                         {
                             if (i.Parent is WrapPanel)
                             {
@@ -718,44 +732,35 @@ namespace Anything_wpf_main_
         /// <param name="e"></param>
         private void txtMain_KeyDown(object sender, KeyEventArgs e)
         {
-            //MessageBox.Show(e.Key.ToString());
+            //只按下了Enter
             if (e.Key == Key.Enter && !((e.KeyboardDevice.Modifiers & ModifierKeys.Control)==ModifierKeys.Control))
             {
-
                 if (QuickStart)
                 {
-                    foreach (Item i in this.Recent.Children)
-                    {
-                        if (i.Visibility == Visibility.Visible)
-                        {
-                            i.RefItemData.Execute();
-                            Manage.SaveKeyword(this.txtMain.Text);
-                            this.txtMain.Text = "";
-                            break;
-                        }
-                    }
+                    SearchValue[0].refItemData.Execute();
+                    Manage.SaveKeyword(this.txtMain.Text);
+                    this.ClearSearch();
                 }
             }
+
+            //按下了Ctrl+ Enter
             else if (e.Key == Key.Enter && ((e.KeyboardDevice.Modifiers & ModifierKeys.Control) == ModifierKeys.Control))
             {
                 Manage.OpenSearchWindow(this.txtMain.Text);
             }
+
+            //按下了Ctrl+F
             else if (e.Key == Key.F && ((e.KeyboardDevice.Modifiers & ModifierKeys.Control) == ModifierKeys.Control))
             {
-                foreach (Item i in this.Recent.Children)
-                {
-                    if (i.Visibility == Visibility.Visible)
-                    {
-                        i.refItemData.FindLocation();
-                        Manage.SaveKeyword(this.txtMain.Text);
-                        this.txtMain.Text = "";
-                        break;
-                    }
-                }
+                SearchValue[0].refItemData.FindLocation();
+                Manage.SaveKeyword(this.txtMain.Text);
+                this.ClearSearch();
             }
+
+            //按下了Alt+C
             else if (e.Key == Key.C && ((e.KeyboardDevice.Modifiers & ModifierKeys.Alt) == ModifierKeys.Alt) && ((e.KeyboardDevice.Modifiers & ModifierKeys.Control) == ModifierKeys.Control))
             {
-                this.txtMain.Text = "";
+                this.ClearSearch();
             }
             
         }
@@ -770,30 +775,23 @@ namespace Anything_wpf_main_
             PackUp();
         }
 
-        ///// <summary>
-        ///// 移动选中
-        ///// </summary>
-        ///// <param name="sender"></param>
-        ///// <param name="e"></param>
-        //private void scrlist_KeyUp(object sender, KeyEventArgs e)
-        //{
-            
-        //    //if (e.Key == Key.Up || e.Key == Key.Down || e.Key == Key.Left || e.Key == Key.Right)
-        //    //{
-        //    //    if (Keyboard.FocusedElement is ScrollViewer)
-        //    //    {
-        //    //        foreach (Item i in this.Recent.Children)
-        //    //        {
-        //    //            i.Bdr.Focus();
-        //    //            break;
-        //    //        }
-        //    //    }
-        //    //}
-        //}
-
         #endregion
 
+
+
+
         #region 菜单项事件响应
+
+        /// <summary>
+        /// 打开设置
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SettingsMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            wndSettings ws = new wndSettings();
+            ws.Show();
+        }
 
         /// <summary>
         /// 从菜单项进入网络搜索
@@ -866,6 +864,9 @@ namespace Anything_wpf_main_
         }
         #endregion
 
+
+
+
         #region 私有
 
         /// <summary>
@@ -921,10 +922,53 @@ namespace Anything_wpf_main_
 
         
 
-        private void SettingsMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            wndSettings ws = new wndSettings();
-            ws.Show();
-        }
+        
     }
 }
+
+///// <summary>
+///// 移动选中
+///// </summary>
+///// <param name="sender"></param>
+///// <param name="e"></param>
+//private void scrlist_KeyUp(object sender, KeyEventArgs e)
+//{
+
+//    //if (e.Key == Key.Up || e.Key == Key.Down || e.Key == Key.Left || e.Key == Key.Right)
+//    //{
+//    //    if (Keyboard.FocusedElement is ScrollViewer)
+//    //    {
+//    //        foreach (Item i in this.Recent.Children)
+//    //        {
+//    //            i.Bdr.Focus();
+//    //            break;
+//    //        }
+//    //    }
+//    //}
+//}
+//foreach (object obj in this.Recent.Children)
+//{
+//    if (obj is ExpanderEx)
+//    {
+//        ExpanderEx exTmp = (ExpanderEx)obj;
+//        if (exTmp.Visibility == Visibility.Visible)
+//        {
+//            WrapPanel wpTmp = (WrapPanel)exTmp.Content;
+
+//            foreach (object innerObj in wpTmp.Children)
+//            {
+//                if (innerObj is Item)
+//                {
+//                    if (((Item)innerObj).Visibility == Visibility.Visible)
+//                    {
+//                        Item i = (Item)innerObj;
+//                        i.RefItemData.Execute();
+//                        Manage.SaveKeyword(this.txtMain.Text);
+//                        this.ClearSearch();
+//                        break;
+//                    }
+//                }
+//            }
+//        }
+//    }
+//}

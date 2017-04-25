@@ -57,3 +57,4 @@ C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_mai
 C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\obj\Release\Form\wndPreSet.baml
 C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\obj\Release\Form\wndHotKeyManagement.g.cs
 C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\obj\Release\Form\wndHotKeyManagement.baml
+C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\Anything[wpf_main]\obj\Release\Anything[wpf_main].csprojResolveAssemblyReference.cache

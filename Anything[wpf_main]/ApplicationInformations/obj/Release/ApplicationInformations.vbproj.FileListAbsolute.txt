@@ -9,4 +9,3 @@ C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\ApplicationInfor
 C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\ApplicationInformations\obj\Release\ApplicationInformations.dll
 C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\ApplicationInformations\obj\Release\ApplicationInformations.xml
 C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\ApplicationInformations\obj\Release\ApplicationInformations.pdb
-C:\Users\vidam\Documents\GitHub\Anything_wpf\Anything[wpf_main]\ApplicationInformations\obj\Release\ApplicationInformations.vbprojResolveAssemblyReference.cache
